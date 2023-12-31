@@ -7,7 +7,7 @@ using MineJason.Serialization.TextJson;
 namespace MineJason;
 
 [JsonConverter(typeof(ChatComponentConverter))]
-public abstract class ChatComponent(string? type)
+public abstract class ChatComponent(string? type) : IEquatable<ChatComponent>
 {
     protected string? Type { get; set; } = type;
 
@@ -58,5 +58,33 @@ public abstract class ChatComponent(string? type)
     public static ChatComponent CreateText(string text)
     {
         return new TextChatComponent(text);
+    }
+
+    [PublicAPI]
+    public static ChatComponent CreateTranslatable(string text)
+    {
+        return new TranslatableChatComponent(text);
+    }
+
+    public abstract bool Equals(ChatComponent? other);
+
+    public abstract override int GetHashCode();
+
+    public override bool Equals(object? obj)
+    {
+        return obj is ChatComponent component && this.Equals(component);
+    }
+
+    public static bool StyleEquals(ChatComponent component1, ChatComponent component2)
+    {
+        return component1.Color == component2.Color
+               && component1.Font == component2.Font
+               && component1.Insertion == component2.Insertion
+               && component1.Italic == component2.Italic
+               && component1.Underline == component2.Underline
+               && component1.Strikethrough == component2.Strikethrough
+               && Equals(component1.ClickEvent, component2.ClickEvent)
+               && Equals(component1.HoverEvent, component2.HoverEvent) 
+               && Equals(component1.Extra, component2.Extra);
     }
 }

@@ -1,10 +1,12 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Text.Json.Serialization;
+using MineJason.Serialization.TextJson;
 
 namespace MineJason;
 
 using JetBrains.Annotations;
 
 [PublicAPI]
+[JsonConverter(typeof(KnownColorConverter))]
 public sealed class KnownColor : IChatColor
 {
     private readonly string _colorName;

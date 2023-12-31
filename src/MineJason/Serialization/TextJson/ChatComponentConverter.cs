@@ -68,6 +68,6 @@ public class ChatComponentConverter : JsonConverter<ChatComponent>
 
     public override void Write(Utf8JsonWriter writer, ChatComponent value, JsonSerializerOptions options)
     {
-        JsonSerializer.Serialize(writer, (object)value, options);
+        JsonSerializer.Serialize(writer, (object)value, TextJsonComponentHelper.SerializerOptions);
     }
 }
