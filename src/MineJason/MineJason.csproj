@@ -10,6 +10,7 @@
     <AnalysisMode>Recommended</AnalysisMode>
     <Title>MineJason</Title>
     <Description>A library providing models for dealing with chat components (Raw JSON text) in Minecraft: Java Edition</Description>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
