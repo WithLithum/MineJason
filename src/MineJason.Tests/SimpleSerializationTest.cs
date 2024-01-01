@@ -1,8 +1,6 @@
-using System.Text.Json;
-
 namespace MineJason.Tests;
-
-using Events.Hover;
+using System.Text.Json;
+using MineJason.Events.Hover;
 
 public class SimpleSerializationTests
 {

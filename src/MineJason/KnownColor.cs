@@ -1,8 +1,7 @@
-﻿using System.Text.Json.Serialization;
+﻿namespace MineJason;
+
+using System.Text.Json.Serialization;
 using MineJason.Serialization.TextJson;
-
-namespace MineJason;
-
 using JetBrains.Annotations;
 
 [PublicAPI]
@@ -11,8 +10,8 @@ public sealed class KnownColor : IChatColor
 {
     private readonly string _colorName;
 
-    private static readonly IReadOnlySet<string> KnownColorNames = new HashSet<string>
-    {
+    private static readonly HashSet<string> KnownColorNames =
+    [
         "black",
         "dark_blue",
         "dark_green",
@@ -29,7 +28,7 @@ public sealed class KnownColor : IChatColor
         "light_purple",
         "yellow",
         "white"
-    };
+    ];
 
     internal KnownColor(string colorName)
     {
