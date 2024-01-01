@@ -5,7 +5,12 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MineJason", "MineJason\MineJason.csproj", "{FC134C3E-70B7-4B0D-A08B-A8B28BA2F2A5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MineJason.Tests", "MineJason.Tests\MineJason.Tests.csproj", "{AD477592-00E5-4C53-90B0-EC7B251F20FD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MineJason.Tests", "MineJason.Tests\MineJason.Tests.csproj", "{AD477592-00E5-4C53-90B0-EC7B251F20FD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3A88CBDD-6148-4FAD-B454-8EB156E94C84}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

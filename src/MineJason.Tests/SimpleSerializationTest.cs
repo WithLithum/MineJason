@@ -2,6 +2,8 @@ using System.Text.Json;
 
 namespace MineJason.Tests;
 
+using Events.Hover;
+
 public class SimpleSerializationTests
 {
     [Test]
@@ -9,6 +11,20 @@ public class SimpleSerializationTests
     {
         Assert.That(JsonSerializer.Serialize(KnownColor.Aqua),
             Is.EqualTo("\"aqua\""));
+    }
+
+    [Test]
+    public void ShowTextEvent_Serialize()
+    {
+        Assert.That(JsonSerializer.Serialize((HoverEvent)(new ShowTextHoverEvent(ChatComponent.CreateText("text this")))),
+            Is.EqualTo("{\"action\":\"show_text\",\"contents\":{\"text\":\"text this\"}}"));
+    }
+
+    [Test]
+    public void ShowTextEvent_Deserialize()
+    {
+        Assert.That(JsonSerializer.Deserialize<HoverEvent>("{\"action\":\"show_text\",\"contents\":{\"text\":\"text this\"}}"),
+            Is.EqualTo(new ShowTextHoverEvent(ChatComponent.CreateText("text this"))));
     }
 
     [Test]

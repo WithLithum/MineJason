@@ -1,11 +1,16 @@
 ﻿namespace MineJason.Events.Hover;
 
+using System.Text.Json.Serialization;
+
 public sealed class ShowEntityHoverEvent(string type, Guid id, ChatComponent? name = null) : HoverEvent, IEquatable<ShowEntityHoverEvent>
 {
+    [JsonPropertyName("name")]
     public ChatComponent? Name { get; } = name;
 
+    [JsonPropertyName("type")]
     public string Type { get; } = type;
 
+    [JsonPropertyName("id")]
     public Guid Id { get; } = id;
 
     public bool Equals(ShowEntityHoverEvent? other)

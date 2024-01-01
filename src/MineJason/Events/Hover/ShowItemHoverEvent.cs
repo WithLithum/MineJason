@@ -1,9 +1,16 @@
 ﻿namespace MineJason.Events.Hover;
 
+using System.Text.Json.Serialization;
+
 public sealed class ShowItemHoverEvent(string id, int count, string nbt) : HoverEvent, IEquatable<ShowItemHoverEvent>
 {
+    [JsonPropertyName("id")]
     public string Id { get; } = id;
+
+    [JsonPropertyName("count")]
     public int Count { get; } = count;
+
+    [JsonPropertyName("nbt")]
     public string Nbt { get; } = nbt;
 
     public bool Equals(ShowItemHoverEvent? other)

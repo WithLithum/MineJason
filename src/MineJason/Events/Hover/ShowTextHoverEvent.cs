@@ -1,7 +1,10 @@
 ﻿namespace MineJason.Events.Hover;
 
+using System.Text.Json.Serialization;
+
 public sealed class ShowTextHoverEvent(ChatComponent contents) : HoverEvent, IEquatable<ShowTextHoverEvent>
 {
+    [JsonPropertyName("contents")]
     public ChatComponent Contents { get; } = contents;
 
     public bool Equals(ShowTextHoverEvent? other)

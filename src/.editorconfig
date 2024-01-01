@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# IDE0065: 错放了 using 指令
+csharp_using_directive_placement = inside_namespace
