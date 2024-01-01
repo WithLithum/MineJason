@@ -66,6 +66,23 @@ public class SimpleSerializationTests
     }
 
     [Test]
+    public void EntityComponent_Serialize()
+    {
+        Assert.That(JsonSerializer.Serialize(ChatComponent.CreateSelector("@a", ChatComponent.CreateText(";"))),
+            Is.EqualTo("{\"selector\":\"@a\",\"separator\":{\"text\":\";\"}}"));
+    }
+
+
+    [Test]
+    public void EntityComponent_Deserialize()
+    {
+        var deserialized = JsonSerializer.Deserialize<ChatComponent>("{\"selector\":\"@a\",\"separator\":{\"text\":\";\"}}");
+
+        Assert.That(deserialized,
+            Is.EqualTo(ChatComponent.CreateSelector("@a", ChatComponent.CreateText(";"))));
+    }
+
+    [Test]
     public void TranslatableComponent_SerializeWithColor()
     {
         var component = ChatComponent.CreateTranslatable("translatable.key");

@@ -94,6 +94,12 @@ public abstract class ChatComponent(string? type) : IEquatable<ChatComponent>
         return new ScoreboardChatComponent(new ScoreboardSearcher(name, objective, value));
     }
 
+    [PublicAPI]
+    public static ChatComponent CreateSelector(string selector, ChatComponent? separator = null)
+    {
+        return new EntityChatComponent(selector, separator);
+    }
+
     public virtual bool Equals(ChatComponent? other)
     {
         return other is not null && StyleEquals(this, other);

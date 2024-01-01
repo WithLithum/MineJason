@@ -26,6 +26,9 @@ public class ChatComponentConverter : JsonConverter<ChatComponent>
                         .SerializerOptions);
 
                 case "selector":
+                    return dom.RootElement.Deserialize<EntityChatComponent>(ChatComponent
+                        .SerializerOptions);
+
                 case "score":
                     return dom.RootElement.Deserialize<ScoreboardChatComponent>(ChatComponent
                         .SerializerOptions);
@@ -57,7 +60,7 @@ public class ChatComponentConverter : JsonConverter<ChatComponent>
 
         if (dom.RootElement.TryGetProperty("selector", out _))
         {
-            throw new NotImplementedException();
+            return dom.RootElement.Deserialize<EntityChatComponent>(ChatComponent.SerializerOptions);
         }
 
         if (dom.RootElement.TryGetProperty("keybind", out _))
