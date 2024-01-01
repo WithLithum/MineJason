@@ -12,6 +12,6 @@
         <Product>MineJason</Product>
         <ProjectUrl>https://codeberg.org/WithLithum/MineJason</ProjectUrl>
         <RepositoryUrl>https://codeberg.org/WithLithum/MineJason.git</RepositoryUrl>
-        <PackageReadmeFile>../README.md</PackageReadmeFile>
+        <PackageReadmeFile>PACK-README.md</PackageReadmeFile>
     </PropertyGroup>
 </Project>

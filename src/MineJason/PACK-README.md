@@ -30,6 +30,3 @@ Please report issues in the [issue tracker](https://codeberg.org/WithLithum/Mine
 - Thanks JetBrains for providing a licence of their tools for open source development. The ReSharper VS extension is used in the development of this library.
 - Thanks you for your interest on this library.
 
-## License
-
-[LGPL-3.0-or-later](COPYING.LESSER.txt)
