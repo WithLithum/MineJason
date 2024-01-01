@@ -1,4 +1,6 @@
-# Contribution Documentation
+# Contribution Guide
+
+Thanks for your interest on this project. Before making code contributions, please take time to review the conventions as set out below.
 
 The key words "DO, DO NOT", "AVOID" and "CONSIDER" are to be interpreted in the same as same such words in [Framework Design Guidelines](https://learn.microsoft.com/en-us/dotnet/standard/design-guidelines).
 

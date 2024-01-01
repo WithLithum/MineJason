@@ -25,6 +25,12 @@ JsonConverter.Deserialize(json, ChatComponent.SerializerOptions);
 
 Please report issues in the [issue tracker](https://codeberg.org/WithLithum/MineJason/issues).
 
+## Contributing
+
+Pull requests are welcome. For major changes, please open an issue to discuss what you would like to change first.
+
+Please make sure to update tests as appropriately, and don't forget to check the conventions of this project written in [the Contributing guide](CONTRIBUTING.md).
+
 ## Thanks
 
 - Thanks JetBrains for providing a licence of their tools for open source development. The ReSharper VS extension is used in the development of this library.
