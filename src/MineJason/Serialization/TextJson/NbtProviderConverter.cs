@@ -1,4 +1,4 @@
-﻿namespace MineJason.Serialization;
+﻿namespace MineJason.Serialization.TextJson;
 
 using System.Text.Json;
 using System.Text.Json.Serialization;
