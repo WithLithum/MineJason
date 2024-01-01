@@ -1,7 +1,6 @@
-﻿using System.Text.Json;
+﻿namespace MineJason.Serialization.TextJson;
+using System.Text.Json;
 using System.Text.Json.Serialization;
-
-namespace MineJason.Serialization.TextJson;
 
 public class ChatComponentConverter : JsonConverter<ChatComponent>
 {
@@ -20,14 +19,17 @@ public class ChatComponentConverter : JsonConverter<ChatComponent>
             switch (value.GetString()!)
             {
                 case "text":
-                    return dom.RootElement.Deserialize<TextChatComponent>(TextJsonComponentHelper.SerializerOptions);
+                    return dom.RootElement.Deserialize<TextChatComponent>(ChatComponent.SerializerOptions);
 
                 case "translatable":
-                    return dom.RootElement.Deserialize<TranslatableChatComponent>(TextJsonComponentHelper
+                    return dom.RootElement.Deserialize<TranslatableChatComponent>(ChatComponent
                         .SerializerOptions);
 
                 case "selector":
                 case "score":
+                    return dom.RootElement.Deserialize<ScoreboardChatComponent>(ChatComponent
+                        .SerializerOptions);
+
                 case "keybind":
                 case "nbt":
                     throw new NotImplementedException();
@@ -40,17 +42,17 @@ public class ChatComponentConverter : JsonConverter<ChatComponent>
         // Use old Minecraft behaviour...
         if (dom.RootElement.TryGetProperty("text", out _))
         {
-            return dom.RootElement.Deserialize<TextChatComponent>(TextJsonComponentHelper.SerializerOptions);
+            return dom.RootElement.Deserialize<TextChatComponent>(ChatComponent.SerializerOptions);
         }
 
         if (dom.RootElement.TryGetProperty("translate", out _))
         {
-            return dom.RootElement.Deserialize<TranslatableChatComponent>(TextJsonComponentHelper.SerializerOptions);
+            return dom.RootElement.Deserialize<TranslatableChatComponent>(ChatComponent.SerializerOptions);
         }
 
         if (dom.RootElement.TryGetProperty("score", out _))
         {
-            throw new NotImplementedException();
+            return dom.RootElement.Deserialize<ScoreboardChatComponent>(ChatComponent.SerializerOptions);
         }
 
         if (dom.RootElement.TryGetProperty("selector", out _))
@@ -68,6 +70,6 @@ public class ChatComponentConverter : JsonConverter<ChatComponent>
 
     public override void Write(Utf8JsonWriter writer, ChatComponent value, JsonSerializerOptions options)
     {
-        JsonSerializer.Serialize(writer, (object)value, TextJsonComponentHelper.SerializerOptions);
+        JsonSerializer.Serialize(writer, (object)value, ChatComponent.SerializerOptions);
     }
 }

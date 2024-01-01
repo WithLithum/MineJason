@@ -1,14 +1,25 @@
-﻿using System.Text.Json.Serialization;
+﻿namespace MineJason;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using JetBrains.Annotations;
+using MineJason.Data;
 using MineJason.Events;
 using MineJason.Events.Hover;
 using MineJason.Serialization.TextJson;
 
-namespace MineJason;
-
 [JsonConverter(typeof(ChatComponentConverter))]
 public abstract class ChatComponent(string? type) : IEquatable<ChatComponent>
 {
+    /// <summary>
+    /// Gets the serializer options that is required for conforming the Minecraft: Java Edition standards.
+    /// </summary>
+    [PublicAPI]
+    public static readonly JsonSerializerOptions SerializerOptions = new()
+    {
+        PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+        DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+    };
+
     protected string? Type { get; set; } = type;
 
     /// <summary>
@@ -77,7 +88,16 @@ public abstract class ChatComponent(string? type) : IEquatable<ChatComponent>
         return new TranslatableChatComponent(text);
     }
 
-    public abstract bool Equals(ChatComponent? other);
+    [PublicAPI]
+    public static ChatComponent CreateScore(string name, string objective, string? value = null)
+    {
+        return new ScoreboardChatComponent(new ScoreboardSearcher(name, objective, value));
+    }
+
+    public virtual bool Equals(ChatComponent? other)
+    {
+        return other is not null && StyleEquals(this, other);
+    }
 
     public abstract override int GetHashCode();
 

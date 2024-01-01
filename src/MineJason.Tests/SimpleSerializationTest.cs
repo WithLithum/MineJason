@@ -49,6 +49,23 @@ public class SimpleSerializationTests
     }
 
     [Test]
+    public void ScoreboardComponent_Serialize()
+    {
+        Assert.That(JsonSerializer.Serialize(ChatComponent.CreateScore("Player", "advancements")),
+            Is.EqualTo("{\"score\":{\"name\":\"Player\",\"objective\":\"advancements\"}}"));
+    }
+
+
+    [Test]
+    public void ScoreboardComponent_Deserialize()
+    {
+        var deserialized = JsonSerializer.Deserialize<ChatComponent>("{\"score\":{\"name\":\"Player\",\"objective\":\"kills\"}}");
+
+        Assert.That(deserialized,
+            Is.EqualTo(ChatComponent.CreateScore("Player", "kills")));
+    }
+
+    [Test]
     public void TranslatableComponent_SerializeWithColor()
     {
         var component = ChatComponent.CreateTranslatable("translatable.key");
