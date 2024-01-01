@@ -10,6 +10,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3A88CBDD-6148-4FAD-B454-8EB156E94C84}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		..\ACKNOWLEDGEMENTS.txt = ..\ACKNOWLEDGEMENTS.txt
 		..\CONTRIBUTING.md = ..\CONTRIBUTING.md
 		..\README.md = ..\README.md
 	EndProjectSection

@@ -21,6 +21,11 @@ JsonConverter.Deserialize(json, ChatComponent.SerializerOptions);
 
 `Create` methods in `ChatComponent` class allows you to create various types of components.
 
+## Thanks
+
+- Thanks JetBrains for providing a licence of their tools for open source development. The ReSharper VS extension is used in the development of this library.
+- Thanks you for your interest on this library.
+
 ## License
 
 [LGPL-3.0-or-later](COPYING.LESSER.txt)
