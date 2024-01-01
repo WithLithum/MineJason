@@ -8,6 +8,8 @@
 
   <PropertyGroup>
     <AnalysisMode>Recommended</AnalysisMode>
+    <Title>MineJason</Title>
+    <Description>A library providing models for dealing with chat components (Raw JSON text) in Minecraft: Java Edition</Description>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,6 +18,10 @@
 
   <ItemGroup>
     <PackageReference Include="JetBrains.Annotations" Version="2023.3.0" />
+    <PackageReference Include="Microsoft.SourceLink.Gitea" Version="8.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
 </Project>

@@ -1,0 +1,16 @@
+<Project>
+    <PropertyGroup>
+        <!-- Version -->
+        <VersionPrefix>0.1.0</VersionPrefix>
+        <VersionSuffix>alpha</VersionSuffix>
+
+        <!-- Authors and Misc -->
+        <Authors>WithLithum</Authors>
+        <Company>WithLithum</Company>
+        <Copyright>Copyright (C) WithLithum 2023, 2024.</Copyright>
+        <PackageLicenseExpression>LGPL-3.0-or-later</PackageLicenseExpression>
+        <Product>MineJason</Product>
+        <ProjectUrl>https://codeberg.org/WithLithum/MineJason</ProjectUrl>
+        <RepositoryUrl>https://codeberg.org/WithLithum/MineJason.git</RepositoryUrl>
+    </PropertyGroup>
+</Project>
