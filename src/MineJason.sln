@@ -10,10 +10,11 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3A88CBDD-6148-4FAD-B454-8EB156E94C84}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
-		CONTRIBUTING.md = CONTRIBUTING.md
+		..\CONTRIBUTING.md = ..\CONTRIBUTING.md
+		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MineJason.Extensions.SharpNbt", "MineJason.Extensions.SharpNbt\MineJason.Extensions.SharpNbt.csproj", "{166334AE-F245-4D12-AE2B-FED2F8F0D433}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MineJason.Extensions.SharpNbt", "MineJason.Extensions.SharpNbt\MineJason.Extensions.SharpNbt.csproj", "{166334AE-F245-4D12-AE2B-FED2F8F0D433}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
