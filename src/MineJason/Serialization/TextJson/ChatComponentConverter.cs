@@ -1,5 +1,6 @@
 ﻿namespace MineJason.Serialization.TextJson;
 using System.Text.Json;
+using System.Text.Json.Nodes;
 using System.Text.Json.Serialization;
 
 /// <summary>
@@ -12,6 +13,11 @@ public class ChatComponentConverter : JsonConverter<ChatComponent>
     {
         if (reader.TokenType != JsonTokenType.StartObject)
         {
+            if (reader.TokenType == JsonTokenType.StartArray)
+            {
+                return ReadArray(ref reader);
+            }
+
             throw new JsonException("not a chat component");
         }
 
@@ -78,6 +84,37 @@ public class ChatComponentConverter : JsonConverter<ChatComponent>
         }
 
         throw new NotSupportedException();
+    }
+
+    private static ChatComponent ReadArray(ref Utf8JsonReader reader)
+    {
+        var array = JsonNode.Parse(ref reader)!.AsArray();
+
+        if (array.Count == 0)
+        {
+            return ChatComponent.CreateText(string.Empty);
+        }
+
+        var first = array[0]!.AsObject();
+        var component = first.Deserialize<ChatComponent>(ChatComponent.SerializerOptions)
+                        ?? ChatComponent.CreateText(string.Empty);
+
+        if (array.Count < 2)
+        {
+            return component;
+        }
+
+        for (var i = 1; i < array.Count; i++)
+        {
+            var extraComp = array[i].Deserialize<ChatComponent>();
+
+            if (extraComp != null)
+            {
+                component.Append(extraComp);
+            }
+        }
+
+        return component;
     }
 
     private static T? DeserializeComponent<T>(JsonDocument document)

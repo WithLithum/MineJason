@@ -36,4 +36,10 @@ public sealed class TextChatComponent(string text) : ChatComponent("text"), IEqu
     {
         return Text.GetHashCode();
     }
+
+    /// <inheritdoc />
+    public override string ToString()
+    {
+        return $"({base.ToString()} | text{{{Text}}})";
+    }
 }

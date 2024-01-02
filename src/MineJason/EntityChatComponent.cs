@@ -1,5 +1,6 @@
 ﻿namespace MineJason;
 using System;
+using System.Diagnostics;
 using System.Text.Json.Serialization;
 
 /// <summary>
@@ -36,6 +37,12 @@ public sealed class EntityChatComponent(string selector, ChatComponent? separato
     }
 
     /// <inheritdoc />
+    public override string ToString()
+    {
+        return $"selector{{{Selector}, {Separator}}}";
+    }
+
+    /// <inheritdoc />
     public bool Equals(EntityChatComponent? other)
     {
         if (ReferenceEquals(null, other))
@@ -47,6 +54,12 @@ public sealed class EntityChatComponent(string selector, ChatComponent? separato
         {
             return true;
         }
+
+        #if DEBUG
+
+        Console.WriteLine(base.Equals(other));
+
+        #endif
 
         return base.Equals(other) && Selector == other.Selector && Equals(Separator, other.Separator);
     }

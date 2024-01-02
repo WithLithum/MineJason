@@ -96,7 +96,7 @@ public abstract class ChatComponent(string? type) : IEquatable<ChatComponent>
     /// styles of this component by default.
     /// </summary>
     [JsonPropertyName("extra")]
-    public IList<ChatComponent> Extra { get; set; } = new List<ChatComponent>();
+    public IList<ChatComponent>? Extra { get; set; }
 
     #region Creation methods
     /// <summary>
@@ -174,6 +174,8 @@ public abstract class ChatComponent(string? type) : IEquatable<ChatComponent>
     {
         ArgumentNullException.ThrowIfNull(component);
 
+        Extra ??= new List<ChatComponent>();
+
         Extra.Add(component);
         return this;
     }
@@ -204,6 +206,9 @@ public abstract class ChatComponent(string? type) : IEquatable<ChatComponent>
     /// <returns><see langword="true"/> if the style of the components are equivalent; otherwise, <see langword="false"/>.</returns>
     public static bool StyleEquals(ChatComponent component1, ChatComponent component2)
     {
+        Console.WriteLine("Component 1: {0}", component1);
+        Console.WriteLine("Component 2: {0}", component2);
+
         return component1.Color == component2.Color
                && component1.Font == component2.Font
                && component1.Insertion == component2.Insertion
@@ -213,5 +218,14 @@ public abstract class ChatComponent(string? type) : IEquatable<ChatComponent>
                && Equals(component1.ClickEvent, component2.ClickEvent)
                && Equals(component1.HoverEvent, component2.HoverEvent) 
                && Equals(component1.Extra, component2.Extra);
+    }
+
+    /// <inheritdoc />
+    public override string ToString()
+    {
+        return $"<color={Color},font={Font},bold={Bold},italic={Italic},underlined={Underline},strikethrough={Strikethrough},{Environment.NewLine}" +
+               $"clickEvent={ClickEvent}{Environment.NewLine}" +
+               $"hoverEvent={HoverEvent}{Environment.NewLine}" +
+               $"extra={Extra}>";
     }
 }
