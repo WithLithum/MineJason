@@ -70,7 +70,7 @@ public abstract class ChatComponent(string? type) : IEquatable<ChatComponent>
     /// Gets or sets the font of this component.
     /// </summary>
     [JsonPropertyName("font")]
-    public string? Font { get; set; }
+    public ResourceLocation? Font { get; set; }
 
     /// <summary>
     /// Gets or sets the text to insert into the chat box whenever this component was clicked while
@@ -152,7 +152,7 @@ public abstract class ChatComponent(string? type) : IEquatable<ChatComponent>
 
     #endregion
 
-    #region Fluent syntax methdos
+    #region Fluent syntax methods
 
     /// <summary>
     /// Sets the color of this instance.
@@ -162,6 +162,17 @@ public abstract class ChatComponent(string? type) : IEquatable<ChatComponent>
     public ChatComponent SetColor(IChatColor? color)
     {
         Color = color;
+        return this;
+    }
+
+    /// <summary>
+    /// Sets the font of this instance.
+    /// </summary>
+    /// <param name="font">The font of this instance.</param>
+    /// <returns>This instance for chaining.</returns>
+    public ChatComponent SetFont(ResourceLocation? font)
+    {
+        Font = font;
         return this;
     }
 
