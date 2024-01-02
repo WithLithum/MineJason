@@ -1,4 +1,6 @@
 ﻿namespace MineJason;
+
+using System.ComponentModel;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using JetBrains.Annotations;
@@ -94,8 +96,9 @@ public abstract class ChatComponent(string? type) : IEquatable<ChatComponent>
     /// styles of this component by default.
     /// </summary>
     [JsonPropertyName("extra")]
-    public IEnumerable<ChatComponent>? Extra { get; set; }
+    public IList<ChatComponent> Extra { get; set; } = new List<ChatComponent>();
 
+    #region Creation methods
     /// <summary>
     /// Creates a text component.
     /// </summary>
@@ -146,6 +149,36 @@ public abstract class ChatComponent(string? type) : IEquatable<ChatComponent>
     {
         return new EntityChatComponent(selector, separator);
     }
+
+    #endregion
+
+    #region Fluent syntax methdos
+
+    /// <summary>
+    /// Sets the color of this instance.
+    /// </summary>
+    /// <param name="color">The color of this instance.</param>
+    /// <returns>This instance for chaining.</returns>
+    public ChatComponent SetColor(IChatColor? color)
+    {
+        Color = color;
+        return this;
+    }
+
+    /// <summary>
+    /// Appends the specified component as the extra component to this component.
+    /// </summary>
+    /// <param name="component">The component to append.</param>
+    /// <returns>This instance for chaining.</returns>
+    public ChatComponent Append(ChatComponent component)
+    {
+        ArgumentNullException.ThrowIfNull(component);
+
+        Extra.Add(component);
+        return this;
+    }
+
+    #endregion
 
     /// <inheritdoc />
     public virtual bool Equals(ChatComponent? other)
