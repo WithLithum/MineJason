@@ -48,4 +48,8 @@ Please make sure to update tests as appropriately, and don't forget to check the
 
 ## License
 
-[LGPL-3.0-or-later](COPYING.LESSER.txt)
+The libraries are available under the [GNU Lesser General Public License](COPYING.LESSER.txt), either version 3 of the license, or (at your opinion) any later version.
+
+Please also see the license of [other libraries that this project links to](ACKNOWLEDGEMENTS.txt).
+
+The SPDX License ID of this project is `LGPL-3.0-or-later`.
