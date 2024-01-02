@@ -2,8 +2,12 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
+/// <summary>
+/// Provides JSON conversion for <see cref="ChatComponent"/>.
+/// </summary>
 public class ChatComponentConverter : JsonConverter<ChatComponent>
 {
+    /// <inheritdoc />
     public override ChatComponent? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         if (reader.TokenType != JsonTokenType.StartObject)
@@ -33,6 +37,7 @@ public class ChatComponentConverter : JsonConverter<ChatComponent>
                     return dom.RootElement.Deserialize<ScoreboardChatComponent>(ChatComponent
                         .SerializerOptions);
 
+                // TODO add keybind and nbt
                 case "keybind":
                 case "nbt":
                     throw new NotImplementedException();
@@ -63,6 +68,7 @@ public class ChatComponentConverter : JsonConverter<ChatComponent>
             return dom.RootElement.Deserialize<EntityChatComponent>(ChatComponent.SerializerOptions);
         }
 
+        // TODO add keybind and nbt.
         if (dom.RootElement.TryGetProperty("keybind", out _))
         {
             throw new NotImplementedException();
@@ -71,6 +77,7 @@ public class ChatComponentConverter : JsonConverter<ChatComponent>
         throw new NotSupportedException();
     }
 
+    /// <inheritdoc />
     public override void Write(Utf8JsonWriter writer, ChatComponent value, JsonSerializerOptions options)
     {
         JsonSerializer.Serialize(writer, (object)value, ChatComponent.SerializerOptions);

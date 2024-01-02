@@ -35,26 +35,41 @@ public struct ScoreboardSearcher(string name, string objective, string? value = 
     [JsonPropertyName("value")]
     public string? Value { get; set; } = value;
 
-    public override bool Equals(object? obj)
+    /// <inheritdoc />
+    public readonly override bool Equals(object? obj)
     {
         return obj is ScoreboardSearcher other && Equals(other);
     }
 
-    public override int GetHashCode()
+    /// <inheritdoc />
+    public readonly override int GetHashCode()
     {
         return HashCode.Combine(Name, Objective, Value);
     }
 
-    public bool Equals(ScoreboardSearcher other)
+    /// <inheritdoc />
+    public readonly bool Equals(ScoreboardSearcher other)
     {
         return Name == other.Name && Objective == other.Objective && Value == other.Value;
     }
 
+    /// <summary>
+    /// Determines whether the instance to the <paramref name="left"/> is equivalent to the instance to the <paramref name="right"/>.
+    /// </summary>
+    /// <param name="left">The instance to the left.</param>
+    /// <param name="right">The instance to the right.</param>
+    /// <returns><see langword="true"/> if the instance to the left is equivalent to the instance to the <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator ==(ScoreboardSearcher left, ScoreboardSearcher right)
     {
         return left.Equals(right);
     }
 
+    /// <summary>
+    /// Determines whether the instance to the <paramref name="left"/> is not equivalent to the instance to the <paramref name="right"/>.
+    /// </summary>
+    /// <param name="left">The instance to the left.</param>
+    /// <param name="right">The instance to the right.</param>
+    /// <returns><see langword="true"/> if the instance to the left is not equivalent to the instance to the <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator !=(ScoreboardSearcher left, ScoreboardSearcher right)
     {
         return !(left == right);

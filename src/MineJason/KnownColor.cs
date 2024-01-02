@@ -2,9 +2,7 @@
 
 using System.Text.Json.Serialization;
 using MineJason.Serialization.TextJson;
-using JetBrains.Annotations;
 
-[PublicAPI]
 [JsonConverter(typeof(KnownColorConverter))]
 public sealed class KnownColor : IChatColor
 {

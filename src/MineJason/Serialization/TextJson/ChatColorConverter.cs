@@ -1,7 +1,6 @@
-﻿using System.Text.Json;
+﻿namespace MineJason.Serialization.TextJson;
+using System.Text.Json;
 using System.Text.Json.Serialization;
-
-namespace MineJason.Serialization.TextJson;
 
 public class ChatColorConverter : JsonConverter<IChatColor>
 {

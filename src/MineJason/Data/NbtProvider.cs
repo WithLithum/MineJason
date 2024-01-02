@@ -7,9 +7,13 @@ using MineJason.Serialization.TextJson;
 /// Represents a NBT data value. This value should not be created manually,
 /// but rather be created by an NBT library adapter.
 /// </summary>
-/// <param name="raw">The raw NBT string.</param>
+/// <param name="raw">The raw NBT string. This value is not validated.</param>
 [JsonConverter(typeof(NbtProviderConverter))]
 public class NbtProvider(string raw)
 {
+    /// <summary>
+    /// Returns the string representation of this NBT component.
+    /// </summary>
+    /// <returns>The SNBT representation.</returns>
     public override string ToString() => raw;
 }

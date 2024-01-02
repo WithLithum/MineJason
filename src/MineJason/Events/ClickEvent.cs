@@ -1,6 +1,6 @@
-﻿using System.Text.Json.Serialization;
+﻿namespace MineJason.Events;
 
-namespace MineJason.Events;
+using System.Text.Json.Serialization;
 
 [JsonPolymorphic(TypeDiscriminatorPropertyName = "action")]
 [JsonDerivedType(typeof(ChangePageClickEvent), "change_page")]

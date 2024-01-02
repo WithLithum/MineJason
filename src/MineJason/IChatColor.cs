@@ -1,8 +1,11 @@
-﻿using System.Text.Json.Serialization;
+﻿namespace MineJason;
+
+using System.Text.Json.Serialization;
 using MineJason.Serialization.TextJson;
 
-namespace MineJason;
-
+/// <summary>
+/// Represents a chat color.
+/// </summary>
 [JsonConverter(typeof(ChatColorConverter))]
 public interface IChatColor
 {
