@@ -13,5 +13,8 @@
         <ProjectUrl>https://codeberg.org/WithLithum/MineJason</ProjectUrl>
         <RepositoryUrl>https://codeberg.org/WithLithum/MineJason.git</RepositoryUrl>
         <PackageReadmeFile>PACK-README.md</PackageReadmeFile>
+
+        <!-- Package assets -->
+        <PackageIcon>icon.png</PackageIcon>
     </PropertyGroup>
 </Project>
