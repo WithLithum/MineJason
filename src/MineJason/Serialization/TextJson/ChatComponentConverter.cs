@@ -23,24 +23,23 @@ public class ChatComponentConverter : JsonConverter<ChatComponent>
             switch (value.GetString()!)
             {
                 case "text":
-                    return dom.RootElement.Deserialize<TextChatComponent>(ChatComponent.SerializerOptions);
+                    return DeserializeComponent<TextChatComponent>(dom);
 
                 case "translatable":
-                    return dom.RootElement.Deserialize<TranslatableChatComponent>(ChatComponent
-                        .SerializerOptions);
+                    return DeserializeComponent<TranslatableChatComponent>(dom);
 
                 case "selector":
-                    return dom.RootElement.Deserialize<EntityChatComponent>(ChatComponent
-                        .SerializerOptions);
+                    return DeserializeComponent<EntityChatComponent>(dom);
 
                 case "score":
-                    return dom.RootElement.Deserialize<ScoreboardChatComponent>(ChatComponent
-                        .SerializerOptions);
+                    return DeserializeComponent<ScoreboardChatComponent>(dom);
 
                 // TODO add keybind and nbt
                 case "keybind":
+                    return DeserializeComponent<KeybindChatComponent>(dom);
+
                 case "nbt":
-                    throw new NotImplementedException();
+                    return DeserializeComponent<NbtChatComponent>(dom);
 
                 default:
                     throw new NotSupportedException();
@@ -55,26 +54,35 @@ public class ChatComponentConverter : JsonConverter<ChatComponent>
 
         if (dom.RootElement.TryGetProperty("translate", out _))
         {
-            return dom.RootElement.Deserialize<TranslatableChatComponent>(ChatComponent.SerializerOptions);
+            return DeserializeComponent<TranslatableChatComponent>(dom);
         }
 
         if (dom.RootElement.TryGetProperty("score", out _))
         {
-            return dom.RootElement.Deserialize<ScoreboardChatComponent>(ChatComponent.SerializerOptions);
+            return DeserializeComponent<ScoreboardChatComponent>(dom);
         }
 
         if (dom.RootElement.TryGetProperty("selector", out _))
         {
-            return dom.RootElement.Deserialize<EntityChatComponent>(ChatComponent.SerializerOptions);
+            return DeserializeComponent<EntityChatComponent>(dom);
         }
 
-        // TODO add keybind and nbt.
         if (dom.RootElement.TryGetProperty("keybind", out _))
         {
-            throw new NotImplementedException();
+            return DeserializeComponent<KeybindChatComponent>(dom);
+        }
+
+        if (dom.RootElement.TryGetProperty("path", out _))
+        {
+            return DeserializeComponent<NbtChatComponent>(dom);
         }
 
         throw new NotSupportedException();
+    }
+
+    private static T? DeserializeComponent<T>(JsonDocument document)
+    {
+        return document.RootElement.Deserialize<T>(ChatComponent.SerializerOptions);
     }
 
     /// <inheritdoc />

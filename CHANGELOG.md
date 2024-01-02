@@ -8,6 +8,7 @@ This document notes all API visible changes of this library.
 
 - Added `ResourceLocation.TryParse`.
 - Added JSON conversion support for `ResourceLocation`.
+- Added JSON conversion support for NBT and Keybind chat component.
 - Added XML documentation.
 
 ### Changed

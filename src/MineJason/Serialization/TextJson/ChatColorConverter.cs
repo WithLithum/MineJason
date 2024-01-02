@@ -2,8 +2,12 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
+/// <summary>
+/// Provides JSON conversion for <see cref="IChatColor"/>.
+/// </summary>
 public class ChatColorConverter : JsonConverter<IChatColor>
 {
+    /// <inheritdoc />
     public override IChatColor? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         if (reader.TokenType != JsonTokenType.String)
@@ -35,6 +39,7 @@ public class ChatColorConverter : JsonConverter<IChatColor>
         }
     }
 
+    /// <inheritdoc />
     public override void Write(Utf8JsonWriter writer, IChatColor value, JsonSerializerOptions options)
     {
         writer.WriteStringValue(value.GenerateColorText());

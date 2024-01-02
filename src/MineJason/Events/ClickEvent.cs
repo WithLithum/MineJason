@@ -2,6 +2,9 @@
 
 using System.Text.Json.Serialization;
 
+/// <summary>
+/// Represents a click event.
+/// </summary>
 [JsonPolymorphic(TypeDiscriminatorPropertyName = "action")]
 [JsonDerivedType(typeof(ChangePageClickEvent), "change_page")]
 [JsonDerivedType(typeof(CopyToClipboardClickEvent), "copy_to_clipboard")]

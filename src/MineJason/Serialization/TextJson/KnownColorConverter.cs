@@ -1,10 +1,14 @@
-﻿using System.Text.Json;
+﻿namespace MineJason.Serialization.TextJson;
+
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace MineJason.Serialization.TextJson;
-
+/// <summary>
+/// Provides JSON conversion for <see cref="KnownColor"/>.
+/// </summary>
 public class KnownColorConverter : JsonConverter<KnownColor>
 {
+    /// <inheritdoc />
     public override KnownColor? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         if (reader.TokenType != JsonTokenType.String)
@@ -29,6 +33,7 @@ public class KnownColorConverter : JsonConverter<KnownColor>
         }
     }
 
+    /// <inheritdoc />
     public override void Write(Utf8JsonWriter writer, KnownColor value, JsonSerializerOptions options)
     {
         writer.WriteStringValue(value.GenerateColorText());
