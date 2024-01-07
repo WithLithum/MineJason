@@ -2,6 +2,7 @@
 using System;
 using System.Diagnostics;
 using System.Text.Json.Serialization;
+using JetBrains.Annotations;
 
 /// <summary>
 /// Represents an entity selector chat component that resolves into a list of entity names upon being
@@ -9,6 +10,7 @@ using System.Text.Json.Serialization;
 /// </summary>
 /// <param name="selector">The selector.</param>
 /// <param name="separator">The chat component to separate entity names.</param>
+[PublicAPI]
 public sealed class EntityChatComponent(string selector, ChatComponent? separator = null) : ChatComponent("selector"),
     IEquatable<EntityChatComponent>
 {
