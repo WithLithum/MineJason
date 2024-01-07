@@ -1,6 +1,7 @@
 ﻿namespace MineJason.Serialization.TextJson;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using MineJason.Colors;
 
 /// <summary>
 /// Provides JSON conversion for <see cref="IChatColor"/>.
@@ -24,7 +25,13 @@ public class ChatColorConverter : JsonConverter<IChatColor>
 
         if (str.StartsWith('#'))
         {
-            throw new NotImplementedException();
+            // If it is RGB chat color then we are parsing it here.
+            if (!RgbChatColor.TryParse(str, out var rgbColor))
+            {
+                throw new JsonException("Expected RGB color notation");
+            }
+
+            return rgbColor;
         }
         else
         {
