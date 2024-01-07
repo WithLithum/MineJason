@@ -13,6 +13,7 @@
         <ProjectUrl>https://codeberg.org/WithLithum/MineJason</ProjectUrl>
         <RepositoryUrl>https://codeberg.org/WithLithum/MineJason.git</RepositoryUrl>
         <PackageReadmeFile>PACK-README.md</PackageReadmeFile>
+        <PackageTags>minecraft;mcje;raw-json-text;minecraft-java;minecraft-commands;minecraft-command;chat-components;</PackageTags>
 
         <!-- Package assets -->
         <PackageIcon>icon.png</PackageIcon>
