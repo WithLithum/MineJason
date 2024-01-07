@@ -11,21 +11,26 @@ MineJason is a .NET library that provides serialization compatible models for ch
 
 Use our NuGet package (click the status badge/icon to get to the package page!)
 
-| Name                          | Status & Link |
-| ----------------------------- | ------------- |
-| MineJason                     | [![Nuget](https://img.shields.io/nuget/v/MineJason?style=flat-square&logo=nuget&label=%20)](https://www.nuget.org/packages/MineJason) |
+| Name                          | Status & Link                                                                                                                                                                 |
+|-------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| MineJason                     | [![Nuget](https://img.shields.io/nuget/v/MineJason?style=flat-square&logo=nuget&label=%20)](https://www.nuget.org/packages/MineJason)                                         |
 | MineJason.Extensions.SharpNbt | [![Nuget](https://img.shields.io/nuget/v/MineJason.Extensions.SharpNbt?style=flat-square&logo=nuget&label=%20)](https://www.nuget.org/packages/MineJason.Extensions.SharpNbt) |
 
 ### Serialize and deserialize
 
-To serialize or deserialize chat components, make sure to use `ChatComponent.SerializerOptions`, so that your serialized output conforms to Minecraft: Java Edition format.
+You need to make sure that you use `ChatComponent.SerializerOptions` when serializing or deserializing chat components, so that your serialized output conforms to Minecraft: Java Edition format.
+
+To make it easier, we have provided `JsonComponentSerializer` class which provides a few static methods similar to `JsonSerializer`, but pre-configured to use the specified serializer options:
 
 ```csharp
-// Use the serializer options!
+// Use our custom serializers!
+using MineJason.Serialization;
 
-JsonConverter.Serialize(component, ChatComponent.SerializerOptions);
-JsonConverter.Deserialize(json, ChatComponent.SerializerOptions);
+JsonComponentSerializer.Serialize(component);
+JsonComponentSerializer.Deserialize(json);
 ```
+
+If you prefer to do it yourself then you must use or respect all options defined in `ChatComponent.SerializerOptions`!
 
 ### Creating components
 

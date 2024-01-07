@@ -4,6 +4,10 @@ This document notes all API visible changes of this library.
 
 ## [Unreleased]
 
+### Added
+
+- Added support for RGB chat colors.
+
 ## [v0.2.0-alpha]
 
 ### Added
