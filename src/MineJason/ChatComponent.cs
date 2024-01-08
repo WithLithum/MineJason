@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using JetBrains.Annotations;
+using MineJason.Components.Builders;
 using MineJason.Data;
 using MineJason.Events;
 using MineJason.Events.Hover;
@@ -111,6 +112,16 @@ public abstract class ChatComponent(string? type) : IEquatable<ChatComponent>
     }
 
     /// <summary>
+    /// Creates a builder for a text component.
+    /// </summary>
+    /// <returns>The text component builder.</returns>
+    [PublicAPI]
+    public static TextComponentBuilder CreateText()
+    {
+        return new TextComponentBuilder();
+    }
+
+    /// <summary>
     /// Creates a translatable component.
     /// </summary>
     /// <param name="text">The translation ID to display.</param>
@@ -123,6 +134,15 @@ public abstract class ChatComponent(string? type) : IEquatable<ChatComponent>
     public static ChatComponent CreateTranslatable(string text, string? fallback = null, IList<ChatComponent>? with = null)
     {
         return new TranslatableChatComponent(text, fallback, with);
+    }
+
+    /// <summary>
+    /// Creates a builder for a translatable chat component.
+    /// </summary>
+    /// <returns>The chat component builder.</returns>
+    public static TranslatableComponentBuilder CreateTranslatable()
+    {
+        return new TranslatableComponentBuilder();
     }
 
     /// <summary>

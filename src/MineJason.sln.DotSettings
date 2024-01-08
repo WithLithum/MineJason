@@ -4,4 +4,5 @@
 	<s:String x:Key="/Default/Environment/Editor/MatchingBraceHighlighting/Style/@EntryValue">OUTLINE</s:String>
 	<s:String x:Key="/Default/CodeInspection/Highlighting/VsLightBulbDisplayMode/@EntryValue">MergeVsActionsIntoResharperMenu</s:String>
 	<s:Boolean x:Key="/Default/CodeInspection/Highlighting/ShowVsLightBulbActionsInSubmenu/@EntryValue">True</s:Boolean>
-	<s:Boolean x:Key="/Default/UserDictionary/Words/=keybind/@EntryIndexedValue">True</s:Boolean></wpf:ResourceDictionary>
+	<s:Boolean x:Key="/Default/UserDictionary/Words/=keybind/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/UserDictionary/Words/=Lithum/@EntryIndexedValue">True</s:Boolean></wpf:ResourceDictionary>
