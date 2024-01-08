@@ -40,15 +40,15 @@ public struct ScoreboardSearcher(string name, string objective, string? value = 
     public string? Value { get; set; } = value;
 
     /// <inheritdoc />
-    public readonly override bool Equals(object? obj)
-    {
-        return obj is ScoreboardSearcher other && Equals(other);
-    }
-
-    /// <inheritdoc />
     public readonly override int GetHashCode()
     {
         return HashCode.Combine(Name, Objective, Value);
+    }
+    
+    /// <inheritdoc />
+    public readonly override bool Equals(object? obj)
+    {
+        return obj is ScoreboardSearcher other && Equals(other);
     }
 
     /// <inheritdoc />

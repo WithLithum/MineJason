@@ -10,7 +10,7 @@ using System.Globalization;
 /// <summary>
 /// Represents a chat color that is stored as <see cref="System.Drawing.Color"/>.
 /// </summary>
-public class DrawingChatColor : IChatColor, IEquatable<DrawingChatColor>, IEquatable<Color>
+public sealed class DrawingChatColor : IChatColor, IEquatable<DrawingChatColor>, IEquatable<Color>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="DrawingChatColor"/> class.

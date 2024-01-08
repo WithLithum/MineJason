@@ -64,28 +64,15 @@ public sealed class RgbChatColor(byte r, byte g, byte b) : IChatColor, IEquatabl
         
 #endif
 
-        if (!byte.TryParse(rStr, NumberStyles.HexNumber, null, out var r)
-            || !byte.TryParse(gStr, NumberStyles.HexNumber, null, out var g)
-            || !byte.TryParse(bStr, NumberStyles.HexNumber, null, out var b))
+        if (!byte.TryParse(rStr, NumberStyles.HexNumber, null, out var red)
+            || !byte.TryParse(gStr, NumberStyles.HexNumber, null, out var green)
+            || !byte.TryParse(bStr, NumberStyles.HexNumber, null, out var blue))
         {
             return false;
         }
 
-        result = new RgbChatColor(r, g, b);
+        result = new RgbChatColor(red, green, blue);
         return true;
-    }
-
-    /// <inheritdoc />
-    public override bool Equals(object? obj)
-    {
-        #if DEBUG
-
-        Console.WriteLine("ChatColor: equals");
-        Console.WriteLine(obj is RgbChatColor);
-        
-        #endif
-        
-        return ReferenceEquals(this, obj) || obj is RgbChatColor other && Equals(other);
     }
 
     /// <inheritdoc />
@@ -117,5 +104,18 @@ public sealed class RgbChatColor(byte r, byte g, byte b) : IChatColor, IEquatabl
         #endif
 
         return R == other.R && G == other.G && B == other.B;
+    }
+    
+    /// <inheritdoc />
+    public override bool Equals(object? obj)
+    {
+#if DEBUG
+
+        Console.WriteLine("ChatColor: equals");
+        Console.WriteLine(obj is RgbChatColor);
+        
+#endif
+        
+        return ReferenceEquals(this, obj) || obj is RgbChatColor other && Equals(other);
     }
 }

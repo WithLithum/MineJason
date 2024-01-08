@@ -36,17 +36,17 @@ public sealed class EntityChatComponent(string selector, ChatComponent? separato
     }
 
     /// <inheritdoc />
-    public override bool Equals(ChatComponent? other)
-    {
-        return base.Equals(other);
-    }
-
-    /// <inheritdoc />
     public override string ToString()
     {
         return $"selector{{{Selector}, {Separator}}}";
     }
-
+    
+    /// <inheritdoc />
+    public override bool Equals(ChatComponent? other)
+    {
+        return base.Equals(other);
+    }
+    
     /// <inheritdoc />
     public bool Equals(EntityChatComponent? other)
     {

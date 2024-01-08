@@ -970,15 +970,6 @@ namespace JetBrains.Annotations
     }
 
     /// <summary>
-    /// Indicates that the marked method unconditionally terminates control flow execution.
-    /// For example, it could unconditionally throw an exception.
-    /// </summary>
-    [Obsolete("Use [ContractAnnotation('=> halt')] instead")]
-    [AttributeUsage(AttributeTargets.Method)]
-    [Conditional("JETBRAINS_ANNOTATIONS")]
-    internal sealed class TerminatesProgramAttribute : Attribute { }
-
-    /// <summary>
     /// Indicates that the method is a pure LINQ method, with postponed enumeration (like Enumerable.Select,
     /// .Where). This annotation allows inference of [InstantHandle] annotation for parameters
     /// of delegate type by analyzing LINQ method chains.

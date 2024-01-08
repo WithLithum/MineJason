@@ -217,18 +217,18 @@ public abstract class ChatComponent(string? type) : IEquatable<ChatComponent>
     #endregion
 
     /// <inheritdoc />
-    public virtual bool Equals(ChatComponent? other)
-    {
-        return other is not null && StyleEquals(this, other);
-    }
-
-    /// <inheritdoc />
     public abstract override int GetHashCode();
 
     /// <inheritdoc />
     public override bool Equals(object? obj)
     {
         return obj is ChatComponent component && this.Equals(component);
+    }
+    
+    /// <inheritdoc />
+    public virtual bool Equals(ChatComponent? other)
+    {
+        return other is not null && StyleEquals(this, other);
     }
 
     /// <summary>

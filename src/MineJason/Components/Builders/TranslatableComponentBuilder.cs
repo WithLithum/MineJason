@@ -14,7 +14,7 @@ public sealed class TranslatableComponentBuilder : ChatComponentBuilder<Translat
 {
     private string? _translate;
     private string? _fallback;
-    private List<ChatComponent> _with = new();
+    private readonly List<ChatComponent> _with = [];
     
     /// <summary>
     /// Sets the translation key value of the component.

@@ -39,8 +39,7 @@ public class ChatComponentConverter : JsonConverter<ChatComponent>
 
                 case "score":
                     return DeserializeComponent<ScoreboardChatComponent>(dom);
-
-                // TODO add keybind and nbt
+                
                 case "keybind":
                     return DeserializeComponent<KeybindChatComponent>(dom);
 
