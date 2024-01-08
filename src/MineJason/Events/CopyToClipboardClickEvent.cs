@@ -1,4 +1,8 @@
-﻿namespace MineJason.Events;
+﻿// Copyright (c) WithLithum & contributors 2023-2024. All rights reserved.
+// Licensed under the GNU Lesser General Public License, either version 3 or
+// (at your opinion) any later version.
+
+namespace MineJason.Events;
 
 /// <summary>
 /// Represents a copy to clipboard click event, that copies the specified text to the clipboard.

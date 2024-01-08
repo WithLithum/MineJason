@@ -1,4 +1,8 @@
-﻿/* MIT License
+﻿// Copyright (c) WithLithum & contributors 2023-2024. All rights reserved.
+// Licensed under the GNU Lesser General Public License, either version 3 or
+// (at your opinion) any later version.
+
+/* MIT License
 
 Copyright (c) 2016 JetBrains http://www.jetbrains.com
 

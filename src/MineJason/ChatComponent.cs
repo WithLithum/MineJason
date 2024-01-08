@@ -1,6 +1,9 @@
-﻿namespace MineJason;
+﻿// Copyright (c) WithLithum & contributors 2023-2024. All rights reserved.
+// Licensed under the GNU Lesser General Public License, either version 3 or
+// (at your opinion) any later version.
 
-using System.ComponentModel;
+namespace MineJason;
+
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using JetBrains.Annotations;

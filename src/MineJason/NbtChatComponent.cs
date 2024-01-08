@@ -1,6 +1,11 @@
-﻿namespace MineJason;
+﻿// Copyright (c) WithLithum & contributors 2023-2024. All rights reserved.
+// Licensed under the GNU Lesser General Public License, either version 3 or
+// (at your opinion) any later version.
+
+namespace MineJason;
 
 using System.Text.Json.Serialization;
+using JetBrains.Annotations;
 using MineJason.Data;
 
 /// <summary>
@@ -12,7 +17,8 @@ using MineJason.Data;
 /// <param name="entity">The entity to read entity NBT values from.</param>
 /// <param name="storage">The storage to read entity NBT values from.</param>
 /// <param name="separator">The separator to separate between multiple NBT files.</param>
-public class NbtChatComponent(NbtDataSource source, string path, string? block, string? entity, string? storage, ChatComponent? separator = null)
+[PublicAPI]
+public sealed class NbtChatComponent(NbtDataSource source, string path, string? block, string? entity, string? storage, ChatComponent? separator = null)
     : ChatComponent("nbt"),
         IEquatable<NbtChatComponent>
 {
