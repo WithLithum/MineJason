@@ -1,16 +1,19 @@
-﻿namespace MineJason.Data;
+﻿namespace MineJason.Data.Selectors;
+
+using JetBrains.Annotations;
 
 /// <summary>
 /// Represents a scoreboard target selector condition.
 /// </summary>
-public struct ScoreboardSelector : IEquatable<ScoreboardSelector>
+[PublicAPI]
+public struct ScoreboardRangeMatch : IEquatable<ScoreboardRangeMatch>, IScoreboardRange
 {
     /// <summary>
-    /// Initializes a new instance of the <see cref="ScoreboardSelector"/> class.
+    /// Initializes a new instance of the <see cref="ScoreboardRangeMatch"/> class.
     /// </summary>
     /// <param name="objective">The objective.</param>
     /// <param name="range">The range.</param>
-    public ScoreboardSelector(string objective, ScoreboardRange range)
+    public ScoreboardRangeMatch(string objective, IntegralRange range)
     {
         Objective = objective;
         Range = range;
@@ -24,10 +27,10 @@ public struct ScoreboardSelector : IEquatable<ScoreboardSelector>
     /// <summary>
     /// Gets or sets the range to match.
     /// </summary>
-    public ScoreboardRange Range { get; set; }
+    public IntegralRange Range { get; set; }
 
     /// <inheritdoc />
-    public bool Equals(ScoreboardSelector other)
+    public bool Equals(ScoreboardRangeMatch other)
     {
         return Objective == other.Objective && Range.Equals(other.Range);
     }
@@ -35,13 +38,19 @@ public struct ScoreboardSelector : IEquatable<ScoreboardSelector>
     /// <inheritdoc />
     public override bool Equals(object? obj)
     {
-        return obj is ScoreboardSelector other && Equals(other);
+        return obj is ScoreboardRangeMatch other && Equals(other);
     }
 
     /// <inheritdoc />
     public override int GetHashCode()
     {
         return HashCode.Combine(Objective, Range);
+    }
+
+    /// <inheritdoc />
+    public string GetString()
+    {
+        return Range.ToString();
     }
 
     /// <summary>
@@ -52,7 +61,7 @@ public struct ScoreboardSelector : IEquatable<ScoreboardSelector>
     /// <param name="right">The right instance.</param>
     /// <returns><see langword="true"/> if the instance to the <paramref name="left"/> is equivalent to the instance
     /// to the <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
-    public static bool operator ==(ScoreboardSelector left, ScoreboardSelector right)
+    public static bool operator ==(ScoreboardRangeMatch left, ScoreboardRangeMatch right)
     {
         return left.Equals(right);
     }
@@ -65,7 +74,7 @@ public struct ScoreboardSelector : IEquatable<ScoreboardSelector>
     /// <param name="right">The right instance.</param>
     /// <returns><see langword="true"/> if the instance to the <paramref name="left"/> is not equivalent to the instance
     /// to the <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
-    public static bool operator !=(ScoreboardSelector left, ScoreboardSelector right)
+    public static bool operator !=(ScoreboardRangeMatch left, ScoreboardRangeMatch right)
     {
         return !(left == right);
     }

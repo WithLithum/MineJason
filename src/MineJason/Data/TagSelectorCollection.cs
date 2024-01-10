@@ -1,6 +1,7 @@
 ﻿namespace MineJason.Data;
 
 using System.Collections;
+using System.Text;
 
 /// <summary>
 /// Represents a collection of tag selectors.
@@ -68,4 +69,24 @@ public class TagSelectorCollection : ICollection<TagSelector>
 
     /// <inheritdoc />
     public bool IsReadOnly => false;
+
+    public override string ToString()
+    {
+        var first = false;
+        var builder = new StringBuilder();
+
+        foreach (var tag in _list)
+        {
+            if (first)
+            {
+                builder.Append(',');
+            }
+
+            builder.Append(tag);
+        
+            first = true;   
+        }
+
+        return builder.ToString();
+    }
 }

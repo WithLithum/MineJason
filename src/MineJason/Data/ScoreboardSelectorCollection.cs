@@ -1,16 +1,18 @@
 ﻿namespace MineJason.Data;
 
 using System.Collections;
+using System.Text;
+using MineJason.Data.Selectors;
 
 /// <summary>
 /// Represents a collection of tag selectors.
 /// </summary>
-public class ScoreboardSelectorCollection : ICollection<ScoreboardSelector>
+public class ScoreboardRangeCollection : ICollection<IScoreboardRange>
 {
-    private readonly List<ScoreboardSelector> _list = [];
+    private readonly List<IScoreboardRange> _list = [];
 
     /// <inheritdoc />
-    public IEnumerator<ScoreboardSelector> GetEnumerator()
+    public IEnumerator<IScoreboardRange> GetEnumerator()
     {
         return _list.GetEnumerator();
     }
@@ -24,7 +26,7 @@ public class ScoreboardSelectorCollection : ICollection<ScoreboardSelector>
     /// Adds a scoreboard selector to this collection.
     /// </summary>
     /// <param name="item">The selector.</param>
-    public void Add(ScoreboardSelector item)
+    public void Add(IScoreboardRange item)
     {
         _list.Add(item);
     }
@@ -34,9 +36,9 @@ public class ScoreboardSelectorCollection : ICollection<ScoreboardSelector>
     /// </summary>
     /// <param name="objective">The objective to check for.</param>
     /// <param name="range">The range to match for.</param>
-    public void Add(string objective, ScoreboardRange range)
+    public void Add(string objective, IntegralRange range)
     {
-        Add(new ScoreboardSelector(objective, range));
+        Add(new ScoreboardRangeMatch(objective, range));
     }
 
     /// <inheritdoc />
@@ -46,19 +48,19 @@ public class ScoreboardSelectorCollection : ICollection<ScoreboardSelector>
     }
 
     /// <inheritdoc />
-    public bool Contains(ScoreboardSelector item)
+    public bool Contains(IScoreboardRange item)
     {
         return _list.Contains(item);
     }
 
     /// <inheritdoc />
-    public void CopyTo(ScoreboardSelector[] array, int arrayIndex)
+    public void CopyTo(IScoreboardRange[] array, int arrayIndex)
     {
         _list.CopyTo(array, arrayIndex);
     }
 
     /// <inheritdoc />
-    public bool Remove(ScoreboardSelector item)
+    public bool Remove(IScoreboardRange item)
     {
         return _list.Remove(item);
     }
@@ -68,4 +70,30 @@ public class ScoreboardSelectorCollection : ICollection<ScoreboardSelector>
 
     /// <inheritdoc />
     public bool IsReadOnly => false;
+
+    /// <inheritdoc />
+    public override string ToString()
+    {
+        var builder = new StringBuilder();
+        builder.Append('{');
+        var first = false;
+        
+        foreach (var selector in _list)
+        {
+            if (first)
+            {
+                builder.Append(',');
+            }
+            
+            first = true;
+
+            builder.Append(selector.Objective);
+            builder.Append('=');
+            builder.Append(selector.GetString());
+        }
+
+        builder.Append('}');
+
+        return builder.ToString();
+    }
 }

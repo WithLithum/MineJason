@@ -1,32 +1,57 @@
 ﻿namespace MineJason.Data;
 
+using System.Globalization;
 using System.Text;
+using JetBrains.Annotations;
 
 /// <summary>
-/// Represents a range in scoreboard condition.
+/// Represents a range in integral condition.
 /// </summary>
-public struct ScoreboardRange : IEquatable<ScoreboardRange>
+[PublicAPI]
+public struct IntegralRange : IEquatable<IntegralRange>
 {
+    /// <summary>
+    /// Initializes a new instance of the <see cref="IntegralRange"/> class.
+    /// </summary>
+    /// <param name="min">The minimum value.</param>
+    /// <param name="max">The maximum value.</param>
+    public IntegralRange(int? min, int? max)
+    {
+        Min = min;
+        Max = max;
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="IntegralRange"/> class.
+    /// </summary>
+    /// <param name="exact">The exact value to match.</param>
+    public IntegralRange(int exact)
+    {
+        Exact = exact;
+    }
+
+    public int? Exact { get; set; }
+    
     /// <summary>
     /// Gets or sets the minimum range.
     /// </summary>
     public int? Min { get; set; }
-    
+
     /// <summary>
     /// Gets or sets the maximum range.
     /// </summary>
     public int? Max { get; set; }
-
+    
     /// <inheritdoc />
-    public bool Equals(ScoreboardRange other)
+    public bool Equals(IntegralRange other)
     {
-        return Min.Equals(other.Min) && Max.Equals(other.Max);
+        return Min.Equals(other.Min) && Max.Equals(other.Max) && Exact.Equals(other.Exact);
     }
 
     /// <inheritdoc />
     public override bool Equals(object? obj)
     {
-        return obj is ScoreboardRange other && Equals(other);
+        return obj is IntegralRange other && Equals(other);
     }
 
     /// <summary>
@@ -36,6 +61,11 @@ public struct ScoreboardRange : IEquatable<ScoreboardRange>
     /// range as used by a target selector.</returns>
     public override string ToString()
     {
+        if (Exact.HasValue)
+        {
+            return Exact.Value.ToString(CultureInfo.InvariantCulture);
+        }
+        
         var builder = new StringBuilder();
 
         if (!Min.HasValue && !Max.HasValue)
@@ -61,7 +91,7 @@ public struct ScoreboardRange : IEquatable<ScoreboardRange>
     /// <inheritdoc />
     public override int GetHashCode()
     {
-        return HashCode.Combine(Min, Max);
+        return HashCode.Combine(Min, Max, Exact);
     }
 
     /// <summary>
@@ -72,7 +102,7 @@ public struct ScoreboardRange : IEquatable<ScoreboardRange>
     /// <param name="right">The right instance.</param>
     /// <returns><see langword="true"/> if the instance to the <paramref name="left"/> is equivalent to the instance
     /// to the <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
-    public static bool operator ==(ScoreboardRange left, ScoreboardRange right)
+    public static bool operator ==(IntegralRange left, IntegralRange right)
     {
         return left.Equals(right);
     }
@@ -85,7 +115,7 @@ public struct ScoreboardRange : IEquatable<ScoreboardRange>
     /// <param name="right">The right instance.</param>
     /// <returns><see langword="true"/> if the instance to the <paramref name="left"/> is not equivalent to the instance
     /// to the <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
-    public static bool operator !=(ScoreboardRange left, ScoreboardRange right)
+    public static bool operator !=(IntegralRange left, IntegralRange right)
     {
         return !(left == right);
     }

@@ -1,5 +1,7 @@
 ﻿namespace MineJason.Data;
 
+using MineJason.Data.Selectors;
+
 /// <summary>
 /// Represents a target selector.
 /// </summary>
@@ -39,10 +41,45 @@ public class EntitySelector(EntitySelectorKind kind)
     /// Gets a collection of scoreboard conditions that a entity must fulfill to be selected. This represents the
     /// <c>scores</c> argument.
     /// </summary>
-    public ScoreboardSelectorCollection Scores { get; } = [];
+    public ScoreboardRangeCollection Scores { get; } = [];
     
     /// <summary>
     /// Gets or sets the teams condition a player must fulfill for the player to be selected.
     /// </summary>
     public TeamSelector? Team { get; set; }
+    
+    /// <summary>
+    /// Gets or set the maximum amount of players that this selector can select.
+    /// </summary>
+    /// <value>
+    /// Maximum amount of players that this selector can select. If set to <c>0</c> or less, then this value is
+    /// considered unset during serialization.
+    /// </value>
+    public int Limit { get; set; }
+    
+    /// <summary>
+    /// Gets or sets how this selector sorts its results.
+    /// </summary>
+    public EntitySelectorSortMode? Sort { get; set; }
+    
+    /// <summary>
+    /// Gets or sets the experience level for a player must be matching to be selected.
+    /// </summary>
+    public IntegralRange? Level { get; set; }
+    
+    /// <summary>
+    /// Gets or sets the game mode conditions a player must fulfill to be selected.
+    /// </summary>
+    public GameModeMatch? GameMode { get; set; }
+    
+    /// <summary>
+    /// Gets or sets the name conditions a entity must fulfill to be selected. 
+    /// </summary>
+    public NameMatch? Name { get; set; }
+
+    /// <inheritdoc />
+    public override string ToString()
+    {
+        return EntitySelectorStringFormatter.ToString(this);
+    }
 }

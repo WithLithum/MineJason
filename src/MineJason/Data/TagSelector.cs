@@ -61,4 +61,10 @@ public struct TagSelector(string tag, bool present) : IEquatable<TagSelector>
     {
         return !(left == right);
     }
+
+    /// <inheritdoc />
+    public override string ToString()
+    {
+        return $"tag={(Present ? "" : "!")}{Tag}";
+    }
 }
