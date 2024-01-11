@@ -16,6 +16,11 @@ public struct DistanceRange : IEquatable<DistanceRange>
     /// Gets or sets the maximum range.
     /// </summary>
     public double? Max { get; set; }
+    
+    /// <summary>
+    /// Gets or sets the exact value to match.
+    /// </summary>
+    public double? Exact { get; set; }
 
     /// <inheritdoc />
     public bool Equals(DistanceRange other)
@@ -88,5 +93,33 @@ public struct DistanceRange : IEquatable<DistanceRange>
     public static bool operator !=(DistanceRange left, DistanceRange right)
     {
         return !(left == right);
+    }
+
+    /// <summary>
+    /// Returns a new <see cref="DistanceRange"/> that matches for an exact distance.
+    /// </summary>
+    /// <param name="distance">The distance.</param>
+    /// <returns>The instance.</returns>
+    public static DistanceRange MatchExact(double distance)
+    {
+        return new DistanceRange
+        {
+            Exact = distance
+        };
+    }
+    
+    /// <summary>
+    /// Returns a new <see cref="DistanceRange"/> that matches for a range between.
+    /// </summary>
+    /// <param name="min">The minimum distance.</param>
+    /// <param name="max">The maximum distance</param>
+    /// <returns>The instance.</returns>
+    public static DistanceRange MatchRange(double? min, double? max)
+    {
+        return new DistanceRange
+        {
+            Min = min,
+            Max = max
+        };
     }
 }

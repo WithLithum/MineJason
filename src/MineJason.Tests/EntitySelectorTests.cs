@@ -127,4 +127,52 @@ public class EntitySelectorTests
 
         Assert.That(selector.ToString(), Is.EqualTo("@a[scores={obj0=..2,obj1=..15}]"));
     }
+
+    [Test]
+    public void Formatter_Parse_Scores()
+    {
+        var collection = new ScoreboardRangeCollection();
+        EntitySelectorStringFormatter.ParseScores("{obj0=..3,obj1=..250}", collection);
+        
+        Assert.That(collection.ToString(), Is.EqualTo("{obj0=..3,obj1=..250}"));
+    }
+    
+    [Test]
+    public void Formatter_Parse_ThreeDifferentScores()
+    {
+        var collection = new ScoreboardRangeCollection();
+        EntitySelectorStringFormatter.ParseScores("{obj0=..3,obj1=250,obj2=2..}", collection);
+        
+        Assert.That(collection.ToString(), Is.EqualTo("{obj0=..3,obj1=250,obj2=2..}"));
+    }
+    
+    [Test]
+    public void Formatter_Parse_AllScores()
+    {
+        var collection = new ScoreboardRangeCollection();
+        EntitySelectorStringFormatter.ParseScores("{obj0=..3,obj1=250,obj2=2..,obj3=20..25}", collection);
+        
+        Assert.That(collection.ToString(), Is.EqualTo("{obj0=..3,obj1=250,obj2=2..,obj3=20..25}"));
+    }
+
+    [Test]
+    public void Formatter_Parse_DistanceRange()
+    {
+        Assert.That(EntitySelectorStringFormatter.ParseDistanceRange("..150.5"),
+            Is.EqualTo(DistanceRange.MatchRange(null, 150.5D)));
+    }
+    
+    [Test]
+    public void Formatter_Parse_DistanceRangeBoth()
+    {
+        Assert.That(EntitySelectorStringFormatter.ParseDistanceRange("22.5..150.5"),
+            Is.EqualTo(DistanceRange.MatchRange(22.5D, 150.5D)));
+    }
+    
+    [Test]
+    public void Formatter_Parse_DistanceExact()
+    {
+        Assert.That(EntitySelectorStringFormatter.ParseDistanceRange("111.2"),
+            Is.EqualTo(DistanceRange.MatchExact(111.2D)));
+    }
 }

@@ -1,12 +1,17 @@
 ﻿namespace MineJason.Data;
 
+using System.Text.Json.Serialization;
+using JetBrains.Annotations;
 using MineJason.Data.Selectors;
+using MineJason.Serialization.TextJson;
 
 /// <summary>
 /// Represents a target selector.
 /// </summary>
 /// <param name="kind">The kind of the selector.</param>
 /// <seealso href="https://minecraft.wiki/w/Target_selectors"/>
+[JsonConverter(typeof(EntitySelectorConverter))]
+[PublicAPI]
 public class EntitySelector(EntitySelectorKind kind)
 {
     /// <summary>

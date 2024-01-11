@@ -2,7 +2,10 @@
 
 using System.Text;
 
-internal static partial class EntitySelectorStringFormatter
+/// <summary>
+/// Provides parsing for entity selectors.
+/// </summary>
+public static partial class EntitySelectorStringFormatter
 {
     internal static string ToString(EntitySelector selector)
     {
