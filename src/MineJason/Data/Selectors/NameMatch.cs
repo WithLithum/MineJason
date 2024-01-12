@@ -44,12 +44,20 @@ public struct NameMatch : IEquatable<NameMatch>
         
         if (Include != null)
         {
+            #if DEBUG
+            Console.WriteLine("NameMatch ToString: include");            
+            #endif
+            
             Comma();
             builder.Append("name=").Append(Include);
         }
 
         if (Exclude != null)
         {
+#if DEBUG
+            Console.WriteLine("NameMatch ToString: exclude, {0} items", Exclude.Count);            
+#endif
+            
             foreach (var name in Exclude)
             {
                 Comma();

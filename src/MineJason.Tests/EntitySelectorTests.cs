@@ -203,4 +203,78 @@ public class EntitySelectorTests
         Assert.That(EntitySelectorParser.ParseScoresRange("objective", "377"),
             Is.EqualTo((IScoreboardRange)new ScoreboardExactMatch("objective", 377)));
     }
+
+    [Test]
+    public void Parser_Scoreboard()
+    {
+        var collection = new ScoreboardRangeCollection();
+        EntitySelectorParser.ParseScoresValue("{ad=1..,ab=5,ac=..10}", collection);
+        
+        Assert.That(collection.ToString(),
+            Is.EqualTo("{ad=1..,ab=5,ac=..10}"));
+    }
+
+    [Test]
+    public void Parser_Teams_Include()
+    {
+        var teams = new TeamSelector();
+        EntitySelectorParser.ParseTeamsValue("included", ref teams);
+        
+        Assert.That(teams.ToString(), Is.EqualTo("team=included"));
+    }
+    
+    [Test]
+    public void Parser_Teams_ExcludesMultiple()
+    {
+        var teams = new TeamSelector();
+        EntitySelectorParser.ParseTeamsValue("!exclude", ref teams);
+        EntitySelectorParser.ParseTeamsValue("!hello", ref teams);
+        
+        Assert.That(teams.ToString(), Is.EqualTo("team=!exclude,team=!hello"));
+    }
+
+    [Test]
+    public void Parser_ParseWithName()
+    {
+        const string sampleString = "@a[name=SomeName]";
+
+        Assert.That(EntitySelectorStringFormatter.ParseSelector(sampleString).ToString(),
+            Is.EqualTo(sampleString));
+    }
+    
+    [Test]
+    public void Parser_ParseWithNameExcludes()
+    {
+        const string sampleString = "@a[name=!SomeNameOne,name=!SomeNameTwo]";
+
+        Assert.That(EntitySelectorStringFormatter.ParseSelector(sampleString).ToString(),
+            Is.EqualTo(sampleString));
+    }
+    
+    [Test]
+    public void Parser_ParseWithTagExcludes()
+    {
+        const string sampleString = "@a[tag=!SomeNameOne,tag=!SomeNameTwo]";
+
+        Assert.That(EntitySelectorStringFormatter.ParseSelector(sampleString).ToString(),
+            Is.EqualTo(sampleString));
+    }
+    
+    [Test]
+    public void Parser_ParseWithTagIncludesAndExcludes()
+    {
+        const string sampleString = "@a[tag=RealTagZero,tag=RealTagOne,tag=!SomeNameOne,tag=!SomeNameTwo]";
+
+        Assert.That(EntitySelectorStringFormatter.ParseSelector(sampleString).ToString(),
+            Is.EqualTo(sampleString));
+    }
+    
+    [Test]
+    public void Parser_ParseWithPositionAndDistance()
+    {
+        const string sampleString = "@a[x=250,y=110,z=2491,distance=..20]";
+
+        Assert.That(EntitySelectorStringFormatter.ParseSelector(sampleString).ToString(),
+            Is.EqualTo(sampleString));
+    }
 }

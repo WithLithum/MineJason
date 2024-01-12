@@ -12,6 +12,11 @@ public static partial class EntitySelectorStringFormatter
         var kind = GetKindString(selector.Kind);
         
         var parameterString = GetParameterString(selector);
+        
+        #if DEBUG
+        Console.WriteLine("-- parameter string --");
+        Console.WriteLine(parameterString ?? "parameter string null");        
+        #endif
 
         return $"{kind}{(string.IsNullOrWhiteSpace(parameterString) ? string.Empty : $"[{parameterString}]")}";
     }
@@ -20,13 +25,20 @@ public static partial class EntitySelectorStringFormatter
     {
         var builder = new StringBuilder();
         var first = false;
+        #if DEBUG
+        var commas = 0;        
+        #endif
 
         void Comma()
         {
             if (first)
             {
-                builder!.Append(',');
+                builder.Append(',');
             }
+            
+            #if DEBUG
+            Console.WriteLine("Comma selector: #{0}, first = {1}", commas++, first);
+            #endif
 
             first = true;
         }
@@ -56,27 +68,43 @@ public static partial class EntitySelectorStringFormatter
             builder.Append(selector.Tags);
         }
 
-        if (selector.Scores.Count != 0)
+        if (selector.Scores.Count > 0)
         {
-            Comma();
-            builder.Append("scores=");
+            #if DEBUG
+            Console.WriteLine("Selector score parsing: OK");            
+            #endif
+            
+            // scores
             var str = selector.Scores.ToString();
-            builder.Append(str);
+
+            if (!string.IsNullOrWhiteSpace(str))
+            {
+                Comma();
+                builder.Append("scores=");
+                builder.Append(str);   
+            }
         }
 
-        if (selector.Team != null)
+        // teams
+        var teamStr = selector.Team.ToString();
+
+        if (!string.IsNullOrWhiteSpace(teamStr))
         {
+#if DEBUG
+            Console.WriteLine("Selector team parsing: OK");            
+#endif
+            
             Comma();
-            if (!selector.Team.Value.IsValid())
-            {
-                throw new ArgumentException("The team property is invalid.", nameof(selector));
-            }
             
             builder.Append(selector.Team);
         }
-
+        
         if (selector.Limit > 0)
         {
+#if DEBUG
+            Console.WriteLine("Selector limit parsing: OK");            
+#endif
+            
             Comma();
             builder.Append("limit=").Append(selector.Limit);
         }
@@ -98,11 +126,20 @@ public static partial class EntitySelectorStringFormatter
             Comma();
             builder.Append(selector.GameMode.Value);
         }
-
+        
         if (selector.Name.HasValue)
         {
-            Comma();
-            builder.Append(selector.Name.Value);
+            var nameValue = selector.Name.Value.ToString();
+
+            if (!string.IsNullOrWhiteSpace(nameValue))
+            {
+#if DEBUG
+                Console.WriteLine("Selector name parsing: OK");            
+#endif
+            
+                Comma();
+                builder.Append(selector.Name.Value);
+            }
         }
 
         return builder.ToString();
