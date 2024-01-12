@@ -45,6 +45,12 @@ public struct IntegralRange : IEquatable<IntegralRange>
     /// <inheritdoc />
     public bool Equals(IntegralRange other)
     {
+#if DEBUG
+        Console.WriteLine("IntegralRange match with instance: {0}, {1}, {2}", Min, Exact, Max);
+        Console.WriteLine("> other: {0}, {1}, {2}", other.Min, other.Exact, other.Max);
+        Console.WriteLine("> {0}, {1}, {2}", Min.Equals(other.Min), Max.Equals(other.Max), Exact.Equals(other.Exact));
+#endif
+        
         return Min.Equals(other.Min) && Max.Equals(other.Max) && Exact.Equals(other.Exact);
     }
 

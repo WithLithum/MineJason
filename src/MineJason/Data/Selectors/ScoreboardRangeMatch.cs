@@ -32,12 +32,20 @@ public struct ScoreboardRangeMatch : IEquatable<ScoreboardRangeMatch>, IScoreboa
     /// <inheritdoc />
     public bool Equals(ScoreboardRangeMatch other)
     {
+#if DEBUG
+        Console.WriteLine("ScoreboardRangeMatch comparison with instance: {0}, {1}", other.Objective, other.Range);
+#endif
+        
         return Objective == other.Objective && Range.Equals(other.Range);
     }
 
     /// <inheritdoc />
     public override bool Equals(object? obj)
     {
+        #if DEBUG
+        Console.WriteLine("ScoreboardRangeMatch comparison with object: {0}", obj);
+        #endif
+        
         return obj is ScoreboardRangeMatch other && Equals(other);
     }
 
@@ -77,5 +85,11 @@ public struct ScoreboardRangeMatch : IEquatable<ScoreboardRangeMatch>, IScoreboa
     public static bool operator !=(ScoreboardRangeMatch left, ScoreboardRangeMatch right)
     {
         return !(left == right);
+    }
+
+    /// <inheritdoc />
+    public override string ToString()
+    {
+        return $"ScoreboardRangeMatch({Objective}={Range})";
     }
 }

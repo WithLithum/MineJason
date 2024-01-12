@@ -54,9 +54,7 @@ public static partial class EntitySelectorStringFormatter
 
         foreach (var pair in pairs)
         {
-            var realPair = pair.Split('=');
-            var key = realPair[0];
-            var value = realPair[1];
+            EntitySelectorParser.ParsePair(pair, out var key, out var value);
 
             switch (key)
             {
@@ -84,34 +82,28 @@ public static partial class EntitySelectorStringFormatter
                     var distValue = ParseDistanceRange(value);
                     distanceRange = distValue;
                     break;
+                case "tag":
+                    EntitySelectorParser.ParseTagValue(value, selector.Tags);
+                    break;
+                case "scores":
+                    EntitySelectorParser.ParseScoresValue(value, selector.Scores);
+                    break;
             }
         }
         
         // Assemble all values!
         
         // position
-        if (position.HasValue)
-        {
-            selector.Position = position.Value;
-        }
+        selector.Position = position;
         
         // diagonal
-        if (diagonal.HasValue)
-        {
-            selector.DiagonalRange = diagonal.Value;
-        }
+        selector.DiagonalRange = diagonal;
         
         // game mode
-        if (gameModeMatch.HasValue)
-        {
-            selector.GameMode = gameModeMatch.Value;
-        }
+        selector.GameMode = gameModeMatch;
         
         // distance
-        if (distanceRange.HasValue)
-        {
-            selector.Distance = distanceRange.Value;
-        }
+        selector.Distance = distanceRange;
     }
 
     private static bool TryGetXyzValue(string[] pairs, out Vector3D vector, string xName = "x", string yName = "y", string zName = "z")
@@ -123,9 +115,7 @@ public static partial class EntitySelectorStringFormatter
         
         foreach (var pair in pairs)
         {
-            var realPair = pair.Split('=');
-            var key = realPair[0];
-            var value = realPair[1];
+            EntitySelectorParser.ParsePair(pair, out var key, out var value);
 
             if (string.Equals(key, xName, StringComparison.Ordinal))
             {

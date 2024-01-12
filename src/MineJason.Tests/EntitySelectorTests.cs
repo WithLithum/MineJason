@@ -175,4 +175,32 @@ public class EntitySelectorTests
         Assert.That(EntitySelectorStringFormatter.ParseDistanceRange("111.2"),
             Is.EqualTo(DistanceRange.MatchExact(111.2D)));
     }
+
+    [Test]
+    public void ScoreboardValueRange_MinMax()
+    {
+        Assert.That(EntitySelectorParser.ParseScoresRange("objective", "222..233"),
+            Is.EqualTo((IScoreboardRange)new ScoreboardRangeMatch("objective", new IntegralRange(222, 233))));
+    }
+    
+    [Test]
+    public void ScoreboardValueRange_Min()
+    {
+        Assert.That(EntitySelectorParser.ParseScoresRange("objective", "255.."),
+            Is.EqualTo((IScoreboardRange)new ScoreboardRangeMatch("objective", new IntegralRange(255, null))));
+    }
+    
+    [Test]
+    public void ScoreboardValueRange_Max()
+    {
+        Assert.That(EntitySelectorParser.ParseScoresRange("objective", "..205"),
+            Is.EqualTo((IScoreboardRange)new ScoreboardRangeMatch("objective", new IntegralRange(null, 205))));
+    }
+    
+    [Test]
+    public void ScoreboardValueRange_Exact()
+    {
+        Assert.That(EntitySelectorParser.ParseScoresRange("objective", "377"),
+            Is.EqualTo((IScoreboardRange)new ScoreboardExactMatch("objective", 377)));
+    }
 }
