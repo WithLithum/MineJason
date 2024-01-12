@@ -277,4 +277,49 @@ public class EntitySelectorTests
         Assert.That(EntitySelectorStringFormatter.ParseSelector(sampleString).ToString(),
             Is.EqualTo(sampleString));
     }
+    
+    [Test]
+    public void Parser_ParseWithScores()
+    {
+        const string sampleString = "@a[x=250,y=110,z=2491,scores={objective0=100,objective1=90..250,objective2=..77,objective3=55..}]";
+
+        Assert.That(EntitySelectorStringFormatter.ParseSelector(sampleString).ToString(),
+            Is.EqualTo(sampleString));
+    }
+    
+    [Test]
+    public void Parser_ParseWithGameModeExcludes()
+    {
+        const string sampleString = "@a[gamemode=!adventure,gamemode=!creative]";
+
+        Assert.That(EntitySelectorStringFormatter.ParseSelector(sampleString).ToString(),
+            Is.EqualTo(sampleString));
+    }
+    
+    [Test]
+    public void Parser_ParseWithGameModeRequirement()
+    {
+        const string sampleString = "@a[gamemode=adventure]";
+
+        Assert.That(EntitySelectorStringFormatter.ParseSelector(sampleString).ToString(),
+            Is.EqualTo(sampleString));
+    }
+    
+    [Test]
+    public void Parser_ParseWithLevels()
+    {
+        const string sampleString = "@a[level=56..100]";
+
+        Assert.That(EntitySelectorStringFormatter.ParseSelector(sampleString).ToString(),
+            Is.EqualTo(sampleString));
+    }
+    
+    [Test]
+    public void Parser_ParseWithNoArguments()
+    {
+        const string sampleString = "@a";
+
+        Assert.That(EntitySelectorStringFormatter.ParseSelector(sampleString).ToString(),
+            Is.EqualTo(sampleString));
+    }
 }

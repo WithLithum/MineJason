@@ -41,8 +41,8 @@ public static partial class EntitySelectorStringFormatter
         DistanceRange? distanceRange = null;
         var teams = new TeamSelector();
         var names = new NameMatch();
-        
-        var pairs = s[1..^1].Split(',');
+
+        var pairs = EntitySelectorParser.ParsePairSet(s[1..^1]);
         #if DEBUG
         Console.WriteLine(pairs);        
         #endif
@@ -134,7 +134,7 @@ public static partial class EntitySelectorStringFormatter
         selector.Name = names;
     }
 
-    private static bool TryGetXyzValue(string[] pairs, out Vector3D vector, string xName = "x", string yName = "y", string zName = "z")
+    private static bool TryGetXyzValue(IEnumerable<string> pairs, out Vector3D vector, string xName = "x", string yName = "y", string zName = "z")
     {
         double? x = null;
         double? y = null;

@@ -2,12 +2,18 @@
 
 using System.Collections.ObjectModel;
 using System.Globalization;
+using System.Text;
 
 /// <summary>
 /// Provides parsing service for entity target selectors.
 /// </summary>
 public static class EntitySelectorParser
 {
+    private const char LeftBrace = '{';
+    private const char RightBrace = '}';
+    private const char Comma = ',';
+    private const char EqualSign = '=';
+    
     private static readonly IReadOnlyDictionary<string, EntitySelectorSortMode> sortModes =
         new Dictionary<string, EntitySelectorSortMode>
         {
@@ -17,6 +23,46 @@ public static class EntitySelectorParser
             { "nearest", EntitySelectorSortMode.Nearest }
         };
 
+    public static IEnumerable<string> ParsePairSet(string from)
+    {
+        var inBrace = false;
+
+        var list = new List<string>();
+        var builder = new StringBuilder();
+
+        if (from.StartsWith(',') || from.EndsWith(','))
+        {
+            throw new FormatException("Pair set invalid.");
+        }
+        
+        foreach (var ch in from)
+        {
+            switch (ch)
+            {
+                case LeftBrace when inBrace:
+                    throw new FormatException("No double bracing!");
+                case LeftBrace:
+                    inBrace = true;
+                    break;
+                case RightBrace when !inBrace:
+                    throw new FormatException("Not even bracing yet!");
+                case RightBrace:
+                    inBrace = false;
+                    break;
+                case Comma when !inBrace:
+                    list.Add(builder.ToString());
+                    builder.Clear();
+                    continue;
+            }
+            
+            builder.Append(ch);
+        }
+
+        list.Add(builder.ToString());
+        
+        return list;
+    }
+    
     public static EntitySelectorSortMode ParseSortMode(string value)
     {
         if (!sortModes.TryGetValue(value, out var mode))
@@ -185,15 +231,55 @@ public static class EntitySelectorParser
     /// <exception cref="FormatException"></exception>
     public static void ParsePair(string input, out string name, out string value)
     {
-        var split = input.Split('=', StringSplitOptions.TrimEntries);
-
-        if (split.Length != 2)
+        var inBrace = false;
+        var isValue = false;
+        var builder = new StringBuilder();
+        name = "=";
+        
+        foreach (var x in input)
         {
-            throw new FormatException("The key pair format was invalid.");
+            if (x == EqualSign && !isValue)
+            {
+                isValue = true;
+                name = builder.ToString();
+                builder.Clear();
+                continue;
+            }
+
+            if (isValue && x == LeftBrace)
+            {
+                inBrace = true;
+            }
+
+            if (x == RightBrace)
+            {
+                if (!inBrace)
+                {
+                    throw new FormatException("Was not even in a brace!");
+                }
+
+                inBrace = false;
+            }
+
+            if (!inBrace && isValue && x == EqualSign)
+            {
+                throw new FormatException("Not a pair, but more than a pair!!!");
+            }
+
+            builder.Append(x);
         }
 
-        name = split[0];
-        value = split[1];
+        if (!isValue || name == "=")
+        {
+            throw new FormatException("Not a pair but merely a value!");
+        }
+
+        if (inBrace)
+        {
+            throw new FormatException("Brace never ends!");
+        }
+
+        value = builder.ToString();
     }
 
     public static void ParseTeamsValue(string value, ref TeamSelector selector)
