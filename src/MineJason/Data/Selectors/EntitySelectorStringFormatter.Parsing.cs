@@ -110,6 +110,8 @@ public static partial class EntitySelectorStringFormatter
                 case "name":
                     EntitySelectorParser.ParseNameValue(value, ref names);
                     break;
+                default:
+                    throw new FormatException($"Unrecognised argument name {key}");
             }
         }
         
