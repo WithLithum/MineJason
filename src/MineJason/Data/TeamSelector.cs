@@ -2,6 +2,7 @@
 
 using System.Text;
 using JetBrains.Annotations;
+using MineJason.Data.Selectors;
 
 /// <summary>
 /// Represents a team target selector argument.
@@ -57,5 +58,22 @@ public struct TeamSelector
         }
 
         return builder.ToString();
+    }
+
+    internal void WriteToBuilder(EntitySelectorArgumentBuilder builder)
+    {
+        // If includes..
+        
+        if (Team != null)
+        {
+            builder.WritePair("team", Team);
+        }
+
+        // Or if excludes..
+        
+        foreach (var exclude in Exclude!)
+        {
+            builder.WritePair("team", $"!{exclude}");
+        }
     }
 }

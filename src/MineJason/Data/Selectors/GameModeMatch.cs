@@ -67,6 +67,22 @@ public struct GameModeMatch : IEquatable<GameModeMatch>
         return builder.ToString();
     }
 
+    internal void WriteToBuilder(EntitySelectorArgumentBuilder builder)
+    {
+        if (Include.HasValue)
+        {
+            builder.WritePair("gamemode", Include.Value.ToString().ToLowerInvariant());
+        }
+
+        if (Exclude != null && Exclude.Count != 0)
+        {
+            foreach (var mode in Exclude)
+            {
+                builder.WritePair("gamemode", $"!{mode.ToString().ToLowerInvariant()}");
+            }
+        }
+    }
+
     /// <inheritdoc />
     [System.Diagnostics.Contracts.Pure]
     public bool Equals(GameModeMatch other)

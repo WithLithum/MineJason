@@ -23,49 +23,26 @@ public static partial class EntitySelectorStringFormatter
 
     private static string GetParameterString(EntitySelector selector)
     {
-        var builder = new StringBuilder();
-        var first = false;
-        #if DEBUG
-        var commas = 0;        
-        #endif
-
-        void Comma()
-        {
-            if (first)
-            {
-                builder.Append(',');
-            }
-            
-            #if DEBUG
-            Console.WriteLine("Comma selector: #{0}, first = {1}", commas++, first);
-            #endif
-
-            first = true;
-        }
+        var builder = new EntitySelectorArgumentBuilder();
         
         if (selector.Position.HasValue)
         {
-            Comma();
-            AddPosition(ref builder, selector.Position);
+            AddPosition(builder, selector.Position);
         }
 
         if (selector.Distance.HasValue)
         {
-            Comma();
-            builder.Append("distance=");
-            builder.Append(selector.Distance);
+            builder.WritePair("distance", selector.Distance.Value);
         }
 
         if (selector.DiagonalRange.HasValue)
         {
-            Comma();
-            AddDiagonalRange(ref builder, selector.DiagonalRange);
+            AddDiagonalRange(builder, selector.DiagonalRange);
         }
 
         if (selector.Tags.Count != 0)
         {
-            Comma();
-            builder.Append(selector.Tags);
+            selector.Tags.WriteToBuilder(builder);
         }
 
         if (selector.Scores.Count > 0)
@@ -74,91 +51,47 @@ public static partial class EntitySelectorStringFormatter
             Console.WriteLine("Selector score parsing: OK");            
             #endif
             
-            // scores
-            var str = selector.Scores.ToString();
-
-            if (!string.IsNullOrWhiteSpace(str))
-            {
-                Comma();
-                builder.Append("scores=");
-                builder.Append(str);   
-            }
+            selector.Scores.WriteToBuilder(builder);
         }
 
-        // teams
-        var teamStr = selector.Team.ToString();
+        selector.Team?.WriteToBuilder(builder);
 
-        if (!string.IsNullOrWhiteSpace(teamStr))
-        {
-#if DEBUG
-            Console.WriteLine("Selector team parsing: OK");            
-#endif
-            
-            Comma();
-            
-            builder.Append(selector.Team);
-        }
-        
         if (selector.Limit > 0)
         {
-#if DEBUG
-            Console.WriteLine("Selector limit parsing: OK");            
-#endif
-            
-            Comma();
-            builder.Append("limit=").Append(selector.Limit);
+            builder.WritePair("limit", selector.Limit);
         }
 
         if (selector.Sort.HasValue)
         {
-            Comma();
-            builder.Append("sort=").Append(selector.Sort.Value.ToString().ToLowerInvariant());
+            builder.WritePair("sort", selector.Sort.Value.ToString().ToLowerInvariant());
         }
 
         if (selector.Level.HasValue)
         {
-            Comma();
-            builder.Append("level=").Append(selector.Level.Value);
+            builder.WritePair("level", selector.Level.Value);
         }
 
         if (selector.GameMode.HasValue)
         {
-            Comma();
-            builder.Append(selector.GameMode.Value);
+            selector.GameMode.Value.WriteToBuilder(builder);
         }
         
         // Rotation
         if (selector.VerticalRotation.HasValue)
         {
-            Comma();
-            builder.Append("x_rotation=").Append(selector.VerticalRotation);
+            builder.WritePair("x_rotation", selector.VerticalRotation.Value);
         }
 
         if (selector.HorizontalRotation.HasValue)
         {
-            Comma();
-            builder.Append("y_rotation=").Append(selector.HorizontalRotation);
+            builder.WritePair("y_rotation", selector.HorizontalRotation.Value);
         }
-        
-        if (selector.Name.HasValue)
-        {
-            var nameValue = selector.Name.Value.ToString();
 
-            if (!string.IsNullOrWhiteSpace(nameValue))
-            {
-#if DEBUG
-                Console.WriteLine("Selector name parsing: OK");            
-#endif
-            
-                Comma();
-                builder.Append(selector.Name.Value);
-            }
-        }
+        selector.Name?.WriteToBuilder(builder);
 
         if (selector.Type.HasValue)
         {
-            Comma();
-            builder.Append("type=").Append(selector.Type);
+            builder.WritePair("type", selector.Type.Value.ToString());
         }
 
         return builder.ToString();
@@ -177,29 +110,27 @@ public static partial class EntitySelectorStringFormatter
         };
     }
     
-    private static void AddDiagonalRange(ref StringBuilder builder, Vector3D? diagonalRange)
+    private static void AddDiagonalRange(EntitySelectorArgumentBuilder builder, Vector3D? diagonalRange)
     {
         if (!diagonalRange.HasValue)
         {
             return;
         }
         
-        builder.Append("dx=")
-            .Append(diagonalRange.Value.X).Append(',')
-            .Append("dy=").Append(diagonalRange.Value.Y).Append(',')
-            .Append("dz=").Append(diagonalRange.Value.Z);
+        builder.WritePair("dx", diagonalRange.Value.X);
+        builder.WritePair("dy", diagonalRange.Value.Y);
+        builder.WritePair("dz", diagonalRange.Value.Z);
     }
 
-    private static void AddPosition(ref StringBuilder builder, Vector3D? selectorPosition)
+    private static void AddPosition(EntitySelectorArgumentBuilder builder, Vector3D? selectorPosition)
     {
         if (!selectorPosition.HasValue)
         {
             return;
         }
         
-        builder.Append("x=")
-            .Append(selectorPosition.Value.X).Append(',')
-            .Append("y=").Append(selectorPosition.Value.Y).Append(',')
-            .Append("z=").Append(selectorPosition.Value.Z);
+        builder.WritePair("x", selectorPosition.Value.X);
+        builder.WritePair("y", selectorPosition.Value.Y);
+        builder.WritePair("z", selectorPosition.Value.Z);
     }
 }

@@ -2,6 +2,7 @@
 
 using System.Collections;
 using System.Text;
+using MineJason.Data.Selectors;
 
 /// <summary>
 /// Represents a collection of tag selectors.
@@ -88,5 +89,13 @@ public class TagSelectorCollection : ICollection<TagSelector>
         }
 
         return builder.ToString();
+    }
+
+    internal void WriteToBuilder(EntitySelectorArgumentBuilder builder)
+    {
+        foreach (var tag in _list)
+        {
+            builder.WritePair("tag", tag.ToString());
+        }
     }
 }

@@ -26,6 +26,30 @@ public struct NameMatch : IEquatable<NameMatch>
     /// </summary>
     public List<string> Exclude { get; } = [];
 
+    internal void WriteToBuilder(EntitySelectorArgumentBuilder builder)
+    {
+        if (Include != null)
+        {
+#if DEBUG
+            Console.WriteLine("NameMatch ToString: include");            
+#endif
+            
+            builder.WritePair("name", Include);
+        }
+
+        if (Exclude != null)
+        {
+#if DEBUG
+            Console.WriteLine("NameMatch ToString: exclude, {0} items", Exclude.Count);            
+#endif
+            
+            foreach (var name in Exclude)
+            {
+                builder.WritePair("name", $"!{name}");
+            }
+        }
+    }
+    
     /// <inheritdoc />
     public override string ToString()
     {

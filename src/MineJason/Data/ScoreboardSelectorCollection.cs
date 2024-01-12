@@ -96,4 +96,14 @@ public class ScoreboardRangeCollection : ICollection<IScoreboardRange>
 
         return builder.ToString();
     }
+    
+    internal void WriteToBuilder(EntitySelectorArgumentBuilder builder)
+    {
+        var str = ToString();
+
+        if (!string.IsNullOrWhiteSpace(str))
+        {
+            builder.WritePair("scores", ToString());   
+        }
+    }
 }
