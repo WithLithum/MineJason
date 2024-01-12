@@ -155,6 +155,12 @@ public static partial class EntitySelectorStringFormatter
             }
         }
 
+        if (selector.Type.HasValue)
+        {
+            Comma();
+            builder.Append("type=").Append(selector.Type);
+        }
+
         return builder.ToString();
     }
 

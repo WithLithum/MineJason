@@ -116,6 +116,20 @@ public static partial class EntitySelectorStringFormatter
                 case "y_rotation":
                     selector.HorizontalRotation = ParseDistanceRange(value);
                     break;
+                case "type":
+                    if (!ResourceLocation.TryParse(value, out var resourceLocation))
+                    {
+                        throw new FormatException("Invalid resource location for type");
+                    }
+
+                    selector.Type = resourceLocation;
+                    break;
+                case "x":
+                case "y":
+                case "z": 
+                    // Don't do anything here, just skip.
+                    // We already handled them above.
+                    break;
                 default:
                     throw new FormatException($"Unrecognised argument name {key}");
             }

@@ -93,6 +93,12 @@ public class EntitySelector(EntitySelectorKind kind)
     /// <c>y_rotation</c> parameter.
     /// </summary>
     public DistanceRange? HorizontalRotation { get; set; }
+    
+    /// <summary>
+    /// Gets or sets the type that the entity must belong of to be selected. This represents the
+    /// <c>type</c> parameter.
+    /// </summary>
+    public ResourceLocation? Type { get; set; }
 
     /// <inheritdoc />
     public override string ToString()

@@ -340,4 +340,22 @@ public class EntitySelectorTests
         Assert.That(EntitySelectorStringFormatter.ParseSelector(sampleString).ToString(),
             Is.EqualTo(sampleString));
     }
+    
+    [Test]
+    public void Parser_ParseWithType()
+    {
+        const string sampleString = "@a[type=player]";
+
+        Assert.That(EntitySelectorStringFormatter.ParseSelector(sampleString).ToString(),
+            Is.EqualTo("@a[type=minecraft:player]"));
+    }
+    
+    [Test]
+    public void Parser_ParseWithTypeComplete()
+    {
+        const string sampleString = "@a[type=minecraft:pig]";
+
+        Assert.That(EntitySelectorStringFormatter.ParseSelector(sampleString).ToString(),
+            Is.EqualTo(sampleString));
+    }
 }
