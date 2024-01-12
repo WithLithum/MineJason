@@ -322,4 +322,22 @@ public class EntitySelectorTests
         Assert.That(EntitySelectorStringFormatter.ParseSelector(sampleString).ToString(),
             Is.EqualTo(sampleString));
     }
+    
+    [Test]
+    public void Parser_ParseWithXRotationRange()
+    {
+        const string sampleString = "@a[x_rotation=-180..180]";
+
+        Assert.That(EntitySelectorStringFormatter.ParseSelector(sampleString).ToString(),
+            Is.EqualTo(sampleString));
+    }
+    
+    [Test]
+    public void Parser_ParseWithYRotationRange()
+    {
+        const string sampleString = "@a[y_rotation=-180..180]";
+
+        Assert.That(EntitySelectorStringFormatter.ParseSelector(sampleString).ToString(),
+            Is.EqualTo(sampleString));
+    }
 }

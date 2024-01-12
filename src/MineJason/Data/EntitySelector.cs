@@ -81,6 +81,18 @@ public class EntitySelector(EntitySelectorKind kind)
     /// Gets or sets the name conditions a entity must fulfill to be selected. 
     /// </summary>
     public NameMatch? Name { get; set; }
+    
+    /// <summary>
+    /// Gets or sets the vertical rotation range a entity must be at to be selected. This represents the
+    /// <c>x_rotation</c> parameter.
+    /// </summary>
+    public DistanceRange? VerticalRotation { get; set; }
+    
+    /// <summary>
+    /// Gets or sets the horizontal rotation range a entity must be at to be selected. This represents the
+    /// <c>y_rotation</c> parameter.
+    /// </summary>
+    public DistanceRange? HorizontalRotation { get; set; }
 
     /// <inheritdoc />
     public override string ToString()

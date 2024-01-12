@@ -110,6 +110,12 @@ public static partial class EntitySelectorStringFormatter
                 case "name":
                     EntitySelectorParser.ParseNameValue(value, ref names);
                     break;
+                case "x_rotation":
+                    selector.VerticalRotation = ParseDistanceRange(value);
+                    break;
+                case "y_rotation":
+                    selector.HorizontalRotation = ParseDistanceRange(value);
+                    break;
                 default:
                     throw new FormatException($"Unrecognised argument name {key}");
             }

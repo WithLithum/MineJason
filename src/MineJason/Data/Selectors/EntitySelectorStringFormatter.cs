@@ -127,6 +127,19 @@ public static partial class EntitySelectorStringFormatter
             builder.Append(selector.GameMode.Value);
         }
         
+        // Rotation
+        if (selector.VerticalRotation.HasValue)
+        {
+            Comma();
+            builder.Append("x_rotation=").Append(selector.VerticalRotation);
+        }
+
+        if (selector.HorizontalRotation.HasValue)
+        {
+            Comma();
+            builder.Append("y_rotation=").Append(selector.HorizontalRotation);
+        }
+        
         if (selector.Name.HasValue)
         {
             var nameValue = selector.Name.Value.ToString();
