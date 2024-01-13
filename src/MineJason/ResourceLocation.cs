@@ -139,11 +139,19 @@ public readonly struct ResourceLocation : IEquatable<ResourceLocation>
     /// </summary>
     /// <param name="from">The string to parse.</param>
     /// <param name="result">The parsing result.</param>
+    /// <param name="allowMinecraftDefault">If <see langword="true"/>, the namespace <c>minecraft</c> will be used if the namespace is absent.</param>
     /// <returns><see langword="true"/> if the conversion is successful; otherwise, <see langword="false"/>.</returns>
-    public static bool TryParse(string from, out ResourceLocation result)
+    public static bool TryParse(string from, out ResourceLocation result, bool allowMinecraftDefault = true)
     {
         var split = from.Split(':');
         result = default;
+
+        if (split.Length == 1 && allowMinecraftDefault)
+        {
+            if (!IsPathValid(from)) return false;
+            result = new ResourceLocation("minecraft", from, true);
+            return true;
+        }
 
         if (split.Length != 2)
         {
