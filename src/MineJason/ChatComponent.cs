@@ -168,7 +168,7 @@ public abstract class ChatComponent(string? type) : IEquatable<ChatComponent>
     /// <param name="separator">The chat component that is used to separate between multiple entities.</param> 
     /// <returns>The selector component.</returns>
     [PublicAPI]
-    public static ChatComponent CreateSelector(string selector, ChatComponent? separator = null)
+    public static ChatComponent CreateSelector(EntitySelector selector, ChatComponent? separator = null)
     {
         return new EntityChatComponent(selector, separator);
     }

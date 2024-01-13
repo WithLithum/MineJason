@@ -12,7 +12,7 @@ using MineJason.Serialization.TextJson;
 /// <seealso href="https://minecraft.wiki/w/Target_selectors"/>
 [JsonConverter(typeof(EntitySelectorConverter))]
 [PublicAPI]
-public class EntitySelector(EntitySelectorKind kind)
+public class EntitySelector(EntitySelectorKind kind) : IEquatable<EntitySelector>
 {
     /// <summary>
     /// Gets the kind of the selector.
@@ -99,6 +99,32 @@ public class EntitySelector(EntitySelectorKind kind)
     /// <c>type</c> parameter.
     /// </summary>
     public ResourceLocation? Type { get; set; }
+
+    /// <inheritdoc />
+    public override bool Equals(object? obj)
+    {
+#if DEBUG
+        Console.WriteLine("EntitySelector: object equals called");        
+#endif
+        
+        return obj is EntitySelector other && Equals(other);
+    }
+
+    /// <inheritdoc />
+    public bool Equals(EntitySelector? other)
+    {
+        #if DEBUG
+        Console.WriteLine("EntitySelector: equals called");        
+#endif
+        
+        return other != null && other.ToString().Equals(ToString(), StringComparison.Ordinal);
+    }
+
+    /// <inheritdoc />
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(ToString());
+    }
 
     /// <inheritdoc />
     public override string ToString()

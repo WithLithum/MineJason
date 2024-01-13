@@ -1,5 +1,6 @@
 namespace MineJason.Tests;
 using System.Text.Json;
+using MineJason.Data;
 using MineJason.Events.Hover;
 
 public class SimpleSerializationTests
@@ -68,7 +69,7 @@ public class SimpleSerializationTests
     [Test]
     public void EntityComponent_Serialize()
     {
-        Assert.That(JsonSerializer.Serialize(ChatComponent.CreateSelector("@a", ChatComponent.CreateText(";"))),
+        Assert.That(JsonSerializer.Serialize(ChatComponent.CreateSelector(new EntitySelector(EntitySelectorKind.AllPlayers), ChatComponent.CreateText(";"))),
             Is.EqualTo("{\"selector\":\"@a\",\"separator\":{\"text\":\";\"}}"));
     }
 
@@ -79,7 +80,7 @@ public class SimpleSerializationTests
         var deserialized = JsonSerializer.Deserialize<ChatComponent>("{\"selector\":\"@a\",\"separator\":{\"text\":\";\"}}");
 
         Assert.That(deserialized,
-            Is.EqualTo(ChatComponent.CreateSelector("@a", ChatComponent.CreateText(";"))));
+            Is.EqualTo(ChatComponent.CreateSelector(new EntitySelector(EntitySelectorKind.AllPlayers), ChatComponent.CreateText(";"))));
     }
 
     [Test]

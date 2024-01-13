@@ -6,6 +6,7 @@ namespace MineJason;
 using System;
 using System.Text.Json.Serialization;
 using JetBrains.Annotations;
+using MineJason.Data;
 
 /// <summary>
 /// Represents an entity selector chat component that resolves into a list of entity names upon being
@@ -14,14 +15,14 @@ using JetBrains.Annotations;
 /// <param name="selector">The selector.</param>
 /// <param name="separator">The chat component to separate entity names.</param>
 [PublicAPI]
-public sealed class EntityChatComponent(string selector, ChatComponent? separator = null) : ChatComponent("selector"),
+public sealed class EntityChatComponent(EntitySelector selector, ChatComponent? separator = null) : ChatComponent("selector"),
     IEquatable<EntityChatComponent>
 {
     /// <summary>
     /// Gets the entity selector.
     /// </summary>
     [JsonPropertyName("selector")]
-    public string Selector { get; } = selector;
+    public EntitySelector Selector { get; } = selector;
 
     /// <summary>
     /// Gets chat component to separate entity names.
@@ -66,7 +67,7 @@ public sealed class EntityChatComponent(string selector, ChatComponent? separato
 
         #endif
 
-        return base.Equals(other) && Selector == other.Selector && Equals(Separator, other.Separator);
+        return base.Equals(other) && Selector.Equals(other.Selector) && Equals(Separator, other.Separator);
     }
 
     /// <inheritdoc />

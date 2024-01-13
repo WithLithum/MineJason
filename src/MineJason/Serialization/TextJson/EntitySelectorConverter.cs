@@ -3,6 +3,7 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using MineJason.Data;
+using MineJason.Data.Selectors;
 
 /// <summary>
 /// Provides conversion services to <see cref="EntitySelector"/>.
@@ -12,7 +13,14 @@ public class EntitySelectorConverter : JsonConverter<EntitySelector>
     /// <inheritdoc />
     public override EntitySelector? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-        throw new NotImplementedException();
+        var str = reader.GetString();
+
+        if (string.IsNullOrWhiteSpace(str))
+        {
+            throw new JsonException("Expected string");
+        }
+
+        return EntitySelectorStringFormatter.ParseSelector(str);
     }
 
     /// <inheritdoc />
