@@ -4,6 +4,17 @@ This document notes all API visible changes of this library.
 
 ## [Unreleased]
 
+### Added
+
+- Added support for target selector models and building.
+  - Supports converting from and to strings.
+- Added support for equality comparisons with scoreboard chat components.
+- Added basic builder support for chat components.
+
+### Changed
+
+- Entity chat components now uses `EntitySelector` instead of a string.
+
 ## [v0.2.1-alpha]
 
 ### Added
