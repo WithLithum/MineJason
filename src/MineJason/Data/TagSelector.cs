@@ -1,4 +1,8 @@
-﻿namespace MineJason.Data;
+﻿// Copyright (c) WithLithum & contributors 2023-2024. All rights reserved.
+// Licensed under the GNU Lesser General Public License, either version 3 or
+// (at your opinion) any later version.
+
+namespace MineJason.Data;
 
 using JetBrains.Annotations;
 

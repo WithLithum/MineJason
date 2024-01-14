@@ -1,4 +1,8 @@
-﻿namespace MineJason.Data.Selectors;
+﻿// Copyright (c) WithLithum & contributors 2023-2024. All rights reserved.
+// Licensed under the GNU Lesser General Public License, either version 3 or
+// (at your opinion) any later version.
+
+namespace MineJason.Data.Selectors;
 
 using System.Text;
 using JetBrains.Annotations;
@@ -55,7 +59,7 @@ public sealed class GameModeMatch : IEquatable<GameModeMatch>
             builder.Append("gamemode=").Append(Include.Value.ToString().ToLowerInvariant());
         }
 
-        if (Exclude != null && Exclude.Count != 0)
+        if (Exclude.Count != 0)
         {
             foreach (var mode in Exclude)
             {
@@ -74,7 +78,7 @@ public sealed class GameModeMatch : IEquatable<GameModeMatch>
             builder.WritePair("gamemode", Include.Value.ToString().ToLowerInvariant());
         }
 
-        if (Exclude != null && Exclude.Count != 0)
+        if (Exclude.Count != 0)
         {
             foreach (var mode in Exclude)
             {
@@ -85,9 +89,9 @@ public sealed class GameModeMatch : IEquatable<GameModeMatch>
 
     /// <inheritdoc />
     [System.Diagnostics.Contracts.Pure]
-    public bool Equals(GameModeMatch other)
+    public bool Equals(GameModeMatch? other)
     {
-        return Include == other.Include && Exclude.SequenceEqual(other.Exclude);
+        return other is not null && Include == other.Include && Exclude.SequenceEqual(other.Exclude);
     }
 
     /// <inheritdoc />
@@ -102,12 +106,12 @@ public sealed class GameModeMatch : IEquatable<GameModeMatch>
         return HashCode.Combine(Include, Exclude);
     }
 
-    public static bool operator ==(GameModeMatch left, GameModeMatch right)
+    public static bool operator ==(GameModeMatch? left, GameModeMatch? right)
     {
         return left.Equals(right);
     }
 
-    public static bool operator !=(GameModeMatch left, GameModeMatch right)
+    public static bool operator !=(GameModeMatch? left, GameModeMatch? right)
     {
         return !(left == right);
     }
