@@ -68,10 +68,8 @@ public class EntitySelectorTests
     [Test]
     public void ToString_GameMode_Exact()
     {
-        var selector = new EntitySelector(EntitySelectorKind.AllPlayers)
-        {
-            GameMode = GameModeMatch.MatchExact(GameMode.Creative)
-        };
+        var selector = new EntitySelector(EntitySelectorKind.AllPlayers);
+        selector.GameMode.MatchExact(GameMode.Creative);
         
         Assert.That(selector.ToString(),
             Is.EqualTo("@a[gamemode=creative]"));
@@ -80,10 +78,8 @@ public class EntitySelectorTests
     [Test]
     public void ToString_GameMode_Exclude()
     {
-        var selector = new EntitySelector(EntitySelectorKind.AllPlayers)
-        {
-            GameMode = GameModeMatch.MatchExclude(GameMode.Adventure, GameMode.Spectator)
-        };
+        var selector = new EntitySelector(EntitySelectorKind.AllPlayers);
+        selector.GameMode.MatchExclude(GameMode.Adventure, GameMode.Spectator);
         
         Assert.That(selector.ToString(),
             Is.EqualTo("@a[gamemode=!adventure,gamemode=!spectator]"));
@@ -94,9 +90,12 @@ public class EntitySelectorTests
     {
         var selector = new EntitySelector(EntitySelectorKind.AllPlayers)
         {
-            Name = NameMatch.MatchExact("Exact_Name")
+            Name =
+            {
+                Include = "Exact_Name"
+            }
         };
-        
+
         Assert.That(selector.ToString(),
             Is.EqualTo("@a[name=Exact_Name]"));
     }
@@ -104,10 +103,9 @@ public class EntitySelectorTests
     [Test]
     public void ToString_Name_Exclude()
     {
-        var selector = new EntitySelector(EntitySelectorKind.AllPlayers)
-        {
-            Name = NameMatch.MatchExclude("Exclude_Me", "Nothing")
-        };
+        var selector = new EntitySelector(EntitySelectorKind.AllPlayers);
+        selector.Name.Exclude.Add("Exclude_Me");
+        selector.Name.Exclude.Add("Nothing");
         
         Assert.That(selector.ToString(),
             Is.EqualTo("@a[name=!Exclude_Me,name=!Nothing]"));
@@ -218,7 +216,7 @@ public class EntitySelectorTests
     public void Parser_Teams_Include()
     {
         var teams = new TeamSelector();
-        EntitySelectorParser.ParseTeamsValue("included", ref teams);
+        EntitySelectorParser.ParseTeamsValue("included", teams);
         
         Assert.That(teams.ToString(), Is.EqualTo("team=included"));
     }
@@ -227,8 +225,8 @@ public class EntitySelectorTests
     public void Parser_Teams_ExcludesMultiple()
     {
         var teams = new TeamSelector();
-        EntitySelectorParser.ParseTeamsValue("!exclude", ref teams);
-        EntitySelectorParser.ParseTeamsValue("!hello", ref teams);
+        EntitySelectorParser.ParseTeamsValue("!exclude", teams);
+        EntitySelectorParser.ParseTeamsValue("!hello", teams);
         
         Assert.That(teams.ToString(), Is.EqualTo("team=!exclude,team=!hello"));
     }

@@ -71,11 +71,11 @@ public sealed class EntitySelector(EntitySelectorKind kind) : IEquatable<EntityS
     /// Gets or sets the experience level for a player must be matching to be selected.
     /// </summary>
     public IntegralRange? Level { get; set; }
-    
+
     /// <summary>
     /// Gets or sets the game mode conditions a player must fulfill to be selected.
     /// </summary>
-    public GameModeMatch GameMode { get; }
+    public GameModeMatch GameMode { get; } = new();
 
     /// <summary>
     /// Gets or sets the name conditions a entity must fulfill to be selected. 
@@ -93,12 +93,12 @@ public sealed class EntitySelector(EntitySelectorKind kind) : IEquatable<EntityS
     /// <c>y_rotation</c> parameter.
     /// </summary>
     public DistanceRange? HorizontalRotation { get; set; }
-    
+
     /// <summary>
     /// Gets or sets the type that the entity must belong of to be selected. This represents the
     /// <c>type</c> parameter.
     /// </summary>
-    public ResourceLocation? Type { get; set; }
+    public EntityTypeMatch Type { get; } = new();
 
     /// <inheritdoc />
     public override bool Equals(object? obj)

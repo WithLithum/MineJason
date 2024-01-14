@@ -84,12 +84,8 @@ public static partial class EntitySelectorStringFormatter
             builder.WritePair("y_rotation", selector.HorizontalRotation.Value);
         }
 
-        selector.Name?.WriteToBuilder(builder);
-
-        if (selector.Type.HasValue)
-        {
-            builder.WritePair("type", selector.Type.Value.ToString());
-        }
+        selector.Name.WriteToBuilder(builder);
+        selector.Type.WriteToBuilder(builder);
 
         return builder.ToString();
     }

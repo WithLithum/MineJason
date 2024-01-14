@@ -143,9 +143,15 @@ public class EntitySelectorBuilder
         return this;
     }
 
-    public EntitySelectorBuilder Type(ResourceLocation type)
+    public EntitySelectorBuilder MatchType(ResourceLocation type)
     {
-        _selector.Type = type;
+        _selector.Type.Include = type;
+        return this;
+    }
+
+    public EntitySelectorBuilder ExcludeType(ResourceLocation location)
+    {
+        _selector.Type.Exclude.Add(location);
         return this;
     }
     

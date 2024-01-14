@@ -110,12 +110,31 @@ public static partial class EntitySelectorStringFormatter
                     selector.HorizontalRotation = ParseDistanceRange(value);
                     break;
                 case "type":
+                    var exclude = false;
+                    if (value.StartsWith('!'))
+                    {
+                        exclude = true;
+                        value = value[1..];
+                    }
+                    
                     if (!ResourceLocation.TryParse(value, out var resourceLocation))
                     {
                         throw new FormatException("Invalid resource location for type");
                     }
 
-                    selector.Type = resourceLocation;
+                    if (exclude)
+                    {
+                        selector.Type.Exclude.Add(resourceLocation);
+                    }
+                    else
+                    {
+                        if (selector.Type.Include.HasValue)
+                        {
+                            throw new FormatException("Multiple include type selector!");
+                        }
+                        
+                        selector.Type.Include = resourceLocation;
+                    }
                     break;
                 case "x":
                 case "y":
