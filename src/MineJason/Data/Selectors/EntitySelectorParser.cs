@@ -90,7 +90,7 @@ public static class EntitySelectorParser
     /// </summary>
     /// <param name="value">The value to parse.</param>
     /// <param name="match">The collection to add to.</param>
-    public static void ParseNameValue(string value, ref NameMatch match)
+    public static void ParseNameValue(string value, NameMatch match)
     {
         Console.WriteLine("ParseNameValue: {0}", value);
         
@@ -282,16 +282,16 @@ public static class EntitySelectorParser
         value = builder.ToString();
     }
 
-    public static void ParseTeamsValue(string value, ref TeamSelector selector)
+    public static void ParseTeamsValue(string value, TeamSelector selector)
     {
         if (!value.StartsWith('!'))
         {
-            if (selector.Team != null)
+            if (selector.Include != null)
             {
                 throw new FormatException("Duplicate teams notations are not allowed.");
             }
 
-            selector.Team = value;
+            selector.Include = value;
         }
         else
         {

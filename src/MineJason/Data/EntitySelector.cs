@@ -12,7 +12,7 @@ using MineJason.Serialization.TextJson;
 /// <seealso href="https://minecraft.wiki/w/Target_selectors"/>
 [JsonConverter(typeof(EntitySelectorConverter))]
 [PublicAPI]
-public class EntitySelector(EntitySelectorKind kind) : IEquatable<EntitySelector>
+public sealed class EntitySelector(EntitySelectorKind kind) : IEquatable<EntitySelector>
 {
     /// <summary>
     /// Gets the kind of the selector.
@@ -47,12 +47,12 @@ public class EntitySelector(EntitySelectorKind kind) : IEquatable<EntitySelector
     /// <c>scores</c> argument.
     /// </summary>
     public ScoreboardRangeCollection Scores { get; } = [];
-    
+
     /// <summary>
     /// Gets or sets the teams condition a player must fulfill for the player to be selected.
     /// </summary>
-    public TeamSelector? Team { get; set; }
-    
+    public TeamSelector Team { get; } = new();
+
     /// <summary>
     /// Gets or set the maximum amount of players that this selector can select.
     /// </summary>
@@ -75,12 +75,12 @@ public class EntitySelector(EntitySelectorKind kind) : IEquatable<EntitySelector
     /// <summary>
     /// Gets or sets the game mode conditions a player must fulfill to be selected.
     /// </summary>
-    public GameModeMatch? GameMode { get; set; }
-    
+    public GameModeMatch GameMode { get; }
+
     /// <summary>
     /// Gets or sets the name conditions a entity must fulfill to be selected. 
     /// </summary>
-    public NameMatch? Name { get; set; }
+    public NameMatch Name { get; } = new();
     
     /// <summary>
     /// Gets or sets the vertical rotation range a entity must be at to be selected. This represents the

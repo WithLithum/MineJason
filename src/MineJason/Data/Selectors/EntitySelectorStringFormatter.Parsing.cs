@@ -39,8 +39,6 @@ public static partial class EntitySelectorStringFormatter
         Vector3D? position = null;
         Vector3D? diagonal = null;
         DistanceRange? distanceRange = null;
-        var teams = new TeamSelector();
-        var names = new NameMatch();
 
         var pairs = EntitySelectorParser.ParsePairSet(s[1..^1]);
         #if DEBUG
@@ -66,24 +64,19 @@ public static partial class EntitySelectorStringFormatter
             switch (key)
             {
                 case "gamemode":
-                    gameModeMatch ??= new GameModeMatch();
-                    var modeValue = gameModeMatch.Value;
-
                     if (!value.StartsWith('!'))
                     {
-                        if (gameModeMatch.Value.Include != null)
+                        if (selector.GameMode.Include != null)
                         {
-                            throw new FormatException("Already existing gamemode include condition.");
+                            throw new FormatException("Already existing game mode include condition.");
                         }
 
-                        modeValue.Include = ParseGameMode(value);
+                        selector.GameMode.Include = ParseGameMode(value);
                     }
                     else
                     {
-                        modeValue.Exclude.Add(ParseGameMode(value[1..]));
+                        selector.GameMode.Exclude.Add(ParseGameMode(value[1..]));
                     }
-
-                    gameModeMatch = modeValue;
                     break;
                 case "distance":
                     var distValue = ParseDistanceRange(value);
@@ -96,7 +89,7 @@ public static partial class EntitySelectorStringFormatter
                     EntitySelectorParser.ParseScoresValue(value, selector.Scores);
                     break;
                 case "team":
-                    EntitySelectorParser.ParseTeamsValue(value, ref teams);
+                    EntitySelectorParser.ParseTeamsValue(value, selector.Team);
                     break;
                 case "limit":
                     selector.Limit = int.Parse(value, CultureInfo.InvariantCulture);
@@ -108,7 +101,7 @@ public static partial class EntitySelectorStringFormatter
                     selector.Level = EntitySelectorParser.ParseIntegralRange(value);
                     break;
                 case "name":
-                    EntitySelectorParser.ParseNameValue(value, ref names);
+                    EntitySelectorParser.ParseNameValue(value, selector.Name);
                     break;
                 case "x_rotation":
                     selector.VerticalRotation = ParseDistanceRange(value);
@@ -143,17 +136,8 @@ public static partial class EntitySelectorStringFormatter
         // diagonal
         selector.DiagonalRange = diagonal;
         
-        // game mode
-        selector.GameMode = gameModeMatch;
-        
         // distance
         selector.Distance = distanceRange;
-        
-        // teams
-        selector.Team = teams;
-        
-        // names
-        selector.Name = names;
     }
 
     private static bool TryGetXyzValue(IEnumerable<string> pairs, out Vector3D vector, string xName = "x", string yName = "y", string zName = "z")

@@ -7,7 +7,7 @@ using JetBrains.Annotations;
 /// Represents a game mode matching.
 /// </summary>
 [PublicAPI]
-public struct GameModeMatch : IEquatable<GameModeMatch>
+public sealed class GameModeMatch : IEquatable<GameModeMatch>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="GameModeMatch"/> structure.
@@ -113,25 +113,23 @@ public struct GameModeMatch : IEquatable<GameModeMatch>
     }
 
     /// <summary>
-    /// Creates a new instance of <see cref="GameModeMatch"/> that matches an exact game mode.
+    /// Add condition to match the specified game mode.
     /// </summary>
     /// <param name="mode">The game mode.</param>
     /// <returns>The created instance.</returns>
-    public static GameModeMatch MatchExact(GameMode mode)
+    public void MatchExact(GameMode mode)
     {
-        return new GameModeMatch(mode);
+        Include = mode;
     }
 
     /// <summary>
-    /// Creates a new instance of <see cref="GameModeMatch"/> that matches game modes except for the ones
+    /// Add conditions that matches game modes except for the ones
     /// specified.
     /// </summary>
     /// <param name="modes">The game modes to exclude.</param>
     /// <returns>The created instance.</returns>
-    public static GameModeMatch MatchExclude(params GameMode[] modes)
+    public void MatchExclude(params GameMode[] modes)
     {
-        var result = new GameModeMatch();
-        result.Exclude.AddRange(modes);
-        return result;
+        Exclude.AddRange(modes);
     }
 }

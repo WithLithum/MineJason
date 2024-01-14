@@ -8,10 +8,10 @@ using MineJason.Data.Selectors;
 /// Represents a team target selector argument.
 /// </summary>
 [PublicAPI]
-public struct TeamSelector
+public sealed class TeamSelector
 {
     /// <summary>
-    /// Initializes a new instance of the <see cref="TeamSelector"/> structure.
+    /// Initializes a new instance of the <see cref="TeamSelector"/> class.
     /// </summary>
     public TeamSelector()
     {
@@ -21,7 +21,7 @@ public struct TeamSelector
     /// <summary>
     /// Gets or sets the team that the player must be in to be selected.
     /// </summary>
-    public string? Team { get; set; }
+    public string? Include { get; set; }
 
     /// <summary>
     /// Gets or sets that the teams that player must not be in to be selected.
@@ -33,9 +33,9 @@ public struct TeamSelector
     {
         // If includes..
         
-        if (Team != null)
+        if (Include != null)
         {
-            return $"team={Team}";
+            return $"team={Include}";
         }
 
         // Or if excludes..
@@ -64,9 +64,9 @@ public struct TeamSelector
     {
         // If includes..
         
-        if (Team != null)
+        if (Include != null)
         {
-            builder.WritePair("team", Team);
+            builder.WritePair("team", Include);
         }
 
         // Or if excludes..

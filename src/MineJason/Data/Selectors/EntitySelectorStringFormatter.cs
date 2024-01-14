@@ -71,10 +71,7 @@ public static partial class EntitySelectorStringFormatter
             builder.WritePair("level", selector.Level.Value);
         }
 
-        if (selector.GameMode.HasValue)
-        {
-            selector.GameMode.Value.WriteToBuilder(builder);
-        }
+        selector.GameMode.WriteToBuilder(builder);
         
         // Rotation
         if (selector.VerticalRotation.HasValue)

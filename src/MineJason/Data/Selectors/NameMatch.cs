@@ -7,7 +7,7 @@ using JetBrains.Annotations;
 /// Represents a name matching condition.
 /// </summary>
 [PublicAPI]
-public struct NameMatch : IEquatable<NameMatch>
+public sealed class NameMatch : IEquatable<NameMatch>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="NameMatch"/> class.
