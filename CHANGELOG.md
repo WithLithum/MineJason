@@ -10,6 +10,7 @@ This document notes all API visible changes of this library.
   - Supports converting from and to strings.
 - Added support for equality comparisons with scoreboard chat components.
 - Added basic builder support for chat components.
+- Added new builder `Create` methods for `keybind` and `selector` components.
 
 ### Changed
 

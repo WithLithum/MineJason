@@ -173,6 +173,26 @@ public abstract class ChatComponent(string? type) : IEquatable<ChatComponent>
         return new EntityChatComponent(selector, separator);
     }
 
+    /// <summary>
+    /// Creates a builder that creates an entity selector component.
+    /// </summary>
+    /// <returns>The builder.</returns>
+    [PublicAPI]
+    public static EntityComponentBuilder CreateSelector()
+    {
+        return new EntityComponentBuilder();
+    }
+
+    /// <summary>
+    /// Create a builder that creates a keybind component.
+    /// </summary>
+    /// <returns>The builder.</returns>
+    [PublicAPI]
+    public static KeybindComponentBuilder CreateKeybind()
+    {
+        return new KeybindComponentBuilder();
+    }
+
     #endregion
 
     #region Fluent syntax methods
