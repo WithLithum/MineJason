@@ -104,6 +104,12 @@ public sealed class EntitySelector(EntitySelectorKind kind) : IEquatable<EntityS
     /// </summary>
     public EntityTypeMatch Type { get; } = new();
 
+    /// <summary>
+    /// Gets the exact NBT data conditions that an entity must fulfill to be selected. This represents the
+    /// <c>nbt</c> parameter.
+    /// </summary>
+    public SelectorNbtMatch Nbt { get; } = new();
+
     /// <inheritdoc />
     public override bool Equals(object? obj)
     {

@@ -88,6 +88,7 @@ public static partial class EntitySelectorStringFormatter
 
         selector.Name.WriteToBuilder(builder);
         selector.Type.WriteToBuilder(builder);
+        selector.Nbt.WriteToBuilder(builder);
 
         return builder.ToString();
     }

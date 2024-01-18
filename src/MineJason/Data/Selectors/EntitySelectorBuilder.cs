@@ -274,6 +274,28 @@ public class EntitySelectorBuilder
     }
 
     /// <summary>
+    /// Adds an NBT condition that an entity must fulfill to be selected.
+    /// </summary>
+    /// <param name="nbt">The NBT.</param>
+    /// <returns>This instance.</returns>
+    public EntitySelectorBuilder IncludeNbt(NbtProvider nbt)
+    {
+        _selector.Nbt.Include.Add(nbt);
+        return this;
+    }
+
+    /// <summary>
+    /// Adds an NBT condition that an entity must not fulfill to be selected.
+    /// </summary>
+    /// <param name="nbt">The NBT.</param>
+    /// <returns>This instance.</returns>
+    public EntitySelectorBuilder ExcludeNbt(NbtProvider nbt)
+    {
+        _selector.Nbt.Exclude.Add(nbt);
+        return this;
+    }
+
+    /// <summary>
     /// Returns the assembled selector.
     /// </summary>
     /// <returns>The selector.</returns>

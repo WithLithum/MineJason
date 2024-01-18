@@ -144,6 +144,16 @@ public static partial class EntitySelectorStringFormatter
                     // Don't do anything here, just skip.
                     // We already handled them above.
                     break;
+                case "nbt":
+                    if (value.StartsWith('!'))
+                    {
+                        selector.Nbt.Exclude.Add(new NbtProvider(value[1..]));
+                    }
+                    else
+                    {
+                        selector.Nbt.Include.Add(new NbtProvider(value));
+                    }
+                    break;
                 default:
                     throw new FormatException($"Unrecognised argument name {key}");
             }

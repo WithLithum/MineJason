@@ -356,4 +356,22 @@ public class EntitySelectorTests
         Assert.That(EntitySelectorStringFormatter.ParseSelector(sampleString).ToString(),
             Is.EqualTo(sampleString));
     }
+    
+    [Test]
+    public void Parser_ParseWithNbtCondition()
+    {
+        const string sampleString = "@a[nbt={Condition:1b}]";
+
+        Assert.That(EntitySelectorStringFormatter.ParseSelector(sampleString).ToString(),
+            Is.EqualTo(sampleString));
+    }
+    
+    [Test]
+    public void Parser_ParseWithMultipleNbtConditions()
+    {
+        const string sampleString = "@a[nbt={Condition:1b},nbt=!{NonCondition:2b}]";
+
+        Assert.That(EntitySelectorStringFormatter.ParseSelector(sampleString).ToString(),
+            Is.EqualTo(sampleString));
+    }
 }
