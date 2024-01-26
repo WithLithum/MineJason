@@ -2,7 +2,7 @@
 
 This document notes all API visible changes of this library.
 
-## [Unreleased]
+## [v0.3.0-alpha]
 
 ### Added
 
@@ -44,7 +44,8 @@ This document notes all API visible changes of this library.
 
 - First version release.
 
-[Unreleased]: https://codeberg.org/WithLithum/MineJason/compare/v0.2.1-alpha...trunk
+[Unreleased]: https://codeberg.org/WithLithum/MineJason/compare/v0.3.0-alpha...trunk
+[v0.3.0-alpha]: https://codeberg.org/WithLithum/MineJason/compare/v0.2.1-alpha...v0.3.0-alpha
 [v0.2.1-alpha]: https://codeberg.org/WithLithum/MineJason/compare/v0.2.0-alpha...v0.2.1-alpha
 [v0.2.0-alpha]: https://codeberg.org/WithLithum/MineJason/compare/v0.1.0-alpha...v0.2.0-alpha
 [v0.1.0-alpha]: https://codeberg.org/WithLithum/MineJason/src/tag/v0.1.0-alpha
