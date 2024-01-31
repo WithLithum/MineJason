@@ -4,6 +4,7 @@
 
 namespace MineJason.Events;
 
+using System.Text.Json.Serialization;
 using JetBrains.Annotations;
 
 /// <summary>
@@ -16,6 +17,7 @@ public sealed class CopyToClipboardClickEvent(string value) : ClickEvent, IEquat
     /// <summary>
     /// Gets the text to copy to the clipboard.
     /// </summary>
+    [JsonPropertyName("value")]
     public string Value { get; } = value;
 
     /// <inheritdoc />

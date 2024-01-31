@@ -4,6 +4,7 @@
 
 namespace MineJason.Events;
 
+using System.Text.Json.Serialization;
 using JetBrains.Annotations;
 
 /// <summary>
@@ -16,6 +17,7 @@ public sealed class SuggestCommandClickEvent(string value) : ClickEvent, IEquata
     /// <summary>
     /// Gets the text to enter into the chat box.
     /// </summary>
+    [JsonPropertyName("value")]
     public string Value { get; } = value;
 
     /// <inheritdoc />

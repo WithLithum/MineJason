@@ -8,6 +8,7 @@ using JetBrains.Annotations;
 /// System.Text.Json.
 /// </summary>
 [PublicAPI]
+[Obsolete("Serialize directly with usual methods instead.")]
 public static class JsonComponentSerializer
 {
     /// <summary>

@@ -4,6 +4,7 @@
 
 namespace MineJason.Events;
 
+using System.Text.Json.Serialization;
 using JetBrains.Annotations;
 
 /// <summary>
@@ -16,6 +17,7 @@ public sealed class OpenUrlClickEvent(Uri value) : ClickEvent, IEquatable<OpenUr
     /// <summary>
     /// Gets the URL to open.
     /// </summary>
+    [JsonPropertyName("value")]
     public Uri Value { get; } = value;
 
     /// <inheritdoc />

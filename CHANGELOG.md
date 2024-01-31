@@ -16,6 +16,10 @@ This document notes all API visible changes of this library.
 
 - Entity chat components now uses `EntitySelector` instead of a string.
 
+### Fixed
+
+- Fixed definition error in `show_item` hover event that renders `count` and `tag` required, and incorrectly serializes `tag` as `nbt`.
+
 ## [v0.2.1-alpha]
 
 ### Added
