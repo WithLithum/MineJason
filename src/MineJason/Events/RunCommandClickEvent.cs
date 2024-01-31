@@ -4,10 +4,13 @@
 
 namespace MineJason.Events;
 
+using JetBrains.Annotations;
+
 /// <summary>
 /// Represents a click event that executes a command.
 /// </summary>
 /// <param name="value">The command to execute.</param>
+[PublicAPI]
 public sealed class RunCommandClickEvent(string value) : ClickEvent, IEquatable<RunCommandClickEvent>
 {
     /// <summary>

@@ -28,6 +28,7 @@ public sealed class EntityChatComponent(EntitySelector selector, ChatComponent? 
     /// Gets chat component to separate entity names.
     /// </summary>
     [JsonPropertyName("separator")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public ChatComponent? Separator { get; } = separator;
 
     /// <inheritdoc />

@@ -4,12 +4,14 @@
 
 namespace MineJason;
 using System;
+using JetBrains.Annotations;
 
 /// <summary>
 /// Represents a chat component that displays as the key associated with the specified key binding entry
 /// of the client that this component is being presented.
 /// </summary>
 /// <param name="keybind">The ID of the key binding entry.</param>
+[PublicAPI]
 public sealed class KeybindChatComponent(string keybind) : ChatComponent("keybind"),
     IEquatable<KeybindChatComponent>
 {

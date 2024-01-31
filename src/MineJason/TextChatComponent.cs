@@ -4,10 +4,13 @@
 
 namespace MineJason;
 
+using JetBrains.Annotations;
+
 /// <summary>
 /// Represents a chat component that displays a text.
 /// </summary>
 /// <param name="text">The text to display.</param>
+[PublicAPI]
 public sealed class TextChatComponent(string text) : ChatComponent("text"), IEquatable<TextChatComponent>
 {
     /// <summary>

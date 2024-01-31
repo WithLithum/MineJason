@@ -18,6 +18,7 @@ using MineJason.Serialization.TextJson;
 /// </summary>
 /// <param name="type">The type of the chat component.</param>
 [JsonConverter(typeof(ChatComponentConverter))]
+[PublicAPI]
 public abstract class ChatComponent(string? type) : IEquatable<ChatComponent>
 {
     /// <summary>
@@ -38,42 +39,49 @@ public abstract class ChatComponent(string? type) : IEquatable<ChatComponent>
     /// Gets or sets whether this component is displayed in bold font.
     /// </summary>
     [JsonPropertyName("bold")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public bool? Bold { get; set; }
 
     /// <summary>
     /// Gets or sets whether this component is displayed in italic font.
     /// </summary>
     [JsonPropertyName("italic")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public bool? Italic { get; set; }
 
     /// <summary>
     /// Gets or sets whether the text of this component is displayed obfuscated.
     /// </summary>
     [JsonPropertyName("obfuscated")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public bool? Obfuscated { get; set; }
 
     /// <summary>
     /// Gets or sets whether to render underline below the text of this component.
     /// </summary>
     [JsonPropertyName("underlined")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public bool? Underline { get; set; }
 
     /// <summary>
     /// Gets or sets whether to render a line at the middle of this component.
     /// </summary>
     [JsonPropertyName("strikethrough")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public bool? Strikethrough { get; set; }
 
     /// <summary>
     /// Gets or sets the color of this component.
     /// </summary>
     [JsonPropertyName("color")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public IChatColor? Color { get; set; }
 
     /// <summary>
     /// Gets or sets the font of this component.
     /// </summary>
     [JsonPropertyName("font")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public ResourceLocation? Font { get; set; }
 
     /// <summary>
@@ -81,18 +89,21 @@ public abstract class ChatComponent(string? type) : IEquatable<ChatComponent>
     /// <c>SHIFT</c> is held.
     /// </summary>
     [JsonPropertyName("insertion")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public string? Insertion { get; set; }
 
     /// <summary>
     /// Gets or sets the click event of this component.
     /// </summary>
     [JsonPropertyName("clickEvent")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public ClickEvent? ClickEvent { get; set; }
 
     /// <summary>
     /// Gets or sets the hover event of this component.
     /// </summary>
     [JsonPropertyName("hoverEvent")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public HoverEvent? HoverEvent { get; set; }
 
     /// <summary>
@@ -100,6 +111,7 @@ public abstract class ChatComponent(string? type) : IEquatable<ChatComponent>
     /// styles of this component by default.
     /// </summary>
     [JsonPropertyName("extra")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public IList<ChatComponent>? Extra { get; set; }
 
     #region Creation methods
@@ -263,7 +275,7 @@ public abstract class ChatComponent(string? type) : IEquatable<ChatComponent>
         Console.WriteLine("Component 1: {0}", component1);
         Console.WriteLine("Component 2: {0}", component2);
 
-        return component1.Color == component2.Color
+        return Equals(component1.Color, component2.Color)
                && component1.Font == component2.Font
                && component1.Insertion == component2.Insertion
                && component1.Italic == component2.Italic

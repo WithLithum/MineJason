@@ -5,6 +5,7 @@
 namespace MineJason.Events.Hover;
 
 using System.Text.Json.Serialization;
+using JetBrains.Annotations;
 using MineJason.Data;
 
 /// <summary>
@@ -13,6 +14,7 @@ using MineJason.Data;
 /// <param name="id">The identifier of the type of the item.</param>
 /// <param name="count">The count of the item.</param>
 /// <param name="nbt">The NBT data of the item.</param>
+[PublicAPI]
 public sealed class ShowItemHoverEvent(ResourceLocation id, int count, NbtProvider nbt) : HoverEvent, IEquatable<ShowItemHoverEvent>
 {
     /// <summary>

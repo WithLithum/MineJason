@@ -5,11 +5,13 @@
 namespace MineJason.Events;
 
 using System.Text.Json.Serialization;
+using JetBrains.Annotations;
 
 /// <summary>
 /// Represents a click event that jumps to a specified page in a book.
 /// </summary>
 /// <param name="value"></param>
+[PublicAPI]
 public sealed class ChangePageClickEvent(int value) : ClickEvent, IEquatable<ChangePageClickEvent>
 {
     /// <summary>

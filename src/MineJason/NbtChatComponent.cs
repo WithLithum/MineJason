@@ -38,24 +38,28 @@ public sealed class NbtChatComponent(NbtDataSource source, string path, string? 
     /// Gets the block to read NBT from.
     /// </summary>
     [JsonPropertyName("block")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public string? Block { get; } = block;
 
     /// <summary>
     /// Gets the entity to read NBT from.
     /// </summary>
     [JsonPropertyName("entity")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public string? Entity { get; } = entity;
 
     /// <summary>
     /// Gets the storage to read NBT from.
     /// </summary>
     [JsonPropertyName("storage")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public string? Storage { get; } = storage;
 
     /// <summary>
     /// Gets the separator to separate between NBT values.
     /// </summary>
     [JsonPropertyName("separator")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public ChatComponent? Separator { get; } = separator;
 
     /// <inheritdoc />

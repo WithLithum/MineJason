@@ -4,12 +4,16 @@
 
 namespace MineJason;
 
+using System.Text.Json.Serialization;
+using JetBrains.Annotations;
+
 /// <summary>
 /// Represents a chat component that displays a translatable text.
 /// </summary>
 /// <param name="translate">The translation key.</param>
 /// <param name="fallback">The text to display in case of the translation key is missing.</param>
 /// <param name="with">The arguments of the translation.</param>
+[PublicAPI]
 public sealed class TranslatableChatComponent(string translate, string? fallback = null, IList<ChatComponent>? with = null) : ChatComponent("translatable"), IEquatable<TranslatableChatComponent>
 {
     /// <summary>
@@ -20,11 +24,13 @@ public sealed class TranslatableChatComponent(string translate, string? fallback
     /// <summary>
     /// Gets the fallback text.
     /// </summary>
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public string? Fallback { get; } = fallback;
 
     /// <summary>
     /// Gets the arguments.
     /// </summary>
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public IList<ChatComponent>? With { get; } = with;
 
     /// <inheritdoc />

@@ -5,11 +5,13 @@
 namespace MineJason.Events.Hover;
 
 using System.Text.Json.Serialization;
+using JetBrains.Annotations;
 
 /// <summary>
 /// Represents a show text hover event, that shows a chat component as a tooltip.
 /// </summary>
 /// <param name="contents">The contents of the tooltip.</param>
+[PublicAPI]
 public sealed class ShowTextHoverEvent(ChatComponent contents) : HoverEvent, IEquatable<ShowTextHoverEvent>
 {
     /// <summary>
