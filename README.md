@@ -3,7 +3,8 @@
 简体中文 | [English](README-en.md)
 
 [![Nuget](https://img.shields.io/nuget/v/MineJason?style=flat-square&logo=nuget&label=%20)](https://www.nuget.org/packages/MineJason)
-![GitLab Last Commit](https://img.shields.io/gitlab/last-commit/WithLithum%2FMineJason?gitlab_url=https%3A%2F%2Fjihulab.com&style=flat-square)
+![GitLab Last Commit](https://img.shields.io/gitlab/last-commit/WithLithum%2FMineJason?tyle=flat-square)
+![AppVeyor Build](https://img.shields.io/appveyor/build/WithLithum/minejason?style=flat-square&logo=appveyor&logoColor=white&label=%20)
 [![Discord](https://img.shields.io/discord/1178887806286823424?style=flat-square&logo=discord&logoColor=white&label=%20&color=blue)](https://discord.gg/UFfWb9Rj)
 [![QQ](https://img.shields.io/badge/qq%20group-join-blue?style=flat-square
 )](https://qm.qq.com/cgi-bin/qm/qr?k=reIRa9w7-vMBemqim7NdREX7vNKirNFo&jump_from=webapi&authKey=UnyZ5LWlfV8g8VCEffm2CShHd9PVPHP5CaXVbxkF2wwZj6FtXGEU/M7jRbU4e/K2)
@@ -43,7 +44,7 @@ JsonComponentSerializer.Deserialize(json);
 
 ## 报告问题
 
-请通过[本库的议题区](https://jihulab.com/WithLithum/MineJason/issues)报告问题。
+请通过[本库的议题区](https://gitlab.com/WithLithum/MineJason/issues)报告问题。
 
 ## 贡献代码
 

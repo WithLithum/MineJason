@@ -9,8 +9,8 @@
         <Company>WithLithum</Company>
         <Copyright>Copyright (C) WithLithum 2023, 2024.</Copyright>
         <Product>MineJason</Product>
-        <ProjectUrl>https://jihulab.com/WithLithum/MineJason</ProjectUrl>
-        <RepositoryUrl>https://jihulab.com/WithLithum/MineJason.git</RepositoryUrl>
+        <ProjectUrl>https://gitlab.com/WithLithum/MineJason</ProjectUrl>
+        <RepositoryUrl>https://gitlab.com/WithLithum/MineJason.git</RepositoryUrl>
         <PackageLicenseExpression>LGPL-3.0-or-later</PackageLicenseExpression>
         <PackageReadmeFile>PACK-README.md</PackageReadmeFile>
         <PackageTags>minecraft;mcje;raw-json-text;minecraft-java;minecraft-commands;minecraft-command;chat-components;</PackageTags>
