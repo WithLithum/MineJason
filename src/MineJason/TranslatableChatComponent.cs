@@ -19,6 +19,7 @@ public sealed class TranslatableChatComponent(string translate, string? fallback
     /// <summary>
     /// Gets the translation key.
     /// </summary>
+    [JsonPropertyName("translate")]
     public string Translate { get; } = translate;
 
     /// <summary>

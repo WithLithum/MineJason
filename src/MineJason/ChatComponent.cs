@@ -22,16 +22,6 @@ using MineJason.Serialization.TextJson;
 public abstract class ChatComponent(string? type) : IEquatable<ChatComponent>
 {
     /// <summary>
-    /// Gets the serializer options that is required for conforming the Minecraft: Java Edition standards.
-    /// </summary>
-    [Obsolete("Deserialize and serialize directly.")]
-    public static readonly JsonSerializerOptions SerializerOptions = new()
-    {
-        PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-        DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
-    };
-
-    /// <summary>
     /// Gets or sets the type of the chat component.
     /// </summary>
     protected string? Type { get; set; } = type;

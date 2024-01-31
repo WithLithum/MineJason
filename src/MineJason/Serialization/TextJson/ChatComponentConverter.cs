@@ -54,7 +54,7 @@ public class ChatComponentConverter : JsonConverter<ChatComponent>
         // Use old Minecraft behaviour...
         if (dom.RootElement.TryGetProperty("text", out _))
         {
-            return dom.RootElement.Deserialize<TextChatComponent>(ChatComponent.SerializerOptions);
+            return dom.RootElement.Deserialize<TextChatComponent>();
         }
 
         if (dom.RootElement.TryGetProperty("translate", out _))
@@ -95,7 +95,7 @@ public class ChatComponentConverter : JsonConverter<ChatComponent>
         }
 
         var first = array[0]!.AsObject();
-        var component = first.Deserialize<ChatComponent>(ChatComponent.SerializerOptions)
+        var component = first.Deserialize<ChatComponent>()
                         ?? ChatComponent.CreateText(string.Empty);
 
         if (array.Count < 2)
@@ -118,12 +118,12 @@ public class ChatComponentConverter : JsonConverter<ChatComponent>
 
     private static T? DeserializeComponent<T>(JsonDocument document)
     {
-        return document.RootElement.Deserialize<T>(ChatComponent.SerializerOptions);
+        return document.RootElement.Deserialize<T>();
     }
 
     /// <inheritdoc />
     public override void Write(Utf8JsonWriter writer, ChatComponent value, JsonSerializerOptions options)
     {
-        JsonSerializer.Serialize(writer, (object)value, ChatComponent.SerializerOptions);
+        JsonSerializer.Serialize(writer, (object)value);
     }
 }

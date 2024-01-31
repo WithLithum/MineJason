@@ -4,6 +4,7 @@
 
 namespace MineJason;
 
+using System.Text.Json.Serialization;
 using JetBrains.Annotations;
 
 /// <summary>
@@ -16,6 +17,7 @@ public sealed class TextChatComponent(string text) : ChatComponent("text"), IEqu
     /// <summary>
     /// Gets the text to display.
     /// </summary>
+    [JsonPropertyName("text")]
     public string Text { get; } = text;
 
     /// <inheritdoc />

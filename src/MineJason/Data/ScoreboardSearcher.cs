@@ -37,6 +37,7 @@ public struct ScoreboardSearcher(string name, string objective, string? value = 
     /// Gets or sets the text to display instead of the score.
     /// </summary>
     [JsonPropertyName("value")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public string? Value { get; set; } = value;
 
     /// <inheritdoc />
