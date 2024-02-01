@@ -2,6 +2,25 @@
 
 This document notes all API visible changes of this library.
 
+## [Unreleased]
+
+### Added
+
+- Added `NbtProvider.Empty` readonly value.
+
+### Changed
+
+- Added `JsonIgnore` and `JsonPropertyName` attributes properly to all JSON serializable types.
+- `JsonComponentSerializer` is now deprecated.
+
+## Removed
+
+- `ChatComponent.SerializerOptions` is removed.
+
+### Fixed
+
+- Fixed definition error in `show_item` hover event that renders `count` and `tag` required, and incorrectly serializes `tag` as `nbt`.
+
 ## [v0.3.0-alpha]
 
 ### Added
@@ -44,8 +63,8 @@ This document notes all API visible changes of this library.
 
 - First version release.
 
-[Unreleased]: https://codeberg.org/WithLithum/MineJason/compare/v0.3.0-alpha...trunk
-[v0.3.0-alpha]: https://codeberg.org/WithLithum/MineJason/compare/v0.2.1-alpha...v0.3.0-alpha
-[v0.2.1-alpha]: https://codeberg.org/WithLithum/MineJason/compare/v0.2.0-alpha...v0.2.1-alpha
-[v0.2.0-alpha]: https://codeberg.org/WithLithum/MineJason/compare/v0.1.0-alpha...v0.2.0-alpha
-[v0.1.0-alpha]: https://codeberg.org/WithLithum/MineJason/src/tag/v0.1.0-alpha
+[Unreleased]: https://gitlab.com/WithLithum/MineJason/compare/v0.3.0-alpha...trunk
+[v0.3.0-alpha]: https://gitlab.com/WithLithum/MineJason/compare/v0.2.1-alpha...v0.3.0-alpha
+[v0.2.1-alpha]: https://gitlab.com/WithLithum/MineJason/compare/v0.2.0-alpha...v0.2.1-alpha
+[v0.2.0-alpha]: https://gitlab.com/WithLithum/MineJason/compare/v0.1.0-alpha...v0.2.0-alpha
+[v0.1.0-alpha]: https://gitlab.com/WithLithum/MineJason/src/tag/v0.1.0-alpha

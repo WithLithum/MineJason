@@ -4,15 +4,20 @@
 
 namespace MineJason.Events;
 
+using System.Text.Json.Serialization;
+using JetBrains.Annotations;
+
 /// <summary>
 /// Represents a click event that executes a command.
 /// </summary>
 /// <param name="value">The command to execute.</param>
+[PublicAPI]
 public sealed class RunCommandClickEvent(string value) : ClickEvent, IEquatable<RunCommandClickEvent>
 {
     /// <summary>
     /// Gets the command to execute.
     /// </summary>
+    [JsonPropertyName("value")]
     public string Value { get; } = value;
 
     /// <inheritdoc />

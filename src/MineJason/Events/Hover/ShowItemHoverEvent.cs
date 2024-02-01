@@ -5,6 +5,7 @@
 namespace MineJason.Events.Hover;
 
 using System.Text.Json.Serialization;
+using JetBrains.Annotations;
 using MineJason.Data;
 
 /// <summary>
@@ -13,7 +14,8 @@ using MineJason.Data;
 /// <param name="id">The identifier of the type of the item.</param>
 /// <param name="count">The count of the item.</param>
 /// <param name="nbt">The NBT data of the item.</param>
-public sealed class ShowItemHoverEvent(ResourceLocation id, int count, NbtProvider nbt) : HoverEvent, IEquatable<ShowItemHoverEvent>
+[PublicAPI]
+public sealed class ShowItemHoverEvent(ResourceLocation id, int? count = null, NbtProvider? nbt = null) : HoverEvent, IEquatable<ShowItemHoverEvent>
 {
     /// <summary>
     /// Gets the identifier of the item.
@@ -25,13 +27,15 @@ public sealed class ShowItemHoverEvent(ResourceLocation id, int count, NbtProvid
     /// Gets the count of item.
     /// </summary>
     [JsonPropertyName("count")]
-    public int Count { get; } = count;
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public int? Count { get; } = count;
 
     /// <summary>
     /// Gets the NBT of the item.
     /// </summary>
-    [JsonPropertyName("nbt")]
-    public NbtProvider Nbt { get; } = nbt;
+    [JsonPropertyName("tag")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public NbtProvider? Nbt { get; } = nbt;
 
     /// <inheritdoc />
     public bool Equals(ShowItemHoverEvent? other)

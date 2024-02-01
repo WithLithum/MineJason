@@ -8,6 +8,7 @@ using JetBrains.Annotations;
 /// System.Text.Json.
 /// </summary>
 [PublicAPI]
+[Obsolete("Serialize directly with usual methods instead.")]
 public static class JsonComponentSerializer
 {
     /// <summary>
@@ -17,7 +18,7 @@ public static class JsonComponentSerializer
     /// <returns>The converted JSON.</returns>
     public static string Serialize(ChatComponent component)
     {
-        return JsonSerializer.Serialize(component, ChatComponent.SerializerOptions);
+        return JsonSerializer.Serialize(component);
     }
 
     /// <summary>
@@ -30,7 +31,7 @@ public static class JsonComponentSerializer
     /// <returns>A task that represents the operation.</returns>
     public static async Task SerializeAsync(Stream utf8Json, ChatComponent component, CancellationToken cancellation = default)
     {
-        await JsonSerializer.SerializeAsync(utf8Json, component, ChatComponent.SerializerOptions, cancellation);
+        await JsonSerializer.SerializeAsync(utf8Json, component, options: null, cancellationToken: cancellation);
     }
 
     /// <summary>
@@ -61,7 +62,7 @@ public static class JsonComponentSerializer
     /// <returns>The chat component.</returns>
     public static async Task<ChatComponent?> DeserializeAsync(Stream utf8Json, CancellationToken cancellation = default)
     {
-        return await JsonSerializer.DeserializeAsync<ChatComponent>(utf8Json, ChatComponent.SerializerOptions,
+        return await JsonSerializer.DeserializeAsync<ChatComponent>(utf8Json, options: null,
             cancellation);
     }
 }

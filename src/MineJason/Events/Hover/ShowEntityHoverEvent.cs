@@ -5,6 +5,7 @@
 namespace MineJason.Events.Hover;
 
 using System.Text.Json.Serialization;
+using JetBrains.Annotations;
 
 /// <summary>
 /// Represents a show entity hover event, a hover event that displays entity type and GUID information
@@ -13,12 +14,14 @@ using System.Text.Json.Serialization;
 /// <param name="type">The type of the entity.</param>
 /// <param name="id">The unique identifier of the entity.</param>
 /// <param name="name">The name of the entity to show.</param>
+[PublicAPI]
 public sealed class ShowEntityHoverEvent(ResourceLocation type, Guid id, ChatComponent? name = null) : HoverEvent, IEquatable<ShowEntityHoverEvent>
 {
     /// <summary>
     /// Gets the name of the entity to show as.
     /// </summary>
     [JsonPropertyName("name")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public ChatComponent? Name { get; } = name;
 
     /// <summary>

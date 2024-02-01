@@ -16,6 +16,11 @@ using MineJason.Serialization.TextJson;
 public class NbtProvider(string raw)
 {
     /// <summary>
+    /// Provides an empty NBT provider.
+    /// </summary>
+    public static readonly NbtProvider Empty = new("");
+    
+    /// <summary>
     /// Returns the string representation of this NBT component.
     /// </summary>
     /// <returns>The SNBT representation.</returns>

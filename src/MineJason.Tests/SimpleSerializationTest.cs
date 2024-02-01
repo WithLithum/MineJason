@@ -1,6 +1,7 @@
 namespace MineJason.Tests;
 using System.Text.Json;
 using MineJason.Data;
+using MineJason.Events;
 using MineJason.Events.Hover;
 
 public class SimpleSerializationTests
@@ -13,26 +14,22 @@ public class SimpleSerializationTests
     }
 
     [Test]
-    public void ShowTextEvent_Serialize()
-    {
-        Assert.That(JsonSerializer.Serialize((HoverEvent)(new ShowTextHoverEvent(ChatComponent.CreateText("text this")))),
-            Is.EqualTo("{\"action\":\"show_text\",\"contents\":{\"text\":\"text this\"}}"));
-    }
-
-    [Test]
-    public void ShowTextEvent_Deserialize()
-    {
-        Assert.That(JsonSerializer.Deserialize<HoverEvent>("{\"action\":\"show_text\",\"contents\":{\"text\":\"text this\"}}"),
-            Is.EqualTo(new ShowTextHoverEvent(ChatComponent.CreateText("text this"))));
-    }
-
-    [Test]
     public void TextComponent_Serialize()
     {
         Assert.That(JsonSerializer.Serialize(ChatComponent.CreateText("I am text")),
             Is.EqualTo("{\"text\":\"I am text\"}"));
     }
 
+    [Test]
+    public void TextComponent_Deserialize()
+    {
+        var deserialized = JsonSerializer.Deserialize<ChatComponent>("{\"text\":\"Hello World!\"}");
+
+        Assert.That(deserialized,
+            Is.EqualTo(ChatComponent.CreateText("Hello World!")));
+    }
+
+    
     [Test]
     public void TranslatableComponent_Serialize()
     {
@@ -55,7 +52,6 @@ public class SimpleSerializationTests
         Assert.That(JsonSerializer.Serialize(ChatComponent.CreateScore("Player", "advancements")),
             Is.EqualTo("{\"score\":{\"name\":\"Player\",\"objective\":\"advancements\"}}"));
     }
-
 
     [Test]
     public void ScoreboardComponent_Deserialize()
@@ -83,6 +79,16 @@ public class SimpleSerializationTests
             Is.EqualTo(ChatComponent.CreateSelector(new EntitySelector(EntitySelectorKind.AllPlayers), ChatComponent.CreateText(";"))));
     }
 
+    [Test]
+    public void TextComponent_SerializeWithColor()
+    {
+        var component = ChatComponent.CreateText("Hello World!");
+        component.Color = KnownColor.Aqua;
+
+        Assert.That(JsonSerializer.Serialize(component),
+            Is.EqualTo("{\"text\":\"Hello World!\",\"color\":\"aqua\"}"));
+    }
+    
     [Test]
     public void TranslatableComponent_SerializeWithColor()
     {

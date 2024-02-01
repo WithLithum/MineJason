@@ -4,15 +4,20 @@
 
 namespace MineJason.Events;
 
+using System.Text.Json.Serialization;
+using JetBrains.Annotations;
+
 /// <summary>
 /// Represents an open URL click event, that shows a prompt to open a URL in the default browser.
 /// </summary>
 /// <param name="value">The URL to open.</param>
+[PublicAPI]
 public sealed class OpenUrlClickEvent(Uri value) : ClickEvent, IEquatable<OpenUrlClickEvent>
 {
     /// <summary>
     /// Gets the URL to open.
     /// </summary>
+    [JsonPropertyName("value")]
     public Uri Value { get; } = value;
 
     /// <inheritdoc />

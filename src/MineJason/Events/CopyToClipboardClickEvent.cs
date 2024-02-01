@@ -4,15 +4,20 @@
 
 namespace MineJason.Events;
 
+using System.Text.Json.Serialization;
+using JetBrains.Annotations;
+
 /// <summary>
 /// Represents a copy to clipboard click event, that copies the specified text to the clipboard.
 /// </summary>
 /// <param name="value">The text to copy to the clipboard.</param>
+[PublicAPI]
 public sealed class CopyToClipboardClickEvent(string value) : ClickEvent, IEquatable<CopyToClipboardClickEvent>
 {
     /// <summary>
     /// Gets the text to copy to the clipboard.
     /// </summary>
+    [JsonPropertyName("value")]
     public string Value { get; } = value;
 
     /// <inheritdoc />

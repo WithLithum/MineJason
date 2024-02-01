@@ -4,15 +4,20 @@
 
 namespace MineJason.Events;
 
+using System.Text.Json.Serialization;
+using JetBrains.Annotations;
+
 /// <summary>
 /// Represents a click event that enters the specified text into the chat box.
 /// </summary>
 /// <param name="value">The text to enter into the chat box.</param>
+[PublicAPI]
 public sealed class SuggestCommandClickEvent(string value) : ClickEvent, IEquatable<SuggestCommandClickEvent>
 {
     /// <summary>
     /// Gets the text to enter into the chat box.
     /// </summary>
+    [JsonPropertyName("value")]
     public string Value { get; } = value;
 
     /// <inheritdoc />
