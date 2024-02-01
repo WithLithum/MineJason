@@ -4,18 +4,22 @@ This document notes all API visible changes of this library.
 
 ## [Unreleased]
 
+This release contains breaking changes.
+
 ### Added
 
 - Added `NbtProvider.Empty` readonly value.
+- Added `ChatColor` utility class and `ChatColor.FromColorCode` utility method.
 
 ### Changed
 
 - Added `JsonIgnore` and `JsonPropertyName` attributes properly to all JSON serializable types.
 - `JsonComponentSerializer` is now deprecated.
 
-## Removed
+### Removed
 
-- `ChatComponent.SerializerOptions` is removed.
+- **BREAKING CHANGE**:
+  - `ChatComponent.SerializerOptions` is removed.
 
 ### Fixed
 
