@@ -24,19 +24,11 @@ MineJason 提供支持使用 System.Text.Json 序列化和反序列化的原始 
 
 ### 序列化和反序列化
 
-使用序列化功能时请保证使用 `ChatComponent.SerializerOptions` 以保持序列化和反序列化出的格式与 Minecraft 兼容。
+从 0.3.1-alpha 开始，序列化时可以直接使用默认设置进行序列化，不需要再使用特殊的设置。
 
-为了简化这个过程，本库提供了包含数个用于序列化和反序列化 JSON 文本格式的静态方法的 `JsonComponentSerializer` 类。它与 `JsonSerializer` 类似，但已配置使用上述序列化设置。
+`ChatComponent.SerializerOptions` 已被弃用。
 
-```csharp
-// 使用本库提供的序列化功能
-using MineJason.Serialization;
-
-JsonComponentSerializer.Serialize(component);
-JsonComponentSerializer.Deserialize(json);
-```
-
-如果你需要自行序列化/反序列化，请一定要使用 `ChatComponent.SerializerOptions` 设置！
+目前尚不支持 `Newtonsoft.Json`，请勿使用该库进行序列化；请使用 `System.Text.Json`。
 
 ### 创建文本组件
 
