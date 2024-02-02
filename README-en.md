@@ -1,5 +1,7 @@
 # MineJason
 
+[简体中文](README.md) | English
+
 [![Nuget](https://img.shields.io/nuget/v/MineJason?style=flat-square&logo=nuget&label=%20)](https://www.nuget.org/packages/MineJason)
 [![GitLab Last Commit](https://img.shields.io/gitlab/last-commit/WithLithum%2FMineJason?style=flat-square)](https://gitlab.com/WithLithum/MineJason/-/commits/trunk?ref_type=heads)
 [![AppVeyor Build](https://img.shields.io/appveyor/build/WithLithum/minejason?style=flat-square&logo=appveyor&logoColor=white&label=%20)](https://ci.appveyor.com/project/WithLithum/minejason)
