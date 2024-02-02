@@ -24,9 +24,9 @@ MineJason 提供支持使用 System.Text.Json 序列化和反序列化的原始 
 
 ### 序列化和反序列化
 
-从 0.3.1-alpha 开始，序列化时可以直接使用默认设置进行序列化，不需要再使用特殊的设置。
+从 0.3.1-alpha 开始，可以直接序列化 `ChatComponent` 等类，不需要再使用特殊的设置。
 
-`ChatComponent.SerializerOptions` 已被弃用。
+`ChatComponent.SerializerOptions` 已被弃用并移除，请勿再使用该类；`JsonComponentSerializer` 工具类也已经弃用。
 
 目前尚不支持 `Newtonsoft.Json`，请勿使用该库进行序列化；请使用 `System.Text.Json`。
 
@@ -42,7 +42,7 @@ MineJason 提供支持使用 System.Text.Json 序列化和反序列化的原始 
 
 您可以通过合并请求的方式向本库提交代码。但如果改动较大，请先创建相关议题讨论。
 
-请同时按需添加或者更新对应的单元测试，并且查看[贡献者指南](CONTRIBUTING.md)中本项目的代码细则。
+请同时按需添加或者更新对应的单元测试。请先阅读[贡献者指南](CONTRIBUTING.md)。
 
 ## 鸣谢
 

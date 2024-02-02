@@ -1,162 +1,170 @@
-# Contribution Guide
+# Contributing Guide
 
-Thanks for your interest on this project. Before making code contributions, please take time to review the conventions as set out below.
+Thank you for investing your time in contributing to our project!
 
-The key words "DO, DO NOT", "AVOID" and "CONSIDER" are to be interpreted in the same as same such words in [Framework Design Guidelines](https://learn.microsoft.com/en-us/dotnet/standard/design-guidelines).
+Read the [Code of Conduct](CODE_OF_CONDUCT.md) of this project; it is the ground rules apply to this project, and it is enforced to keep this community approachable and respectable.
 
-## Code Style Guidelines
+In this guide you will get an overview of the contribution workflow from reporting issues to contributing code by creating Merge Requests.
 
-### Naming
+Use the table of contents icon on the top left corner of this document to get to a specific section of this guide quickly.
 
-**✔️ DO** prefix interface names with the letter `I`.
+## Important
 
-If you encounter cases where the word you use for the interface name begins with I then use two I. For example, `IInstance`.
+This is particularly important if you are seeing this from GitHub.
 
-**✔️ DO** use Pascal Casing for type names, namespace names, as well as method and property names, and constant and non-private field names.
+As GitHub MineJason repository is just a mirror, it does not accept contributions. Please refrain from trying to submit Pull Requests to it because it will most likely be ignored.
 
-**✔️ DO** prefix private field names with an underscore.
+Please use [GitLab Merge Requests](https://gitlab.com/WithLithum/MineJason/-/merge-requests) and [GitLab Issues](https://gitlab.com/WithLithum/MineJason/-/issues) for contributions.
 
-**✔️ CONSIDER** using adjectives for interface names.
+## Question of Problem?
 
-Use verbs if there is no adjective available for the concept. 
+Issues should not be use to submit general questions.
 
-**❌ DO NOT** use hungarian notations.
+If you have questions about how to use MineJason or another general question related to it, please view the [our wiki](https://gitlab.com/WithLithum/MineJason/-/wikis/home) (WIP), or considering joining our:
 
-**❌ DO NOT** prefix nor postfix any symbol name with dollar sign (`$`).
+- Discord server: [Click to join](https://discord.gg/UFfWb9Rj)
+- QQ group: [Click to join (Chinese)](https://qm.qq.com/cgi-bin/qm/qr?k=reIRa9w7-vMBemqim7NdREX7vNKirNFo&jump_from=webapi&authKey=UnyZ5LWlfV8g8VCEffm2CShHd9PVPHP5CaXVbxkF2wwZj6FtXGEU/M7jRbU4e/K2)
 
-**❌ DO NOT** use non-English characters in names.
+## Reporting Issues
 
-As C# is designed in English and is meant to be written in English, using any other language than English makes it feel out of place, and it can induce time cost as you need to switch between input methods.
+### Before reporting
 
-**❌ DO NOT** use romantised words unless describing a foreign concept and romantised word is the standard or popular way of referring to it.
+Please search for existing _open_ issues that describes the issue you want to report. Please do not search for the whole issue description but rather look for keywords. Duplicate issues will be closed and linked to the currently tracked issue for the problem/request.
 
-For example, Hanyu shall not be used to refer to Chinese language; but using Pinyin to refer to Chinese Pinyin is absolutely okay.
+If an issue was previously reported and resolved, but it appeared again, please make a new report.
 
-**❌ DO NOT** postfix type names with `Enum` or `Flags`.
+### When reporting
 
-If you are naming a flags enum which is used to modify the behaivour of some API, use `Options` or similar.
+It is best that you would use the relevant issue template for the type of the issue you are reporting. You should use standard Chinese (as used) or English, and this does not include dialects.
 
-**❌ DO NOT** prefix enum names with the letter `E`.
+Both Chinese and English versions of issue templates are provided. Use them appropriately, and please, do not mix Chinese template with English content, etc.
 
-For example, use `VehicleOptions` rather than `EVehicleOptions`.
+If you plan to work on the issue, please specify in the description. However, if you specify you plan to work on it but no Merge Requests have been submitted by you for a reasonably long period of time, we may end up choosing to open the issue for other contributions.
 
-### General Styles
+Below are the specific guidelines for each type of issue reports.
 
-**✔️ DO use file-scoped namespaces.**
+#### Bug Reports
 
-Unless in circumstances you need to use a single `.cs` file library, you must use file-scoped namespaces. However, you should avoid those libraries. Use NuGet whenever possible.
+Please describe the following things in your bug report as detailed as you can describe it:
 
-**✔️ DO** place imports after file-scoped namespaces.
+- exact expected behaviour (the behaviour you would like to see)
+- actual behaviour (what actually happened)
+- steps to reproduce the issue
 
-**✔️ DO** fully qualify names of imports inside file-scoped namespaces.
+A proof of concept code would be the most helpful if it is am API behaviour issue.
 
-By default, ReSharper would shorten names inside file-scoped namespaces. The`editorconfig` file have been modified to make ReSharper do the exactly opposite, however if you choose to override `editorconfig` options with ReSharper options, you will have to manually set `Prefer fully qualified using name at nested scope﻿` to `true`.
+Please make one issue for each bug, rather than reporting multiple bugs in one report.
 
-**✔️ DO** use Allman style curly braces.
+#### Feature Request
 
-**✔️ DO** indent with four spaces without tabs.
+Please, when submitting feature requests:
 
-**✔️ DO** follow Framework Design Guidelines; if you don't want to buy it or don't want to read it, [here is a digest of it that is useful](https://github.com/dotnet/runtime/blob/main/docs/coding-guidelines/framework-design-guidelines-digest.md).
+- Describe what is the feature, and what does it do?
+- What is the intended use case of the feature?
+- Are there any workarounds for the lacking of the feature?
 
-**✔️ CONSIDER** using `ReadOnlySpan<char>` instead of `string` for parameters on methods that iterates such string parameter.
+The feature request will be evaluated and processed accordingly. However, do note that if the intended use case of the feature is not acceptable, then the feature request will be rejected. See [the Intended Use Cases wiki page](https://gitlab.com/WithLithum/MineJason/-/wikis/English/Development/Intended-Use-Case).
 
-**❌ AVOID** using `this.` unless absolutely necessary.
+Please make an issue for each feature request rather than making several feature requests into a single issue.
 
-### Types
+#### Enhancement Request
 
-**✔️ DO** prefix interface names with the letter `I`.
+Please, when submitting enhancement requests, describe what enhancement is needed?
 
-**✔️ DO** use Pascal Casing for type names.
+Enhancement requests should not involve making breaking changes. If the requests involves breaking changes it will be evaluated for inclusion in the next major version.
 
-### Type Members
+### After reporting
 
-**✔️ DO** place `readonly` after `static`.
+Please note that all issues will be prioritised based on its urgency and importance.
 
-**❌ DO NOT** declare write-only properties.
+Usually, critical bugs (like serious regressions, unexpected exceptions or major API unintended breaking change) will be fixed first.
 
-If you need to expose a value that is set-only, use a method.
+## Submitting Code Contributions
 
-### Unit Tests
+The procedure for submitting code contributions is straight-forward,
+but there are some considerations when submitting new features to the MineJason project.
 
-**✔️ CONSIDER** use underscore to separate the subject being tested and the condition tested with, in names of Unit Test methods.
+By submitting code contributions you agree to the [Developer Certificate of Origin](#developer-certificate-of-origin). You are not necessary to add a `Signed-off-by` comment in your commits.
 
-## Inline XML documentation guideline
+### Intended Use Cases
 
-## Types
+The intended use cases is to aid in programmatic creation of Raw JSON text format serialised text components to be used with "Notchian" Minecraft: Java Edition software.
 
-**✔️ DO** describe the responsiblities of a type in its summary.
+Other use cases may be accepted but are not officially planned. See [the Intended Use Cases wiki page](https://gitlab.com/WithLithum/MineJason/-/wikis/English/Development/Intended-Use-Case).
 
-**✔️ CONSIDER** using third-person singular present indicative for the first word in type summaries.
+### DO and DO NOTS
 
-For example, "provides" and "represents".
+Please do:
 
-## Constructors
+- **DO** follow the [style guide](docs/STYLEGUIDE.md).
+- **DO** give priority to the current style of the project or file you're changing even if it diverges from the general guidelines.
+- **DO** include tests when adding new features. When fixing bugs, start with adding a test that highlights how the current behavior is broken.
+- **DO** keep the discussions focused. When a new or related topic comes up it's often better to create new issue than to side track the discussion.
+- **DO** clearly state on an issue that you are going to take on implementing it.
 
-**✔️ DO** use the `Initializes a new instance of the <see cref="type name" /> (type kind).` format for constructor summaries.
+Please do not:
 
-For example:
+- **DO NOT** make PRs for style changes.
+- **DO NOT** surprise us with big merge requests. Instead, file an issue and start a discussion so we can agree on a direction before you invest a large amount of time.
+- **DO NOT** submit PRs that alter licensing related files or headers. If you believe there's a problem with them, file an issue and we'll be happy to discuss it.
 
-> Initializes a new instance of the `Panaroid` class.
+### Breaking Changes
 
-**❌ AVOID** using the word `Create` or `Creates`, or any declensions of it.
+Contributions with breaking changes are accepted, but:
 
-It its reported that some analysers would enforce `Creates` rather than `Initializes a new instance of...`. In this case, you would want to disable this analyser or the particular rule that enforces `Creates`.
+- It will only be included for the next major version (in `0.x` this means immediate inclusion)
+- It will be subject to review on API
+- It requires proposal prior to Merge Request being created.
 
-### Properties
+It is best that you open an issue with the proposed changes for breaking changes.
 
-**✔️ DO** prefix`Gets or sets...` for read-write property summaries, and prefix `Gets...` for read-only property summaries.
+### Submitting Merge Requests
 
-**✔️ DO** prefix `Gets or sets a value indicating whether...` for read-write boolean properties, and prefix `Gets a value indicating whether...` for read-only boolean properties.
+Prior to submitting merge requests for your first time as a beginner, please see [the GitLab guide on Merge Requests](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html).
 
-## Fields
+If you are not yet ready for the Merge Request to be reviewed and merged please make sure to make the Merge Request as a [Draft Merge Request](https://docs.gitlab.com/ee/user/project/merge_requests/drafts.html).
 
-**❌ AVOID** using `Gets or sets...` or similar prefixes for field summaries.
+Please don't surprise us with big merge requests. Instead, file an issue and start a discussion so we can agree on a direction before you invest a large amount of time.
 
-## Commit Guidelines
+## Developer Certificate of Origin
 
-**✔️ DO** follow the Conventional Commits standard:
+By submitting code contributions you agree to the Developer Certificate of Origin:
 
-https://www.conventionalcommits.org/en/v1.0.0/
+```plain
+Developer Certificate of Origin
+Version 1.1
 
-For external contributions this is not absolutely necessary, but please for the sake of readability, use the convention.
+Copyright (C) 2004, 2006 The Linux Foundation and its contributors.
 
-The type of the commit may be one of the following:
+Everyone is permitted to copy and distribute verbatim copies of this
+license document, but changing it is not allowed.
 
-- 'build': Modification of Solution File (.sln), Project File (.csproj), Build Properties (.props), and other MSBuild files. Not including adding or removing NuGet packages as dependencies.
 
-- 'chore': Changes that not adds feature nor removing feature, and is not associated with an issue. Misc works, etc.
+Developer's Certificate of Origin 1.1
 
-- 'ci': Changes to CI configuration files and scripts.
+By making a contribution to this project, I certify that:
 
-- 'docs': Documentation only changes (that includes README and other files).
+(a) The contribution was created in whole or in part by me and I
+    have the right to submit it under the open source license
+    indicated in the file; or
 
-- 'feat': New feature.
+(b) The contribution is based upon previous work that, to the best
+    of my knowledge, is covered under an appropriate open source
+    license and I have the right under that license to submit that
+    work with modifications, whether created in whole or in part
+    by me, under the same open source license (unless I am
+    permitted to submit under a different license), as indicated
+    in the file; or
 
-- 'fix': Bug fixes.
+(c) The contribution was provided directly to me by some other
+    person who certified (a), (b) or (c) and I have not modified
+    it.
 
-- 'pref': Performance improvements and fixes.
+(d) I understand and agree that this project and the contribution
+    are public and that a record of the contribution (including all
+    personal information I submit with it, including my sign-off) is
+    maintained indefinitely and may be redistributed consistent with
+    this project or the open source license(s) involved.
+```
 
-- 'refactor': A code change that neither fixes a bug nor adds a feature.
-
-- 'style': Changes that do not affect the logic and the meaning of code.
-
-- 'test': Solely add, modify or remove tests.
-
-**✔️ DO** use `revert` commit type and make the description as `Revert commit <commit hash>` if the commit reverts a commit.
-
-The scope of the commits shall be one of the following:
-
-- 'events': Hover and Click events.
-- 'component': Chat component classes, ChatColor classes.
-- 'serialization': Serialization namespace.
-- 'misc': Generic documentation and other parts.
-
-**✔️ CONSIDER** not specifing scope if you are modifing `README.md` and `CONTRIBUTING.md`.
-
-## References
-
-- [Alibaba Java Coding Guidelines](https://alibaba.github.io/Alibaba-Java-Coding-Guidelines)
-
-- [Framework Design Guidelines Digest](https://github.com/dotnet/runtime/blob/main/docs/coding-guidelines/framework-design-guidelines-digest.md)
-
-- [Cheat Sheet: Best practices for writing XML documentation in C#](https://blog.rsuter.com/best-practices-for-writing-xml-documentation-phrases-in-c/)
+This project does not require that you add `Signed-off-by` to your Git commits; contributing anything already signifies that you agrees with the DCO.
