@@ -36,6 +36,13 @@ public abstract class BaseNbtChatComponent : ChatComponent, IEquatable<BaseNbtCh
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     public bool Interpret { get; set; }
 
+    /// <summary>
+    /// Gets or sets the component as the separator between multiple values.
+    /// </summary>
+    [JsonPropertyName("separator")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public ChatComponent? Separator { get; set; }
+
     /// <inheritdoc/>
     public override bool Equals(ChatComponent? other)
     {
