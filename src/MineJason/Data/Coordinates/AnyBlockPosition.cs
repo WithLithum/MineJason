@@ -99,4 +99,17 @@ public readonly struct AnyBlockPosition : IEquatable<AnyBlockPosition>
             return WorldPosition.GetHashCode();
         }
     }
+
+    /// <inheritdoc/>
+    public override string ToString()
+    {
+        if (IsLocal)
+        {
+            return LocalPosition!.ToString()!;
+        }
+        else
+        {
+            return WorldPosition!.ToString()!;
+        }
+    }
 }

@@ -27,13 +27,6 @@ internal class AnyBlockPositionConverter : JsonConverter<AnyBlockPosition>
 
     public override void Write(Utf8JsonWriter writer, AnyBlockPosition value, JsonSerializerOptions options)
     {
-        if (value.IsLocal)
-        {
-            writer.WriteStringValue(value.LocalPosition.ToString());
-        }
-        else
-        {
-            writer.WriteStringValue(value.WorldPosition.ToString());
-        }
+        writer.WriteStringValue(value.ToString());
     }
 }

@@ -117,6 +117,16 @@ public struct LocalBlockPosition
     /// <inheritdoc/>
     public override readonly string ToString()
     {
-        return $"^{X} ^{Y} ^{Z}";
+        static string ToComponentString(int value)
+        {
+            if (value == 0)
+            {
+                return "^";
+            }
+            
+            return string.Format(CultureInfo.InvariantCulture, "^{0}", value.ToString(CultureInfo.InvariantCulture));
+        }
+
+        return $"{ToComponentString(X)} {ToComponentString(Y)} {ToComponentString(Z)}";
     }
 }

@@ -238,6 +238,11 @@ public readonly struct BlockPositionComponent : IEquatable<BlockPositionComponen
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(from);
 
+        if (from == "~")
+        {
+            return new(0, true);
+        }
+
         if (from.StartsWith('~'))
         {
             return new(int.Parse(from[1..], CultureInfo.InvariantCulture),
@@ -255,6 +260,18 @@ public readonly struct BlockPositionComponent : IEquatable<BlockPositionComponen
     /// <returns>The string.</returns>
     public override string ToString()
     {
-        return IsRelative ? $"~{Value}" : Value.ToString(CultureInfo.InvariantCulture);
+        if (IsRelative)
+        {
+            if (Value == 0)
+            {
+                return "~";
+            }
+            else
+            {
+                return $"~{Value}";
+            }
+        }
+
+        return Value.ToString(CultureInfo.InvariantCulture);
     }
 }
