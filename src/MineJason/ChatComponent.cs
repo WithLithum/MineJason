@@ -240,7 +240,24 @@ public abstract class ChatComponent(string? type) : IEquatable<ChatComponent>
     #endregion
 
     /// <inheritdoc />
-    public abstract override int GetHashCode();
+    public override int GetHashCode()
+    {
+        var hashCode = new HashCode();
+
+        hashCode.Add(Type);
+        hashCode.Add(Bold);
+        hashCode.Add(Italic);
+        hashCode.Add(Underline);
+        hashCode.Add(Strikethrough);
+        hashCode.Add(Color);
+        hashCode.Add(Font);
+        hashCode.Add(Insertion);
+        hashCode.Add(ClickEvent);
+        hashCode.Add(HoverEvent);
+        hashCode.Add(Extra);
+
+        return hashCode.ToHashCode();
+    }
 
     /// <inheritdoc />
     public override bool Equals(object? obj)

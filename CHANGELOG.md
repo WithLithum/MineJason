@@ -10,10 +10,12 @@ This release contains breaking changes.
 
 - Added `NbtProvider.Empty` readonly value.
 - Added `ChatColor` utility class and `ChatColor.FromColorCode` utility method.
+- Added split up NBT chat component types in `MineJason.Components` namespace.
 
 ### Changed
 
 - Added `JsonIgnore` and `JsonPropertyName` attributes properly to all JSON serializable types.
+- Added a default hash function to `ChatComponent`.
 - `JsonComponentSerializer` is now deprecated.
 
 ### Removed
