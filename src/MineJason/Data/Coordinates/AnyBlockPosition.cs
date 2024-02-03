@@ -4,11 +4,13 @@
 
 namespace MineJason.Data.Coordinates;
 
-using System.Diagnostics.CodeAnalysis;
+using MineJason.Serialization.TextJson;
+using System.Text.Json.Serialization;
 
 /// <summary>
 /// Represents a block position.
 /// </summary>
+[JsonConverter(typeof(AnyBlockPositionConverter))]
 public readonly struct AnyBlockPosition : IEquatable<AnyBlockPosition>
 {
     /// <summary>

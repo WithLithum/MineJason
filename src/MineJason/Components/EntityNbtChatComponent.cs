@@ -17,9 +17,9 @@ public sealed class EntityNbtChatComponent : BaseNbtChatComponent, IEquatable<En
     /// <summary>
     /// Initializes a new instance of the <see cref="EntityNbtChatComponent"/> class.
     /// </summary>
-    /// <param name="path">The NBT path.</param>
     /// <param name="entity">The entity to source NBT from.</param>
-    public EntityNbtChatComponent(string path, EntitySelector entity) : base(NbtDataSource.Entity, path)
+    /// <param name="path">The NBT path.</param>
+    public EntityNbtChatComponent(EntitySelector entity, string path) : base(path)
     {
         Entity = entity;
     }
@@ -48,5 +48,11 @@ public sealed class EntityNbtChatComponent : BaseNbtChatComponent, IEquatable<En
     public override int GetHashCode()
     {
         return HashCode.Combine(base.GetHashCode(), Path.GetHashCode(), Entity.GetHashCode());
+    }
+
+    /// <inheritdoc/>
+    public override string ToString()
+    {
+        return $"[entity={Entity},nbt={Path}]";
     }
 }

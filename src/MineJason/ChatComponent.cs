@@ -7,8 +7,10 @@ namespace MineJason;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using JetBrains.Annotations;
+using MineJason.Components;
 using MineJason.Components.Builders;
 using MineJason.Data;
+using MineJason.Data.Coordinates;
 using MineJason.Events;
 using MineJason.Events.Hover;
 using MineJason.Serialization.TextJson;
@@ -194,6 +196,42 @@ public abstract class ChatComponent(string? type) : IEquatable<ChatComponent>
     public static KeybindComponentBuilder CreateKeybind()
     {
         return new KeybindComponentBuilder();
+    }
+
+    /// <summary>
+    /// Creates an NBT component with a block as the source.
+    /// </summary>
+    /// <param name="block">The position of the block.</param>
+    /// <param name="path">The NBT path.</param>
+    /// <returns>The created component.</returns>
+    [PublicAPI]
+    public static ChatComponent CreateNbt(AnyBlockPosition block, string path)
+    {
+        return new BlockNbtChatComponent(block, path);
+    }
+
+    /// <summary>
+    /// Creates an NBT component with an entity as the source.
+    /// </summary>
+    /// <param name="entity">The selector that selects a single entity as a source.</param>
+    /// <param name="path">The NBT path.</param>
+    /// <returns>The created component.</returns>
+    [PublicAPI]
+    public static ChatComponent CreateNbt(EntitySelector entity, string path)
+    {
+        return new EntityNbtChatComponent(entity, path);
+    }
+
+    /// <summary>
+    /// Creates an NBT component with a storage as the source.
+    /// </summary>
+    /// <param name="storage">The identifier of the storage.</param>
+    /// <param name="path">The NBT path.</param>
+    /// <returns>The created component.</returns>
+    [PublicAPI]
+    public static ChatComponent CreateNbt(ResourceLocation storage, string path)
+    {
+        return new StorageNbtChatComponent(storage, path);
     }
 
     #endregion

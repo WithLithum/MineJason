@@ -16,19 +16,11 @@ public abstract class BaseNbtChatComponent : ChatComponent, IEquatable<BaseNbtCh
     /// <summary>
     /// Initializes a new instance of the <see cref="BaseNbtChatComponent"/> class.
     /// </summary>
-    /// <param name="source">The data source.</param>
     /// <param name="path">The NBT path.</param>
-    protected BaseNbtChatComponent(NbtDataSource source, string path) : base("nbt")
+    protected BaseNbtChatComponent(string path) : base("nbt")
     {
-        DataSource = source;
         Path = path;
     }
-
-    /// <summary>
-    /// Gets the type of the data source.
-    /// </summary>
-    [JsonPropertyName("source")]
-    public NbtDataSource DataSource { get; }
 
     /// <summary>
     /// Gets or sets the path to the NBT value to interpert.
@@ -47,7 +39,7 @@ public abstract class BaseNbtChatComponent : ChatComponent, IEquatable<BaseNbtCh
     /// <inheritdoc/>
     public override bool Equals(ChatComponent? other)
     {
-        return base.Equals(other);
+        return base.Equals(other) && other is BaseNbtChatComponent component && component.Equals(this);
     }
 
     /// <inheritdoc/>
@@ -55,7 +47,6 @@ public abstract class BaseNbtChatComponent : ChatComponent, IEquatable<BaseNbtCh
     {
         return other is not null
             && base.Equals(other)
-            && other.DataSource == this.DataSource
             && other.Path == this.Path
             && other.Interpert == this.Interpert;
     }
@@ -72,6 +63,6 @@ public abstract class BaseNbtChatComponent : ChatComponent, IEquatable<BaseNbtCh
     /// <returns>The hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(base.GetHashCode(), DataSource.GetHashCode(), Path.GetHashCode());
+        return HashCode.Combine(base.GetHashCode(), Path.GetHashCode());
     }
 }

@@ -1,4 +1,6 @@
 ﻿namespace MineJason.Serialization.TextJson;
+
+using MineJason.Components;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Text.Json.Serialization;
@@ -44,7 +46,7 @@ public class ChatComponentConverter : JsonConverter<ChatComponent>
                     return DeserializeComponent<KeybindChatComponent>(dom);
 
                 case "nbt":
-                    return DeserializeComponent<NbtChatComponent>(dom);
+                    return DeserializeNbtComponent(dom);
 
                 default:
                     throw new NotSupportedException();
@@ -77,9 +79,31 @@ public class ChatComponentConverter : JsonConverter<ChatComponent>
             return DeserializeComponent<KeybindChatComponent>(dom);
         }
 
-        if (dom.RootElement.TryGetProperty("path", out _))
+        if (dom.RootElement.TryGetProperty("nbt", out _))
         {
-            return DeserializeComponent<NbtChatComponent>(dom);
+            return DeserializeNbtComponent(dom);
+        }
+
+        throw new NotSupportedException();
+    }
+
+    private static ChatComponent? DeserializeNbtComponent(JsonDocument document)
+    {
+        var element = document.RootElement;
+
+        if (element.TryGetProperty("block", out _))
+        {
+            return DeserializeComponent<BlockNbtChatComponent>(document);
+        }
+
+        if (element.TryGetProperty("entity", out _))
+        {
+            return DeserializeComponent<EntityNbtChatComponent>(document);
+        }
+
+        if (element.TryGetProperty("storage", out _))
+        {
+            return DeserializeComponent<StorageNbtChatComponent>(document);
         }
 
         throw new NotSupportedException();

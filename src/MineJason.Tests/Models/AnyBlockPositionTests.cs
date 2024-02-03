@@ -5,6 +5,7 @@
 namespace MineJason.Tests.Models;
 
 using MineJason.Data.Coordinates;
+using System.Text.Json.Serialization;
 
 public class AnyBlockPositionTests
 {

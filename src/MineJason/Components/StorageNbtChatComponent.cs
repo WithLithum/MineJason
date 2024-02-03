@@ -6,6 +6,7 @@ namespace MineJason.Components;
 
 using MineJason.Data;
 using System;
+using System.Text.Json.Serialization;
 
 /// <summary>
 /// Represents an NBT chat component that sources the value from a storage. This class cannot be inherited.
@@ -15,23 +16,24 @@ public sealed class StorageNbtChatComponent : BaseNbtChatComponent, IEquatable<S
     /// <summary>
     /// Initializes a new instance of the <see cref="StorageNbtChatComponent"/> class.
     /// </summary>
-    /// <param name="storageId">The ID of the storage.</param>
+    /// <param name="storage">The ID of the storage.</param>
     /// <param name="path">The NBT path.</param>
-    public StorageNbtChatComponent(ResourceLocation storageId, string path) : base(NbtDataSource.Storage, path)
+    public StorageNbtChatComponent(ResourceLocation storage, string path) : base(path)
     {
-        StorageId = storageId;
+        Storage = storage;
     }
 
     /// <summary>
     /// Gets or sets the ID of the storage to source NBT from.
     /// </summary>
-    public ResourceLocation StorageId { get; set; }
+    [JsonPropertyName("storage")]
+    public ResourceLocation Storage { get; set; }
     
     /// <inheritdoc/>
     public bool Equals(StorageNbtChatComponent? other)
     {
         return other is not null && base.Equals(other)
-            && other.StorageId.Equals(StorageId);
+            && other.Storage.Equals(Storage);
     }
 
     /// <inheritdoc />
@@ -43,6 +45,12 @@ public sealed class StorageNbtChatComponent : BaseNbtChatComponent, IEquatable<S
     /// <inheritdoc/>
     public override int GetHashCode()
     {
-        return HashCode.Combine(base.GetHashCode(), StorageId.GetHashCode());
+        return HashCode.Combine(base.GetHashCode(), Storage.GetHashCode());
+    }
+
+    /// <inheritdoc/>
+    public override string ToString()
+    {
+        return $"[storage={Storage},nbt={Path}]";
     }
 }

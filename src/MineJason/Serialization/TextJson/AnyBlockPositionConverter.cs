@@ -9,8 +9,12 @@ using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-internal class AnyBlockPositionConverter : JsonConverter<AnyBlockPosition>
+/// <summary>
+/// Provides JSON conversion for <see cref="AnyBlockPosition"/>.
+/// </summary>
+public class AnyBlockPositionConverter : JsonConverter<AnyBlockPosition>
 {
+    /// <inheritdoc/>
     public override AnyBlockPosition Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         var value = reader.GetString() ?? throw new JsonException();
@@ -25,6 +29,7 @@ internal class AnyBlockPositionConverter : JsonConverter<AnyBlockPosition>
         }
     }
 
+    /// <inheritdoc/>
     public override void Write(Utf8JsonWriter writer, AnyBlockPosition value, JsonSerializerOptions options)
     {
         writer.WriteStringValue(value.ToString());

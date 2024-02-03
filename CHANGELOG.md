@@ -27,6 +27,7 @@ This release contains breaking changes.
 ### Fixed
 
 - Fixed definition error in `show_item` hover event that renders `count` and `tag` required, and incorrectly serializes `tag` as `nbt`.
+- Fixed an issue resulted in `NotSupportedException` being thrown when deserializing NBT components.
 
 ## [v0.3.0-alpha]
 

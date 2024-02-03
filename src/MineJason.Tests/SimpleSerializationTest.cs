@@ -1,6 +1,7 @@
 namespace MineJason.Tests;
 using System.Text.Json;
 using MineJason.Data;
+using MineJason.Data.Coordinates;
 using MineJason.Events;
 using MineJason.Events.Hover;
 
@@ -77,6 +78,57 @@ public class SimpleSerializationTests
 
         Assert.That(deserialized,
             Is.EqualTo(ChatComponent.CreateSelector(new EntitySelector(EntitySelectorKind.AllPlayers), ChatComponent.CreateText(";"))));
+    }
+
+    [Test]
+    public void StorageNbtComponent_Serialize()
+    {
+        Assert.That(JsonSerializer.Serialize(ChatComponent.CreateNbt(new ResourceLocation("mine", "storage"), "path.to.NBT")),
+            Is.EqualTo("{\"storage\":\"mine:storage\",\"nbt\":\"path.to.NBT\"}"));
+    }
+
+
+    [Test]
+    public void StorageNbtComponent_Deserialize()
+    {
+        var deserialized = JsonSerializer.Deserialize<ChatComponent>("{\"storage\":\"mine:storage\",\"nbt\":\"path.to.NBT\"}");
+
+        Assert.That(deserialized,
+            Is.EqualTo(ChatComponent.CreateNbt(new ResourceLocation("mine", "storage"), "path.to.NBT")));
+    }
+
+    [Test]
+    public void BlockNbtComponent_Serialize()
+    {
+        Assert.That(JsonSerializer.Serialize(ChatComponent.CreateNbt(new AnyBlockPosition(new BlockPosition(12, 12, 12)), "path.to.NBT")),
+            Is.EqualTo("{\"block\":\"12 12 12\",\"nbt\":\"path.to.NBT\"}"));
+    }
+
+
+    [Test]
+    public void BlockNbtComponent_Deserialize()
+    {
+        var deserialized = JsonSerializer.Deserialize<ChatComponent>("{\"block\":\"12 12 12\",\"nbt\":\"path.to.NBT\"}");
+
+        Assert.That(deserialized,
+            Is.EqualTo(ChatComponent.CreateNbt(new AnyBlockPosition(new BlockPosition(12, 12, 12)), "path.to.NBT")));
+    }
+
+    [Test]
+    public void EntityNbtComponent_Serialize()
+    {
+        Assert.That(JsonSerializer.Serialize(ChatComponent.CreateNbt(new EntitySelector(EntitySelectorKind.Executor), "path.to.NBT")),
+            Is.EqualTo("{\"entity\":\"@s\",\"nbt\":\"path.to.NBT\"}"));
+    }
+
+
+    [Test]
+    public void EntityNbtComponent_Deserialize()
+    {
+        var deserialized = JsonSerializer.Deserialize<ChatComponent>("{\"entity\":\"@s\",\"nbt\":\"path.to.NBT\"}");
+
+        Assert.That(deserialized,
+            Is.EqualTo(ChatComponent.CreateNbt(new EntitySelector(EntitySelectorKind.Executor), "path.to.NBT")));
     }
 
     [Test]
