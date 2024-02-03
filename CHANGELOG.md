@@ -11,6 +11,7 @@ This release contains breaking changes.
 - Added `NbtProvider.Empty` readonly value.
 - Added `ChatColor` utility class and `ChatColor.FromColorCode` utility method.
 - Added split up NBT chat component types in `MineJason.Components` namespace.
+- Added support for block position.
 
 ### Changed
 

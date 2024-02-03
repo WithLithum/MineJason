@@ -1,0 +1,39 @@
+﻿// Copyright (c) WithLithum & contributors 2023-2024. All rights reserved.
+// Licensed under the GNU Lesser General Public License, either version 3 or 
+// (at your opinion) any later version.
+
+namespace MineJason.Serialization.TextJson;
+
+using MineJason.Data.Coordinates;
+using System;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+
+internal class AnyBlockPositionConverter : JsonConverter<AnyBlockPosition>
+{
+    public override AnyBlockPosition Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    {
+        var value = reader.GetString() ?? throw new JsonException();
+
+        if (value.Contains('^'))
+        {
+            return new(LocalBlockPosition.Parse(value));
+        }
+        else
+        {
+            return new(BlockPosition.Parse(value));
+        }
+    }
+
+    public override void Write(Utf8JsonWriter writer, AnyBlockPosition value, JsonSerializerOptions options)
+    {
+        if (value.IsLocal)
+        {
+            writer.WriteStringValue(value.LocalPosition.ToString());
+        }
+        else
+        {
+            writer.WriteStringValue(value.WorldPosition.ToString());
+        }
+    }
+}
