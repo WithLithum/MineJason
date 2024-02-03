@@ -18,6 +18,10 @@ using MineJason.Data;
 /// <param name="storage">The storage to read entity NBT values from.</param>
 /// <param name="separator">The separator to separate between multiple NBT files.</param>
 [PublicAPI]
+[Obsolete("This representation of NBT component is deprecated and no longer supported. Use new NBT components instead.",
+    true,
+    DiagnosticId = "MJS1001",
+    UrlFormat = "https://gitlab.com/WithLithum/MineJason/-/wikis/English/Components/NBT%20Components")]
 public sealed class NbtChatComponent(NbtDataSource source, string path, string? block, string? entity, string? storage, ChatComponent? separator = null)
     : ChatComponent("nbt"),
         IEquatable<NbtChatComponent>

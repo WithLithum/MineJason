@@ -32,9 +32,9 @@ public abstract class BaseNbtChatComponent : ChatComponent, IEquatable<BaseNbtCh
     /// Gets or stes a value indicating whether to attempt to interpert the NBT value retrieved
     /// as a raw JSON text component.
     /// </summary>
-    [JsonPropertyName("interpert")]
+    [JsonPropertyName("interpret")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    public bool Interpert { get; set; }
+    public bool Interpret { get; set; }
 
     /// <inheritdoc/>
     public override bool Equals(ChatComponent? other)
@@ -48,7 +48,7 @@ public abstract class BaseNbtChatComponent : ChatComponent, IEquatable<BaseNbtCh
         return other is not null
             && base.Equals(other)
             && other.Path == this.Path
-            && other.Interpert == this.Interpert;
+            && other.Interpret == this.Interpret;
     }
 
     /// <inheritdoc/>
