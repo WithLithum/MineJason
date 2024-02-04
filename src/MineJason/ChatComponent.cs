@@ -4,7 +4,6 @@
 
 namespace MineJason;
 
-using System.Text.Json;
 using System.Text.Json.Serialization;
 using JetBrains.Annotations;
 using MineJason.Components;
@@ -198,6 +197,16 @@ public abstract class ChatComponent(string? type) : IEquatable<ChatComponent>
         return new KeybindComponentBuilder();
     }
 
+    /// <summary>
+    /// Initiates the construction of an NBT chat component.
+    /// </summary>
+    /// <returns>The NBT chat component building initiator.</returns>
+    [PublicAPI]
+    public static NbtComponentBuilderFactory CreateNbt()
+    {
+        return new NbtComponentBuilderFactory();
+    }
+    
     /// <summary>
     /// Creates an NBT component with a block as the source.
     /// </summary>
