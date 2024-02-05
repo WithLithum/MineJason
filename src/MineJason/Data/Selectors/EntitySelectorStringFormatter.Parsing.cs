@@ -5,6 +5,9 @@
 namespace MineJason.Data.Selectors;
 
 using System.Globalization;
+using MineJason.Data.Selectors.Advancements;
+using MineJason.Exceptions;
+using MineJason.Utilities;
 
 public static partial class EntitySelectorStringFormatter
 {
@@ -153,6 +156,9 @@ public static partial class EntitySelectorStringFormatter
                     {
                         selector.Nbt.Include.Add(new NbtProvider(value));
                     }
+                    break;
+                case "advancements":
+                    ParseAdvancements(value, selector.Advancements);
                     break;
                 default:
                     throw new FormatException($"Unrecognised argument name {key}");
@@ -359,6 +365,50 @@ public static partial class EntitySelectorStringFormatter
             
             collection.Add(range);
             pairNumber++;
+        }
+    }
+
+    internal static IAdvancementCondition ParseCondition(string value)
+    {
+        if (value.StartsWith('{'))
+        {
+            if (!value.EndsWith('}')
+                || !CriterionAdvancementCondition.TryParse(value, out var result))
+            {
+                throw new FormatException("Invalid compound advancement condition!");
+            }
+
+            return result;
+        }
+
+        if (!SpecificValueUtil.TryParseLowerBoolean(value, out var boolean))
+        {
+            throw new FormatException("Invalid boolean advancement condition!");
+        }
+
+        return new BooleanAdvancementCondition(boolean);
+    }
+    
+    public static void ParseAdvancements(string value, SelectorAdvancementMatchCollection collection)
+    {
+        if (!value.StartsWith('{') || !value.EndsWith('}') || value.Length < 3)
+        {
+            throw new SelectorFormatException("Invalid advancement condition set format.", value);
+        }
+
+        var set = EntitySelectorParser.ParsePairSet(value[1..^2]);
+
+        foreach (var pair in set)
+        {
+            EntitySelectorParser.ParsePair(pair, out var name, out var conditionString);
+
+            if (!ResourceLocation.TryParse(pair, out var location))
+            {
+                throw new FormatException("Invalid advancement resource location!");
+            }
+            
+            collection.Add(new SelectorAdvancementMatch(location,
+                ParseCondition(conditionString)));
         }
     }
 }

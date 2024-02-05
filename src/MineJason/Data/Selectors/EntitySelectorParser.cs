@@ -6,6 +6,7 @@ namespace MineJason.Data.Selectors;
 
 using System.Globalization;
 using System.Text;
+using MineJason.Exceptions;
 
 /// <summary>
 /// Provides parsing service for entity target selectors.
@@ -28,42 +29,22 @@ public static class EntitySelectorParser
 
     public static IEnumerable<string> ParsePairSet(string from)
     {
-        var inBrace = false;
-
+        // TODO complete this rewriting
+        
         var list = new List<string>();
+
         var builder = new StringBuilder();
 
-        if (from.StartsWith(',') || from.EndsWith(','))
-        {
-            throw new FormatException("Pair set invalid.");
-        }
-        
+        var inFirstBrace = false;
+        var inSecondBrace = false;
+        var inValue = false;
+
         foreach (var ch in from)
         {
-            switch (ch)
-            {
-                case LeftBrace when inBrace:
-                    throw new FormatException("No double bracing!");
-                case LeftBrace:
-                    inBrace = true;
-                    break;
-                case RightBrace when !inBrace:
-                    throw new FormatException("Not even bracing yet!");
-                case RightBrace:
-                    inBrace = false;
-                    break;
-                case Comma when !inBrace:
-                    list.Add(builder.ToString());
-                    builder.Clear();
-                    continue;
-            }
+            if (!inFirstBrace)
             
             builder.Append(ch);
         }
-
-        list.Add(builder.ToString());
-        
-        return list;
     }
     
     public static EntitySelectorSortMode ParseSortMode(string value)
@@ -264,11 +245,6 @@ public static class EntitySelectorParser
                 inBrace = false;
             }
 
-            if (!inBrace && isValue && x == EqualSign)
-            {
-                throw new FormatException("Not a pair, but more than a pair!!!");
-            }
-
             builder.Append(x);
         }
 
@@ -284,7 +260,7 @@ public static class EntitySelectorParser
 
         value = builder.ToString();
     }
-
+    
     public static void ParseTeamsValue(string value, TeamSelector selector)
     {
         if (!value.StartsWith('!'))

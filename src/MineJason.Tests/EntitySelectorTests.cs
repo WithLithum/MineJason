@@ -2,6 +2,7 @@
 
 using MineJason.Data;
 using MineJason.Data.Selectors;
+using MineJason.Exceptions;
 
 public class EntitySelectorTests
 {
@@ -367,11 +368,64 @@ public class EntitySelectorTests
     }
     
     [Test]
+    public void Parser_ParseWithOneAdvancementCondition()
+    {
+        const string sampleString = "@a[advancements={adventure/kill_all_mobs={witch=true}}]";
+
+        Assert.That(EntitySelectorStringFormatter.ParseSelector(sampleString).ToString(),
+            Is.EqualTo(sampleString));
+    }
+    
+    [Test]
+    public void Parser_AdvancementIncomplete()
+    {
+        const string sampleString = "@a[advancements={adventure/kill_all_mobs={witch=true}]";
+
+        Assert.Throws<SelectorFormatException>(() => EntitySelectorStringFormatter.ParseSelector(sampleString));
+    }
+    
+    [Test]
+    public void Parser_ParseWithTwoAdvancementConditions()
+    {
+        const string sampleString = "@a[advancements={adventure/kill_all_mobs={witch=true},story/form_obsidian=false}]";
+
+        Assert.That(EntitySelectorStringFormatter.ParseSelector(sampleString).ToString(),
+            Is.EqualTo(sampleString));
+    }
+    
+    [Test]
+    public void Parser_ParseWithOneAdvancementCondition_MultipleCriterion()
+    {
+        const string sampleString = "@a[advancements={adventure/kill_all_mobs={witch=true,zombie=false,skeleton=true}]";
+
+        Assert.That(EntitySelectorStringFormatter.ParseSelector(sampleString).ToString(),
+            Is.EqualTo(sampleString));
+    }
+    
+    [Test]
     public void Parser_ParseWithMultipleNbtConditions()
     {
         const string sampleString = "@a[nbt={Condition:1b},nbt=!{NonCondition:2b}]";
 
         Assert.That(EntitySelectorStringFormatter.ParseSelector(sampleString).ToString(),
             Is.EqualTo(sampleString));
+    }
+
+    [Test]
+    public void Parser_SetWithDoubleBracing()
+    {
+        Assert.DoesNotThrow(() =>
+        {
+            EntitySelectorParser.ParsePairSet("advancements={adventure/kill_all_mobs={witch=true}}");
+        });
+    }
+    
+    [Test]
+    public void Parser_SetWithDoubleBracingAndMultiples()
+    {
+        Assert.DoesNotThrow(() =>
+        {
+            EntitySelectorParser.ParsePairSet("advancements={adventure/kill_all_mobs={witch=true},adventure/kill_all_mobs={zombie=false}}");
+        });
     }
 }

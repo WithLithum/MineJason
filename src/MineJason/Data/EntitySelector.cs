@@ -7,6 +7,7 @@ namespace MineJason.Data;
 using System.Text.Json.Serialization;
 using JetBrains.Annotations;
 using MineJason.Data.Selectors;
+using MineJason.Data.Selectors.Advancements;
 using MineJason.Serialization.TextJson;
 
 /// <summary>
@@ -109,6 +110,11 @@ public sealed class EntitySelector(EntitySelectorKind kind) : IEquatable<EntityS
     /// <c>nbt</c> parameter.
     /// </summary>
     public SelectorNbtMatch Nbt { get; } = new();
+
+    /// <summary>
+    /// Gets the advancement conditions that a player must fulfill to be selected.
+    /// </summary>
+    public SelectorAdvancementMatchCollection Advancements { get; } = [];
 
     /// <inheritdoc />
     public override bool Equals(object? obj)
