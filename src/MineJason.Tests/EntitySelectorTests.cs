@@ -387,7 +387,7 @@ public class EntitySelectorTests
     [Test]
     public void Parser_ParseWithTwoAdvancementConditions()
     {
-        const string sampleString = "@a[advancements={minecraft:adventure/kill_all_mobs={witch=true},story/form_obsidian=false}}]";
+        const string sampleString = "@a[advancements={minecraft:adventure/kill_all_mobs={witch=true},minecraft:story/form_obsidian=false}]";
 
         Assert.That(EntitySelectorStringFormatter.ParseSelector(sampleString).ToString(),
             Is.EqualTo(sampleString));

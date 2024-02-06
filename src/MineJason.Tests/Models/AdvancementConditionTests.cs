@@ -30,19 +30,19 @@ public class AdvancementConditionTests
     [Test]
     public void CriterionCondition_Parse_SuccessOnValid()
     {
-        Assert.That(CriterionAdvancementCondition.TryParse("rigid=true,none=false", out _));
+        Assert.That(CriterionAdvancementCondition.TryParse("{rigid=true,none=false}", out _));
     }
     
     [Test]
     public void CriterionCondition_Parse_FailOnInvalid()
     {
-        Assert.That(!CriterionAdvancementCondition.TryParse("rigid=true,,none=false", out _));
+        Assert.That(!CriterionAdvancementCondition.TryParse("{rigid=true,,none=false}", out _));
     }
     
     [Test]
     public void CriterionCondition_Parse_ValidValue()
     {
-        const string parseValue = "rigid=true,none=false";
+        const string parseValue = "{rigid=true,none=false}";
         
         if (!CriterionAdvancementCondition.TryParse(parseValue, out var result))
         {

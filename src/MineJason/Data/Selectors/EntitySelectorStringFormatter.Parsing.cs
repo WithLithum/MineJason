@@ -373,7 +373,7 @@ public static partial class EntitySelectorStringFormatter
         if (value.StartsWith('{'))
         {
             if (!value.EndsWith('}')
-                || !CriterionAdvancementCondition.TryParse(value[1..^1], out var result))
+                || !CriterionAdvancementCondition.TryParse(value, out var result))
             {
                 throw new FormatException("Invalid compound advancement condition!");
             }

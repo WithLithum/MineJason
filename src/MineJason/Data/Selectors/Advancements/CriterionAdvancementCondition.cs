@@ -45,7 +45,14 @@ public sealed class CriterionAdvancementCondition : Collection<CriterionRule>,
     /// <returns><see langword="true"/> if the syntax is correct; otherwise, <see langword="false"/>.</returns>
     public static bool TryParse(string from, [NotNullWhen(true)] out CriterionAdvancementCondition? result)
     {
-        var split = from.Split(',');
+        if (!from.StartsWith('{') || !from.EndsWith('}'))
+        {
+            // FAIL: Not surrounded by braces
+            result = null;
+            return false;
+        }
+
+        var split = from[1..^1].Split(',');
 
         result = null;
         
