@@ -19,6 +19,7 @@ public sealed class CriterionAdvancementCondition : Collection<CriterionRule>,
     public override string ToString()
     {
         var builder = new StringBuilder();
+        builder.Append('{');
         var first = false;
         
         foreach (var value in this)
@@ -32,6 +33,7 @@ public sealed class CriterionAdvancementCondition : Collection<CriterionRule>,
             first = true;
         }
 
+        builder.Append('}');
         return builder.ToString();
     }
 
