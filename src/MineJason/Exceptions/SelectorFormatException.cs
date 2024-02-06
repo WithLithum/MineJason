@@ -7,6 +7,7 @@ namespace MineJason.Exceptions;
 using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using JetBrains.Annotations;
+using MineJason.Data.Selectors;
 
 /// <summary>
 /// An exception thrown when a target selector or a part of a target selector is in an invalid format.
@@ -26,6 +27,7 @@ public class SelectorFormatException : Exception
     [PublicAPI]
     public string? Value { get; }
 
+    /// <inheritdoc/>
     [SuppressMessage("", "CA1305")]
     public override string ToString()
     {
@@ -37,5 +39,25 @@ public class SelectorFormatException : Exception
         }
         builder.AppendLine(base.ToString());
         return builder.ToString();
+    }
+
+    internal static SelectorFormatException ExitBraceWhileOutside(EntitySelectorPairSetResolver resolver)
+    {
+        return new SelectorFormatException("Cannot exit brace while outside of brace.", resolver.From);
+    }
+
+    internal static SelectorFormatException BraceInvalidInKeys(EntitySelectorPairSetResolver resolver)
+    {
+        return new SelectorFormatException("Cannot specify braces in the 'key' part of a pair.", resolver.From);
+    }
+
+    internal static SelectorFormatException EqualSignWhileInValue(EntitySelectorPairSetResolver resolver)
+    {
+        return new SelectorFormatException("Equal sign is invalid while inside values", resolver.From);
+    }
+
+    internal static SelectorFormatException InvalidCharacter(EntitySelectorPairSetResolver resolver, char offendingChar)
+    {
+        return new SelectorFormatException($"Invalid character: {offendingChar} at position {resolver.Cursor}", resolver.From);
     }
 }

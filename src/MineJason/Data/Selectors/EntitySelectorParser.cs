@@ -29,22 +29,9 @@ public static class EntitySelectorParser
 
     public static IEnumerable<string> ParsePairSet(string from)
     {
-        // TODO complete this rewriting
-        
-        var list = new List<string>();
-
-        var builder = new StringBuilder();
-
-        var inFirstBrace = false;
-        var inSecondBrace = false;
-        var inValue = false;
-
-        foreach (var ch in from)
-        {
-            if (!inFirstBrace)
-            
-            builder.Append(ch);
-        }
+        var resolver = new EntitySelectorPairSetResolver(from);
+        resolver.RunToEnd();
+        return resolver.Pairs;
     }
     
     public static EntitySelectorSortMode ParseSortMode(string value)
