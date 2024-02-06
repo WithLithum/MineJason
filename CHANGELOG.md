@@ -1,6 +1,6 @@
 # Changelog
 
-This document notes all API visible changes of this library.
+This document notes most user-visible changes of this library. This format is loosely based on the [Keep a Changelog](https://keep-a-changelog.com) format and this project adheres to [Semantic Versioning](https://semver.org).
 
 ## [Unreleased]
 
@@ -8,17 +8,27 @@ This release contains breaking changes.
 
 ### Added
 
-- Added `NbtProvider.Empty` readonly value.
-- Added `ChatColor` utility class and `ChatColor.FromColorCode` utility method.
+#### Target selectors
+
+- Added support for the `advancements` target selector argument. (#7)
+- Rewritten the pair parser for target selectors to support nested braces. (!3)
+
+#### Components
+
 - Added split up NBT chat component types in `MineJason.Components` namespace.
 - Added support for NBT chat component building.
-- Added support for block position.
+- Added support for block positions.
+
+#### Miscellaneous
+
+- Added `NbtProvider.Empty` readonly value.
+- Added `ChatColor` utility class and `ChatColor.FromColorCode` utility method.
 
 ### Changed
 
-- Added `JsonIgnore` and `JsonPropertyName` attributes properly to all JSON serializable types.
-- Added a default hash function to `ChatComponent`.
-- `JsonComponentSerializer` is now deprecated.
+- Added `JsonIgnore` and `JsonPropertyName` attributes properly to all JSON serializable types. (#1, #2)
+- Added a default hash function to `ChatComponent`. (!2)
+- `JsonComponentSerializer` is now deprecated. (!2)
 
 ### Removed
 
