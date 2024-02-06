@@ -6,6 +6,7 @@ namespace MineJason.Data.Selectors;
 
 using System.Globalization;
 using System.Text;
+using MineJason.Exceptions;
 
 /// <summary>
 /// Provides parsing service for entity target selectors.
@@ -28,42 +29,9 @@ public static class EntitySelectorParser
 
     public static IEnumerable<string> ParsePairSet(string from)
     {
-        var inBrace = false;
-
-        var list = new List<string>();
-        var builder = new StringBuilder();
-
-        if (from.StartsWith(',') || from.EndsWith(','))
-        {
-            throw new FormatException("Pair set invalid.");
-        }
-        
-        foreach (var ch in from)
-        {
-            switch (ch)
-            {
-                case LeftBrace when inBrace:
-                    throw new FormatException("No double bracing!");
-                case LeftBrace:
-                    inBrace = true;
-                    break;
-                case RightBrace when !inBrace:
-                    throw new FormatException("Not even bracing yet!");
-                case RightBrace:
-                    inBrace = false;
-                    break;
-                case Comma when !inBrace:
-                    list.Add(builder.ToString());
-                    builder.Clear();
-                    continue;
-            }
-            
-            builder.Append(ch);
-        }
-
-        list.Add(builder.ToString());
-        
-        return list;
+        var resolver = new EntitySelectorPairSetResolver(from);
+        resolver.RunToEnd();
+        return resolver.Pairs;
     }
     
     public static EntitySelectorSortMode ParseSortMode(string value)
@@ -234,7 +202,7 @@ public static class EntitySelectorParser
     /// <exception cref="FormatException"></exception>
     public static void ParsePair(string input, out string name, out string value)
     {
-        var inBrace = false;
+        var braceLevel = 0;
         var isValue = false;
         var builder = new StringBuilder();
         name = "=";
@@ -251,22 +219,17 @@ public static class EntitySelectorParser
 
             if (isValue && x == LeftBrace)
             {
-                inBrace = true;
+                braceLevel++;
             }
 
             if (x == RightBrace)
             {
-                if (!inBrace)
+                if (braceLevel == 0)
                 {
                     throw new FormatException("Was not even in a brace!");
                 }
 
-                inBrace = false;
-            }
-
-            if (!inBrace && isValue && x == EqualSign)
-            {
-                throw new FormatException("Not a pair, but more than a pair!!!");
+                braceLevel--;
             }
 
             builder.Append(x);
@@ -277,14 +240,14 @@ public static class EntitySelectorParser
             throw new FormatException("Not a pair but merely a value!");
         }
 
-        if (inBrace)
+        if (braceLevel > 0)
         {
             throw new FormatException("Brace never ends!");
         }
 
         value = builder.ToString();
     }
-
+    
     public static void ParseTeamsValue(string value, TeamSelector selector)
     {
         if (!value.StartsWith('!'))
