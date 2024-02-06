@@ -373,7 +373,7 @@ public static partial class EntitySelectorStringFormatter
         if (value.StartsWith('{'))
         {
             if (!value.EndsWith('}')
-                || !CriterionAdvancementCondition.TryParse(value, out var result))
+                || !CriterionAdvancementCondition.TryParse(value[1..^1], out var result))
             {
                 throw new FormatException("Invalid compound advancement condition!");
             }
@@ -396,13 +396,13 @@ public static partial class EntitySelectorStringFormatter
             throw new SelectorFormatException("Invalid advancement condition set format.", value);
         }
 
-        var set = EntitySelectorParser.ParsePairSet(value[1..^2]);
+        var set = EntitySelectorParser.ParsePairSet(value[1..^1]);
 
         foreach (var pair in set)
         {
             EntitySelectorParser.ParsePair(pair, out var name, out var conditionString);
 
-            if (!ResourceLocation.TryParse(pair, out var location))
+            if (!ResourceLocation.TryParse(name, out var location))
             {
                 throw new FormatException("Invalid advancement resource location!");
             }

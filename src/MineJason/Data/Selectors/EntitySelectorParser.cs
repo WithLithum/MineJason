@@ -202,7 +202,7 @@ public static class EntitySelectorParser
     /// <exception cref="FormatException"></exception>
     public static void ParsePair(string input, out string name, out string value)
     {
-        var inBrace = false;
+        var braceLevel = 0;
         var isValue = false;
         var builder = new StringBuilder();
         name = "=";
@@ -219,17 +219,17 @@ public static class EntitySelectorParser
 
             if (isValue && x == LeftBrace)
             {
-                inBrace = true;
+                braceLevel++;
             }
 
             if (x == RightBrace)
             {
-                if (!inBrace)
+                if (braceLevel == 0)
                 {
                     throw new FormatException("Was not even in a brace!");
                 }
 
-                inBrace = false;
+                braceLevel--;
             }
 
             builder.Append(x);
@@ -240,7 +240,7 @@ public static class EntitySelectorParser
             throw new FormatException("Not a pair but merely a value!");
         }
 
-        if (inBrace)
+        if (braceLevel > 0)
         {
             throw new FormatException("Brace never ends!");
         }

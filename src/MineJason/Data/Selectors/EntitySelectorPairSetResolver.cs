@@ -244,7 +244,7 @@ public sealed class EntitySelectorPairSetResolver
     {
         if (Brace != BraceState.Outside)
         {
-            throw new SelectorFormatException("Brace never ends", "<unknown>");
+            throw new SelectorFormatException($"Brace never ends; Currently in {Brace}, {_braceLevel} level", "<unknown>");
         }
 
         BreakPair();

@@ -379,15 +379,15 @@ public class EntitySelectorTests
     [Test]
     public void Parser_AdvancementIncomplete()
     {
-        const string sampleString = "@a[advancements={adventure/kill_all_mobs={witch=true}]";
+        const string sampleString = "@a[advancements={adventure/kill_all_mobs}]";
 
-        Assert.Throws<SelectorFormatException>(() => EntitySelectorStringFormatter.ParseSelector(sampleString));
+        Assert.Throws<FormatException>(() => EntitySelectorStringFormatter.ParseSelector(sampleString));
     }
     
     [Test]
     public void Parser_ParseWithTwoAdvancementConditions()
     {
-        const string sampleString = "@a[advancements={adventure/kill_all_mobs={witch=true},story/form_obsidian=false}]";
+        const string sampleString = "@a[advancements={adventure/kill_all_mobs={witch=true},story/form_obsidian=false}}]";
 
         Assert.That(EntitySelectorStringFormatter.ParseSelector(sampleString).ToString(),
             Is.EqualTo(sampleString));
@@ -396,7 +396,7 @@ public class EntitySelectorTests
     [Test]
     public void Parser_ParseWithOneAdvancementCondition_MultipleCriterion()
     {
-        const string sampleString = "@a[advancements={adventure/kill_all_mobs={witch=true,zombie=false,skeleton=true}]";
+        const string sampleString = "@a[advancements={adventure/kill_all_mobs={witch=true,zombie=false,skeleton=true}}]";
 
         Assert.That(EntitySelectorStringFormatter.ParseSelector(sampleString).ToString(),
             Is.EqualTo(sampleString));
