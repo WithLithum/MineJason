@@ -5,6 +5,7 @@
 namespace MineJason.Data.Selectors;
 
 using JetBrains.Annotations;
+using MineJason.Data.Selectors.Predicates;
 
 /// <summary>
 /// Provides building services for <see cref="EntitySelector"/>.
@@ -292,6 +293,18 @@ public class EntitySelectorBuilder
     public EntitySelectorBuilder ExcludeNbt(NbtProvider nbt)
     {
         _selector.Nbt.Exclude.Add(nbt);
+        return this;
+    }
+
+    /// <summary>
+    /// Adds a predicate condition.
+    /// </summary>
+    /// <param name="predicate">The predicate to check against.</param>
+    /// <param name="match">Whether the entity should pass or fail the predicate check to be selected.</param>
+    /// <returns>This instance.</returns>
+    public EntitySelectorBuilder WithPredicate(ResourceLocation predicate, bool match = true)
+    {
+        _selector.Predicates.Add(predicate, match);
         return this;
     }
 

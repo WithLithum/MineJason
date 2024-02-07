@@ -91,6 +91,7 @@ public static partial class EntitySelectorStringFormatter
             builder.WritePair("advancements", selector.Advancements.ToString());
         }
 
+        selector.Predicates.WriteToBuilder(builder);
         selector.Name.WriteToBuilder(builder);
         selector.Type.WriteToBuilder(builder);
         selector.Nbt.WriteToBuilder(builder);

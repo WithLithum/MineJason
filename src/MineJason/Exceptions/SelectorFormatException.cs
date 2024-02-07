@@ -60,4 +60,9 @@ public class SelectorFormatException : Exception
     {
         return new SelectorFormatException($"Invalid character: {offendingChar} at position {resolver.Cursor}", resolver.From);
     }
+
+    internal static SelectorFormatException InvalidPredicateCondition(string value)
+    {
+        return new SelectorFormatException("Invalid predicate condition notation.", value);
+    }
 }

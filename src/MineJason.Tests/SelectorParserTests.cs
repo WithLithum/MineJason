@@ -26,4 +26,23 @@ public class SelectorParserTests
             Assert.That(value, Is.EqualTo("{a=b,b=c}"));
         });
     }
+    
+    
+    [Test]
+    public void SetWithDoubleBracing()
+    {
+        Assert.DoesNotThrow(() =>
+        {
+            EntitySelectorParser.ParsePairSet("advancements={adventure/kill_all_mobs={witch=true}}");
+        });
+    }
+    
+    [Test]
+    public void SetWithDoubleBracingAndMultiples()
+    {
+        Assert.DoesNotThrow(() =>
+        {
+            EntitySelectorParser.ParsePairSet("advancements={adventure/kill_all_mobs={witch=true},adventure/kill_all_mobs={zombie=false}}");
+        });
+    }
 }

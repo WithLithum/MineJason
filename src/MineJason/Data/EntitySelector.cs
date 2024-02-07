@@ -8,6 +8,7 @@ using System.Text.Json.Serialization;
 using JetBrains.Annotations;
 using MineJason.Data.Selectors;
 using MineJason.Data.Selectors.Advancements;
+using MineJason.Data.Selectors.Predicates;
 using MineJason.Serialization.TextJson;
 
 /// <summary>
@@ -116,6 +117,11 @@ public sealed class EntitySelector(EntitySelectorKind kind) : IEquatable<EntityS
     /// </summary>
     public SelectorAdvancementMatchCollection Advancements { get; } = [];
 
+    /// <summary>
+    /// Gets the predicate conditions that an entity must fulfill to be selected.
+    /// </summary>
+    public PredicateConditionCollection Predicates { get; } = [];
+    
     /// <inheritdoc />
     public override bool Equals(object? obj)
     {

@@ -6,6 +6,7 @@ namespace MineJason.Data.Selectors;
 
 using System.Globalization;
 using MineJason.Data.Selectors.Advancements;
+using MineJason.Data.Selectors.Predicates;
 using MineJason.Exceptions;
 using MineJason.Utilities;
 
@@ -159,6 +160,14 @@ public static partial class EntitySelectorStringFormatter
                     break;
                 case "advancements":
                     ParseAdvancements(value, selector.Advancements);
+                    break;
+                case "predicate":
+                    if (!PredicateCondition.TryParse(value, out var predicateCondition))
+                    {
+                        throw SelectorFormatException.InvalidPredicateCondition(value);
+                    }
+
+                    selector.Predicates.Add(predicateCondition);
                     break;
                 default:
                     throw new FormatException($"Unrecognised argument name {key}");

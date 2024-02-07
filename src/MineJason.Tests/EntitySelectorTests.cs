@@ -410,22 +410,31 @@ public class EntitySelectorTests
         Assert.That(EntitySelectorStringFormatter.ParseSelector(sampleString).ToString(),
             Is.EqualTo(sampleString));
     }
-
+    
     [Test]
-    public void Parser_SetWithDoubleBracing()
+    public void Parser_ParseWithSinglePredicate_DoMatch()
     {
-        Assert.DoesNotThrow(() =>
-        {
-            EntitySelectorParser.ParsePairSet("advancements={adventure/kill_all_mobs={witch=true}}");
-        });
+        const string sampleString = "@a[predicate=custom:predicate]";
+
+        Assert.That(EntitySelectorStringFormatter.ParseSelector(sampleString).ToString(),
+            Is.EqualTo(sampleString));
     }
     
     [Test]
-    public void Parser_SetWithDoubleBracingAndMultiples()
+    public void Parser_ParseWithSinglePredicate_NoMatch()
     {
-        Assert.DoesNotThrow(() =>
-        {
-            EntitySelectorParser.ParsePairSet("advancements={adventure/kill_all_mobs={witch=true},adventure/kill_all_mobs={zombie=false}}");
-        });
+        const string sampleString = "@a[predicate=!custom:mismatch]";
+
+        Assert.That(EntitySelectorStringFormatter.ParseSelector(sampleString).ToString(),
+            Is.EqualTo(sampleString));
+    }
+    
+    [Test]
+    public void Parser_ParseWithMultiplePredicates()
+    {
+        const string sampleString = "@a[predicate=!custom:mismatch,predicate=custom:matches_now]";
+
+        Assert.That(EntitySelectorStringFormatter.ParseSelector(sampleString).ToString(),
+            Is.EqualTo(sampleString));
     }
 }

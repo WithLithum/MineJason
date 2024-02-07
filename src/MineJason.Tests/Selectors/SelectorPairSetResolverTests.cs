@@ -1,4 +1,4 @@
-﻿namespace MineJason.Tests;
+﻿namespace MineJason.Tests.Selectors;
 
 using MineJason.Data.Selectors;
 
