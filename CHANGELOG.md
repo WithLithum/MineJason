@@ -10,22 +10,18 @@ This release contains breaking changes.
 
 #### Target selectors
 
-- Added support for the `advancements` target selector argument. (#7)
-- Rewritten the pair parser for target selectors to support nested braces. (!3)
-
-#### Components
-
+- Added support for additional target selector argument:
+  - `advancements` argument for filtering players with certain advancements. (#7)
+  - `predicate` arguments for filtering entities with predicates. (#8)
 - Added split up NBT chat component types in `MineJason.Components` namespace.
 - Added support for NBT chat component building.
 - Added support for block positions.
-
-#### Miscellaneous
-
 - Added `NbtProvider.Empty` readonly value.
 - Added `ChatColor` utility class and `ChatColor.FromColorCode` utility method.
 
 ### Changed
 
+- Rewritten the pair parser for target selectors to support nested braces. (!3)
 - Added `JsonIgnore` and `JsonPropertyName` attributes properly to all JSON serializable types. (#1, #2)
 - Added a default hash function to `ChatComponent`. (!2)
 - `JsonComponentSerializer` is now deprecated. (!2)

@@ -42,7 +42,7 @@ Please report issues in the [issue tracker](https://gitlab.com/WithLithum/MineJa
 
 Pull requests are welcome. For major changes, please open an issue to discuss what you would like to change first.
 
-Please make sure to update tests as appropriately, and don't forget to check the conventions of this project written in [the Contributing guide](CONTRIBUTING.md).
+Please make sure to update tests as appropriately, and don't forget to check the conventions of this project written in [the Contributing guide](docs/CONTRIBUTING-en.md).
 
 ## Thanks
 

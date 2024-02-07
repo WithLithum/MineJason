@@ -1,134 +1,128 @@
-# Contributing Guide
+# 贡献者指南
 
-Thank you for investing your time in contributing to our project!
+简体中文 | [English](docs/CONTRIBUTING-en.md)
 
-Read the [Code of Conduct](CODE_OF_CONDUCT.md) of this project; it is the ground rules apply to this project, and it is enforced to keep this community approachable and respectable.
+感谢您愿意为本项目变得更好而付出时间和精力。在开始之前请先阅读本项目的[行为规范](CODE_OF_CONDUCT.md)——这个文档是本项目的管理规定，用来保证本项目始终是包容且开放的社区。
 
-In this guide you will get an overview of the contribution workflow from reporting issues to contributing code by creating Merge Requests.
+本指南将指导如何作出从报告问题到提交代码合并请求来改进项目等一系列贡献。您可以点击本文档网页端显示区域的左上角的“目录”按钮来快速浏览到某个标题处。
 
-Use the table of contents icon on the top left corner of this document to get to a specific section of this guide quickly.
+| :information: 注意                                            |
+| ----------------------------------------------------------- |
+| 本文档可能与[英文版](docs/CONTRIBUING-en.md)有所出入。如果英文版与中文版冲突，以中文版为准。 |
 
-## Important
+## 重要事项
 
-This is particularly important if you are seeing this from GitHub.
+如果您是从 GitHub 上看到本项目，则需要注意本条。
 
-As GitHub MineJason repository is just a mirror, it does not accept contributions. Please refrain from trying to submit Pull Requests to it because it will most likely be ignored.
+GitHub 的 MineJason 存储库只是一个只读的镜像，并且不直接接受贡献。如果您在 GitHub 上新建拉取请求（Pull Request），则十有八九会被忽略，所以请不要在 GitHub 上提交贡献。
 
-Please use [GitLab Merge Requests](https://gitlab.com/WithLithum/MineJason/-/merge-requests) and [GitLab Issues](https://gitlab.com/WithLithum/MineJason/-/issues) for contributions.
+请您使用 [GitLab 合并请求](https://gitlab.com/WithLithum/MineJason/-/merge-requests)和 [GitLab 议题](https://gitlab.com/WithLithum/MineJason/-/issues)功能。感谢您的配合。
 
-## Question of Problem?
+## 有关于使用上的提问？
 
-Issues should not be use to submit general questions.
+议题区不应用来提交一般问题。如有关于如何使用 MineJason 以及其它一般疑问，请先查看 [Wiki](https://gitlab.com/WithLithum/MineJason/-/wikis/home)。如果 Wiki 仍不能解答您的疑问，则请前往下列区域讨论：
 
-If you have questions about how to use MineJason or another general question related to it, please view the [our wiki](https://gitlab.com/WithLithum/MineJason/-/wikis/home) (WIP), or considering joining our:
+- Discord 服务器：[点击加入](https://discord.gg/UFfWb9Rj)
+- QQ群：[点击加入](https://qm.qq.com/cgi-bin/qm/qr?k=reIRa9w7-vMBemqim7NdREX7vNKirNFo&jump_from=webapi&authKey=UnyZ5LWlfV8g8VCEffm2CShHd9PVPHP5CaXVbxkF2wwZj6FtXGEU/M7jRbU4e/K2)
 
-- Discord server: [Click to join](https://discord.gg/UFfWb9Rj)
-- QQ group: [Click to join (Chinese)](https://qm.qq.com/cgi-bin/qm/qr?k=reIRa9w7-vMBemqim7NdREX7vNKirNFo&jump_from=webapi&authKey=UnyZ5LWlfV8g8VCEffm2CShHd9PVPHP5CaXVbxkF2wwZj6FtXGEU/M7jRbU4e/K2)
+## 议题
 
-## Reporting Issues
+### 在新建议题之前
 
-### Before reporting
+请先在议题区中搜索*开放中*的议题，以寻找是否有符合您所要报告的问题的议题。请勿搜索整个问题，而是先搜索您要描述的问题的关键字（比如，如果是目标选择器的类型有问题，则搜索“选择器”）。为了防止有英语的议题已经打开，请尽量再用英文搜索一遍。如果一个议题重复了之前的议题所提交的问题，那么就会被关闭。
 
-Please search for existing _open_ issues that describes the issue you want to report. Please do not search for the whole issue description but rather look for keywords. Duplicate issues will be closed and linked to the currently tracked issue for the problem/request.
+但是，如果出现了之前已经修复但是后来版本又出现的问题，那么就算是新的问题。
 
-If an issue was previously reported and resolved, but it appeared again, please make a new report.
+### 在写议题时
 
-### When reporting
+请尽量使用与您想要新建议题讨论的内容相符合的模板，且尽量使用标准中文或者标准英文（切勿使用粤语吴语臺語等方言、注音符號，而且一些网络用语/網路用語也要少用），并且切勿混杂多种语言。
 
-It is best that you would use the relevant issue template for the type of the issue you are reporting. You should use standard Chinese (as used) or English, and this does not include dialects.
+为了方便，提供了中文和英文版本的各种议题模板。但是，请勿以如使用英文模板写中文正文的方式写议题正文。
 
-Both Chinese and English versions of issue templates are provided. Use them appropriately, and please, do not mix Chinese template with English content, etc.
+如果您写议题是为了告诉我们您要以此作出贡献时，请明确写清。但是，如果您写好议题提交后有相当时间内都没有提交合并请求，那么议题就会被再次开放，由维护者或其它贡献者接手。
 
-If you plan to work on the issue, please specify in the description. However, if you specify you plan to work on it but no Merge Requests have been submitted by you for a reasonably long period of time, we may end up choosing to open the issue for other contributions.
+下方列出了各种类型的议题的说明，请务必遵守。
 
-Below are the specific guidelines for each type of issue reports.
+#### 漏洞报告
 
-#### Bug Reports
+请尽量描述清楚：
 
-Please describe the following things in your bug report as detailed as you can describe it:
+- 您觉得正常情况下应该发生什么
+- 实际上发生了什么
+- 重现该问题的步骤
 
-- exact expected behaviour (the behaviour you would like to see)
-- actual behaviour (what actually happened)
-- steps to reproduce the issue
+如果是 API 问题的话，那么我们建议您提交一份示例代码来演示该问题。请为各个问题各提交一个议题；切勿一个议题报告多个漏洞。
 
-A proof of concept code would be the most helpful if it is am API behaviour issue.
+#### 功能请求
 
-Please make one issue for each bug, rather than reporting multiple bugs in one report.
+请尽量描述清楚：
 
-#### Feature Request
+- 您希望添加的功能是什么？做什么用？
+- 您认为该功能在何种情况下会用到？
+- 在没有该功能的情况下，有没有其它方法代替？
 
-Please, when submitting feature requests:
+功能请求会被审查并且决定是否实现。但请注意，如果该功能的用途不符合本项目的预期用途，则可能会被退回；见[预期用途](https://gitlab.com/WithLithum/MineJason/-/wikis/English/Development/Intended-Use-Case)。请为您要请求的各个功能各提交一个议题；切勿一个议题包含多个功能请求。
 
-- Describe what is the feature, and what does it do?
-- What is the intended use case of the feature?
-- Are there any workarounds for the lacking of the feature?
+如果功能请求包含破坏性变更，则可能会被退回或者考虑在下个大版本再加入。
 
-The feature request will be evaluated and processed accordingly. However, do note that if the intended use case of the feature is not acceptable, then the feature request will be rejected. See [the Intended Use Cases wiki page](https://gitlab.com/WithLithum/MineJason/-/wikis/English/Development/Intended-Use-Case).
+#### 改进请求
 
-Please make an issue for each feature request rather than making several feature requests into a single issue.
+请在提交改进请求时尽量描述清楚：您要请求什么改进？
 
-#### Enhancement Request
+改进请求一般应避免出现破坏性变更。如果需要作出破坏性变更，那么要么这个改进需要到下个大版本实现，要么会被退回。
 
-Please, when submitting enhancement requests, describe what enhancement is needed?
+### 在提交议题后
 
-Enhancement requests should not involve making breaking changes. If the requests involves breaking changes it will be evaluated for inclusion in the next major version.
+请记住各个议题将会按照其优先级和严重程度被决定处理的顺序。严重的漏洞一般会被优先处理。
 
-### After reporting
+## 提交代码贡献
 
-Please note that all issues will be prioritised based on its urgency and importance.
+一般来说，向项目提交代码贡献并不难。但是，本项目对提交代码贡献有一些小要求，请注意遵循这里的指导。
 
-Usually, critical bugs (like serious regressions, unexpected exceptions or major API unintended breaking change) will be fixed first.
+注意：提交代码贡献即代表您同意遵守 [Developer Certificate of Origin](#developer-certificate-of-origin)。尽管提交详细信息中写上 `Signed-off-by` 并非绝对必要，但是我们仍然建议您写上 `Signed-off-by`。这样，我们就能知道您明确同意遵守 Developer Certificate of Origin。
 
-## Submitting Code Contributions
+### 预期用途
 
-The procedure for submitting code contributions is straight-forward,
-but there are some considerations when submitting new features to the MineJason project.
+本库的预期用途是：为编程处理与 Minecraft：Java 版配合使用的“原始JSON文本”格式文本组件提供支持。本项目可能支持其它用途，但并不会积极对其提供新的功能；见[预期用途一页](https://gitlab.com/WithLithum/MineJason/-/wikis/中文/开发/预期用途)。
 
-By submitting code contributions you agree to the [Developer Certificate of Origin](#developer-certificate-of-origin). You are not necessary to add a `Signed-off-by` comment in your commits.
+### 该做什么和不该做什么
 
-### Intended Use Cases
+请在编写代码及参与讨论时注意以下事项：
 
-The intended use cases is to aid in programmatic creation of Raw JSON text format serialised text components to be used with "Notchian" Minecraft: Java Edition software.
+- **遵循**本项目的[样式指南](docs/STYLEGUIDE.md)。
+- 新的代码一般情况下**应当**基于现有代码的样式编写，即使现有样式与指南有所出入。
+- 在增加新功能时**应当**同步增加单元测试代码。如果您要修复漏洞，可以先增加有关于漏洞的单元测试（即，该漏洞存在则失败，该漏洞修复则成功的单元测试）。
+- 注意**防止**讨论区跑题。如果一个新的问题反复被讨论的话，一般最好还是创建一个新的议题讨论这个问题，而不是让别的议题跑题。
+- 如创建议题是要表明您要实现该议题，则**应当**明确说明。
 
-Other use cases may be accepted but are not officially planned. See [the Intended Use Cases wiki page](https://gitlab.com/WithLithum/MineJason/-/wikis/English/Development/Intended-Use-Case).
+并且：
 
-### DO and DO NOTS
+- **切勿**因为代码样式的问题就开合并请求。
+- **不要**突然就提交超大合并请求。如果您要进行重大改动，在投入时间和精力之前，请先通过议题讨论，以及评估这种改动是否合适。
+- **切勿**提交修改许可证相关文件的合并请求。如果您认为许可证相关事项有问题，请先通过议题讨论。
 
-Please do:
+### 破坏性变更
 
-- **DO** follow the [style guide](docs/STYLEGUIDE.md).
-- **DO** give priority to the current style of the project or file you're changing even if it diverges from the general guidelines.
-- **DO** include tests when adding new features. When fixing bugs, start with adding a test that highlights how the current behavior is broken.
-- **DO** keep the discussions focused. When a new or related topic comes up it's often better to create new issue than to side track the discussion.
-- **DO** clearly state on an issue that you are going to take on implementing it.
+本项目可以接受带有破坏性变更的合并请求，但：
 
-Please do not:
+- 只会在下一个大版本被正式发布（在 `0.x` 时则可以立即发布）
+- 破坏性变更必须审核
+- 只有创建议题讨论并审核通过后才可以提交合并请求
 
-- **DO NOT** make PRs for style changes.
-- **DO NOT** surprise us with big merge requests. Instead, file an issue and start a discussion so we can agree on a direction before you invest a large amount of time.
-- **DO NOT** submit PRs that alter licensing related files or headers. If you believe there's a problem with them, file an issue and we'll be happy to discuss it.
+### 提交合并请求
 
-### Breaking Changes
+在您第一次作为新手提交合并请求之前，请先阅读 [GitLab 的合并请求指南](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)。
 
-Contributions with breaking changes are accepted, but:
-
-- It will only be included for the next major version (in `0.x` this means immediate inclusion)
-- It will be subject to review on API
-- It requires proposal prior to Merge Request being created.
-
-It is best that you open an issue with the proposed changes for breaking changes.
-
-### Submitting Merge Requests
-
-Prior to submitting merge requests for your first time as a beginner, please see [the GitLab guide on Merge Requests](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html).
-
-If you are not yet ready for the Merge Request to be reviewed and merged please make sure to make the Merge Request as a [Draft Merge Request](https://docs.gitlab.com/ee/user/project/merge_requests/drafts.html).
-
-Please don't surprise us with big merge requests. Instead, file an issue and start a discussion so we can agree on a direction before you invest a large amount of time.
+如果您的合并请求还没有准备好接受审核并被合并，请在创建时勾选[标记为草稿](https://docs.gitlab.com/ee/user/project/merge_requests/drafts.html)。请您注意：不要突然就提交超大合并请求。如果您要进行重大改动，在投入时间和精力之前，请先通过议题讨论，以及评估这种改动是否合适，以免您耗费大量时间精力但是由于没有讨论，改动不合适，被直接退回而浪费。
 
 ## Developer Certificate of Origin
 
-By submitting code contributions you agree to the Developer Certificate of Origin:
+当您：
+
+- 以补丁、合并请求或其它方式提交代码贡献，或
+- 在提交信息中写明 `Signed-off-by` 与您的电子邮箱地址，
+
+即表明同意 Developer Certificate of Origin：
 
 ```plain
 Developer Certificate of Origin
@@ -166,5 +160,3 @@ By making a contribution to this project, I certify that:
     maintained indefinitely and may be redistributed consistent with
     this project or the open source license(s) involved.
 ```
-
-This project does not require that you add `Signed-off-by` to your Git commits; contributing anything already signifies that you agrees with the DCO.
