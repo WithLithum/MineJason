@@ -12,6 +12,7 @@
     <Description>A library providing models for dealing with chat components (Raw JSON text) in Minecraft: Java Edition</Description>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
+      <IsAotCompatible>true</IsAotCompatible>
   </PropertyGroup>
 
   <ItemGroup>

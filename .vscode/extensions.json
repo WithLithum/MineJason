@@ -1,0 +1,10 @@
+{
+    "recommendations": [
+        "ms-dotnettools.csdevkit",
+        "streetsidesoftware.code-spell-checker",
+        "visualstudioexptteam.intellicode-api-usage-examples",
+        "visualstudioexptteam.vscodeintellicode",
+        "ms-dotnettools.vscodeintellicode-csharp",
+        "sonarsource.sonarlint-vscode"
+    ]
+}

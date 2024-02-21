@@ -10,10 +10,9 @@ In this guide you will get an overview of the contribution workflow from reporti
 
 Use the table of contents icon on the top left corner of this document to get to a specific section of this guide quickly.
 
-| :information: Notice                                            |
-| ----------------------------------------------------------- |
-| This document may have differences with the [Chinese](../CONTRIBUING.md) version. If the documents contradicts each other, the Chinese version appleis. |
-
+| :information: Notice                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| This document may have differences with the [Chinese](../CONTRIBUING.md) version. If the documents contradicts each other, the Chinese version applies. |
 
 ## Important
 
@@ -94,6 +93,10 @@ but there are some considerations when submitting new features to the MineJason 
 By submitting code contributions you agree to the [Developer Certificate of Origin](#developer-certificate-of-origin). It is not strictly necessary to add a `Signed-off-by` comment in your commits, however it is a best-have as it tells us that you explicitly agrees to the Developer Certificate of Origin.
 
 Your IDE and/or Git client should be able to do it for you automatically; consult the documentation of your IDE or Git client. For command-line commits, add `--signoff` in the command.
+
+## Setting up Development Environment
+
+See the [setup guide](SETUP-en.md).
 
 ### Intended Use Cases
 

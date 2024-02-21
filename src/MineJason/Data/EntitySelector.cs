@@ -153,4 +153,49 @@ public sealed class EntitySelector(EntitySelectorKind kind) : IEquatable<EntityS
     {
         return EntitySelectorStringFormatter.ToString(this);
     }
+
+    /// <summary>
+    /// Initiates the construction of a target selector that selects all players.
+    /// </summary>
+    /// <returns>The builder.</returns>
+    public static EntitySelectorBuilder AllPlayers()
+    {
+        return new EntitySelectorBuilder(new EntitySelector(EntitySelectorKind.AllPlayers));
+    }
+    
+    /// <summary>
+    /// Initiates the construction of a target selector that selects the nearest player.
+    /// </summary>
+    /// <returns>The builder.</returns>
+    public static EntitySelectorBuilder NearestPlayer()
+    {
+        return new EntitySelectorBuilder(new EntitySelector(EntitySelectorKind.NearestPlayer));
+    }
+    
+    /// <summary>
+    /// Initiates the construction of a target selector that selects a random player.
+    /// </summary>
+    /// <returns>The builder.</returns>
+    public static EntitySelectorBuilder RandomPlayer()
+    {
+        return new EntitySelectorBuilder(new EntitySelector(EntitySelectorKind.RandomPlayer));
+    }
+    
+    /// <summary>
+    /// Initiates the construction of a target selector that selects all entities.
+    /// </summary>
+    /// <returns>The builder.</returns>
+    public static EntitySelectorBuilder AllEntities()
+    {
+        return new EntitySelectorBuilder(new EntitySelector(EntitySelectorKind.AllEntities));
+    }
+    
+    /// <summary>
+    /// Initiates the construction of a target selector that selects the executor.
+    /// </summary>
+    /// <returns>The builder.</returns>
+    public static EntitySelectorBuilder Executor()
+    {
+        return new EntitySelectorBuilder(new EntitySelector(EntitySelectorKind.Executor));
+    }
 }

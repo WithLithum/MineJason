@@ -4,6 +4,13 @@ This document notes most user-visible changes of this library. This format is lo
 
 ## [Unreleased]
 
+### Added
+
+- Added building methods for `EntitySelector`.
+- Added a serialization context `MineJasonTextJsonContext` for serialization in cases that reflection is not available.
+
+## [v0.4.0-alpha]
+
 This release contains breaking changes.
 
 ### Added
@@ -78,7 +85,8 @@ This release contains breaking changes.
 
 - First version release.
 
-[Unreleased]: https://gitlab.com/WithLithum/MineJason/compare/v0.3.0-alpha...trunk
+[Unreleased]: https://gitlab.com/WithLithum/MineJason/compare/v0.4.0-alpha...trunk
+[v0.4.0-alpha]: https://gitlab.com/WithLithum/MineJason/compare/v0.3.0-alpha...v0.4.0-alpha
 [v0.3.0-alpha]: https://gitlab.com/WithLithum/MineJason/compare/v0.2.1-alpha...v0.3.0-alpha
 [v0.2.1-alpha]: https://gitlab.com/WithLithum/MineJason/compare/v0.2.0-alpha...v0.2.1-alpha
 [v0.2.0-alpha]: https://gitlab.com/WithLithum/MineJason/compare/v0.1.0-alpha...v0.2.0-alpha
