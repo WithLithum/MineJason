@@ -1,6 +1,26 @@
+
+DISCLAIMER
+
+This library is not an official Minecraft product, and is not approved by,
+associated or affliated with Mojang or Microsoft.
+_______________________________________________________________________________
+
+MINECRAFT WIKI ATTRIBUTIONS
+
+This project uses the Raw JSON text and target selector information described
+on the Minecraft Wiki in its development. The authors of this project would
+like to thank all contributors of relevant pages on Minecraft Wiki.
+
+The wiki is accessible via: https://minecraft.wiki
+
+The contents of the Minecraft Wiki are available under the CC BY-NC-SA 3.0
+license.
+_______________________________________________________________________________
+
+SOURCE ATTRIBUTIONS
+
 This documentation includes acknowledgements for third-party code as used by
 this library.
-
 
 .NET
 ----
