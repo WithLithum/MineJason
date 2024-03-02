@@ -40,6 +40,16 @@ public sealed class RgbChatColor(byte r, byte g, byte b) : IChatColor, IEquatabl
     }
 
     /// <summary>
+    /// Converts the value of this instance to its NBT color representation as used in NBT and
+    /// item components.
+    /// </summary>
+    /// <returns>The NBT color representation.</returns>
+    public int ToNbtColor()
+    {
+        return (R << 16) + (G << 8) + B;
+    }
+
+    /// <summary>
     /// Attempts to parse the specified string to its equivalent instance representation.
     /// </summary>
     /// <param name="from">The string to parse.</param>

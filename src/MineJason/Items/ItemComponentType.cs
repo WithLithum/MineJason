@@ -12,14 +12,14 @@ public readonly struct ItemComponentType
     /// <summary>
     /// Initializes a new instance of the <see cref="ItemComponentType"/> class.
     /// </summary>
-    /// <param name="maxEntryCount">The maximum number of entries.</param>
-    public ItemComponentType(int maxEntryCount)
+    /// <param name="acceptedType">The accepted type of the value.</param>
+    public ItemComponentType(Type acceptedType)
     {
-        MaxEntryCount = maxEntryCount;
+        AcceptedType = acceptedType;
     }
-    
+
     /// <summary>
-    /// Gets the maximum number of entries of this component type can exist.
+    /// Gets the type of that is accepted.
     /// </summary>
-    public int MaxEntryCount { get; }
+    public Type AcceptedType { get; }
 }

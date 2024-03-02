@@ -46,4 +46,12 @@ public class ChatColorTests
         Assert.That(JsonSerializer.Deserialize<IChatColor>("\"#00ffff\""),
             Is.EqualTo(new RgbChatColor(0x00, 0xff, 0xff)));
     }
+
+    [Test]
+    public void RgbChatColor_ToNbtColor()
+    {
+        var color = new RgbChatColor(39, 45, 221);
+        Assert.That(color.ToNbtColor(),
+            Is.EqualTo(2567645));
+    }
 }

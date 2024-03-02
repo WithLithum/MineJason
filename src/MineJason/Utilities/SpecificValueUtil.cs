@@ -4,7 +4,9 @@
 
 namespace MineJason.Utilities;
 
+using MineJason.Serialization.TextJson;
 using System.Globalization;
+using System.Text.Json;
 
 internal static class SpecificValueUtil
 {
@@ -12,7 +14,12 @@ internal static class SpecificValueUtil
     {
         return value.ToString(CultureInfo.InvariantCulture);
     }
-    
+
+    internal static string ToStringNeutral(this IFormattable value)
+    {
+        return value.ToString(null, CultureInfo.InvariantCulture);
+    }
+
     internal static bool TryParseLowerBoolean(string from, out bool result)
     {
         result = default;
@@ -35,5 +42,16 @@ internal static class SpecificValueUtil
     internal static string ToLowerBooleanString(bool value)
     {
         return value ? "true" : "false";
+    }
+
+    internal static string ToEscapedComponentString(ChatComponent component)
+    {
+        var json = JsonSerializer.Serialize(component, 
+            typeof(ChatComponent), 
+            MineJasonTextJsonContext.Default);
+
+        json = json.Replace("\'", "\\\'", StringComparison.Ordinal);
+
+        return $"'{json}'";
     }
 }

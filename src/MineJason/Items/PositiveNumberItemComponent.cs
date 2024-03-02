@@ -9,30 +9,24 @@ using MineJason.Utilities;
 /// <summary>
 /// Provides a base for item components that accepts a positive number.
 /// </summary>
-public abstract class PositiveNumberItemComponent : IItemComponent
+public abstract class PositiveNumberItemComponent : TypedItemComponent<int>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="PositiveNumberItemComponent"/> class.
     /// </summary>
     /// <param name="value">The value.</param>
-    protected PositiveNumberItemComponent(int value)
+    protected PositiveNumberItemComponent(int value) : base(value)
     {
-        Value = value;
     }
-    
-    /// <summary>
-    /// Gets or sets the value.
-    /// </summary>
-    public int Value { get; set; }
 
     /// <inheritdoc />
-    public string GetString()
+    public override string GetString()
     {
         return Value.ToStringNeutral();
     }
 
     /// <inheritdoc />
-    public bool IsValid()
+    public override bool IsValid()
     {
         return Value >= 0;
     }

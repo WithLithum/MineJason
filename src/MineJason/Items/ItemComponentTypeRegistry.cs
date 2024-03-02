@@ -23,6 +23,11 @@ public sealed class ItemComponentTypeRegistry
         Types.Add(id, type);
     }
     
+    /// <summary>
+    /// Gets or sets the item component type associated with the specified ID.
+    /// </summary>
+    /// <param name="id">The identifier.</param>
+    /// <returns>The type.</returns>
     public ItemComponentType this[ResourceLocation id]
     {
         get => Types[id];
@@ -46,7 +51,11 @@ public sealed class ItemComponentTypeRegistry
     [PublicAPI]
     public static void AddDefaults(ItemComponentTypeRegistry registry)
     {
-        registry.Add(CustomDataItemComponent.Id, new ItemComponentType(1));
-        registry.Add(DamageItemComponent.Id, new ItemComponentType(1));
+        registry.Add(CustomDataItemComponent.Id, new(typeof(CustomDataItemComponent)));
+        registry.Add(DamageItemComponent.Id, new(typeof(DamageItemComponent)));
+        registry.Add(DyedColorItemComponent.Id, new(typeof(DyedColorItemComponent)));
+        registry.Add(CustomModelDataItemComponent.Id, new(typeof(CustomModelDataItemComponent)));
+        registry.Add(CustomNameItemComponent.Id, new(typeof(CustomNameItemComponent)));
+        registry.Add(EnchantmentGlintOverrideItemComponent.Id, new(typeof(EnchantmentGlintOverrideItemComponent)));
     }
 }
