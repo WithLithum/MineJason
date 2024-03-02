@@ -4,8 +4,15 @@
 
 namespace MineJason.Utilities;
 
+using System.Globalization;
+
 internal static class SpecificValueUtil
 {
+    internal static string ToStringNeutral(this int value)
+    {
+        return value.ToString(CultureInfo.InvariantCulture);
+    }
+    
     internal static bool TryParseLowerBoolean(string from, out bool result)
     {
         result = default;
