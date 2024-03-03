@@ -5,6 +5,7 @@
 namespace MineJason.Tests.Items;
 
 using System.Diagnostics.CodeAnalysis;
+using MineJason.Data;
 using MineJason.Items;
 
 [SuppressMessage("ReSharper", 
@@ -12,6 +13,20 @@ using MineJason.Items;
     Justification = "This is a test. The collection is thrown away afterwards.")]
 public class ItemComponentCollectionTests
 {
+    [Test]
+    public void Indexer_Set_InvalidType()
+    {
+        var collection = new ItemComponentCollection(CustomDataItemComponent.Type)
+        {
+            new CustomDataItemComponent(NbtProvider.Empty)
+        };
+
+        Assert.Throws<ArgumentException>(() =>
+        {
+            collection[0] = new DamageItemComponent(250);
+        });
+    }
+    
     [Test]
     public void Add_InvalidType()
     {
