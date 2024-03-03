@@ -4,6 +4,7 @@
 
 namespace MineJason.Items;
 
+using JetBrains.Annotations;
 using MineJason.Colors;
 using MineJason.Utilities;
 
@@ -11,12 +12,14 @@ using MineJason.Utilities;
 /// Represents an item component that sets the dyed color for dye-able items.
 /// This class cannot be inherited.
 /// </summary>
+[PublicAPI]
 public sealed class DyedColorItemComponent : TypedItemComponent<RgbChatColor>
 {
     /// <summary>
-    /// The type ID of this component.
+    /// The registered type of this data component.
     /// </summary>
-    public static readonly ResourceLocation Id = new("minecraft", "dyed_color");
+    public static readonly ItemComponentType Type = new(typeof(DyedColorItemComponent),
+        new ResourceLocation("minecraft", "dyed_color"));
 
     /// <summary>
     /// Initializes a new instance of the <see cref="RgbChatColor"/> class.

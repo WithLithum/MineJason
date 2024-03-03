@@ -4,17 +4,20 @@
 
 namespace MineJason.Items;
 
+using JetBrains.Annotations;
 using MineJason.Utilities;
 
 /// <summary>
 /// Represents a chat component that sets the name of the item. This class cannot be inherited.
 /// </summary>
+[PublicAPI]
 public sealed class CustomNameItemComponent : TypedItemComponent<ChatComponent>
 {
     /// <summary>
-    /// The type ID of this component.
+    /// The registered type of this data component.
     /// </summary>
-    public static readonly ResourceLocation Id = new("minecraft", "custom_name");
+    public static readonly ItemComponentType Type = new(typeof(CustomNameItemComponent),
+        new ResourceLocation("minecraft", "custom_name"));
 
     /// <summary>
     /// Initialises a new instance of the <see cref="ChatComponent"/> class.

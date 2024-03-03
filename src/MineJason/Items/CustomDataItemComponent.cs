@@ -14,9 +14,10 @@ using MineJason.Data;
 public sealed class CustomDataItemComponent : IItemComponent
 {
     /// <summary>
-    /// The identifier of this data component.
+    /// The registered type of this data component.
     /// </summary>
-    public static readonly ResourceLocation Id = new("minecraft", "custom_data");
+    public static readonly ItemComponentType Type = new(typeof(CustomDataItemComponent),
+        new ResourceLocation("minecraft", "custom_data"));
     
     /// <summary>
     /// Initializes a new instance of the <see cref="CustomDataItemComponent"/> class.

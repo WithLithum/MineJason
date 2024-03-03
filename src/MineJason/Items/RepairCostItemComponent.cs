@@ -4,15 +4,19 @@
 
 namespace MineJason.Items;
 
+using JetBrains.Annotations;
+
 /// <summary>
 /// Represents a component that sets repair costs. This class cannot be inherited.
 /// </summary>
+[PublicAPI]
 public sealed class RepairCostItemComponent : PositiveNumberItemComponent
 {
     /// <summary>
-    /// The identifier of this data component.
+    /// The registered type of this data component.
     /// </summary>
-    public static readonly ResourceLocation Id = new("minecraft", "repair_cost");
+    public static readonly ItemComponentType Type = new(typeof(RepairCostItemComponent),
+        new ResourceLocation("minecraft", "repair_cost"));
     
     /// <summary>
     /// Initializes a new instance of the <see cref="RepairCostItemComponent"/> class.

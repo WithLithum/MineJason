@@ -10,7 +10,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 /// <summary>
-/// Represents an item component that overrides the default item enchantment glind display.
+/// Represents an item component that overrides the default item enchantment glint display.
+/// This class cannot be inherited.
 /// </summary>
 /// <remarks>
 /// <para>
@@ -24,9 +25,10 @@ using System.Threading.Tasks;
 public sealed class EnchantmentGlintOverrideItemComponent : BooleanItemComponent
 {
     /// <summary>
-    /// The type ID of this component.
+    /// The registered type of this data component.
     /// </summary>
-    public static readonly ResourceLocation Id = new("minecraft", "enchantment_glint_override");
+    public static readonly ItemComponentType Type = new(typeof(EnchantmentGlintOverrideItemComponent),
+        new ResourceLocation("minecraft", "enchantment_glint_override"));
 
     /// <summary>
     /// Initialises a new instance of the <see cref="EnchantmentGlintOverrideItemComponent"/> class.

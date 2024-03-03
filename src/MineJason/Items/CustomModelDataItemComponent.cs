@@ -4,16 +4,20 @@
 
 namespace MineJason.Items;
 
+using JetBrains.Annotations;
+
 /// <summary>
 /// Represents a component that sets a value which can be used in item models to specify custom item
-/// models.
+/// models. This class cannot be inherited.
 /// </summary>
+[PublicAPI]
 public sealed class CustomModelDataItemComponent : InvariantItemComponent<int>
 {
     /// <summary>
-    /// The type ID of this component.
+    /// The registered type of this data component.
     /// </summary>
-    public static readonly ResourceLocation Id = new("minecraft", "custom_model_data");
+    public static readonly ItemComponentType Type = new(typeof(CustomModelDataItemComponent),
+        new ResourceLocation("minecraft", "custom_model_data"));
 
     /// <summary>
     /// Initialises a new instance of the <see cref="CustomModelDataItemComponent"/> class.
