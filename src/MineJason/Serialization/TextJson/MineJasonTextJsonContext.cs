@@ -11,6 +11,9 @@ using MineJason.Colors;
 using MineJason.Components;
 using MineJason.Data;
 using MineJason.Data.Coordinates;
+using MineJason.Events;
+using MineJason.Events.Hover;
+using MineJason.Items;
 
 /// <summary>
 /// Provides serialization context for the serializable types.
@@ -34,6 +37,19 @@ using MineJason.Data.Coordinates;
 [JsonSerializable(typeof(ResourceLocation))]
 [JsonSerializable(typeof(EntitySelector))]
 [JsonSerializable(typeof(ScoreboardSearcher))]
+[JsonSerializable(typeof(ClickEvent))]
+[JsonSerializable(typeof(ChangePageClickEvent))]
+[JsonSerializable(typeof(CopyToClipboardClickEvent))]
+[JsonSerializable(typeof(OpenUrlClickEvent))]
+[JsonSerializable(typeof(RunCommandClickEvent))]
+[JsonSerializable(typeof(SuggestCommandClickEvent))]
+[JsonSerializable(typeof(HoverEvent))]
+[JsonSerializable(typeof(ShowEntityHoverEvent))]
+[JsonSerializable(typeof(ShowItemHoverEvent))]
+[JsonSerializable(typeof(ShowTextHoverEvent))]
+[JsonSerializable(typeof(ItemStack))]
+[JsonSerializable(typeof(ItemComponentCollection))]
+[JsonSerializable(typeof(ItemComponentDictionary))]
 [JsonSerializable(typeof(string))]
 [JsonSerializable(typeof(bool))]
 [PublicAPI]
