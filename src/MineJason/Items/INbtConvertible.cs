@@ -16,5 +16,5 @@ public interface INbtConvertible
     /// Converts this instance to NBT.
     /// </summary>
     /// <returns>The NBT.</returns>
-    public SNbtCompound ToNbt();
+    public ISNbtValue ToNbt();
 }

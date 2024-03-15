@@ -11,7 +11,7 @@ using MineJason.Utilities;
 /// Represents a chat component that sets the name of the item. This class cannot be inherited.
 /// </summary>
 [PublicAPI]
-public sealed class CustomNameItemComponent : TypedItemComponent<ChatComponent>
+public sealed class CustomNameItemComponent : ChatComponentItemComponent
 {
     /// <summary>
     /// The registered type of this data component.
@@ -25,12 +25,6 @@ public sealed class CustomNameItemComponent : TypedItemComponent<ChatComponent>
     /// <param name="value"></param>
     public CustomNameItemComponent(ChatComponent value) : base(value)
     {
-    }
-
-    /// <inheritdoc/>
-    public override bool IsValid()
-    {
-        return true;
     }
 
     /// <inheritdoc/>
