@@ -44,6 +44,11 @@ internal static class SpecificValueUtil
         return value ? "true" : "false";
     }
 
+    internal static string EscapeNbtString(string text)
+    {
+        return text.Replace("\'", "\\\'", StringComparison.Ordinal);
+    }
+    
     internal static string ToEscapedComponentString(ChatComponent component)
     {
         var json = JsonSerializer.Serialize(component, 

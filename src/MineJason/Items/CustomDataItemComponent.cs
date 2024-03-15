@@ -6,6 +6,7 @@ namespace MineJason.Items;
 
 using JetBrains.Annotations;
 using MineJason.Data;
+using MineJason.SNbt.Values;
 
 /// <summary>
 /// Represents an item component that is used to store custom data. This class cannot be inherited.
@@ -23,7 +24,7 @@ public sealed class CustomDataItemComponent : IItemComponent
     /// Initializes a new instance of the <see cref="CustomDataItemComponent"/> class.
     /// </summary>
     /// <param name="value">The value.</param>
-    public CustomDataItemComponent(NbtProvider value)
+    public CustomDataItemComponent(SNbtCompound value)
     {
         Value = value;
     }
@@ -31,12 +32,12 @@ public sealed class CustomDataItemComponent : IItemComponent
     /// <summary>
     /// Gets or sets the custom data value.
     /// </summary>
-    public NbtProvider Value { get; set; }
+    public SNbtCompound Value { get; set; }
 
     /// <inheritdoc />
     public string GetString()
     {
-        return Value.ToString();
+        return Value.ToSNbtString();
     }
 
     /// <inheritdoc />

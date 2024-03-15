@@ -7,6 +7,7 @@ namespace MineJason.Tests.Items;
 using System.Diagnostics.CodeAnalysis;
 using MineJason.Data;
 using MineJason.Items;
+using MineJason.SNbt.Values;
 
 [SuppressMessage("ReSharper", 
     "CollectionNeverQueried.Local",
@@ -18,7 +19,7 @@ public class ItemComponentCollectionTests
     {
         var collection = new ItemComponentCollection(CustomDataItemComponent.Type)
         {
-            new CustomDataItemComponent(NbtProvider.Empty)
+            new CustomDataItemComponent(new SNbtCompound())
         };
 
         Assert.Throws<ArgumentException>(() =>
