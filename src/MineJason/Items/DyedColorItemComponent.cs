@@ -18,8 +18,8 @@ public sealed class DyedColorItemComponent : TypedItemComponent<RgbChatColor>
     /// <summary>
     /// The registered type of this data component.
     /// </summary>
-    public static readonly ItemComponentType Type = new(typeof(DyedColorItemComponent),
-        new ResourceLocation("minecraft", "dyed_color"));
+    public static readonly ResourceLocation Type = 
+        new("minecraft", "dyed_color");
 
     /// <summary>
     /// Initializes a new instance of the <see cref="RgbChatColor"/> class.

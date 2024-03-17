@@ -27,8 +27,8 @@ public sealed class EnchantmentGlintOverrideItemComponent : BooleanItemComponent
     /// <summary>
     /// The registered type of this data component.
     /// </summary>
-    public static readonly ItemComponentType Type = new(typeof(EnchantmentGlintOverrideItemComponent),
-        new ResourceLocation("minecraft", "enchantment_glint_override"));
+    public static readonly ResourceLocation Type =
+        new ResourceLocation("minecraft", "enchantment_glint_override");
 
     /// <summary>
     /// Initialises a new instance of the <see cref="EnchantmentGlintOverrideItemComponent"/> class.

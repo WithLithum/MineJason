@@ -16,8 +16,8 @@ public sealed class CustomNameItemComponent : ChatComponentItemComponent
     /// <summary>
     /// The registered type of this data component.
     /// </summary>
-    public static readonly ItemComponentType Type = new(typeof(CustomNameItemComponent),
-        new ResourceLocation("minecraft", "custom_name"));
+    public static readonly ResourceLocation Type = 
+        new ResourceLocation("minecraft", "custom_name");
 
     /// <summary>
     /// Initialises a new instance of the <see cref="ChatComponent"/> class.

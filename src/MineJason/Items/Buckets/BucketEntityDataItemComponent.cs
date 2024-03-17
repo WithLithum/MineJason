@@ -15,8 +15,8 @@ public class BucketEntityDataItemComponent : ObjectItemComponent<BucketEntityDat
     /// <summary>
     /// The registered type of this data component.
     /// </summary>
-    public static readonly ItemComponentType Type = new(typeof(CustomModelDataItemComponent),
-        new ResourceLocation("minecraft", "bucket_entity_data"));
+    public static readonly ResourceLocation Type = 
+        new ResourceLocation("minecraft", "bucket_entity_data");
     
     /// <summary>
     /// Initialises a new instance of the <see cref="BucketEntityDataItemComponent"/> class.

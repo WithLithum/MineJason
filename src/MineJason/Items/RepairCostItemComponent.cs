@@ -15,8 +15,8 @@ public sealed class RepairCostItemComponent : PositiveNumberItemComponent
     /// <summary>
     /// The registered type of this data component.
     /// </summary>
-    public static readonly ItemComponentType Type = new(typeof(RepairCostItemComponent),
-        new ResourceLocation("minecraft", "repair_cost"));
+    public static readonly ResourceLocation Type =
+        new ResourceLocation("minecraft", "repair_cost");
     
     /// <summary>
     /// Initializes a new instance of the <see cref="RepairCostItemComponent"/> class.

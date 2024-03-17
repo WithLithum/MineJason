@@ -15,8 +15,8 @@ public sealed class DamageItemComponent : PositiveNumberItemComponent
     /// <summary>
     /// The registered type of this data component.
     /// </summary>
-    public static readonly ItemComponentType Type = new(typeof(DamageItemComponent),
-        new ResourceLocation("minecraft", "damage"));
+    public static readonly ResourceLocation Type =
+        new ResourceLocation("minecraft", "damage");
     
     /// <summary>
     /// Initializes a new instance of the <see cref="DamageItemComponent"/> class.

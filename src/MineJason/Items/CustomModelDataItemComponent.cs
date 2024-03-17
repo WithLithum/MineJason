@@ -16,8 +16,8 @@ public sealed class CustomModelDataItemComponent : InvariantItemComponent<int>
     /// <summary>
     /// The registered type of this data component.
     /// </summary>
-    public static readonly ItemComponentType Type = new(typeof(CustomModelDataItemComponent),
-        new ResourceLocation("minecraft", "custom_model_data"));
+    public static readonly ResourceLocation Type = 
+        new ResourceLocation("minecraft", "custom_model_data");
 
     /// <summary>
     /// Initialises a new instance of the <see cref="CustomModelDataItemComponent"/> class.

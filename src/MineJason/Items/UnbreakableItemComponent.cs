@@ -13,6 +13,6 @@ public sealed class UnbreakableItemComponent : TooltipFlagItemComponent
     /// <summary>
     /// The registered type of this data component.
     /// </summary>
-    public static readonly ItemComponentType Type = new(typeof(RepairCostItemComponent),
-        new ResourceLocation("minecraft", "unbreakable"));
+    public static readonly ResourceLocation Type = 
+        new ResourceLocation("minecraft", "unbreakable");
 }

@@ -13,6 +13,6 @@ public class HideAdditionalTooltipItemComponent : EmptyItemComponent
     /// <summary>
     /// The registered type of this data component.
     /// </summary>
-    public static readonly ItemComponentType Type = new(typeof(CustomDataItemComponent),
-        new ResourceLocation("minecraft", "hide_additional_tooltip"));    
+    public static readonly ResourceLocation Type = 
+        new ResourceLocation("minecraft", "hide_additional_tooltip");    
 }

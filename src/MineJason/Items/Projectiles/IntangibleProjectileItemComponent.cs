@@ -17,6 +17,6 @@ public sealed class IntangibleProjectileItemComponent : EmptyItemComponent
     /// <summary>
     /// The registered type of this data component.
     /// </summary>
-    public static readonly ItemComponentType Type = new(typeof(CustomDataItemComponent),
-        new ResourceLocation("minecraft", "intangible_projectile"));
+    public static readonly ResourceLocation Type = 
+        new("minecraft", "intangible_projectile");
 }

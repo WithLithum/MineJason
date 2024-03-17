@@ -4,7 +4,6 @@
 
 namespace MineJason.Serialization.TextJson;
 
-using System.Text.Json;
 using System.Text.Json.Serialization;
 using JetBrains.Annotations;
 using MineJason.Colors;
@@ -48,7 +47,6 @@ using MineJason.Items;
 [JsonSerializable(typeof(ShowItemHoverEvent))]
 [JsonSerializable(typeof(ShowTextHoverEvent))]
 [JsonSerializable(typeof(ItemStack))]
-[JsonSerializable(typeof(ItemComponentCollection))]
 [JsonSerializable(typeof(ItemComponentDictionary))]
 [JsonSerializable(typeof(string))]
 [JsonSerializable(typeof(bool))]

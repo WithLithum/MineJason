@@ -16,8 +16,8 @@ public class BannerPatternsItemComponent : NbtValueItemComponent<SNbtListValue<B
     /// <summary>
     /// The registered type of this data component.
     /// </summary>
-    public static readonly ItemComponentType Type = new(typeof(CustomDataItemComponent),
-        new ResourceLocation("minecraft", "custom_data"));
+    public static readonly ResourceLocation Type =
+        new ResourceLocation("minecraft", "custom_data");
 
     /// <summary>
     /// Initialises a new instance of the <see cref="BannerPatternsItemComponent"/> class.
