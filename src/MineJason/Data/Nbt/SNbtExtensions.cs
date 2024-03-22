@@ -43,4 +43,38 @@ internal static class SNbtExtensions
     {
         return builder.Property(key, new SNbtFloatValue(value));
     }
+    
+    internal static SNbtObjectBuilder PropertyNullable<T>(this SNbtObjectBuilder builder, string key, T? value)
+        where T : ISNbtValue
+    {
+        if (value != null)
+        {
+            builder.Property(key, value);
+        }
+        
+        return builder;
+    }
+    
+    internal static SNbtObjectBuilder PropertyNotEmpty<TCollection, TItem>(this SNbtObjectBuilder builder, string key, TCollection? value)
+        where TCollection : ICollection<TItem>, ISNbtValue
+    {
+        if (value != null && value.Count != 0)
+        {
+            builder.Property(key, value);
+        }
+        
+        return builder;
+    }
+    
+    internal static SNbtObjectBuilder PropertyNotEmpty<TKey, TValue>(this SNbtObjectBuilder builder, string key, IDictionary<TKey, TValue>? value)
+    {
+        if (value != null
+            && value.Count != 0
+            && value is ISNbtValue val)
+        {
+            builder.Property(key, val);
+        }
+        
+        return builder;
+    }
 }

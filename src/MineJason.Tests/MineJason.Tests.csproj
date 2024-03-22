@@ -21,8 +21,4 @@
     <ProjectReference Include="..\MineJason\MineJason.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Items\" />
-  </ItemGroup>
-
 </Project>
