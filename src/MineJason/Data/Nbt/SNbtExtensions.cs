@@ -44,6 +44,22 @@ internal static class SNbtExtensions
         return builder.Property(key, new SNbtFloatValue(value));
     }
     
+    internal static SNbtObjectBuilder PropertyNotDefault(this SNbtObjectBuilder builder, string key, bool value, bool defaultValue)
+    {
+        return value == defaultValue
+            ? builder
+            : builder.Property(key, new SNbtByteValue(value));
+    }
+    
+    internal static SNbtObjectBuilder PropertyNotDefault(this SNbtObjectBuilder builder, string key, float value, float defaultValue)
+    {
+        // Don't want tolerance here as value should be default value, which should not have gone through any multiply
+        // If you multiply you change it.
+        return value.Equals(defaultValue)
+            ? builder
+            : builder.Property(key, new SNbtFloatValue(value));
+    }
+    
     internal static SNbtObjectBuilder PropertyNullable<T>(this SNbtObjectBuilder builder, string key, T? value)
         where T : ISNbtValue
     {
