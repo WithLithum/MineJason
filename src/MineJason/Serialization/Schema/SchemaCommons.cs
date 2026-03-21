@@ -1,21 +1,18 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
-namespace MineJason.Serialization.Schema;
-
+using System.Text.Json;
 using MineJason.Components;
 using MineJason.Dialogs;
 using MineJason.Dialogs.Input;
-using MineJason.Events;
-using MineJason.Events.Hover;
 using MineJason.Serialization.IO;
 using MineJason.Serialization.IO.Json;
 using MineJason.Serialization.Schema.Objects;
 using MineJason.Serialization.Schema.Primitive;
 using MineJason.Serialization.Utilities.Results;
 using MineJason.Text;
-using System.Text.Json;
 
+namespace MineJason.Serialization.Schema;
 internal static class SchemaCommons
 {
     internal static readonly JsonNodeEncoder JsonEncoder = new();
@@ -70,6 +67,7 @@ internal static class SchemaCommons
             .Property("interpret", x => x.Interpret, BooleanSchema.Instance,
                 optional: true,
                 ignoreIf: x => !x)
+            .OptionalBoolean("plain", x => x.Plain, ignoreIf: x => x != true)
             .Property("separator",
                 x => x.Separator,
                 TextComponentSchema.Instance,

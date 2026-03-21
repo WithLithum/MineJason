@@ -1,13 +1,13 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: Apache-2.0
 
-namespace MineJason.Tests.Client;
-
 using System.Text.Json;
 using MineJason.Data;
 using MineJason.Data.Coordinates;
 using MineJason.Serialization.TextJson;
 using MineJason.Text.Colors;
+
+namespace MineJason.Tests.Client;
 
 public class SimpleSerializationTests
 {
@@ -152,6 +152,42 @@ public class SimpleSerializationTests
 
         // Assert
         Assert.Equal("{\"type\":\"nbt\",\"source\":\"storage\",\"nbt\":\"path.to.NBT\",\"storage\":\"mine:storage\"}", json);
+    }
+
+    [Fact]
+    public void StorageNbt_InterpretEnabled_OutputsPlainTrue()
+    {
+        // Arrange
+        var component = ChatComponent.CreateNbt()
+            .Storage(new ResourceLocation("mine", "storage"))
+            .Path("path.to.NBT")
+            .Interpret()
+            .Build();
+
+        // Act
+        var json = JsonSerializer.Serialize(component,
+            MineJasonTextJsonContext.Default.ChatComponent);
+
+        // Assert
+        Assert.Equal("{\"type\":\"nbt\",\"source\":\"storage\",\"nbt\":\"path.to.NBT\",\"interpret\":true,\"storage\":\"mine:storage\"}", json);
+    }
+
+    [Fact]
+    public void StorageNbt_PlainEnabled_OutputsPlainTrue()
+    {
+        // Arrange
+        var component = ChatComponent.CreateNbt()
+            .Storage(new ResourceLocation("mine", "storage"))
+            .Path("path.to.NBT")
+            .Plain()
+            .Build();
+
+        // Act
+        var json = JsonSerializer.Serialize(component,
+            MineJasonTextJsonContext.Default.ChatComponent);
+
+        // Assert
+        Assert.Equal("{\"type\":\"nbt\",\"source\":\"storage\",\"nbt\":\"path.to.NBT\",\"plain\":true,\"storage\":\"mine:storage\"}", json);
     }
 
     [Fact]

@@ -22,4 +22,9 @@ public readonly ref struct NBTTextComponentCreationInfo
     /// Gets a value indicating whether to interpret values.
     /// </summary>
     public bool Interpret { get; init; }
+
+    /// <summary>
+    /// Gets a value indicating whether to disable pretty printing for NBT values.
+    /// </summary>
+    public bool Plain { get; init; }
 }

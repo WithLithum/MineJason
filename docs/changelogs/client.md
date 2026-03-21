@@ -6,23 +6,32 @@ This document notes most user-visible changes of this library. This format is lo
 
 ### Added
 
-- Added support for the new `fallback` field for object components introduced in Minecraft 26.1.
+- Added support for the following new text component fields introduced in 26.1: 
+	- `fallback` field for object components
+	- `plain` field for NBT components
 - Added `TryParse` support for `IntegralRange`.
-- Added missing documentation comments.
 
 ### Changed
 
 - Refactored entity selector parsers to use `Span<char>` where appropriate.
-  - This should, in theory, reduce allocation and improve performance of entity selector parsing.
+  - This should, in theory, reduce allocation and improve performance of entity selector parsing. 
 
 ### Removed
 
 - SharpNBT extension library has been removed from codebase.
 
+### Fixed
+
+- Added missing documentation comments for some symbols.
+
 ### Deprecated
 
 - Deprecated `EntitySelectorParser.ParseIntegralRange`. Calls to that method should be replaced
   with call to `IntegralRange.Parse()` or `IntegralRange.TryParse()`.
+
+### Other
+
+- Consolidated repositories.
 
 ## [0.7.0-alpha.2] - 2026/03/01
 
@@ -41,10 +50,6 @@ This document notes most user-visible changes of this library. This format is lo
 - **BREAKING**: Removed the following previously deprecated types:
   - `NameMatch`
   - `ScoreboardSearcher` 
-
-### Other
-
-- Moved repository to Codeberg.
 
 ## [0.7.0-alpha.1] - 2025/10/28
 

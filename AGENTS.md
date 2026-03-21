@@ -16,6 +16,7 @@ Key paths:
         - `Components/` — Where text components used to be in, don't place new components in here
         - `Dialogs/` — [Dialogs](http://minecraft.wiki/w/Dialog)  support
         - `Serialization/` — Code that works with `MineJason.Serialization`
+            - `Schema/` — Schemas for the Client module
         - `Text/` — Where new [text components](https://minecraft.wiki/w/Text_component_format) types and related types needs to be in
     - `MineJason.Serialization/` — Handles format-agnostic DOM serialization
         - `Schema/` — Schemas which handles specific types
@@ -29,6 +30,13 @@ Key paths:
         - `Client/` — Tests for `MineJason`
         - `NBT/` — Tests for `MineJason.SNbt`
         - `Serialization/` — Tests for `MineJason.Serialization`
+
+## Build and test commands
+
+From repository root:
+
+- Build entire solution: `dotnet build "src/MineJason.slnx"`
+- Run unit tests: `dotnet test --project "src/MineJason.Tests/MineJason.Tests.csproj"`
 
 ## Coding standards
 

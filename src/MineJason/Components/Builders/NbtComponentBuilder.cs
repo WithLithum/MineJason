@@ -13,7 +13,8 @@ public abstract class NbtComponentBuilder<T> : ChatComponentBuilder<T>
     private string? _path;
     private ChatComponent? _separator;
     private bool _interpret;
-    
+    private bool _plain;
+
     /// <summary>
     /// Specifies the path to the NBT value.
     /// </summary>
@@ -33,6 +34,19 @@ public abstract class NbtComponentBuilder<T> : ChatComponentBuilder<T>
     public NbtComponentBuilder<T> Interpret(bool value = true)
     {
         _interpret = value;
+        return this;
+    }
+
+    /// <summary>
+    /// Specifies that the Minecraft client should not add styling to the formatted NBT value.
+    /// </summary>
+    /// <param name="value">
+    /// If <see langword="true"/>, the formatted NBT value is not styled.
+    /// </param>
+    /// <returns>The current instance.</returns>
+    public NbtComponentBuilder<T> Plain(bool value = true)
+    {
+        _plain = value;
         return this;
     }
 
@@ -62,7 +76,8 @@ public abstract class NbtComponentBuilder<T> : ChatComponentBuilder<T>
         {
             Path = _path,
             Separator = _separator,
-            Interpret = _interpret
+            Interpret = _interpret,
+            Plain = _plain
         };
     }
 }

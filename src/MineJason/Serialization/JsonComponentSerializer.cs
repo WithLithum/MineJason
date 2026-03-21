@@ -1,11 +1,11 @@
 ﻿// SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
-namespace MineJason.Serialization;
-
 using System.Text.Json;
 using JetBrains.Annotations;
 using MineJason.Serialization.TextJson;
+
+namespace MineJason.Serialization;
 
 /// <summary>
 /// Provides methods to assist with serialization of chat components by using

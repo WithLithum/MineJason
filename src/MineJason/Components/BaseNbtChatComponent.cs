@@ -1,12 +1,11 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
-namespace MineJason.Components;
-
 using MineJason.Components.Builders;
 using MineJason.Text;
-using System;
 using System.Diagnostics.CodeAnalysis;
+
+namespace MineJason.Components;
 
 /// <summary>
 /// Represents an NBT chat component.
@@ -33,6 +32,7 @@ public abstract record BaseNbtChatComponent : ChatComponent, IEquatable<BaseNbtC
         Path = nbtCreationInfo.Path;
         Separator = nbtCreationInfo.Separator;
         Interpret = nbtCreationInfo.Interpret;
+        Plain = nbtCreationInfo.Plain;
     }
 
     /// <summary>
@@ -45,6 +45,19 @@ public abstract record BaseNbtChatComponent : ChatComponent, IEquatable<BaseNbtC
     /// as a text component.
     /// </summary>
     public bool Interpret { get; init; }
+
+    /// <summary>
+    /// Gets a value indicating whether to render NBT values without styling when it would be
+    /// pretty printed and styled.
+    /// </summary>
+    /// <remarks>
+    /// <para>
+    /// Settings both this property and <see cref="Interpret"/> to <see langword="true"/> at the
+    /// same time is <i>not supported</i> by Minecraft.
+    /// </para>
+    /// <para>This property was introduced in 26.1.</para>
+    /// </remarks>
+    public bool Plain { get; init; }
 
     /// <summary>
     /// Gets or sets the component as the separator between multiple values.
