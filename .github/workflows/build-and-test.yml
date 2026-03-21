@@ -21,7 +21,7 @@ jobs:
       with:
         global-json-file: global.json
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore "src/MineJason.slnx"
     - name: Build
       run: dotnet build "src/MineJason.slnx" --no-restore
     - name: Test
