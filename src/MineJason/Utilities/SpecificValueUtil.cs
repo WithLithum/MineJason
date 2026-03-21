@@ -1,0 +1,31 @@
+// SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
+// SPDX-License-Identifier: LGPL-3.0-or-later
+
+namespace MineJason.Utilities;
+
+internal static class SpecificValueUtil
+{
+    internal static bool TryParseLowerBoolean(in ReadOnlySpan<char> from, out bool result)
+    {
+        result = default;
+
+        switch (from)
+        {
+            case "true":
+                result = true;
+                break;
+            case "false":
+                result = false;
+                break;
+            default:
+                return false;
+        }
+
+        return true;
+    }
+
+    internal static string ToLowerBooleanString(bool value)
+    {
+        return value ? "true" : "false";
+    }
+}

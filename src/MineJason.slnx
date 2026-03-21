@@ -1,0 +1,10 @@
+<!-- SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026 -->
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+
+<Solution>
+  <Project Path="MineJason.Serialization.fNbt/MineJason.Serialization.fNbt.csproj" />
+  <Project Path="MineJason.Serialization/MineJason.Serialization.csproj" />
+  <Project Path="MineJason.SNbt/MineJason.SNbt.csproj" />
+  <Project Path="MineJason.Tests/MineJason.Tests.csproj" />
+  <Project Path="MineJason/MineJason.csproj" />
+</Solution>
