@@ -8,9 +8,7 @@ MineJason is a suite of libraries that deals with various formats used in Minecr
 The suite is primarily consisted of the following "modules":
 
 - [Client](src/text/): Client formats such as text components and dialogs
-
 - [Serialization](src/MineJason.Serialization): Format agnostic
-
 - [NBT](src/MineJason.NBT/): Supports NBT format (originally made for SNBT)
 
 This repository is the consolidated form of the three previously separated projects managed under the same hood.
