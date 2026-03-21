@@ -78,7 +78,7 @@ Your IDE and/or Git client should be able to do it for you automatically; consul
 
 ## Setting up Development Environment
 
-See the [setup guide](SETUP-en.md).
+See the [setup guide](SETUP.md).
 
 ## Intended Use Case
 
