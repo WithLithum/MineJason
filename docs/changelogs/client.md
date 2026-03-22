@@ -28,6 +28,7 @@ This document notes most user-visible changes of this library. This format is lo
 
 - Deprecated `EntitySelectorParser.ParseIntegralRange`. Calls to that method should be replaced
   with call to `IntegralRange.Parse()` or `IntegralRange.TryParse()`.
+- Deprecated the `StringGuidSchema` in the client library.
 
 ### Other
 

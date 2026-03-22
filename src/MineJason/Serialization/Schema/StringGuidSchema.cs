@@ -1,20 +1,22 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
-namespace MineJason.Serialization.Schema;
-
 using MineJason.Serialization.IO;
 using MineJason.Serialization.Utilities.Results;
+
+namespace MineJason.Serialization.Schema;
 
 /// <summary>
 /// Defines a schema that converts a <see cref="Guid"/> from or to its string representation,
 /// represented by the specified element type.
 /// </summary>
+[Obsolete("Use StringGuidSchema from the serialization library instead.")]
 public class StringGuidSchema : ValueSchema<Guid>
 {
     /// <summary>
     /// The singleton instance.
     /// </summary>
+    [Obsolete("Use Primitives.StringGuidSchema.Default instead.")]
     public static readonly StringGuidSchema Instance = new();
 
     private StringGuidSchema()

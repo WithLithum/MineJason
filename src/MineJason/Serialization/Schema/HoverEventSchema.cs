@@ -1,14 +1,15 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
-namespace MineJason.Serialization.Schema;
-
 using MineJason.Events.Hover;
 using MineJason.Serialization.IO;
 using MineJason.Serialization.Schema.Objects;
 using MineJason.Serialization.Schema.Primitive;
 using MineJason.Serialization.Utilities.Results;
+using PStringGuidSchema = MineJason.Serialization.Schema.Primitive.StringGuidSchema;
 using ShowItemHoverEvent = MineJason.Text.Behaviour.Hover.ShowItemHoverEvent;
+
+namespace MineJason.Serialization.Schema;
 
 /// <summary>
 /// Defines the schema that encodes or decodes <see cref="HoverEvent"/> to or from the given
@@ -32,7 +33,7 @@ public class HoverEventSchema : ValueSchema<HoverEvent>
             .Property("uuid", x => x.Id,
                 new OneOfValueSchema<Guid>([
                     MinecraftUuidSchema.Instance,
-                    StringGuidSchema.Instance
+                    PStringGuidSchema.Default
                 ]))
             .Build();
 
