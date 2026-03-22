@@ -8,9 +8,18 @@
 
 		<RepositoryType>git</RepositoryType>
 		<RepositoryUrl>https://github.com/WithLithum/MineJason.git</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/WithLithum/MineJason</PackageProjectUrl>
+
+		<!-- Deterministic builds -->
+		<ProduceReferenceAssembly>False</ProduceReferenceAssembly>
+		<EmbedUntrackedSources>true</EmbedUntrackedSources>
 
 		<!-- Change this -->
 		<VersionPrefix>0.7.0</VersionPrefix>
 		<VersionSuffix>alpha.3</VersionSuffix>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(CI)' == 'true'">
+		<ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
 	</PropertyGroup>
 </Project>
