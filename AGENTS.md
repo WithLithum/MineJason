@@ -44,6 +44,11 @@ From repository root:
 - Add REUSE SPDX licence header on all files
 - Refer to [the Style Guide](docs/STYLEGUIDE.md) for more standards
 
+## Important things
+
+- Do not add `VersionPrefix` or `VersionSuffix` in `csproj` files unless they are already there
+- Do not specify `VersionPrefix` or `VersionSuffix` nor use `--version-suffix` in command line
+
 ## Unit testing
 
 - **Use Microsoft Testing Platform (MTP)**

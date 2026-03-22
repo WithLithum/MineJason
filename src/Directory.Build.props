@@ -8,5 +8,9 @@
 
 		<RepositoryType>git</RepositoryType>
 		<RepositoryUrl>https://github.com/WithLithum/MineJason.git</RepositoryUrl>
+
+		<!-- Change this -->
+		<VersionPrefix>0.7.0</VersionPrefix>
+		<VersionSuffix>alpha.3</VersionSuffix>
 	</PropertyGroup>
 </Project>
