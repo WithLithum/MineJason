@@ -1,0 +1,32 @@
+name: Package project
+
+on:
+  release: 
+    types: published
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@c2fa09f4bde5ebb9d1777cf28262a3eb3db3ced7 # v5.2.0
+      with:
+        global-json-file: global.json
+    # Get a short-lived NuGet API key
+    - name: NuGet login (OIDC → temp API key)
+      uses: NuGet/login@d22cc5f58ff5b88bf9bd452535b4335137e24544 # v1.0.0
+      id: login
+      with:
+        user: ${{ secrets.NUGET_USER }}
+    - name: Restore dependencies
+      run: dotnet restore "src/MineJason.slnx"
+    - name: Build
+      run: dotnet build "src/MineJason.slnx" --no-restore --configuration Release
+    - name: Test
+      run: dotnet test --project "src/MineJason.Tests/MineJason.Tests.csproj" --configuration Release --no-build --verbosity normal
+    - name: Pack
+      run: scripts/pack.sh
+    - name: Publish
+      run: dotnet nuget push "bin/*.nupkg" --api-key ${{steps.login.outputs.NUGET_API_KEY}} --source https://api.nuget.org/v3/index.json

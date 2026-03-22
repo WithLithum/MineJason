@@ -1,4 +1,4 @@
-<!-- Copyright (C) WithLithum & contributors 2024-2026 -->
+﻿<!-- Copyright (C) WithLithum & contributors 2024-2026 -->
 <!-- SPDX-License-Identifier: Apache-2.0 -->
 
 <Project Sdk="Microsoft.NET.Sdk">
@@ -39,18 +39,12 @@
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 	</ItemGroup>
-
-	<ItemGroup>
-		<Content Include="..\.editorconfig">
-			<Link>.editorconfig</Link>
-		</Content>
-	</ItemGroup>
-
 	<ItemGroup>
 		<None Update="PACK-README.md">
 			<Pack>True</Pack>
 			<PackagePath>\</PackagePath>
 		</None>
+		<None Include="logo.png" Pack="true" PackagePath="\" />
 	</ItemGroup>
 
 </Project>

@@ -1,8 +1,0 @@
-<!-- SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026 -->
-<!-- SPDX-License-Identifier: Apache-2.0 -->
-
-<Project>
-    <ItemGroup>
-        <None Include="$(SolutionDir)../assets/logo-128x.png" Pack="true" PackagePath="" />
-    </ItemGroup>
-</Project>

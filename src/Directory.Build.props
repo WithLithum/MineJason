@@ -4,7 +4,7 @@
 <Project>
 	<PropertyGroup>
 		<AnalysisMode>Recommended</AnalysisMode>
-		<PackageIcon>logo-128x.png</PackageIcon>
+		<PackageIcon>logo.png</PackageIcon>
 
 		<RepositoryType>git</RepositoryType>
 		<RepositoryUrl>https://github.com/WithLithum/MineJason.git</RepositoryUrl>
