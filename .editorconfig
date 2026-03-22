@@ -37,6 +37,12 @@ csharp_indent_labels = one_less_than_current
 csharp_qualified_using_at_nested_scope = true
 
 [*.{cs,vb}]
+#### Formatting styles ####
+
+# Import rules
+
+dotnet_sort_system_directives_first = true
+
 #### Naming styles ####
 
 # Naming rules

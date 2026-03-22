@@ -1,14 +1,14 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
-namespace MineJason.Data.Selectors;
-
 using System.Globalization;
 using MineJason.Data.Nbt;
 using MineJason.Data.Selectors.Advancements;
 using MineJason.Data.Selectors.Predicates;
 using MineJason.Exceptions;
 using MineJason.Utilities;
+
+namespace MineJason.Data.Selectors;
 
 public static partial class EntitySelectorStringFormatter
 {
@@ -53,7 +53,6 @@ public static partial class EntitySelectorStringFormatter
             throw new FormatException("Invalid value");
         }
 
-        GameModeMatch? gameModeMatch = null;
         Vector3D? position = null;
         Vector3D? diagonal = null;
         DistanceRange? distanceRange = null;

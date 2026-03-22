@@ -6,6 +6,7 @@ using MineJason.SNbt.Codecs.Primitives;
 
 namespace MineJason.SNbt.Codecs;
 
+[Obsolete("Use Serialization instead.")]
 internal static class CodecHelper
 {
     internal static void WriteViaCodec(object value, object codec, SNbtWriter writer)
