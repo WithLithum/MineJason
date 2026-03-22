@@ -1,16 +1,6 @@
-# Changelog
+# Serialization module pre-consolidation changelog
 
-This document records API-visible changes of the library.
-
-Note that what you see below is not "Common Changelog".
-
-## [Unreleased]
-
-### Changed
-
-- Added checks for certain `null` values in `ObjectSchema` and `ObjectSchemaBuilder`.
-
-## [0.1.0-alpha.7]
+## 0.1.0-alpha.7
 
 > [!NOTE]
 > This release reworked the majority of the Results and Schemas framework. It is necessary to check for all usages for errors.
@@ -48,7 +38,7 @@ Note that what you see below is not "Common Changelog".
 
 - Deprecated implicit cast from `OpResult` to `DataResult<T>`, in favour of the new `ErrorRecord` structure.
 
-## [0.1.0-alpha.6] - 2025-10-28
+## 0.1.0-alpha.6 - 2025-10-28
 
 ### Changed
 
@@ -59,7 +49,7 @@ Note that what you see below is not "Common Changelog".
 
 - Fixed the issue where object schema always return missing property error results with `property.Name` as property name. 
 
-## [0.1.0-alpha.5] - 2025-10-25
+## 0.1.0-alpha.5 - 2025-10-25
 
 ### Added
 
@@ -82,7 +72,7 @@ Note that what you see below is not "Common Changelog".
 - Deprecated `CausedBy(OpResult)` in `DataResult` in favour of the implicit conversion.
 - Deprecated `Success(TValue)` in `DataResult` in favour of the implicit conversion.
 
-## [0.1.0-alpha.4] - 2025-10-17
+## 0.1.0-alpha.4 - 2025-10-17
 
 ### Added
 
@@ -92,7 +82,7 @@ Note that what you see below is not "Common Changelog".
 
 - Improved the error message returned by `OneOfValueSchema` in cases where none of the schemas were successful. ([#2](https://github.com/MineJason/serialization/issues/2))
 
-## [0.1.0-alpha.3] - 2025-10-16
+## 0.1.0-alpha.3 - 2025-10-16
 
 ### Added
 
@@ -103,7 +93,7 @@ Note that what you see below is not "Common Changelog".
 
 - **Breaking:** Changed `OneOfValueSchema` to accept `IValueSchema<TValue, TElement>` instead of the class `ValueSchema<TValue, TElement>`.
 
-## [0.1.0-alpha.2] - 2025-10-14
+## 0.1.0-alpha.2 - 2025-10-14
 
 ### Added
 
@@ -128,14 +118,6 @@ Note that what you see below is not "Common Changelog".
 ## 0.1.0-alpha.1 - 2025-10-08
 
 _Initial release_.
-
-[Unreleased]: https://codeberg.org/MineJason/serialization/compare/v0.1.0-alpha.7..HEAD
-[0.1.0-alpha.7]: https://codeberg.org/MineJason/serialization/compare/v0.1.0-alpha.6..v0.1.0-alpha.7
-[0.1.0-alpha.6]: https://codeberg.org/MineJason/serialization/compare/v0.1.0-alpha.5..v0.1.0-alpha.6
-[0.1.0-alpha.5]: https://codeberg.org/MineJason/serialization/compare/v0.1.0-alpha.4..v0.1.0-alpha.5
-[0.1.0-alpha.4]: https://codeberg.org/MineJason/serialization/compare/v0.1.0-alpha.3..v0.1.0-alpha.4
-[0.1.0-alpha.3]: https://codeberg.org/MineJason/serialization/compare/v0.1.0-alpha.2..v0.1.0-alpha.3
-[0.1.0-alpha.2]: https://codeberg.org/MineJason/serialization/release/tag/v0.1.0-alpha.2
 
 <!-- Put here to not break Kate preview -->
 <!--

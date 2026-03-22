@@ -1,23 +1,6 @@
-# Changelog
+# NBT module pre-consolidation changelog
 
-This document records all changes made to this project in each version
-release.
-
-## [Unreleased]
-
-### Changed
-
-- **Breaking**: Updated to .NET 10.
-
-### Deprecated
-
-- NBT codecs have been deprecated.
-
-### Other
-
-- Consolidated repositories.
-
-## [0.5.0-alpha.1] - 2025/09/27
+## 0.5.0-alpha.1 - 2025/09/27
 
 ### Added
 
@@ -29,7 +12,7 @@ release.
 - Rewritten `GuidHelper`, replacing some implementations with low-allocation `Span`-based ones.
 - Deprecated `GuidHelper.FromUniversalBytes` in favour of the built-in `Guid(ReadOnlySpan<byte>, bool)` constructor.
 
-## [0.4.0-alpha.2] - 2024/6/17
+## 0.4.0-alpha.2 - 2024/6/17
 
 ### Added
 
@@ -46,12 +29,12 @@ release.
 
 - Removed the deprecated `ISNbtValue` interface and relevant methods.
 
-## [0.4.0-alpha.1] - 2024/5/31
+## 0.4.0-alpha.1 - 2024/5/31
 
 ### Added
 
-- [MNT-10](https://minejason.atlassian.net/browse/MNT-10): Added support for parsing primitive type and compounds consisted of primitive types.
-- [MNT-14](https://minejason.atlassian.net/browse/MNT-14): Added a system to write arbitrary value with codecs that converts it to its NBT representation. ([PR #2](https://bitbucket.org/minejason/minejason-snbt/pull-requests/2))
+- Added support for parsing primitive type and compounds consisted of primitive types.
+- Added a system to write arbitrary value with codecs that converts it to its NBT representation.
 - Added `SNbtWriter.WriteValue(object)` method.
 - Added the `SNbtCodec` attribute that specifies a codec for any arbitrary type.
 
@@ -61,54 +44,54 @@ release.
   - The new method for writing string is now `SNbtWriter.WriteStringValue(string, bool)`, that behaves exactly the same as the original method.
   - This was done because calling the old method without the optional single quote argument results in a call to `SNbtWriter.WriteValue(object)`, making the code no longer source compatible.
 
-## [0.3.6-alpha] - 2024/5/27
+## 0.3.6-alpha - 2024/5/27
 
 ### Fixed
 
 - Addressed an issue where suffix of entries in written `SNbtLongArray` and `SNbtByteArray` values are missing. 
 
-## [0.3.5-alpha] - 2024/5/14
+## 0.3.5-alpha - 2024/5/14
 
-- [MNT-7](https://minejason.atlassian.net/browse/MNT-7): Changed the URLs of the NuGet package to its new locations.
-- [MNT-8](https://minejason.atlassian.net/browse/MNT-8): Updated the package README.
-- [MNT-9](https://minejason.atlassian.net/browse/NNT-9): Enabled XML documentation output and completed all documentation comments for symbols.
+- Changed the URLs of the NuGet package to its new locations.
+- Updated the package README.
+- Enabled XML documentation output and completed all documentation comments for symbols.
 
-## [0.3.4-alpha] - 2024/4/30
+## 0.3.4-alpha - 2024/4/30
 
 ### Added
 
-- [MNT-5](https://minejason.atlassian.net/browse/MNT-5): Added support for writing quoted key names in `SNbtWriter`.
+- Added support for writing quoted key names in `SNbtWriter`.
   - Also added support for writing properties with quoted key names.
 - Added support for writing Boolean values and properties (represented by `TAG_Byte`) in `SNbtWriter.`
 
 ### Fixed
 
-- [MNT-6](https://minejason.atlassian.net/browse/MNT-6): Fixed the `sbyte` overload of `WriteProperty` not writing the `b` suffix required to specify `TAG_Byte`.
+- Fixed the `sbyte` overload of `WriteProperty` not writing the `b` suffix required to specify `TAG_Byte`.
 
-## [0.3.3-alpha] - 2024/4/27
+## 0.3.3-alpha - 2024/4/27
 
 ### Added
 
 - Added `IList` constructor for `SNbtCollection<T>`.
 
-## [0.3.2-alpha] - 2024/4/19
+## 0.3.2-alpha - 2024/4/19
 
 ### Fixes
 
 - Fixed build failure by removing GitVersion.
 
-## [0.3.1-alpha] - 2024/4/19
+## 0.3.1-alpha - 2024/4/19
 
 ### Added
 
-- [MNT-1](https://minejason.atlassian.net/browse/MNT-1): Added implementation for `Guid` values in SNBT.
-- [MNT-2](https://minejason.atlassian.net/browse/MNT-2): Add `sbyte` primitive support to `SNbtWriter`.
+- Added implementation for `Guid` values in SNBT.
+- Added `sbyte` primitive support to `SNbtWriter`.
 
 ### Changed
 
-- [MNT-3](https://minejason.atlassian.net/browse/MNT-3): Renamed all overloads of `WriteValue` that deals with `IFormattable` and restricts their access to `internal`.
+- Renamed all overloads of `WriteValue` that deals with `IFormattable` and restricts their access to `internal`.
 
-## [0.3.0-alpha] - 2024/4/18
+## 0.3.0-alpha - 2024/4/18
 
 ### Added
 
@@ -122,20 +105,20 @@ release.
 - Deprecated methods relevant with `ISNbtValue`.
 - Removed `ISNbtValue` and its implementation from the value representation types.
 
-## [0.2.2-alpha] - 2024/3/22
+## 0.2.2-alpha - 2024/3/22
 
 ### Fixed
 
 - Fixed the constructor of `SNbtByteValue` representing `false` as `1` and `true` as `0`.
 - Fixed the `BooleanValue` method of `SNbtByteValue` not operating correctly.
 
-## [0.2.1-alpha] - 2024/3/17
+## 0.2.1-alpha - 2024/3/17
 
 ### Fixed
 
 - Fixed an issue resulted in adding a `Byte` value into `SNbtByteArray` causing stack overflow.
 
-## [0.2.0-alpha] - 2024/3/17
+## 0.2.0-alpha - 2024/3/17
 
 ### Added
 
@@ -149,25 +132,9 @@ release.
 
 - `ToSNbtString()` method of default `ISNbtValue` implementations now internally use `SNbtWriter`.
 
-## [0.1.0-alpha] - 2024/3/15
+## 0.1.0-alpha - 2024/3/15
 
 - Initial release.
-
-[Unreleased]: https://codeberg.org/MineJason/NBT/compare/v0.5.0-alpha.1..HEAD
-[0.5.0-alpha.1]: https://codeberg.org/MineJason/NBT/compare/v0.4.0-alpha.2..v0.5.0-alpha.1
-[0.4.0-alpha.2]: https://codeberg.org/MineJason/NBT/compare/v0.4.0-alpha.1..v0.4.0-alpha.2
-[0.4.0-alpha.1]: https://codeberg.org/MineJason/NBT/compare/v0.3.6-alpha..v0.4.0-alpha.1
-[0.3.6-alpha]: https://codeberg.org/MineJason/NBT/compare/v0.3.5-alpha..v0.3.6-alpha
-[0.3.5-alpha]: https://codeberg.org/MineJason/NBT/compare/v0.3.4-alpha..v0.3.5-alpha
-[0.3.4-alpha]: https://codeberg.org/MineJason/NBT/compare/v0.3.3-alpha..v0.3.4-alpha
-[0.3.3-alpha]: https://codeberg.org/MineJason/NBT/compare/v0.3.2-alpha..v0.3.3-alpha
-[0.3.2-alpha]: https://codeberg.org/MineJason/NBT/compare/v0.3.1-alpha..v0.3.2-alpha
-[0.3.1-alpha]: https://codeberg.org/MineJason/NBT/compare/v0.3.0-alpha..v0.3.1-alpha
-[0.3.0-alpha]: https://codeberg.org/MineJason/NBT/compare/v0.2.2-alpha..v0.3.0-alpha
-[0.2.2-alpha]: https://codeberg.org/MineJason/NBT/compare/v0.2.1-alpha..v0.2.2-alpha
-[0.2.1-alpha]: https://codeberg.org/MineJason/NBT/compare/v0.2.0-alpha..v0.2.1-alpha
-[0.2.0-alpha]: https://codeberg.org/MineJason/NBT/compare/v0.1.0-alpha..v0.2.0-alpha
-[0.1.0-alpha]: https://codeberg.org/MineJason/nbt/releases/tag/v0.1.0-alpha
 
 <!-- Copyright (C) WithLithum & contributors 2024-2026 -->
 <!-- SPDX-License-Identifier: Apache-2.0 -->

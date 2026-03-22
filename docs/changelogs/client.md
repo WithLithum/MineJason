@@ -1,41 +1,6 @@
-# Changelog
+# Client module pre-consolidation changelog
 
-This document notes most user-visible changes of this library. This format is loosely based on the [Keep a Changelog](https://keep-a-changelog.com) format and this project adheres to [Semantic Versioning](https://semver.org).
-
-## [Unreleased]
-
-### Added
-
-- Added support for the following new text component fields introduced in 26.1: 
-	- `fallback` field for object components
-	- `plain` field for NBT components
-- Added `TryParse` support for `IntegralRange`.
-
-### Changed
-
-- Refactored entity selector parsers to use `Span<char>` where appropriate.
-  - This should, in theory, reduce allocation and improve performance of entity selector parsing. 
-- Changed the implementation of several `GuidExtensions` methods to use `Span`-based implementations.
-
-### Removed
-
-- SharpNBT extension library has been removed from codebase.
-
-### Fixed
-
-- Added missing documentation comments for some symbols.
-
-### Deprecated
-
-- Deprecated `EntitySelectorParser.ParseIntegralRange`. Calls to that method should be replaced
-  with call to `IntegralRange.Parse()` or `IntegralRange.TryParse()`.
-- Deprecated the `StringGuidSchema` in the client library.
-
-### Other
-
-- Consolidated repositories.
-
-## [0.7.0-alpha.2] - 2026/03/01
+## 0.7.0-alpha.2 - 2026/03/01
 
 ### Changed
 
@@ -53,7 +18,7 @@ This document notes most user-visible changes of this library. This format is lo
   - `NameMatch`
   - `ScoreboardSearcher` 
 
-## [0.7.0-alpha.1] - 2025/10/28
+## 0.7.0-alpha.1 - 2025/10/28
 
 Note that this release is extensively breaking in many, many ways. Check every usage of the library
 after you have upgraded the package. Old code WILL NOT WORK.
@@ -93,7 +58,7 @@ Some breaking changes may be missed, so again, check your entire codebase.
 
 - Fixed behavioural differences between the game and the library when parsing components with `type` property.
 
-## [0.6.0-alpha.2] - 2024/6/20
+## 0.6.0-alpha.2 - 2024/6/20
 
 ### Added
 
@@ -111,7 +76,7 @@ Some breaking changes may be missed, so again, check your entire codebase.
 
 - Deprecated `NbtProvider` and relevant functions, including in SharpNBT extension.
 
-## [0.6.0-alpha.1] - 2024/6/14
+## 0.6.0-alpha.1 - 2024/6/14
 
 ### Added
 
@@ -139,14 +104,14 @@ Some breaking changes may be missed, so again, check your entire codebase.
   - `TagSelector`
   - `Vector3D`
 
-## [0.5.1-alpha] - 2024/05/25
+## 0.5.1-alpha - 2024/05/25
 
 ### Fixes
 
 - Fixed raw string not supported for deserializing `ChatComponent`.
 - Fixed `ChatComponentConverter` not supporting context-based serialization.
 
-## [0.5.0-alpha] - 2024/05/10
+## 0.5.0-alpha - 2024/05/10
 
 ### Added
 
@@ -168,7 +133,7 @@ Some breaking changes may be missed, so again, check your entire codebase.
 - `IsRelative` properties and constructor reloads are made deprecated in `BlockPosition` and `BlockPositionComponent`.
 - `AnyBlockPosition` and associated serialization types have been deprecated.
 
-## [0.4.0-alpha]
+## 0.4.0-alpha
 
 This release contains breaking changes.
 
@@ -202,7 +167,7 @@ This release contains breaking changes.
 - Fixed definition error in `show_item` hover event that renders `count` and `tag` required, and incorrectly serializes `tag` as `nbt`.
 - Fixed an issue resulted in `NotSupportedException` being thrown when deserializing NBT components.
 
-## [0.3.0-alpha]
+## 0.3.0-alpha
 
 ### Added
 
@@ -216,13 +181,13 @@ This release contains breaking changes.
 
 - Entity chat components now uses `EntitySelector` instead of a string.
 
-## [0.2.1-alpha]
+## 0.2.1-alpha
 
 ### Added
 
 - Added support for RGB chat colors.
 
-## [0.2.0-alpha]
+## 0.2.0-alpha
 
 ### Added
 
@@ -240,22 +205,9 @@ This release contains breaking changes.
   - `Type` property in `ShowEntityHoverEvent`.
   - `Font` property in `ChatComponent`.
 
-## [0.1.0-alpha]
+## 0.1.0-alpha
 
 - First version release.
-
-[Unreleased]: https://codeberg.org/MineJason/text/compare/v0.7.0-alpha.2..HEAD
-[0.7.0-alpha.2]: https://codeberg.org/MineJason/text/compare/v0.7.0-alpha.1..v0.7.0-alpha.2
-[0.7.0-alpha.1]: https://codeberg.org/MineJason/text/compare/v0.6.0-alpha.2..v0.7.0-alpha.1
-[0.6.0-alpha.2]: https://codeberg.org/MineJason/text/compare/v0.6.0-alpha.1..v0.6.0-alpha.2
-[0.6.0-alpha.1]: https://codeberg.org/MineJason/text/compare/v0.5.1-alpha..v0.6.0-alpha.1
-[0.5.1-alpha]: https://codeberg.org/MineJason/text/compare/v0.4.0-alpha..v0.5.1-alpha
-[0.5.0-alpha]: https://codeberg.org/MineJason/text/compare/v0.4.1-alpha..v0.5.0-alpha
-[0.4.0-alpha]: https://codeberg.org/MineJason/text/compare/v0.3.0-alpha..v0.4.0-alpha
-[0.3.0-alpha]: https://codeberg.org/MineJason/text/compare/v0.2.1-alpha..v0.3.0-alpha
-[0.2.1-alpha]: https://codeberg.org/MineJason/text/compare/v0.2.0-alpha..v0.2.1-alpha
-[0.2.0-alpha]: https://codeberg.org/MineJason/text/compare/v0.1.0-alpha..v0.2.0-alpha
-[0.1.0-alpha]: https://codeberg.org/MineJason/text/tree/v0.1.0-alpha
 
 <!-- Put this here because this breaks KIO -->
 <!-- SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026 -->
