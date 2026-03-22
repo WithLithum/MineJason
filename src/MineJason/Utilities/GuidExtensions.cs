@@ -1,9 +1,9 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
-namespace MineJason.Utilities;
-using System;
 using System.Buffers.Binary;
+
+namespace MineJason.Utilities;
 
 /// <summary>
 /// Supports the operation of <see cref="Guid"/> and conversion between Minecraft
@@ -66,14 +66,13 @@ public static class GuidExtensions
     /// <returns>The most significant bits as a <see cref="long"/>.</returns>
     public static long GetMostSignificantBits(this Guid id)
     {
-        // From: libsignal-service-dotnet
+        Span<byte> buf = stackalloc byte[16];
+        if (!id.TryWriteBytes(buf, true, out _))
+        {
+            throw new InvalidOperationException("The GUID cannot be written to the buffer.");
+        }
 
-        byte[] gb = id.ToByteArray();
-        byte[] ms =
-        [
-            gb[6], gb[7], gb[4], gb[5], gb[0], gb[1], gb[2], gb[3]
-        ];
-        return BitConverter.ToInt64(ms, 0);
+        return BinaryPrimitives.ReadInt64BigEndian(buf[..8]);
     }
 
     /// <summary>
@@ -83,15 +82,13 @@ public static class GuidExtensions
     /// <returns>The least significant bits as a <see cref="long"/>.</returns>
     public static long GetLeastSignificantBits(this Guid id)
     {
-        // From: libsignal-service-dotnet
+        Span<byte> buf = stackalloc byte[16];
+        if (!id.TryWriteBytes(buf, true, out _))
+        {
+            throw new InvalidOperationException("The GUID cannot be written to the buffer.");
+        }
 
-        byte[] gb = id.ToByteArray();
-        byte[] ls =
-        [
-            gb[15], gb[14], gb[13], gb[12], gb[11], gb[10], gb[9], gb[8]
-        ];
-
-        return BitConverter.ToInt64(ls, 0);
+        return BinaryPrimitives.ReadInt64BigEndian(buf[8..]);
     }
 
     /// <summary>
@@ -134,18 +131,13 @@ public static class GuidExtensions
     /// <returns>The created <see cref="Guid"/>.</returns>
     public static Guid CreateGuid(long most, long least)
     {
-        // From: libsignal-service-dotnet
+        Span<byte> buf = stackalloc byte[16];
 
-        byte[] ms = BitConverter.GetBytes(most);
-        byte[] ls = BitConverter.GetBytes(least);
+        // Write BIG ENDIAN data to the buffer
+        BinaryPrimitives.WriteInt64BigEndian(buf[..8], most);
+        BinaryPrimitives.WriteInt64BigEndian(buf[8..], least);
 
-        byte[] guidBytes =
-        [
-                ms[4], ms[5], ms[6], ms[7], ms[2], ms[3], ms[0], ms[1],
-                ls[7], ls[6], ls[5], ls[4], ls[3], ls[2], ls[1], ls[0]
-        ];
-
-        return new Guid(guidBytes);
+        return new Guid(buf, bigEndian: true);
     }
 
     /// <summary>

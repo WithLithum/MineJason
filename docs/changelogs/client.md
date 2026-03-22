@@ -15,6 +15,7 @@ This document notes most user-visible changes of this library. This format is lo
 
 - Refactored entity selector parsers to use `Span<char>` where appropriate.
   - This should, in theory, reduce allocation and improve performance of entity selector parsing. 
+- Changed the implementation of several `GuidExtensions` methods to use `Span`-based implementations.
 
 ### Removed
 

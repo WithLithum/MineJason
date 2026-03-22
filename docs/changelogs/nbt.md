@@ -9,9 +9,13 @@ release.
 
 - **Breaking**: Updated to .NET 10.
 
+### Deprecated
+
+- NBT codecs have been deprecated.
+
 ### Other
 
-- Migrated repository to Codeberg.
+- Consolidated repositories.
 
 ## [0.5.0-alpha.1] - 2025/09/27
 
