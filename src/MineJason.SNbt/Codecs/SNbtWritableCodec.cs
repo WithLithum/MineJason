@@ -47,8 +47,9 @@ using MineJason.SNbt.Values;
 /// </code>
 /// </example>
 [PublicAPI]
+[Obsolete("Use Serialization instead.")]
 public class SNbtWritableCodec<T> : ISNbtCodec<T>
-    where T: ISNbtWritable
+    where T : ISNbtWritable
 {
     /// <summary>
     /// Unsupported operation.

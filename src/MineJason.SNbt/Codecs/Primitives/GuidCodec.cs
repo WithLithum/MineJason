@@ -8,6 +8,7 @@ using MineJason.SNbt.Values.Guids;
 namespace MineJason.SNbt.Codecs.Primitives;
 
 /// <inheritdoc />
+[Obsolete("Use Serialization instead.")]
 public class GuidCodec : ISNbtCodec<Guid>
 {
     /// <inheritdoc />

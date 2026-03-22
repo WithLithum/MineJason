@@ -1,11 +1,10 @@
-﻿// SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
+// SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: Apache-2.0
 
 using MineJason.SNbt.Parsing;
+using MineJason.SNbt.Values;
 
 namespace MineJason.SNbt.Codecs;
-
-using MineJason.SNbt.Values;
 
 /// <summary>
 /// Converts <see cref="T"/> to or from string NBT.
@@ -24,10 +23,11 @@ using MineJason.SNbt.Values;
 /// </list>
 /// </para>
 /// </remarks>
+[Obsolete("Use Serialization instead.")]
 public interface ISNbtCodec<T>
 {
     /// <summary>
-    /// Reads a NBT value from the reader and converts it to <see cref="T"/>.
+    /// Reads a NBT value from the reader and converts it to <typeparamref name="T"/>.
     /// </summary>
     /// <param name="reader">The reader.</param>
     /// <returns>The converted value.</returns>

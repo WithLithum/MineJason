@@ -3,6 +3,7 @@
 
 namespace MineJason.SNbt.Codecs.Primitives;
 
+[Obsolete("Use Serialization instead.")]
 internal static class DefaultCodecs
 {
     private static readonly Dictionary<Type, Type> Codecs = new()

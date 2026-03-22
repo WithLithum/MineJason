@@ -9,8 +9,9 @@ namespace MineJason.SNbt.Codecs;
 [AttributeUsage(AttributeTargets.Class
                 | AttributeTargets.Struct
                 | AttributeTargets.Delegate
-                | AttributeTargets.Enum 
+                | AttributeTargets.Enum
                 | AttributeTargets.Interface, AllowMultiple = false)]
+[Obsolete("Use Serialization instead.")]
 public class SNbtCodecAttribute : Attribute
 {
     /// <summary>
@@ -21,7 +22,7 @@ public class SNbtCodecAttribute : Attribute
     {
         CodecType = codecType;
     }
-    
+
     /// <summary>
     /// Gets or sets the associated codec.
     /// </summary>

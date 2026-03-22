@@ -6,6 +6,7 @@ using MineJason.SNbt.Parsing;
 namespace MineJason.SNbt.Codecs.Primitives;
 
 /// <inheritdoc />
+[Obsolete("Use Serialization instead.")]
 public class Int64Codec : ISNbtCodec<long>
 {
     /// <inheritdoc />
@@ -17,7 +18,7 @@ public class Int64Codec : ISNbtCodec<long>
         {
             throw new FormatException("Invalid TAG_Long.");
         }
-        
+
         return long.Parse(word.Value[..^1]);
     }
 

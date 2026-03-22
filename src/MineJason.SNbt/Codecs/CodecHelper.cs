@@ -11,7 +11,7 @@ internal static class CodecHelper
     internal static void WriteViaCodec(object value, object codec, SNbtWriter writer)
     {
         var codecType = codec.GetType();
-        var writeMethod = codecType.GetMethod("Write", [value.GetType(), typeof(SNbtWriter)]) 
+        var writeMethod = codecType.GetMethod("Write", [value.GetType(), typeof(SNbtWriter)])
                           ?? throw new ArgumentException("Codec is invalid.", nameof(codec));
 
         writeMethod.Invoke(codec, [value, writer]);
@@ -22,7 +22,7 @@ internal static class CodecHelper
         var interfaceType = GetCodecInterfaceOfType(valueType);
         return codecType.GetInterfaces().Contains(interfaceType);
     }
-    
+
     internal static object CreateCodec(Type codecType, Type valueType)
     {
         var interfaceType = GetCodecInterfaceOfType(valueType);
@@ -43,12 +43,12 @@ internal static class CodecHelper
 
     internal static Type GetAssociatedCodecType(Type type)
     {
-        var attribute = type.GetCustomAttribute(typeof(SNbtCodecAttribute));
+        var attribute = type.GetCustomAttribute<SNbtCodecAttribute>();
         if (attribute is SNbtCodecAttribute codecAttribute)
         {
             return codecAttribute.CodecType;
         }
-        
+
         if (!DefaultCodecs.TryGetCodec(type, out var codecType))
         {
             throw new ArgumentException("The specified type does not have am associated codec.", nameof(type));

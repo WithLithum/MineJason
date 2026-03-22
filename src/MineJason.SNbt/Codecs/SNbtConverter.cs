@@ -6,6 +6,7 @@ namespace MineJason.SNbt.Codecs;
 /// <summary>
 /// Converts objects and values to string NBT.
 /// </summary>
+[Obsolete("Use Serialization instead.")]
 public class SNbtConverter : ISNbtConverter
 {
     private readonly Dictionary<Type, Type> _customCodecs = new();
@@ -23,7 +24,7 @@ public class SNbtConverter : ISNbtConverter
             throw new ArgumentException("The specified codec is not a valid codec for the specified type.",
                 nameof(valueType));
         }
-        
+
         _customCodecs.Add(valueType, codecType);
     }
 
@@ -31,7 +32,7 @@ public class SNbtConverter : ISNbtConverter
     public void WriteTo<T>(T value, SNbtWriter writer)
     {
         ArgumentNullException.ThrowIfNull(value);
-        
+
         Type? codecType = null;
         codecType = _customCodecs.TryGetValue(typeof(T), out var resultCodec)
             ? resultCodec
@@ -45,7 +46,7 @@ public class SNbtConverter : ISNbtConverter
     public void WriteTo(object value, SNbtWriter writer)
     {
         ArgumentNullException.ThrowIfNull(value);
-        
+
         Type? codecType = null;
         var valueType = value.GetType();
         codecType = _customCodecs.TryGetValue(valueType, out var resultCodec)

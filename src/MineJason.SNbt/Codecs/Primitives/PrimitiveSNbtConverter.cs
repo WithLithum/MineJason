@@ -3,14 +3,15 @@
 
 namespace MineJason.SNbt.Codecs.Primitives;
 
+[Obsolete("Use Serialization instead.")]
 internal class PrimitiveSNbtConverter : ISNbtConverter
 {
     internal static readonly PrimitiveSNbtConverter Default = new();
-    
+
     public void WriteTo<T>(T value, SNbtWriter writer)
     {
         ArgumentNullException.ThrowIfNull(value);
-        
+
         var valueType = typeof(T);
         var codecType = CodecHelper.GetAssociatedCodecType(valueType);
 
@@ -21,7 +22,7 @@ internal class PrimitiveSNbtConverter : ISNbtConverter
     public void WriteTo(object value, SNbtWriter writer)
     {
         ArgumentNullException.ThrowIfNull(value);
-        
+
         var valueType = value.GetType();
         var codecType = CodecHelper.GetAssociatedCodecType(valueType);
 

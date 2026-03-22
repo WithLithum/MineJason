@@ -6,6 +6,7 @@ using MineJason.SNbt.Parsing;
 namespace MineJason.SNbt.Codecs.Primitives;
 
 /// <inheritdoc />
+[Obsolete("Use Serialization instead.")]
 public class SByteCodec : ISNbtCodec<sbyte>
 {
     /// <inheritdoc />
