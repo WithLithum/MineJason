@@ -2,6 +2,12 @@
 
 This document notes most user-visible changes of this library. The format is based on the [Keep a Changelog](https://keepachangelog.com) format and this project adheres to [Semantic Versioning](https://semver.org).
 
+## [0.7.0-alpha.4] - 2026-03-22
+
+### Fixed
+
+- Corrected misconfiguration that prevents package publishing.
+
 ## [0.7.0-alpha.3] - 2026-03-22
 
 This is the first consolidated version of MineJason, bringing all modules under the same repository and the same version number.
@@ -44,6 +50,7 @@ This is the first consolidated version of MineJason, bringing all modules under 
 
 Please see the [old changelogs directory](docs/changelogs).
 
+[0.7.0-alpha.4]: https://github.com/WithLithum/MineJason/compare/v0.7.0-alpha.3...v0.7.0-alpha.4
 [0.7.0-alpha.3]: https://github.com/WithLithum/MineJason/releases/tag/v0.7.0-alpha.3
 
 <!-- Put this here because this breaks KIO -->
