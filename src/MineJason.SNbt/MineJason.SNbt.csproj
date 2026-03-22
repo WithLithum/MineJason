@@ -15,7 +15,6 @@
 		<Product>MineJason</Product>
 		<Description>SNBT-first NBT support base library for MineJason</Description>
 		<Copyright>Copyright (C) WithLithum 2024-2026.</Copyright>
-		<RepositoryUrl>https://codeberg.org/MineJason/nbt.git</RepositoryUrl>
 		<PackageReadmeFile>PACK-README.md</PackageReadmeFile>
 		<PackageTags>minejason;minecraft-java;minecraft;nbt;snbt;minecraft-command</PackageTags>
 		<ProduceReferenceAssembly>False</ProduceReferenceAssembly>
