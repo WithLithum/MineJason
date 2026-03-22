@@ -14,16 +14,16 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\MineJason.Serialization\MineJason.Serialization.csproj"/>
+		<ProjectReference Include="..\MineJason.Serialization\MineJason.Serialization.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="fNbt" Version="1.0.0"/>
-		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0">
+		<PackageReference Include="fNbt" Version="1.0.0" />
+		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="10.0.201">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<None Include="README.md" Pack="true" PackagePath="\"/>
+		<None Include="README.md" Pack="true" PackagePath="\" />
 	</ItemGroup>
 
 </Project>

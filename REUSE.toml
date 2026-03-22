@@ -1,6 +1,11 @@
 version = 1
 
 [[annotations]]
+path = global.json
+SPDX-FileCopyrightText = (C) WithLithum & contributors 2023-2026
+SPDX-License-Identifier = Apache-2.0
+
+[[annotations]]
 path = **/*.Designer.cs
 SPDX-FileCopyrightText = (C) WithLithum & contributors 2023-2026
 SPDX-License-Identifier = Apache-2.0

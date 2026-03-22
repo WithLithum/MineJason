@@ -50,3 +50,6 @@ From repository root:
 - Tests for [`MineJason`](src/MineJason/) are in [`MineJason.Tests.Client`](src/MineJason.Tests/Client/) namespace
 - Tests for [`MineJason.Serialization`](src/MineJason.Serialization/) and [`MineJason.Serialization.fNbt`](src/MineJason.Serialization.fNbt/) are in [`MineJason.Tests.Serialization`](src/MineJason.Tests/Serialization/) namespace
 - Tests for [`MineJason.SNbt`](src/MineJason.SNbt/) are in [`MineJason.Tests.NBT`](src/MineJason.Tests/NBT/) namespace
+
+<!-- SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026 -->
+<!-- SPDX-License-Identifier: Apache-2.0 -->
