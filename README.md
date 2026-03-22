@@ -24,7 +24,5 @@ All code in this repository is licensed under the [Apache-2.0](LICENSE.txt) lice
 Note that the Client modules is currently licensed under [LGPL-3.0-or-later](src/MineJason/COPYING.LESSER.txt).
 
 <!-- Put this here because this breaks KIO -->
-
 <!-- SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026 -->
-
 <!-- SPDX-License-Identifier: Apache-2.0 -->
