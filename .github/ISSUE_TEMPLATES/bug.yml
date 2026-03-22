@@ -1,0 +1,33 @@
+name: Bug Report
+description: File a bug report.
+labels: [ "🐛type: bug", "🦺state: untriaged" ]
+body:
+  - type: dropdown
+    id: modules
+    attributes:
+      label: Which module/package(s) are affected?
+      options:
+        - Client (MineJason)
+        - NBT (MineJason.SNbt)
+        - Serialization (MineJason.Serialization)
+      multiple: true
+    validations:
+      required: true
+
+  - type: textarea
+    id: behaviour
+    label: Actual behaviour
+    description: What happened?
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    label: Expected behaviour
+    description: What did you expect to happen?
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional
+    label: Additional information
