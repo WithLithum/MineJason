@@ -1,16 +1,18 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: Apache-2.0
 
-namespace MineJason.Serialization.Schema.Objects;
-
+using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using JetBrains.Annotations;
 using MineJason.Serialization.Schema.Primitive;
+
+namespace MineJason.Serialization.Schema.Objects;
 
 /// <summary>
 /// Provides methods to configure properties of commonly found types.
 /// </summary>
 [PublicAPI]
+[SuppressMessage("", "CA1720", Justification = "Object type mapping")]
 public static class ObjectSchemaBuilderExtensions
 {
     /// <summary>

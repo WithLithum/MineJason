@@ -1,20 +1,20 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: Apache-2.0
 
-namespace MineJason.Serialization.Schema.Objects;
-
 using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using System.Text.Json;
 using JetBrains.Annotations;
 using MineJason.Serialization.Utilities;
 
+namespace MineJason.Serialization.Schema.Objects;
 /// <summary>
 /// Provides fluent syntax building for object schema.
 /// </summary>
 /// <typeparam name="TValue">The type of the object.</typeparam>
 /// <seealso cref="ObjectSchema{TValue}"/>
 [PublicAPI]
+[SuppressMessage("", "CA1720", Justification = "Object type mapping")]
 public class ObjectSchemaBuilder<[MeansImplicitUse] TValue>
 {
     private readonly Dictionary<PropertySchema, IValueSchema> _meta = new();
