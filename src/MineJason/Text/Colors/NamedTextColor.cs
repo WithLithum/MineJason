@@ -1,16 +1,15 @@
 ﻿// SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
-namespace MineJason.Text.Colors;
-
 using System.Text.Json.Serialization;
 using MineJason.Serialization.TextJson;
 
+namespace MineJason.Text.Colors;
 /// <summary>
-/// Represents a named text colour.
+/// Represents a named text colour. This class cannot be inherited.
 /// </summary>
 [JsonConverter(typeof(KnownColorConverter))]
-public sealed class NamedTextColor : IChatColor
+public sealed class NamedTextColor : ITextColor
 {
     private readonly string _colorName;
 

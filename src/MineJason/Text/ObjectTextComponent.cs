@@ -13,7 +13,7 @@ using System.Text.Json.Serialization;
 /// </summary>
 [PublicAPI]
 [JsonConverter(typeof(TextComponentConverter))]
-public abstract record ObjectTextComponent : ChatComponent
+public abstract record ObjectTextComponent : TextComponent
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="ObjectTextComponent"/> class.
@@ -37,5 +37,5 @@ public abstract record ObjectTextComponent : ChatComponent
     /// <value>
     /// The fallback component.
     /// </value>
-    public ChatComponent? Fallback { get; init; }
+    public TextComponent? Fallback { get; init; }
 }

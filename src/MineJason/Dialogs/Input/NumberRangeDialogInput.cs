@@ -4,6 +4,7 @@
 namespace MineJason.Dialogs.Input;
 
 using System.Diagnostics.CodeAnalysis;
+using MineJason.Text;
 using MineJason.Utilities;
 
 /// <summary>
@@ -42,7 +43,7 @@ public sealed record NumberRangeDialogInput : DialogInput
     /// <param name="width">The width of the control. If <c>0</c>, uses the default width.</param>
     [SetsRequiredMembers]
     public NumberRangeDialogInput(string key,
-        ChatComponent label,
+        TextComponent label,
         float start,
         float end,
         string? labelFormat = null,

@@ -1,40 +1,38 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
-namespace MineJason;
-
 using System.Drawing;
 using System.Text.Json.Serialization;
 using JetBrains.Annotations;
-using MineJason.Components;
-using MineJason.Components.Builders;
 using MineJason.Data.Coordinates;
 using MineJason.Data.Selectors;
 using MineJason.Events;
 using MineJason.Events.Hover;
 using MineJason.Serialization.TextJson;
-using MineJason.Text;
 using MineJason.Text.Builders;
+using MineJason.Text.Colors;
+
+namespace MineJason.Text;
 
 /// <summary>
 /// Represents a text component.
 /// </summary>
 [JsonConverter(typeof(TextComponentConverter))]
 [PublicAPI]
-public abstract record ChatComponent
+public abstract record TextComponent
 {
     /// <summary>
-    /// Initializes a new instance of <see cref="ChatComponent"/> class.
+    /// Initializes a new instance of <see cref="TextComponent"/> class.
     /// </summary>
-    private protected ChatComponent()
+    private protected TextComponent()
     {
     }
 
     /// <summary>
-    /// Initializes a new instance of <see cref="ChatComponent"/> class with the specified data.
+    /// Initializes a new instance of <see cref="TextComponent"/> class with the specified data.
     /// </summary>
     /// <param name="creationInfo">The data.</param>
-    private protected ChatComponent(in TextComponentCreationInfo creationInfo)
+    private protected TextComponent(in TextComponentCreationInfo creationInfo)
     {
         Bold = creationInfo.Bold;
         Italic = creationInfo.Italic;
@@ -78,7 +76,7 @@ public abstract record ChatComponent
     /// <summary>
     /// Gets or sets the color of this component.
     /// </summary>
-    public IChatColor? Color { get; init; }
+    public ITextColor? Color { get; init; }
 
     /// <summary>
     /// Gets or sets the shadow color of this text component.
@@ -110,7 +108,7 @@ public abstract record ChatComponent
     /// Gets or sets the extra components that displays after this component and uses the
     /// styles of this component by default.
     /// </summary>
-    public IReadOnlyList<ChatComponent>? Extra { get; init; }
+    public IReadOnlyList<TextComponent>? Extra { get; init; }
 
     #region Creation methods
 
@@ -120,9 +118,9 @@ public abstract record ChatComponent
     /// <param name="text">The text to display.</param>
     /// <returns>The text component.</returns>
     [PublicAPI]
-    public static ChatComponent CreateText(string text)
+    public static TextComponent CreateText(string text)
     {
-        return new TextChatComponent(text);
+        return new LiteralTextComponent(text);
     }
 
     /// <summary>
@@ -130,9 +128,9 @@ public abstract record ChatComponent
     /// </summary>
     /// <returns>The text component builder.</returns>
     [PublicAPI]
-    public static TextComponentBuilder CreateText()
+    public static LiteralTextComponentBuilder CreateText()
     {
-        return new TextComponentBuilder();
+        return new LiteralTextComponentBuilder();
     }
 
     /// <summary>
@@ -145,20 +143,20 @@ public abstract record ChatComponent
     /// <param name="with">The arguments of the translated string.</param>
     /// <returns>The translatable chat component.</returns>
     [PublicAPI]
-    public static ChatComponent CreateTranslatable(string text,
+    public static TextComponent CreateTranslatable(string text,
         string? fallback = null,
-        IReadOnlyList<ChatComponent>? with = null)
+        IReadOnlyList<TextComponent>? with = null)
     {
-        return new TranslatableChatComponent(text, fallback, with);
+        return new TranslateTextComponent(text, fallback, with);
     }
 
     /// <summary>
     /// Creates a builder for a translatable chat component.
     /// </summary>
     /// <returns>The chat component builder.</returns>
-    public static TranslatableComponentBuilder CreateTranslatable()
+    public static TranslateComponentBuilder CreateTranslatable()
     {
-        return new TranslatableComponentBuilder();
+        return new TranslateComponentBuilder();
     }
 
     /// <summary>
@@ -168,9 +166,9 @@ public abstract record ChatComponent
     /// <param name="objective">The objective to display the score of.</param>
     /// <returns>The scoreboard chat component.</returns>
     [PublicAPI]
-    public static ChatComponent CreateScore(string name, string objective)
+    public static TextComponent CreateScore(string name, string objective)
     {
-        return new ScoreboardChatComponent(new ScoreboardChatComponent.Data(name, objective));
+        return new ScoreTextComponent(new ScoreTextComponent.Data(name, objective));
     }
 
     /// <summary>
@@ -182,14 +180,14 @@ public abstract record ChatComponent
     /// <returns>The scoreboard chat component.</returns>
     [PublicAPI]
     [Obsolete("The 'value' parameter has no use. Use CreateScore(name, objective) instead.")]
-    public static ChatComponent CreateScore(string name, string objective, string? value)
+    public static TextComponent CreateScore(string name, string objective, string? value)
     {
         return CreateScore(name, objective);
     }
 
     /// <summary>
     /// Returns a new instance of <see cref="ScoreTextComponentBuilder"/> that can be used to
-    /// create <see cref="ScoreboardChatComponent"/> fluently.
+    /// create <see cref="ScoreTextComponent"/> fluently.
     /// </summary>
     /// <returns>The builder.</returns>
     public static ScoreTextComponentBuilder CreateScore()
@@ -204,9 +202,9 @@ public abstract record ChatComponent
     /// <param name="separator">The chat component that is used to separate between multiple entities.</param> 
     /// <returns>The selector component.</returns>
     [PublicAPI]
-    public static ChatComponent CreateSelector(IEntitySelector selector, ChatComponent? separator = null)
+    public static TextComponent CreateSelector(IEntitySelector selector, TextComponent? separator = null)
     {
-        return new EntityChatComponent(selector, separator);
+        return new EntityTextComponent(selector, separator);
     }
 
     /// <summary>
@@ -246,9 +244,9 @@ public abstract record ChatComponent
     /// <param name="path">The NBT path.</param>
     /// <returns>The created component.</returns>
     [PublicAPI]
-    public static ChatComponent CreateNbt(BlockPosition block, string path)
+    public static TextComponent CreateNbt(BlockPosition block, string path)
     {
-        return new BlockNbtChatComponent(block, path);
+        return new BlockNbtTextComponent(block, path);
     }
 
     /// <summary>
@@ -258,9 +256,9 @@ public abstract record ChatComponent
     /// <param name="path">The NBT path.</param>
     /// <returns>The created component.</returns>
     [PublicAPI]
-    public static ChatComponent CreateNbt(IEntitySelector entity, string path)
+    public static TextComponent CreateNbt(IEntitySelector entity, string path)
     {
-        return new EntityNbtChatComponent(entity, path);
+        return new EntityNbtTextComponent(entity, path);
     }
 
     /// <summary>
@@ -270,9 +268,9 @@ public abstract record ChatComponent
     /// <param name="path">The NBT path.</param>
     /// <returns>The created component.</returns>
     [PublicAPI]
-    public static ChatComponent CreateNbt(ResourceLocation storage, string path)
+    public static TextComponent CreateNbt(ResourceLocation storage, string path)
     {
-        return new StorageNbtChatComponent(storage, path);
+        return new StorageNbtTextComponent(storage, path);
     }
 
     /// <summary>
@@ -285,7 +283,7 @@ public abstract record ChatComponent
     /// <c>minecraft:blocks</c>.
     /// </param>
     /// <returns>The created component.</returns>
-    public static ChatComponent CreateAtlasObject(ResourceLocation sprite,
+    public static TextComponent CreateAtlasObject(ResourceLocation sprite,
         ResourceLocation? atlas = null)
     {
         return new AtlasObjectTextComponent(sprite, atlas);
@@ -304,9 +302,9 @@ public abstract record ChatComponent
     /// The text component to display instead in places where the object is not supported.
     /// </param>
     /// <returns>The created component.</returns>
-    public static ChatComponent CreateAtlasObject(ResourceLocation sprite,
+    public static TextComponent CreateAtlasObject(ResourceLocation sprite,
         ResourceLocation? atlas,
-        ChatComponent? fallback)
+        TextComponent? fallback)
     {
         return new AtlasObjectTextComponent(sprite, atlas)
         {
@@ -323,7 +321,7 @@ public abstract record ChatComponent
     /// </summary>
     /// <param name="bold">The bold status to set to.</param>
     /// <returns>A new copy of this instance with bold status set.</returns>
-    public ChatComponent Embolden(bool bold = true)
+    public TextComponent Embolden(bool bold = true)
     {
         return this with { Bold = bold };
     }
@@ -333,7 +331,7 @@ public abstract record ChatComponent
     /// </summary>
     /// <param name="italic">The italic status to set to.</param>
     /// <returns>A new copy of this instance with the italic status set.</returns>
-    public ChatComponent Italicise(bool italic = true)
+    public TextComponent Italicise(bool italic = true)
     {
         return this with { Italic = italic };
     }
@@ -343,7 +341,7 @@ public abstract record ChatComponent
     /// </summary>
     /// <param name="color">The color of this instance.</param>
     /// <returns>This instance for chaining.</returns>
-    public ChatComponent WithColor(IChatColor? color)
+    public TextComponent WithColor(ITextColor? color)
     {
         return this with { Color = color };
     }
@@ -353,7 +351,7 @@ public abstract record ChatComponent
     /// </summary>
     /// <param name="color">The shadow color to set to.</param>
     /// <returns>A new copy of this instance with the specified shadow color.</returns>
-    public ChatComponent WithShadowColor(Color color)
+    public TextComponent WithShadowColor(Color color)
     {
         return this with { ShadowColor = color };
     }
@@ -363,7 +361,7 @@ public abstract record ChatComponent
     /// </summary>
     /// <param name="font">The font of this instance.</param>
     /// <returns>This instance for chaining.</returns>
-    public ChatComponent WithFont(ResourceLocation? font)
+    public TextComponent WithFont(ResourceLocation? font)
     {
         return this with { Font = font };
     }
@@ -373,11 +371,11 @@ public abstract record ChatComponent
     /// </summary>
     /// <param name="component">The component to append.</param>
     /// <returns>This instance for chaining.</returns>
-    public ChatComponent Append(ChatComponent component)
+    public TextComponent Append(TextComponent component)
     {
         ArgumentNullException.ThrowIfNull(component);
 
-        List<ChatComponent> newList = Extra != null
+        List<TextComponent> newList = Extra != null
             ? [.. Extra]
             : [];
 

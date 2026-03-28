@@ -6,6 +6,7 @@ namespace MineJason.Tests.Client.Models;
 using System.Text.Json;
 using MineJason.Events.Hover;
 using MineJason.Serialization.TextJson;
+using MineJason.Text;
 
 public class HoverEventTests
 {
@@ -48,7 +49,7 @@ public class HoverEventTests
     {
         // Arrange
         const string json = "{\"action\":\"show_text\",\"value\":{\"type\":\"text\",\"text\":\"Hello World!\"}}";
-        var value = new ShowTextHoverEvent(ChatComponent.CreateText("Hello World!"));
+        var value = new ShowTextHoverEvent(TextComponent.CreateText("Hello World!"));
 
         // Act
         var result = JsonSerializer.Serialize(value,
@@ -63,7 +64,7 @@ public class HoverEventTests
     {
         // Arrange
         const string json = "{\"action\":\"show_text\",\"value\":{\"type\":\"text\",\"text\":\"Hello World!\"}}";
-        var expected = new ShowTextHoverEvent(ChatComponent.CreateText("Hello World!"));
+        var expected = new ShowTextHoverEvent(TextComponent.CreateText("Hello World!"));
 
         // Act
         var result = JsonSerializer.Deserialize(json,

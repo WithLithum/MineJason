@@ -1,12 +1,12 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
-namespace MineJason.Components.Builders;
+namespace MineJason.Text.Builders.Utilities;
 
 /// <summary>
 /// Encapsulates data for creation of NBT text components.
 /// </summary>
-public readonly ref struct NBTTextComponentCreationInfo
+public readonly ref struct NbtTextComponentCreationInfo
 {
     /// <summary>
     /// Gets the path.
@@ -16,7 +16,7 @@ public readonly ref struct NBTTextComponentCreationInfo
     /// <summary>
     /// Gets the separator.
     /// </summary>
-    public ChatComponent? Separator { get; init; }
+    public TextComponent? Separator { get; init; }
 
     /// <summary>
     /// Gets a value indicating whether to interpret values.

@@ -6,6 +6,7 @@ namespace MineJason.Serialization.Schema;
 using System.Linq.Expressions;
 using MineJason.Dialogs;
 using MineJason.Serialization.Schema.Objects;
+using MineJason.Text;
 
 /// <summary>
 /// Provides common extensions for object schema builders.
@@ -59,7 +60,7 @@ public static class SchemaBuilderExtensions
     }
 
     /// <summary>
-    /// Configures the schema to read a <see cref="ChatComponent"/> from the specified property,
+    /// Configures the schema to read a <see cref="Text.TextComponent"/> from the specified property,
     /// and optionally from the specified name.
     /// </summary>
     /// <param name="builder">The builder.</param>
@@ -73,7 +74,7 @@ public static class SchemaBuilderExtensions
     public static ObjectSchemaBuilder<TValue> TextComponent<TValue>(
         this ObjectSchemaBuilder<TValue> builder,
         string? name,
-        Expression<Func<TValue, ChatComponent?>> expression)
+        Expression<Func<TValue, TextComponent?>> expression)
     {
         return builder.Property(name,
             expression,
@@ -81,7 +82,7 @@ public static class SchemaBuilderExtensions
     }
 
     /// <summary>
-    /// Configures the schema to read a <see cref="ChatComponent"/> from the specified property,
+    /// Configures the schema to read a <see cref="Text.TextComponent"/> from the specified property,
     /// and optionally from the specified name.
     /// </summary>
     /// <param name="builder">The builder.</param>
@@ -95,7 +96,7 @@ public static class SchemaBuilderExtensions
     public static ObjectSchemaBuilder<TValue> OptionalTextComponent<TValue>(
         this ObjectSchemaBuilder<TValue> builder,
         string? name,
-        Expression<Func<TValue, ChatComponent?>> expression)
+        Expression<Func<TValue, TextComponent?>> expression)
     {
         return builder.Property(name,
             expression,

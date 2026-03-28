@@ -6,6 +6,7 @@ namespace MineJason.Tests.Client;
 using MineJason.Serialization.IO.Json;
 using MineJason.Serialization.Schema;
 using MineJason.Serialization.TextJson;
+using MineJason.Text;
 using System.Text.Json;
 
 public class ComponentTests
@@ -17,11 +18,11 @@ public class ComponentTests
         const string json = "{\"type\":\"nbt\",\"text\":\"Hello World!\"}";
 
         // Act
-        var component = JsonSerializer.Deserialize(json, MineJasonTextJsonContext.Default.ChatComponent);
+        var component = JsonSerializer.Deserialize(json, MineJasonTextJsonContext.Default.TextComponent);
 
         // Assert
-        Assert.Equal(ChatComponent.CreateText("Hello World!"),
-            component);
+        Assert.Equal(TextComponent.CreateText("Hello World!"),
+            (TextComponent?)component);
     }
 
     [Fact]
@@ -37,10 +38,10 @@ public class ComponentTests
         // Assert
         Assert.NotNull(result.Value);
 
-        var literal = Assert.IsType<TextChatComponent>(result.Value);
+        var literal = Assert.IsType<LiteralTextComponent>(result.Value);
         Assert.NotNull(literal.Extra);
         Assert.Multiple(() => Assert.Equal("A", literal.Text),
-            () => Assert.Equal(ChatComponent.CreateText("B"), Assert.Single(literal.Extra))
+            () => Assert.Equal(TextComponent.CreateText("B"), Assert.Single(literal.Extra))
             );
     }
 
@@ -57,10 +58,10 @@ public class ComponentTests
         // Assert
         Assert.NotNull(result.Value);
 
-        var literal = Assert.IsType<TextChatComponent>(result.Value);
+        var literal = Assert.IsType<LiteralTextComponent>(result.Value);
         Assert.NotNull(literal.Extra);
         Assert.Multiple(() => Assert.Equal("A", literal.Text),
-            () => Assert.Equal(ChatComponent.CreateText("B"), Assert.Single(literal.Extra))
+            () => Assert.Equal(TextComponent.CreateText("B"), Assert.Single(literal.Extra))
             );
     }
 
@@ -77,12 +78,12 @@ public class ComponentTests
         // Assert
         Assert.NotNull(result.Value);
 
-        var literal = Assert.IsType<TextChatComponent>(result.Value);
+        var literal = Assert.IsType<LiteralTextComponent>(result.Value);
         Assert.NotNull(literal.Extra);
         Assert.Multiple(() => Assert.Equal("A", literal.Text),
             () => Assert.Collection(literal.Extra,
-                x1 => Assert.Equal(ChatComponent.CreateText("B"), x1),
-                x2 => Assert.Equal(ChatComponent.CreateText("C"), x2))
+                x1 => Assert.Equal(TextComponent.CreateText("B"), x1),
+                x2 => Assert.Equal(TextComponent.CreateText("C"), x2))
         );
     }
 }

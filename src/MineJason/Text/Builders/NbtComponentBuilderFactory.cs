@@ -1,12 +1,12 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
-namespace MineJason.Components.Builders;
-
 using System.Diagnostics.CodeAnalysis;
 using JetBrains.Annotations;
 using MineJason.Data.Coordinates;
 using MineJason.Data.Selectors;
+
+namespace MineJason.Text.Builders;
 
 /// <summary>
 /// Initiates the construction of a NBT chat component. This class cannot be inherited.

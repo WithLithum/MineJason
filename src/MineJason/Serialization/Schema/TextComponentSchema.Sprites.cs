@@ -24,7 +24,7 @@ public partial class TextComponentSchema
                 MineJasonSchemas.PlayerProfile)
             .Build();
 
-    private static Result<ChatComponent> DecodeSpriteInternal<TElement>(
+    private static Result<TextComponent> DecodeSpriteInternal<TElement>(
         IReadOnlyObjectLike<TElement> obj,
         TElement elementObj,
         IValueDecoder<TElement> decoder)

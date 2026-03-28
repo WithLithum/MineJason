@@ -1,6 +1,8 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
+using MineJason.Text;
+
 namespace MineJason.Dialogs.Input;
 
 /// <summary>
@@ -20,5 +22,5 @@ public abstract record DialogInput
     /// <summary>
     /// Gets the label to display to the left of the input.
     /// </summary>
-    public required ChatComponent Label { get; init; }
+    public required TextComponent Label { get; init; }
 }

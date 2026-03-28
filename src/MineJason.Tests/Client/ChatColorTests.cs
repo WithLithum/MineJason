@@ -16,22 +16,22 @@ public class ChatColorTests
         const string color = "#00ff00";
         
         // Act
-        var success = TextColor.TryParse(color, out var result);
+        var success = RgbTextColor.TryParse(color, out var result);
         
         // Assert
         Assert.True(success);
-        Assert.Equal(new TextColor(0x00, 0xff, 0x00), result);
+        Assert.Equal(new RgbTextColor(0x00, 0xff, 0x00), result);
     }
 
     [Fact]
     public void TextColor_Serialize()
     {
         // Arrange
-        var color = new TextColor(0x00, 0xff, 0xff);
+        var color = new RgbTextColor(0x00, 0xff, 0xff);
         
         // Act
         var result = JsonSerializer.Serialize(color,
-            MineJasonTextJsonContext.Default.TextColor);
+            MineJasonTextJsonContext.Default.RgbTextColor);
         
         // Result
         // ReSharper disable once StringLiteralTypo   
@@ -42,11 +42,11 @@ public class ChatColorTests
     public void TextColor_SerializeAsChatColor()
     {
         // Arrange
-        var color = new TextColor(0x00, 0xff, 0xff);
+        var color = new RgbTextColor(0x00, 0xff, 0xff);
         
         // Act
         var result = JsonSerializer.Serialize(color,
-            MineJasonTextJsonContext.Default.IChatColor);
+            MineJasonTextJsonContext.Default.ITextColor);
         
         // Result
         Assert.Equal("\"#00ffff\"", result);
@@ -61,10 +61,10 @@ public class ChatColorTests
         
         // Act
         var result = JsonSerializer.Deserialize(color,
-            MineJasonTextJsonContext.Default.TextColor);
-        
+            MineJasonTextJsonContext.Default.RgbTextColor);
+
         // Assert
-        Assert.Equal(new TextColor(0x00, 0xff, 0xff), result);
+        Assert.Equal(new RgbTextColor(0x00, 0xff, 0xff), (RgbTextColor?)result);
     }
     
     [Fact]
@@ -76,9 +76,9 @@ public class ChatColorTests
         
         // Act
         var result = JsonSerializer.Deserialize(color,
-            MineJasonTextJsonContext.Default.IChatColor);
+            MineJasonTextJsonContext.Default.ITextColor);
         
         // Assert
-        Assert.Equal(new TextColor(0x00, 0xff, 0xff), result);
+        Assert.Equal(new RgbTextColor(0x00, 0xff, 0xff), result);
     }
 }

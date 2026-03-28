@@ -6,6 +6,7 @@ namespace MineJason.Tests.Client;
 using System.Text.Json;
 using MineJason.Data;
 using MineJason.Serialization.TextJson;
+using MineJason.Text;
 
 public class ContextSerializationTests
 {
@@ -13,11 +14,11 @@ public class ContextSerializationTests
     public void TextComponent_ContextSerialize()
     {
         // Arrange
-        var component = ChatComponent.CreateText("text");
+        var component = TextComponent.CreateText("text");
 
         // Act
         var json = JsonSerializer.Serialize(component,
-            MineJasonTextJsonContext.Default.ChatComponent);
+            MineJasonTextJsonContext.Default.TextComponent);
 
         // Assert
         Assert.Equal("{\"type\":\"text\",\"text\":\"text\"}", json);
@@ -27,11 +28,11 @@ public class ContextSerializationTests
     public void TranslatableComponent_ContextSerialize()
     {
         // Arrange
-        var component = ChatComponent.CreateTranslatable("its_me");
+        var component = TextComponent.CreateTranslatable("its_me");
 
         // Act
         var json = JsonSerializer.Serialize(component,
-            MineJasonTextJsonContext.Default.ChatComponent);
+            MineJasonTextJsonContext.Default.TextComponent);
 
         // Assert
         Assert.Equal("{\"type\":\"translatable\",\"translate\":\"its_me\"}", json);
@@ -41,11 +42,11 @@ public class ContextSerializationTests
     public void EntityComponent_ContextSerialize()
     {
         // Arrange
-        var component = ChatComponent.CreateSelector(new EntitySelector(EntitySelectorKind.Executor));
+        var component = TextComponent.CreateSelector(new EntitySelector(EntitySelectorKind.Executor));
 
         // Act
         var json = JsonSerializer.Serialize(component,
-            MineJasonTextJsonContext.Default.ChatComponent);
+            MineJasonTextJsonContext.Default.TextComponent);
 
         // Assert
         Assert.Equal("{\"type\":\"selector\",\"selector\":\"@s\"}", json);
@@ -55,11 +56,11 @@ public class ContextSerializationTests
     public void AtlasObjectComponent_ContextSerialize()
     {
         // Arrange
-        var component = ChatComponent.CreateAtlasObject(new ResourceLocation("foo", "bar"));
+        var component = TextComponent.CreateAtlasObject(new ResourceLocation("foo", "bar"));
 
         // Act
         var json = JsonSerializer.Serialize(component,
-            MineJasonTextJsonContext.Default.ChatComponent);
+            MineJasonTextJsonContext.Default.TextComponent);
 
         // Assert
         Assert.Equal("{\"type\":\"object\",\"object\":\"atlas\",\"sprite\":\"foo:bar\"}", json);

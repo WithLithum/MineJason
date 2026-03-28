@@ -1,20 +1,19 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
-namespace MineJason.Components.Builders;
-
 using JetBrains.Annotations;
-using MineJason.Data;
 using MineJason.Data.Selectors;
 
+namespace MineJason.Text.Builders;
+
 /// <summary>
-/// Provides fluent syntax building for <see cref="EntityChatComponent"/>.
+/// Constructs a new instance of <see cref="EntityTextComponent"/>.
 /// </summary>
 [PublicAPI]
-public sealed class EntityComponentBuilder : ChatComponentBuilder<EntityChatComponent>
+public sealed class EntityComponentBuilder : TextComponentBuilder<EntityTextComponent>
 {
     private IEntitySelector? _selector;
-    private ChatComponent? _separator;
+    private TextComponent? _separator;
 
     /// <summary>
     /// Sets the selector.
@@ -26,20 +25,20 @@ public sealed class EntityComponentBuilder : ChatComponentBuilder<EntityChatComp
         _selector = selector;
         return this;
     }
-    
+
     /// <summary>
     /// Sets the text component used to separate entity names found.
     /// </summary>
     /// <param name="separator">The separator.</param>
     /// <returns>This instance.</returns>
-    public EntityComponentBuilder Separator(ChatComponent? separator)
+    public EntityComponentBuilder Separator(TextComponent? separator)
     {
         _separator = separator;
         return this;
     }
 
     /// <inheritdoc />
-    public override EntityChatComponent Build()
+    public override EntityTextComponent Build()
     {
         if (_selector is null)
         {
@@ -48,7 +47,7 @@ public sealed class EntityComponentBuilder : ChatComponentBuilder<EntityChatComp
 
         var creationInfo = CreateData();
 
-        return new EntityChatComponent(creationInfo)
+        return new EntityTextComponent(creationInfo)
         {
             Selector = _selector,
             Separator = _separator

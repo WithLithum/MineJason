@@ -1,15 +1,16 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
-namespace MineJason.Components.Builders;
-
 using JetBrains.Annotations;
 
+namespace MineJason.Text.Builders;
+
 /// <summary>
-/// Provides a fluent syntax builder for <see cref="TextChatComponent"/>.
+/// Constructs a new instance of <see cref="LiteralTextComponent"/>. This class cannot be
+/// inherited.
 /// </summary>
 [PublicAPI]
-public sealed class TextComponentBuilder : ChatComponentBuilder<TextChatComponent>
+public sealed class LiteralTextComponentBuilder : TextComponentBuilder<LiteralTextComponent>
 {
     private string? _text;
 
@@ -18,15 +19,15 @@ public sealed class TextComponentBuilder : ChatComponentBuilder<TextChatComponen
     /// </summary>
     /// <param name="text">The text value to set to.</param>
     /// <returns>This instance.</returns>
-    public TextComponentBuilder Value(string text)
+    public LiteralTextComponentBuilder Value(string text)
     {
         _text = text;
         return this;
     }
-    
+
     /// <inheritdoc />
     /// <exception cref="InvalidOperationException">The text value was not set.</exception>
-    public override TextChatComponent Build()
+    public override LiteralTextComponent Build()
     {
         if (_text == null)
         {
@@ -34,7 +35,7 @@ public sealed class TextComponentBuilder : ChatComponentBuilder<TextChatComponen
         }
 
         var creationInfo = CreateData();
-        return new TextChatComponent(creationInfo)
+        return new LiteralTextComponent(creationInfo)
         {
             Text = _text
         };

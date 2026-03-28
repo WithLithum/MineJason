@@ -1,22 +1,21 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
-namespace MineJason.Components.Builders;
-
 using JetBrains.Annotations;
 using MineJason.Events;
 using MineJason.Events.Hover;
-using MineJason.Text;
-using System;
+using MineJason.Text.Colors;
 using System.Drawing;
 
+namespace MineJason.Text.Builders;
+
 /// <summary>
-/// Provides a base for chat component building.
+/// Constructs new instances of <see cref="TextComponent"/> derivatives.
 /// </summary>
 [PublicAPI]
-public abstract class ChatComponentBuilder<TTarget> where TTarget : ChatComponent
+public abstract class TextComponentBuilder<TTarget> where TTarget : TextComponent
 {
-    private IChatColor? _color;
+    private ITextColor? _color;
     private ResourceLocation? _font;
 
     private bool _bold;
@@ -28,7 +27,7 @@ public abstract class ChatComponentBuilder<TTarget> where TTarget : ChatComponen
     private string? _insertion;
     private HoverEvent? _hoverEvent;
     private ClickEvent? _clickEvent;
-    private IList<ChatComponent>? _extras;
+    private IList<TextComponent>? _extras;
 
     private Color? _shadowColor;
 
@@ -37,7 +36,7 @@ public abstract class ChatComponentBuilder<TTarget> where TTarget : ChatComponen
     /// </summary>
     /// <param name="color">The color to set to.</param>
     /// <returns>This instance.</returns>
-    public ChatComponentBuilder<TTarget> Color(IChatColor? color)
+    public TextComponentBuilder<TTarget> Color(ITextColor? color)
     {
         _color = color;
         return this;
@@ -48,7 +47,7 @@ public abstract class ChatComponentBuilder<TTarget> where TTarget : ChatComponen
     /// </summary>
     /// <param name="location">The location to set to.</param>
     /// <returns>This instance.</returns>
-    public ChatComponentBuilder<TTarget> Font(ResourceLocation? location)
+    public TextComponentBuilder<TTarget> Font(ResourceLocation? location)
     {
         _font = location;
         return this;
@@ -58,7 +57,7 @@ public abstract class ChatComponentBuilder<TTarget> where TTarget : ChatComponen
     /// Enables the bold style of the component.
     /// </summary>
     /// <returns>This instance.</returns>
-    public ChatComponentBuilder<TTarget> Bold()
+    public TextComponentBuilder<TTarget> Bold()
     {
         _bold = true;
         return this;
@@ -68,7 +67,7 @@ public abstract class ChatComponentBuilder<TTarget> where TTarget : ChatComponen
     /// Enables the italic style of the component.
     /// </summary>
     /// <returns>This instance.</returns>
-    public ChatComponentBuilder<TTarget> Italic()
+    public TextComponentBuilder<TTarget> Italic()
     {
         _italic = true;
         return this;
@@ -78,7 +77,7 @@ public abstract class ChatComponentBuilder<TTarget> where TTarget : ChatComponen
     /// Enables the underlined style of the component.
     /// </summary>
     /// <returns>This instance.</returns>
-    public ChatComponentBuilder<TTarget> Underline()
+    public TextComponentBuilder<TTarget> Underline()
     {
         _underlined = true;
         return this;
@@ -88,7 +87,7 @@ public abstract class ChatComponentBuilder<TTarget> where TTarget : ChatComponen
     /// Enables the strikethrough style of the component.
     /// </summary>
     /// <returns>This instance.</returns>
-    public ChatComponentBuilder<TTarget> Strikethrough()
+    public TextComponentBuilder<TTarget> Strikethrough()
     {
         _strikethrough = true;
         return this;
@@ -98,7 +97,7 @@ public abstract class ChatComponentBuilder<TTarget> where TTarget : ChatComponen
     /// Enables the obfuscated style of the component.
     /// </summary>
     /// <returns>This instance.</returns>
-    public ChatComponentBuilder<TTarget> Obfuscate()
+    public TextComponentBuilder<TTarget> Obfuscate()
     {
         _obfuscated = true;
         return this;
@@ -110,7 +109,7 @@ public abstract class ChatComponentBuilder<TTarget> where TTarget : ChatComponen
     /// </summary>
     /// <param name="insertion">The text to insert.</param>
     /// <returns>This instance.</returns>
-    public ChatComponentBuilder<TTarget> Insertion(string? insertion)
+    public TextComponentBuilder<TTarget> Insertion(string? insertion)
     {
         _insertion = insertion;
         return this;
@@ -121,7 +120,7 @@ public abstract class ChatComponentBuilder<TTarget> where TTarget : ChatComponen
     /// </summary>
     /// <param name="clickEvent">The click event.</param>
     /// <returns>This instance.</returns>
-    public ChatComponentBuilder<TTarget> ClickEvent(ClickEvent? clickEvent)
+    public TextComponentBuilder<TTarget> ClickEvent(ClickEvent? clickEvent)
     {
         _clickEvent = clickEvent;
         return this;
@@ -132,7 +131,7 @@ public abstract class ChatComponentBuilder<TTarget> where TTarget : ChatComponen
     /// </summary>
     /// <param name="hoverEvent">The hover event.</param>
     /// <returns>This instance.</returns>
-    public ChatComponentBuilder<TTarget> HoverEvent(HoverEvent? hoverEvent)
+    public TextComponentBuilder<TTarget> HoverEvent(HoverEvent? hoverEvent)
     {
         _hoverEvent = hoverEvent;
         return this;
@@ -143,7 +142,7 @@ public abstract class ChatComponentBuilder<TTarget> where TTarget : ChatComponen
     /// </summary>
     /// <param name="extras">The extra components.</param>
     /// <returns>This instance.</returns>
-    public ChatComponentBuilder<TTarget> Extras(IList<ChatComponent>? extras)
+    public TextComponentBuilder<TTarget> Extras(IList<TextComponent>? extras)
     {
         _extras = extras;
         return this;
@@ -154,7 +153,7 @@ public abstract class ChatComponentBuilder<TTarget> where TTarget : ChatComponen
     /// </summary>
     /// <param name="color">The shadow color.</param>
     /// <returns>This instance.</returns>
-    public ChatComponentBuilder<TTarget> ShadowColor(Color? color)
+    public TextComponentBuilder<TTarget> ShadowColor(Color? color)
     {
         _shadowColor = color;
         return this;

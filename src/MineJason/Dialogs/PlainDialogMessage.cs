@@ -4,6 +4,7 @@
 namespace MineJason.Dialogs;
 
 using System.Diagnostics.CodeAnalysis;
+using MineJason.Text;
 using MineJason.Utilities;
 
 /// <summary>
@@ -22,7 +23,7 @@ public sealed record PlainDialogMessage : DialogMessage
     /// <summary>
     /// Gets the contents of this instance.
     /// </summary>
-    public required ChatComponent Contents { get; init; }
+    public required TextComponent Contents { get; init; }
 
     /// <summary>
     /// Gets the width of this message.

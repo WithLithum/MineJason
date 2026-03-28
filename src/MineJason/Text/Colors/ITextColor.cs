@@ -1,16 +1,16 @@
 ﻿// SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
-namespace MineJason;
-
 using System.Text.Json.Serialization;
 using MineJason.Serialization.TextJson;
 
+namespace MineJason.Text.Colors;
+
 /// <summary>
-/// Represents a chat color.
+/// Represents a text color.
 /// </summary>
 [JsonConverter(typeof(ChatColorConverter))]
-public interface IChatColor
+public interface ITextColor
 {
     /// <summary>
     /// Generates the value of the <c>color</c> field.

@@ -7,14 +7,15 @@ using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using MineJason.Serialization.Schema;
+using MineJason.Text;
 
 /// <summary>
 /// Converts text components from and to JSON.
 /// </summary>
-public class TextComponentConverter : JsonConverter<ChatComponent>
+public class TextComponentConverter : JsonConverter<TextComponent>
 {
     /// <inheritdoc />
-    public override ChatComponent? Read(ref Utf8JsonReader reader,
+    public override TextComponent? Read(ref Utf8JsonReader reader,
         Type typeToConvert,
         JsonSerializerOptions options)
     {
@@ -22,7 +23,7 @@ public class TextComponentConverter : JsonConverter<ChatComponent>
         return ReadElement(ref element);
     }
 
-    private static ChatComponent? ReadElement(ref JsonElement element)
+    private static TextComponent? ReadElement(ref JsonElement element)
     {
         if (element.ValueKind == JsonValueKind.Null)
         {
@@ -32,7 +33,7 @@ public class TextComponentConverter : JsonConverter<ChatComponent>
         return ReadOne(ref element);
     }
 
-    private static ChatComponent ReadOne(ref JsonElement element)
+    private static TextComponent ReadOne(ref JsonElement element)
     {
         var decodeResult = TextComponentSchema.Instance.Decode(element,
             SchemaCommons.JsonDecoder);
@@ -45,7 +46,7 @@ public class TextComponentConverter : JsonConverter<ChatComponent>
     }
 
     /// <inheritdoc />
-    public override void Write(Utf8JsonWriter writer, ChatComponent value, JsonSerializerOptions options)
+    public override void Write(Utf8JsonWriter writer, TextComponent value, JsonSerializerOptions options)
     {
         var nodeResult = TextComponentSchema.Instance.Encode(value,
                 SchemaCommons.JsonEncoder);
@@ -60,6 +61,6 @@ public class TextComponentConverter : JsonConverter<ChatComponent>
     /// <inheritdoc />
     public override bool CanConvert(Type typeToConvert)
     {
-        return typeToConvert.IsAssignableTo(typeof(ChatComponent));
+        return typeToConvert.IsAssignableTo(typeof(TextComponent));
     }
 }

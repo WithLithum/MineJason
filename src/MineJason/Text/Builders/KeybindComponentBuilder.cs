@@ -1,15 +1,15 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
-namespace MineJason.Components.Builders;
-
 using JetBrains.Annotations;
 
+namespace MineJason.Text.Builders;
+
 /// <summary>
-/// Provides fluent syntax builder for <see cref="KeybindChatComponent"/>.
+/// Constructs a new instance of <see cref="KeybindTextComponent"/>.
 /// </summary>
 [PublicAPI]
-public class KeybindComponentBuilder : ChatComponentBuilder<KeybindChatComponent>
+public class KeybindComponentBuilder : TextComponentBuilder<KeybindTextComponent>
 {
     private string? _keybind;
 
@@ -23,9 +23,9 @@ public class KeybindComponentBuilder : ChatComponentBuilder<KeybindChatComponent
         _keybind = keybind;
         return this;
     }
-    
+
     /// <inheritdoc />
-    public override KeybindChatComponent Build()
+    public override KeybindTextComponent Build()
     {
         if (string.IsNullOrWhiteSpace(_keybind))
         {
@@ -34,7 +34,7 @@ public class KeybindComponentBuilder : ChatComponentBuilder<KeybindChatComponent
 
         var creationInfo = CreateData();
 
-        return new KeybindChatComponent(creationInfo)
+        return new KeybindTextComponent(creationInfo)
         {
             Keybind = _keybind
         };

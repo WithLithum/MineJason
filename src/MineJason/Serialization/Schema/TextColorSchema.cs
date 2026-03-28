@@ -8,10 +8,10 @@ using MineJason.Serialization.Utilities.Results;
 using MineJason.Text.Colors;
 
 /// <summary>
-/// Defines the conversion between the instance representation of <see cref="IChatColor"/> and
-/// element types. Supports encoding any <see cref="IChatColor"/> implementation.
+/// Defines the conversion between the instance representation of <see cref="ITextColor"/> and
+/// element types. Supports encoding any <see cref="ITextColor"/> implementation.
 /// </summary>
-public class TextColorSchema : ValueSchema<IChatColor>
+public class TextColorSchema : ValueSchema<ITextColor>
 {
     /// <summary>
     /// The singleton instance of the schema.
@@ -23,14 +23,14 @@ public class TextColorSchema : ValueSchema<IChatColor>
     }
 
     /// <inheritdoc />
-    public override Result<TElement> Encode<TElement>(IChatColor value, IValueEncoder<TElement> encoder,
+    public override Result<TElement> Encode<TElement>(ITextColor value, IValueEncoder<TElement> encoder,
         string? elementName = null)
     {
         return encoder.CreateString(value.GenerateColorText(), elementName);
     }
 
     /// <inheritdoc />
-    public override Result<IChatColor> Decode<TElement>(TElement value, IValueDecoder<TElement> decoder)
+    public override Result<ITextColor> Decode<TElement>(TElement value, IValueDecoder<TElement> decoder)
     {
         var strResult = decoder.GetString(value);
         if (!strResult.IsSuccess(out var color))
@@ -54,7 +54,7 @@ public class TextColorSchema : ValueSchema<IChatColor>
             return known;
         }
 
-        if (!TextColor.TryParse(color, out var rgbValue))
+        if (!RgbTextColor.TryParse(color, out var rgbValue))
         {
             return Errors.Error("Malformed RGB color value");
         }
