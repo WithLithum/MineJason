@@ -86,10 +86,13 @@ public sealed class RgbTextColor : ITextColor, IRGBLike, IEquatable<RgbTextColor
     /// <summary>
     /// Creates a new instance of <see cref="RgbTextColor"/> from the specified RGB value.
     /// </summary>
-    /// <param name="value">The RGB value.</param>
+    /// <param name="value">The RGB value. Must not exceed <c>0xFFFFFF</c>.</param>
     /// <returns>The resulting color.</returns>
     public static RgbTextColor FromRgb(int value)
     {
+        ArgumentOutOfRangeException.ThrowIfGreaterThan(value, 0xFFFFFF);
+        ArgumentOutOfRangeException.ThrowIfLessThan(value, 0x0);
+
         // Decode RGB
         var r = value >> 16;
         var g = (value >> 8) & 0xff;
