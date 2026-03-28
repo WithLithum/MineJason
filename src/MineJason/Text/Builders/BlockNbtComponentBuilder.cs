@@ -6,7 +6,8 @@ using MineJason.Data.Coordinates;
 namespace MineJason.Text.Builders;
 
 /// <summary>
-/// Constructs a NBT chat component with data sourced from a block entity. This class cannot be inherited.
+/// Constructs a new instance of <see cref="BlockNbtTextComponent"/>. This class cannot be
+/// inherited.
 /// </summary>
 public sealed class BlockNbtComponentBuilder : NbtComponentBuilder<BlockNbtTextComponent>
 {
@@ -14,7 +15,7 @@ public sealed class BlockNbtComponentBuilder : NbtComponentBuilder<BlockNbtTextC
     {
         _position = position;
     }
-    
+
     private readonly BlockPosition _position;
 
     /// <inheritdoc />

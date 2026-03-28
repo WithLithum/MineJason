@@ -7,7 +7,8 @@ using MineJason.Data.Selectors;
 namespace MineJason.Text.Builders;
 
 /// <summary>
-/// Builds a NBT chat component with data sourced from a single entity. This class cannot be inherited.
+/// Constructs a new instance of <see cref="EntityNbtTextComponent"/>. This class cannot be
+/// inherited.
 /// </summary>
 [PublicAPI]
 public sealed class EntityNbtComponentBuilder : NbtComponentBuilder<EntityNbtTextComponent>
@@ -16,7 +17,7 @@ public sealed class EntityNbtComponentBuilder : NbtComponentBuilder<EntityNbtTex
     {
         _selector = selector;
     }
-    
+
     private readonly IEntitySelector _selector;
 
     /// <inheritdoc />

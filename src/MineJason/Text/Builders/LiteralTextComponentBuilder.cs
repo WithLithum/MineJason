@@ -6,7 +6,8 @@ using JetBrains.Annotations;
 namespace MineJason.Text.Builders;
 
 /// <summary>
-/// Provides a fluent syntax builder for <see cref="LiteralTextComponent"/>.
+/// Constructs a new instance of <see cref="LiteralTextComponent"/>. This class cannot be
+/// inherited.
 /// </summary>
 [PublicAPI]
 public sealed class LiteralTextComponentBuilder : TextComponentBuilder<LiteralTextComponent>
@@ -23,7 +24,7 @@ public sealed class LiteralTextComponentBuilder : TextComponentBuilder<LiteralTe
         _text = text;
         return this;
     }
-    
+
     /// <inheritdoc />
     /// <exception cref="InvalidOperationException">The text value was not set.</exception>
     public override LiteralTextComponent Build()

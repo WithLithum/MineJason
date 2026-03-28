@@ -1,16 +1,13 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
-namespace MineJason.Components.Builders;
-
 using JetBrains.Annotations;
-using MineJason.Data;
 using MineJason.Data.Selectors;
-using MineJason.Text;
-using MineJason.Text.Builders;
+
+namespace MineJason.Text.Builders;
 
 /// <summary>
-/// Provides fluent syntax building for <see cref="EntityTextComponent"/>.
+/// Constructs a new instance of <see cref="EntityTextComponent"/>.
 /// </summary>
 [PublicAPI]
 public sealed class EntityComponentBuilder : TextComponentBuilder<EntityTextComponent>
@@ -28,7 +25,7 @@ public sealed class EntityComponentBuilder : TextComponentBuilder<EntityTextComp
         _selector = selector;
         return this;
     }
-    
+
     /// <summary>
     /// Sets the text component used to separate entity names found.
     /// </summary>

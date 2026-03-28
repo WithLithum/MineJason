@@ -4,7 +4,8 @@
 namespace MineJason.Text.Builders;
 
 /// <summary>
-/// Constructs a NBT chat component with data sourced from a storage file. This class cannot be inherited.
+/// Constructs a new instance of <see cref="StorageNbtComponentBuilder"/>. This class cannot be
+/// inherited.
 /// </summary>
 public sealed class StorageNbtComponentBuilder : NbtComponentBuilder<StorageNbtTextComponent>
 {
@@ -12,7 +13,7 @@ public sealed class StorageNbtComponentBuilder : NbtComponentBuilder<StorageNbtT
     {
         _storage = storage;
     }
-    
+
     private readonly ResourceLocation _storage;
 
     /// <inheritdoc />

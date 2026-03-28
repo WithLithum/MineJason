@@ -6,7 +6,7 @@ using JetBrains.Annotations;
 namespace MineJason.Text.Builders;
 
 /// <summary>
-/// Provides fluent syntax builder for <see cref="KeybindTextComponent"/>.
+/// Constructs a new instance of <see cref="KeybindTextComponent"/>.
 /// </summary>
 [PublicAPI]
 public class KeybindComponentBuilder : TextComponentBuilder<KeybindTextComponent>
@@ -23,7 +23,7 @@ public class KeybindComponentBuilder : TextComponentBuilder<KeybindTextComponent
         _keybind = keybind;
         return this;
     }
-    
+
     /// <inheritdoc />
     public override KeybindTextComponent Build()
     {

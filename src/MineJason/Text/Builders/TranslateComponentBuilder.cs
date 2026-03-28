@@ -6,7 +6,8 @@ using JetBrains.Annotations;
 namespace MineJason.Text.Builders;
 
 /// <summary>
-/// Provides a fluent syntax builder for <see cref="TranslateTextComponent"/>.
+/// Constructs a new instance of <see cref="TranslateTextComponent"/>. This class cannot be
+/// inherited.
 /// </summary>
 [PublicAPI]
 public sealed class TranslateComponentBuilder : TextComponentBuilder<TranslateTextComponent>
@@ -47,7 +48,7 @@ public sealed class TranslateComponentBuilder : TextComponentBuilder<TranslateTe
         _with.Add(value);
         return this;
     }
-    
+
     /// <summary>
     /// Adds the specified values to the arguments.
     /// </summary>

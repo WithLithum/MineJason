@@ -25,7 +25,7 @@ public sealed record KeybindTextComponent : TextComponent,
     /// Initializes a new instance of <see cref="KeybindTextComponent"/> with the specified
     /// keybind.
     /// </summary>
-    /// <param name="keybind"></param>
+    /// <param name="keybind">The identifier of the key to display.</param>
     [SetsRequiredMembers]
     public KeybindTextComponent(string keybind)
     {

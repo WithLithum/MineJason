@@ -10,7 +10,7 @@ using System.Drawing;
 namespace MineJason.Text.Builders;
 
 /// <summary>
-/// Provides a base for chat component building.
+/// Constructs new instances of <see cref="TextComponent"/> derivatives.
 /// </summary>
 [PublicAPI]
 public abstract class TextComponentBuilder<TTarget> where TTarget : TextComponent

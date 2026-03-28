@@ -4,7 +4,7 @@
 namespace MineJason.Text.Builders;
 
 /// <summary>
-/// Constructs a <see cref="ScoreTextComponent"/> with support for fluent syntax.
+/// Constructs a new instance of <see cref="ScoreTextComponent"/>. This class cannot be inherited.
 /// </summary>
 public class ScoreTextComponentBuilder : TextComponentBuilder<ScoreTextComponent>
 {

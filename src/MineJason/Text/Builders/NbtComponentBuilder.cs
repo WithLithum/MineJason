@@ -6,7 +6,7 @@ using MineJason.Text.Builders.Utilities;
 namespace MineJason.Text.Builders;
 
 /// <summary>
-/// Provides services for building an NBT component.
+/// Constructs new instances of <see cref="NbtTextComponent"/> derivatives.
 /// </summary>
 /// <typeparam name="T">The type of the NBT component.</typeparam>
 public abstract class NbtComponentBuilder<T> : TextComponentBuilder<T>
