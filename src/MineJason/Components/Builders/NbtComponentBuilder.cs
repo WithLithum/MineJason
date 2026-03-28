@@ -1,6 +1,8 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
+using MineJason.Text;
+
 namespace MineJason.Components.Builders;
 
 /// <summary>
@@ -8,10 +10,10 @@ namespace MineJason.Components.Builders;
 /// </summary>
 /// <typeparam name="T">The type of the NBT component.</typeparam>
 public abstract class NbtComponentBuilder<T> : ChatComponentBuilder<T>
-    where T : BaseNbtChatComponent
+    where T : NbtTextComponent
 {
     private string? _path;
-    private ChatComponent? _separator;
+    private TextComponent? _separator;
     private bool _interpret;
     private bool _plain;
 
@@ -55,7 +57,7 @@ public abstract class NbtComponentBuilder<T> : ChatComponentBuilder<T>
     /// </summary>
     /// <param name="separator">The separator.</param>
     /// <returns>This instance.</returns>
-    public NbtComponentBuilder<T> Separator(ChatComponent separator)
+    public NbtComponentBuilder<T> Separator(TextComponent separator)
     {
         _separator = separator;
         return this;

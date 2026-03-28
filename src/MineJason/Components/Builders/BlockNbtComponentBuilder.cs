@@ -4,11 +4,12 @@
 namespace MineJason.Components.Builders;
 
 using MineJason.Data.Coordinates;
+using MineJason.Text;
 
 /// <summary>
 /// Constructs a NBT chat component with data sourced from a block entity. This class cannot be inherited.
 /// </summary>
-public sealed class BlockNbtComponentBuilder : NbtComponentBuilder<BlockNbtChatComponent>
+public sealed class BlockNbtComponentBuilder : NbtComponentBuilder<BlockNbtTextComponent>
 {
     internal BlockNbtComponentBuilder(BlockPosition position)
     {
@@ -18,11 +19,11 @@ public sealed class BlockNbtComponentBuilder : NbtComponentBuilder<BlockNbtChatC
     private readonly BlockPosition _position;
 
     /// <inheritdoc />
-    public override BlockNbtChatComponent Build()
+    public override BlockNbtTextComponent Build()
     {
         var baseInfo = CreateData();
         var nbtInfo = CreateNBTData();
 
-        return new BlockNbtChatComponent(baseInfo, nbtInfo, _position);
+        return new BlockNbtTextComponent(baseInfo, nbtInfo, _position);
     }
 }

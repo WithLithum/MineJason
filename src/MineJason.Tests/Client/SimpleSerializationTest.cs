@@ -5,6 +5,7 @@ using System.Text.Json;
 using MineJason.Data;
 using MineJason.Data.Coordinates;
 using MineJason.Serialization.TextJson;
+using MineJason.Text;
 using MineJason.Text.Colors;
 
 namespace MineJason.Tests.Client;
@@ -15,7 +16,7 @@ public class SimpleSerializationTests
     public void TextComponent_Serialize()
     {
         // Arrange
-        var component = ChatComponent.CreateText("I am text");
+        var component = TextComponent.CreateText("I am text");
 
         // Act
         var json = JsonSerializer.Serialize(component,
@@ -32,11 +33,11 @@ public class SimpleSerializationTests
         const string json = "{\"text\":\"Hello World!\"}";
 
         // Act
-        var deserialized = JsonSerializer.Deserialize<ChatComponent>(json,
+        var deserialized = JsonSerializer.Deserialize<TextComponent>(json,
             MineJasonTextJsonContext.Default.ChatComponent);
 
         // Assert
-        Assert.Equal(ChatComponent.CreateText("Hello World!"), deserialized);
+        Assert.Equal(TextComponent.CreateText("Hello World!"), deserialized);
     }
 
     [Fact]
@@ -50,14 +51,14 @@ public class SimpleSerializationTests
             MineJasonTextJsonContext.Default.ChatComponent);
 
         // Assert
-        Assert.Equal(ChatComponent.CreateText("Hello World!"), deserialized);
+        Assert.Equal(TextComponent.CreateText("Hello World!"), (TextComponent?)deserialized);
     }
 
     [Fact]
     public void TranslatableComponent_Serialize()
     {
         // Arrange
-        var component = ChatComponent.CreateTranslatable("translatable.key");
+        var component = TextComponent.CreateTranslatable("translatable.key");
 
         // Act
         var json = JsonSerializer.Serialize(component,
@@ -78,7 +79,7 @@ public class SimpleSerializationTests
             MineJasonTextJsonContext.Default.ChatComponent);
 
         // Assert
-        var exp = ChatComponent.CreateTranslatable("translatable.key");
+        var exp = TextComponent.CreateTranslatable("translatable.key");
         Assert.Equal(exp, deserialized);
     }
 
@@ -86,7 +87,7 @@ public class SimpleSerializationTests
     public void ScoreboardComponent_Serialize()
     {
         // Arrange
-        var component = ChatComponent.CreateScore("Player", "advancements");
+        var component = TextComponent.CreateScore("Player", "advancements");
 
         // Act
         var json = JsonSerializer.Serialize(component,
@@ -107,14 +108,14 @@ public class SimpleSerializationTests
             MineJasonTextJsonContext.Default.ChatComponent);
 
         // Assert
-        Assert.Equal(ChatComponent.CreateScore("Player", "advancements"), deserialized);
+        Assert.Equal(TextComponent.CreateScore("Player", "advancements"), (TextComponent?)deserialized);
     }
 
     [Fact]
     public void EntityComponent_Serialize()
     {
         // Arrange
-        var component = ChatComponent.CreateSelector(new EntitySelector(EntitySelectorKind.AllPlayers), ChatComponent.CreateText(";"));
+        var component = TextComponent.CreateSelector(new EntitySelector(EntitySelectorKind.AllPlayers), TextComponent.CreateText(";"));
 
         // Act
         var json = JsonSerializer.Serialize(component,
@@ -136,15 +137,15 @@ public class SimpleSerializationTests
             MineJasonTextJsonContext.Default.ChatComponent);
 
         // Assert
-        Assert.Equal(ChatComponent.CreateSelector(new EntitySelector(EntitySelectorKind.AllPlayers), ChatComponent.CreateText(";")),
-            deserialized);
+        Assert.Equal(TextComponent.CreateSelector(new EntitySelector(EntitySelectorKind.AllPlayers), TextComponent.CreateText(";")),
+            (TextComponent?)deserialized);
     }
 
     [Fact]
     public void StorageNbtComponent_Serialize()
     {
         // Arrange
-        var component = ChatComponent.CreateNbt(new ResourceLocation("mine", "storage"), "path.to.NBT");
+        var component = TextComponent.CreateNbt(new ResourceLocation("mine", "storage"), "path.to.NBT");
 
         // Act
         var json = JsonSerializer.Serialize(component,
@@ -158,7 +159,7 @@ public class SimpleSerializationTests
     public void StorageNbt_InterpretEnabled_OutputsPlainTrue()
     {
         // Arrange
-        var component = ChatComponent.CreateNbt()
+        var component = TextComponent.CreateNbt()
             .Storage(new ResourceLocation("mine", "storage"))
             .Path("path.to.NBT")
             .Interpret()
@@ -176,7 +177,7 @@ public class SimpleSerializationTests
     public void StorageNbt_PlainEnabled_OutputsPlainTrue()
     {
         // Arrange
-        var component = ChatComponent.CreateNbt()
+        var component = TextComponent.CreateNbt()
             .Storage(new ResourceLocation("mine", "storage"))
             .Path("path.to.NBT")
             .Plain()
@@ -201,15 +202,15 @@ public class SimpleSerializationTests
             MineJasonTextJsonContext.Default.ChatComponent);
 
         // Assert
-        Assert.Equal(ChatComponent.CreateNbt(new ResourceLocation("mine", "storage"), "path.to.NBT"),
-            deserialized);
+        Assert.Equal(TextComponent.CreateNbt(new ResourceLocation("mine", "storage"), "path.to.NBT"),
+            (TextComponent?)deserialized);
     }
 
     [Fact]
     public void BlockNbtComponent_Serialize()
     {
         // Arrange
-        var component = ChatComponent.CreateNbt(new BlockPosition(12, 12, 12), "path.to.NBT");
+        var component = TextComponent.CreateNbt(new BlockPosition(12, 12, 12), "path.to.NBT");
 
         // Act
         var json = JsonSerializer.Serialize(component,
@@ -230,15 +231,15 @@ public class SimpleSerializationTests
             MineJasonTextJsonContext.Default.ChatComponent);
 
         // Assert
-        Assert.Equal(ChatComponent.CreateNbt(new BlockPosition(12, 12, 12), "path.to.NBT"),
-            deserialized);
+        Assert.Equal(TextComponent.CreateNbt(new BlockPosition(12, 12, 12), "path.to.NBT"),
+            (TextComponent?)deserialized);
     }
 
     [Fact]
     public void EntityNbtComponent_Serialize()
     {
         // Arrange
-        var component = ChatComponent.CreateNbt(new EntitySelector(EntitySelectorKind.Executor), "path.to.NBT");
+        var component = TextComponent.CreateNbt(new EntitySelector(EntitySelectorKind.Executor), "path.to.NBT");
 
         // Act
         var json = JsonSerializer.Serialize(component,
@@ -252,7 +253,7 @@ public class SimpleSerializationTests
     public void SpriteComponent_Serialize()
     {
         // Arrange
-        var component = ChatComponent.CreateAtlasObject(
+        var component = TextComponent.CreateAtlasObject(
             sprite: new ResourceLocation("foo", "bar"),
             atlas: new ResourceLocation("foo", "atlas"));
 
@@ -269,10 +270,10 @@ public class SimpleSerializationTests
     public void SpriteComponent_Serialize_WithFallback()
     {
         // Arrange
-        var component = ChatComponent.CreateAtlasObject(
+        var component = TextComponent.CreateAtlasObject(
             sprite: new ResourceLocation("foo", "bar"),
             atlas: new ResourceLocation("foo", "atlas"),
-            fallback: ChatComponent.CreateText("Fallback"));
+            fallback: TextComponent.CreateText("Fallback"));
 
         // Act
         var json = JsonSerializer.Serialize(component,
@@ -294,8 +295,8 @@ public class SimpleSerializationTests
             MineJasonTextJsonContext.Default.ChatComponent);
 
         // Assert
-        Assert.Equal(ChatComponent.CreateNbt(new EntitySelector(EntitySelectorKind.Executor), "path.to.NBT"),
-            deserialized);
+        Assert.Equal(TextComponent.CreateNbt(new EntitySelector(EntitySelectorKind.Executor), "path.to.NBT"),
+            (TextComponent?)deserialized);
     }
 
     [Fact]
@@ -309,10 +310,10 @@ public class SimpleSerializationTests
             MineJasonTextJsonContext.Default.ChatComponent);
 
         // Assert
-        Assert.Equal(ChatComponent.CreateAtlasObject(sprite: new ResourceLocation("foo", "bar"),
+        Assert.Equal(TextComponent.CreateAtlasObject(sprite: new ResourceLocation("foo", "bar"),
             atlas: new ResourceLocation("foo", "atlas"),
-            fallback: ChatComponent.CreateText("Fallback")),
-            deserialized);
+            fallback: TextComponent.CreateText("Fallback")),
+            (TextComponent?)deserialized);
     }
 
     [Fact]
@@ -326,16 +327,16 @@ public class SimpleSerializationTests
             MineJasonTextJsonContext.Default.ChatComponent);
 
         // Assert
-        Assert.Equal(ChatComponent.CreateAtlasObject(sprite: new ResourceLocation("foo", "bar"),
+        Assert.Equal(TextComponent.CreateAtlasObject(sprite: new ResourceLocation("foo", "bar"),
             atlas: new ResourceLocation("foo", "atlas")),
-            deserialized);
+            (TextComponent?)deserialized);
     }
 
     [Fact]
     public void TextComponent_Serialize_WithColor()
     {
         // Arrange
-        var component = ChatComponent.CreateText("Hello World!")
+        var component = TextComponent.CreateText("Hello World!")
             .WithColor(NamedTextColor.Aqua);
 
         // Act
@@ -350,7 +351,7 @@ public class SimpleSerializationTests
     public void TranslatableComponent_Serialize_WithColor()
     {
         // Arrange
-        var component = ChatComponent.CreateTranslatable("translatable.key")
+        var component = TextComponent.CreateTranslatable("translatable.key")
             .WithColor(NamedTextColor.Aqua);
 
         // Act

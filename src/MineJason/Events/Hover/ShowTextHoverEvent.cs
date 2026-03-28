@@ -7,6 +7,7 @@ using System.Diagnostics.CodeAnalysis;
 using JetBrains.Annotations;
 using MineJason.Serialization.TextJson;
 using System.Text.Json.Serialization;
+using MineJason.Text;
 
 /// <summary>
 /// Represents a show text hover event, that shows a chat component as a tooltip.
@@ -27,7 +28,7 @@ public sealed class ShowTextHoverEvent : HoverEvent, IEquatable<ShowTextHoverEve
     /// </summary>
     /// <param name="contents">The contents of the tooltip.</param>
     [SetsRequiredMembers]
-    public ShowTextHoverEvent(ChatComponent contents)
+    public ShowTextHoverEvent(TextComponent contents)
     {
         Contents = contents;
     }
@@ -36,7 +37,7 @@ public sealed class ShowTextHoverEvent : HoverEvent, IEquatable<ShowTextHoverEve
     /// Gets the contents of the tooltip.
     /// </summary>
     [JsonPropertyName("contents")]
-    public required ChatComponent Contents { get; init; }
+    public required TextComponent Contents { get; init; }
 
     /// <inheritdoc />
     public bool Equals(ShowTextHoverEvent? other)

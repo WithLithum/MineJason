@@ -4,12 +4,13 @@
 namespace MineJason.Components.Builders;
 
 using JetBrains.Annotations;
+using MineJason.Text;
 
 /// <summary>
-/// Provides a fluent syntax builder for <see cref="TextChatComponent"/>.
+/// Provides a fluent syntax builder for <see cref="LiteralTextComponent"/>.
 /// </summary>
 [PublicAPI]
-public sealed class TextComponentBuilder : ChatComponentBuilder<TextChatComponent>
+public sealed class TextComponentBuilder : ChatComponentBuilder<LiteralTextComponent>
 {
     private string? _text;
 
@@ -26,7 +27,7 @@ public sealed class TextComponentBuilder : ChatComponentBuilder<TextChatComponen
     
     /// <inheritdoc />
     /// <exception cref="InvalidOperationException">The text value was not set.</exception>
-    public override TextChatComponent Build()
+    public override LiteralTextComponent Build()
     {
         if (_text == null)
         {
@@ -34,7 +35,7 @@ public sealed class TextComponentBuilder : ChatComponentBuilder<TextChatComponen
         }
 
         var creationInfo = CreateData();
-        return new TextChatComponent(creationInfo)
+        return new LiteralTextComponent(creationInfo)
         {
             Text = _text
         };

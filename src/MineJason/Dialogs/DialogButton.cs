@@ -4,6 +4,7 @@
 namespace MineJason.Dialogs;
 
 using MineJason.Events;
+using MineJason.Text;
 using MineJason.Utilities;
 
 /// <summary>
@@ -16,12 +17,12 @@ public record DialogButton
     /// <summary>
     /// Gets the text shown on the button.
     /// </summary>
-    public required ChatComponent Label { get; init; }
+    public required TextComponent Label { get; init; }
     
     /// <summary>
     /// Gets the optional tool tip shown when the mouse hovers over the button.
     /// </summary>
-    public ChatComponent? Tooltip { get; init; }
+    public TextComponent? Tooltip { get; init; }
 
     /// <summary>
     /// Gets the width of this button.

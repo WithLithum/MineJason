@@ -4,6 +4,7 @@
 namespace MineJason.Dialogs;
 
 using MineJason.Dialogs.Input;
+using MineJason.Text;
 using System.Collections.Generic;
 
 internal readonly ref struct DialogCreationInfo
@@ -11,12 +12,12 @@ internal readonly ref struct DialogCreationInfo
     /// <summary>
     /// Gets the title of this dialog screen.
     /// </summary>
-    public required ChatComponent Title { get; init; }
+    public required TextComponent Title { get; init; }
 
     /// <summary>
     /// Gets the text to display on a button leading this dialog in a dialog list screen.
     /// </summary>
-    public ChatComponent? ExternalTitle { get; init; }
+    public TextComponent? ExternalTitle { get; init; }
 
     /// <summary>
     /// Gets the body messages of this dialog screen.

@@ -72,5 +72,5 @@ public readonly ref struct TextComponentCreationInfo
     /// Gets or sets the extra components that displays after this component and uses the
     /// styles of this component by default.
     /// </summary>
-    public IReadOnlyList<ChatComponent>? Extra { get; init; }
+    public IReadOnlyList<TextComponent>? Extra { get; init; }
 }

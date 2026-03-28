@@ -4,17 +4,18 @@
 namespace MineJason.Components.Builders;
 
 using JetBrains.Annotations;
+using MineJason.Text;
 using System.Drawing;
 
 /// <summary>
-/// Provides a fluent syntax builder for <see cref="TranslatableChatComponent"/>.
+/// Provides a fluent syntax builder for <see cref="TranslateTextComponent"/>.
 /// </summary>
 [PublicAPI]
-public sealed class TranslatableComponentBuilder : ChatComponentBuilder<TranslatableChatComponent>
+public sealed class TranslatableComponentBuilder : ChatComponentBuilder<TranslateTextComponent>
 {
     private string? _translate;
     private string? _fallback;
-    private readonly List<ChatComponent> _with = [];
+    private readonly List<TextComponent> _with = [];
 
     /// <summary>
     /// Sets the translation key value of the component.
@@ -43,7 +44,7 @@ public sealed class TranslatableComponentBuilder : ChatComponentBuilder<Translat
     /// </summary>
     /// <param name="value">The value.</param>
     /// <returns>This instance.</returns>
-    public TranslatableComponentBuilder With(ChatComponent value)
+    public TranslatableComponentBuilder With(TextComponent value)
     {
         _with.Add(value);
         return this;
@@ -54,7 +55,7 @@ public sealed class TranslatableComponentBuilder : ChatComponentBuilder<Translat
     /// </summary>
     /// <param name="values">The values.</param>
     /// <returns>This instance.</returns>
-    public TranslatableComponentBuilder With(params ChatComponent[] values)
+    public TranslatableComponentBuilder With(params TextComponent[] values)
     {
         _with.AddRange(values);
         return this;
@@ -62,7 +63,7 @@ public sealed class TranslatableComponentBuilder : ChatComponentBuilder<Translat
 
     /// <inheritdoc />
     /// <exception cref="InvalidOperationException">The translation key was not set.</exception>
-    public override TranslatableChatComponent Build()
+    public override TranslateTextComponent Build()
     {
         if (_translate == null)
         {
@@ -70,7 +71,7 @@ public sealed class TranslatableComponentBuilder : ChatComponentBuilder<Translat
         }
 
         var creationInfo = CreateData();
-        return new TranslatableChatComponent(creationInfo)
+        return new TranslateTextComponent(creationInfo)
         {
             Translate = _translate,
             Fallback = _fallback,

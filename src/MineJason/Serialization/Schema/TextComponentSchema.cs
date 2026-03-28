@@ -3,7 +3,6 @@
 
 namespace MineJason.Serialization.Schema;
 
-using MineJason.Components;
 using MineJason.Serialization.IO;
 using MineJason.Serialization.Schema.Objects;
 using MineJason.Serialization.Schema.Primitive;
@@ -14,7 +13,7 @@ using MineJason.Utilities;
 /// <summary>
 /// Defines a schema that encodes or decodes text components to or from the given element type. 
 /// </summary>
-public partial class TextComponentSchema : ValueSchema<ChatComponent>
+public partial class TextComponentSchema : ValueSchema<TextComponent>
 {
     /// <summary>
     /// The singleton instance with default settings that do not support items.
@@ -25,15 +24,15 @@ public partial class TextComponentSchema : ValueSchema<ChatComponent>
     {
     }
 
-    private static readonly ObjectSchema<TextChatComponent> LiteralSchema
-        = new ObjectSchemaBuilder<TextChatComponent>()
+    private static readonly ObjectSchema<LiteralTextComponent> LiteralSchema
+        = new ObjectSchemaBuilder<LiteralTextComponent>()
             .Constant("type", "text", StringValueSchema.Instance)
             .String("text", x => x.Text)
             .CommonTextComponentSchema()
             .Build();
 
-    private static readonly ObjectSchema<TranslatableChatComponent> TranslatableSchema
-        = new ObjectSchemaBuilder<TranslatableChatComponent>()
+    private static readonly ObjectSchema<TranslateTextComponent> TranslatableSchema
+        = new ObjectSchemaBuilder<TranslateTextComponent>()
             .Constant("type", "translatable", StringValueSchema.Instance)
             .String("translate", x => x.Translate)
             .OptionalString("fallback", x => x.Fallback)
@@ -42,8 +41,8 @@ public partial class TextComponentSchema : ValueSchema<ChatComponent>
             .CommonTextComponentSchema()
             .Build();
 
-    private static readonly ObjectSchema<ScoreboardChatComponent> ScoreSchema
-        = new ObjectSchemaBuilder<ScoreboardChatComponent>()
+    private static readonly ObjectSchema<ScoreTextComponent> ScoreSchema
+        = new ObjectSchemaBuilder<ScoreTextComponent>()
             .Constant("type", "score", StringValueSchema.Instance)
             .Object("score", x => x.Score,
                 cfg =>
@@ -51,8 +50,8 @@ public partial class TextComponentSchema : ValueSchema<ChatComponent>
                         .String("objective", x => x.Objective))
             .Build();
 
-    private static readonly ObjectSchema<EntityChatComponent> SelectorSchema
-        = new ObjectSchemaBuilder<EntityChatComponent>()
+    private static readonly ObjectSchema<EntityTextComponent> SelectorSchema
+        = new ObjectSchemaBuilder<EntityTextComponent>()
             .Constant("type", "selector", StringValueSchema.Instance)
             .Property("selector", x => x.Selector,
                 EntitySelectorSchema.Instance)
@@ -60,31 +59,31 @@ public partial class TextComponentSchema : ValueSchema<ChatComponent>
                 Instance, optional: true)
             .Build();
 
-    private static readonly ObjectSchema<KeybindChatComponent> KeybindSchema
-        = new ObjectSchemaBuilder<KeybindChatComponent>()
+    private static readonly ObjectSchema<KeybindTextComponent> KeybindSchema
+        = new ObjectSchemaBuilder<KeybindTextComponent>()
             .Constant("type", "keybind", StringValueSchema.Instance)
             .String("keybind", x => x.Keybind)
             .CommonTextComponentSchema()
             .Build();
 
     /// <inheritdoc />
-    public override Result<TElement> Encode<TElement>(ChatComponent value,
+    public override Result<TElement> Encode<TElement>(TextComponent value,
         IValueEncoder<TElement> encoder,
         string? elementName = null)
     {
         return value switch
         {
-            TextChatComponent literal => LiteralSchema.Encode(literal, encoder, elementName),
-            TranslatableChatComponent translate => TranslatableSchema.Encode(translate,
+            LiteralTextComponent literal => LiteralSchema.Encode(literal, encoder, elementName),
+            TranslateTextComponent translate => TranslatableSchema.Encode(translate,
                 encoder,
                 elementName),
-            ScoreboardChatComponent score => ScoreSchema.Encode(score, encoder, elementName),
-            EntityChatComponent selector => SelectorSchema.Encode(selector, encoder, elementName),
-            KeybindChatComponent keybind => KeybindSchema.Encode(keybind, encoder, elementName),
-            BlockNbtChatComponent blockNbt => NbtBlockSchema.Encode(blockNbt, encoder, elementName),
-            EntityNbtChatComponent entityNbt =>
+            ScoreTextComponent score => ScoreSchema.Encode(score, encoder, elementName),
+            EntityTextComponent selector => SelectorSchema.Encode(selector, encoder, elementName),
+            KeybindTextComponent keybind => KeybindSchema.Encode(keybind, encoder, elementName),
+            BlockNbtTextComponent blockNbt => NbtBlockSchema.Encode(blockNbt, encoder, elementName),
+            EntityNbtTextComponent entityNbt =>
                 NbtEntitySchema.Encode(entityNbt, encoder, elementName),
-            StorageNbtChatComponent storageNbt =>
+            StorageNbtTextComponent storageNbt =>
                 NbtStorageSchema.Encode(storageNbt, encoder, elementName),
             AtlasObjectTextComponent atlasObject =>
                 AtlasSpriteSchema.Encode(atlasObject, encoder, elementName),
@@ -95,7 +94,7 @@ public partial class TextComponentSchema : ValueSchema<ChatComponent>
     }
 
     /// <inheritdoc />
-    public override Result<ChatComponent> Decode<TElement>(TElement value, IValueDecoder<TElement> decoder)
+    public override Result<TextComponent> Decode<TElement>(TElement value, IValueDecoder<TElement> decoder)
     {
         ArgumentNullException.ThrowIfNull(value);
 
@@ -103,7 +102,7 @@ public partial class TextComponentSchema : ValueSchema<ChatComponent>
         var strResult = decoder.GetString(value);
         if (strResult.IsSuccess(out var str))
         {
-            return new TextChatComponent(str);
+            return new LiteralTextComponent(str);
         }
 
         // If fails, attempts to parse collection based components.
@@ -139,11 +138,11 @@ public partial class TextComponentSchema : ValueSchema<ChatComponent>
         };
     }
 
-    private Result<ChatComponent> DecodeCollection<TElement>(IEnumerable<TElement> collection,
+    private Result<TextComponent> DecodeCollection<TElement>(IEnumerable<TElement> collection,
         IValueDecoder<TElement> decoder)
     {
-        ChatComponent? first = null;
-        List<ChatComponent>? extras = null;
+        TextComponent? first = null;
+        List<TextComponent>? extras = null;
 
         foreach (var col in collection)
         {
@@ -164,11 +163,11 @@ public partial class TextComponentSchema : ValueSchema<ChatComponent>
             extras.Add(item);
         }
 
-        first ??= ChatComponent.CreateText("");
+        first ??= TextComponent.CreateText("");
         return first with { Extra = extras };
     }
 
-    private static Result<ChatComponent> DecodeByProperty<TElement>(TElement value,
+    private static Result<TextComponent> DecodeByProperty<TElement>(TElement value,
         IReadOnlyObjectLike<TElement> o,
         IValueDecoder<TElement> decoder)
     {
@@ -188,9 +187,9 @@ public partial class TextComponentSchema : ValueSchema<ChatComponent>
         };
     }
 
-    private static Result<ChatComponent> CastResult<TChild>(Result<TChild> from)
-        where TChild : ChatComponent
+    private static Result<TextComponent> CastResult<TChild>(Result<TChild> from)
+        where TChild : TextComponent
     {
-        return from.Cast<TChild, ChatComponent>();
+        return from.Cast<TChild, TextComponent>();
     }
 }

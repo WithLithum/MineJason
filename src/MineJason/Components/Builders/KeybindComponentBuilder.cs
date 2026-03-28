@@ -4,12 +4,13 @@
 namespace MineJason.Components.Builders;
 
 using JetBrains.Annotations;
+using MineJason.Text;
 
 /// <summary>
-/// Provides fluent syntax builder for <see cref="KeybindChatComponent"/>.
+/// Provides fluent syntax builder for <see cref="KeybindTextComponent"/>.
 /// </summary>
 [PublicAPI]
-public class KeybindComponentBuilder : ChatComponentBuilder<KeybindChatComponent>
+public class KeybindComponentBuilder : ChatComponentBuilder<KeybindTextComponent>
 {
     private string? _keybind;
 
@@ -25,7 +26,7 @@ public class KeybindComponentBuilder : ChatComponentBuilder<KeybindChatComponent
     }
     
     /// <inheritdoc />
-    public override KeybindChatComponent Build()
+    public override KeybindTextComponent Build()
     {
         if (string.IsNullOrWhiteSpace(_keybind))
         {
@@ -34,7 +35,7 @@ public class KeybindComponentBuilder : ChatComponentBuilder<KeybindChatComponent
 
         var creationInfo = CreateData();
 
-        return new KeybindChatComponent(creationInfo)
+        return new KeybindTextComponent(creationInfo)
         {
             Keybind = _keybind
         };

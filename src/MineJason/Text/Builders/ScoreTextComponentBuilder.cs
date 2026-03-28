@@ -4,11 +4,12 @@
 namespace MineJason.Text.Builders;
 
 using MineJason.Components.Builders;
+using MineJason.Text;
 
 /// <summary>
-/// Constructs a <see cref="ScoreboardChatComponent"/> with support for fluent syntax.
+/// Constructs a <see cref="ScoreTextComponent"/> with support for fluent syntax.
 /// </summary>
-public class ScoreTextComponentBuilder : ChatComponentBuilder<ScoreboardChatComponent>
+public class ScoreTextComponentBuilder : ChatComponentBuilder<ScoreTextComponent>
 {
     private string? _name;
     private string? _objective;
@@ -36,7 +37,7 @@ public class ScoreTextComponentBuilder : ChatComponentBuilder<ScoreboardChatComp
     }
 
     /// <inheritdoc />
-    public override ScoreboardChatComponent Build()
+    public override ScoreTextComponent Build()
     {
         if (_name == null || _objective == null)
         {
@@ -44,9 +45,9 @@ public class ScoreTextComponentBuilder : ChatComponentBuilder<ScoreboardChatComp
         }
 
         var creationInfo = CreateData();
-        return new ScoreboardChatComponent(creationInfo)
+        return new ScoreTextComponent(creationInfo)
         {
-            Score = new ScoreboardChatComponent.Data(_name, _objective)
+            Score = new ScoreTextComponent.Data(_name, _objective)
         };
     }
 }

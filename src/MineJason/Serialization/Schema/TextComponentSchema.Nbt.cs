@@ -3,37 +3,37 @@
 
 namespace MineJason.Serialization.Schema;
 
-using MineJason.Components;
 using MineJason.Serialization.IO;
 using MineJason.Serialization.Schema.Objects;
 using MineJason.Serialization.Utilities.Results;
+using MineJason.Text;
 
 public partial class TextComponentSchema
 {
-    private static readonly ObjectSchema<BlockNbtChatComponent> NbtBlockSchema
-        = new ObjectSchemaBuilder<BlockNbtChatComponent>()
-            .CommonNbtTextComponentSchema(BlockNbtChatComponent.SourceName)
+    private static readonly ObjectSchema<BlockNbtTextComponent> NbtBlockSchema
+        = new ObjectSchemaBuilder<BlockNbtTextComponent>()
+            .CommonNbtTextComponentSchema(BlockNbtTextComponent.SourceName)
             .Property("block", x => x.Block,
                 BlockPositionSchema.Instance)
             .CommonTextComponentSchema()
             .Build();
 
-    private static readonly ObjectSchema<EntityNbtChatComponent> NbtEntitySchema
-        = new ObjectSchemaBuilder<EntityNbtChatComponent>()
-            .CommonNbtTextComponentSchema(EntityNbtChatComponent.SourceName)
+    private static readonly ObjectSchema<EntityNbtTextComponent> NbtEntitySchema
+        = new ObjectSchemaBuilder<EntityNbtTextComponent>()
+            .CommonNbtTextComponentSchema(EntityNbtTextComponent.SourceName)
             .Property("entity", x => x.Entity,
                 EntitySelectorSchema.Instance)
             .CommonTextComponentSchema()
             .Build();
 
-    private static readonly ObjectSchema<StorageNbtChatComponent> NbtStorageSchema
-        = new ObjectSchemaBuilder<StorageNbtChatComponent>()
-            .CommonNbtTextComponentSchema(StorageNbtChatComponent.SourceName)
+    private static readonly ObjectSchema<StorageNbtTextComponent> NbtStorageSchema
+        = new ObjectSchemaBuilder<StorageNbtTextComponent>()
+            .CommonNbtTextComponentSchema(StorageNbtTextComponent.SourceName)
             .ResourceLocation("storage", x => x.Storage)
             .CommonTextComponentSchema()
             .Build();
 
-    private static Result<ChatComponent> DecodeNbtInternal<TElement>(TElement value,
+    private static Result<TextComponent> DecodeNbtInternal<TElement>(TElement value,
         IReadOnlyObjectLike<TElement> o,
         IValueDecoder<TElement> decoder)
     {
@@ -54,7 +54,7 @@ public partial class TextComponentSchema
         };
     }
 
-    private static Result<ChatComponent> DecodeNbtBySourceInternal<TElement>(TElement value,
+    private static Result<TextComponent> DecodeNbtBySourceInternal<TElement>(TElement value,
         IReadOnlyObjectLike<TElement> o,
         IValueDecoder<TElement> decoder)
     {

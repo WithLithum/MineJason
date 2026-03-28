@@ -7,6 +7,7 @@ using System.Diagnostics.CodeAnalysis;
 using JetBrains.Annotations;
 using MineJason.Serialization.TextJson;
 using System.Text.Json.Serialization;
+using MineJason.Text;
 
 /// <summary>
 /// Represents a show entity hover event, a hover event that displays entity type and GUID information
@@ -31,7 +32,7 @@ public sealed class ShowEntityHoverEvent : HoverEvent, IEquatable<ShowEntityHove
     /// <param name="id">The unique identifier of the entity.</param>
     /// <param name="name">The name of the entity to show.</param>
     [SetsRequiredMembers]
-    public ShowEntityHoverEvent(ResourceLocation type, Guid id, ChatComponent? name = null)
+    public ShowEntityHoverEvent(ResourceLocation type, Guid id, TextComponent? name = null)
     {
         Type = type;
         Id = id;
@@ -43,7 +44,7 @@ public sealed class ShowEntityHoverEvent : HoverEvent, IEquatable<ShowEntityHove
     /// </summary>
     [JsonPropertyName("name")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public ChatComponent? Name { get; init; }
+    public TextComponent? Name { get; init; }
 
     /// <summary>
     /// Gets the type of the entity.

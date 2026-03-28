@@ -1,18 +1,21 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
-namespace MineJason.Components;
-
-using MineJason.Components.Builders;
-using MineJason.Text;
-using System;
 using System.Diagnostics.CodeAnalysis;
+using MineJason.Components.Builders;
+
+namespace MineJason.Text;
 
 /// <summary>
-/// Represents an NBT chat component that sources the value from a storage. This class cannot be inherited.
+/// Represents a text component that resolves to the text representation of an NBT value retrieved
+/// from a storage. This class cannot be inherited.
 /// </summary>
-public sealed record StorageNbtChatComponent : BaseNbtChatComponent,
-    IEquatable<StorageNbtChatComponent>
+/// <remarks>
+/// This type of component is resolved on the server side and will display nothing if resolved on
+/// the client as-is.
+/// </remarks>
+public sealed record StorageNbtTextComponent : NbtTextComponent,
+    IEquatable<StorageNbtTextComponent>
 {
     /// <summary>
     /// The value of the <c>source</c> field identifying this type.
@@ -20,26 +23,26 @@ public sealed record StorageNbtChatComponent : BaseNbtChatComponent,
     public const string SourceName = "storage";
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="StorageNbtChatComponent"/> class.
+    /// Initializes a new instance of the <see cref="StorageNbtTextComponent"/> class.
     /// </summary>
-    public StorageNbtChatComponent()
+    public StorageNbtTextComponent()
     {
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="StorageNbtChatComponent"/> class.
+    /// Initializes a new instance of the <see cref="StorageNbtTextComponent"/> class.
     /// </summary>
     /// <param name="storage">The ID of the storage.</param>
     /// <param name="path">The NBT path.</param>
     [SetsRequiredMembers]
-    public StorageNbtChatComponent(ResourceLocation storage, string path)
+    public StorageNbtTextComponent(ResourceLocation storage, string path)
     {
         Storage = storage;
         Path = path;
     }
 
     [SetsRequiredMembers]
-    internal StorageNbtChatComponent(in TextComponentCreationInfo creationInfo,
+    internal StorageNbtTextComponent(in TextComponentCreationInfo creationInfo,
         in NBTTextComponentCreationInfo nbtInfo,
         ResourceLocation storage) : base(creationInfo, nbtInfo)
     {

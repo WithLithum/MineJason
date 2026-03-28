@@ -4,6 +4,7 @@
 namespace MineJason.Dialogs.Input;
 
 using System.Diagnostics.CodeAnalysis;
+using MineJason.Text;
 using MineJason.Utilities;
 
 /// <summary>
@@ -39,7 +40,7 @@ public sealed record SingleOptionDialogInput : DialogInput
     /// </param>
     [SetsRequiredMembers]
     public SingleOptionDialogInput(string key,
-        ChatComponent label,
+        TextComponent label,
         IReadOnlyList<Item> options,
         bool labelVisible = true,
         int width = 0)
@@ -65,7 +66,7 @@ public sealed record SingleOptionDialogInput : DialogInput
         /// <summary>
         /// Gets the text label to display for this item.
         /// </summary>
-        public ChatComponent? Display { get; init; }
+        public TextComponent? Display { get; init; }
 
         /// <summary>
         /// Gets a value indicating whether this option is the default.

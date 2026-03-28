@@ -5,6 +5,7 @@ namespace MineJason.Dialogs;
 
 using JetBrains.Annotations;
 using MineJason.Data;
+using MineJason.Text;
 
 /// <summary>
 /// Represents a dialog control that shows an item.
@@ -30,7 +31,7 @@ public sealed record ItemDialogMessage : DialogMessage
         /// <summary>
         /// Gets the text component to display.
         /// </summary>
-        public required ChatComponent Contents { get; init; }
+        public required TextComponent Contents { get; init; }
 
         /// <summary>
         /// Gets the width of the text to display.

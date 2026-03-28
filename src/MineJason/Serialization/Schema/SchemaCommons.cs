@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
 using System.Text.Json;
-using MineJason.Components;
 using MineJason.Dialogs;
 using MineJason.Dialogs.Input;
 using MineJason.Serialization.IO;
@@ -31,7 +30,7 @@ internal static class SchemaCommons
 
     internal static ObjectSchemaBuilder<TValue> CommonTextComponentSchema<TValue>(
         this ObjectSchemaBuilder<TValue> builder)
-    where TValue : ChatComponent
+    where TValue : TextComponent
     {
         return builder.Property("color", x => x.Color,
                 TextColorSchema.Instance,
@@ -59,7 +58,7 @@ internal static class SchemaCommons
     internal static ObjectSchemaBuilder<TValue> CommonNbtTextComponentSchema<TValue>(
         this ObjectSchemaBuilder<TValue> builder,
         string sourceType)
-        where TValue : BaseNbtChatComponent
+        where TValue : NbtTextComponent
     {
         return builder.Constant("type", "nbt", StringValueSchema.Instance)
             .Constant("source", sourceType, StringValueSchema.Instance)

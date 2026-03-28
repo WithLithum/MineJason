@@ -1,32 +1,31 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
-using MineJason.Components.Builders;
-using MineJason.Text;
 using System.Diagnostics.CodeAnalysis;
+using MineJason.Components.Builders;
 
-namespace MineJason.Components;
+namespace MineJason.Text;
 
 /// <summary>
-/// Represents an NBT chat component.
+/// Represents a text component that resolves to the text representation of an NBT value.
 /// </summary>
-public abstract record BaseNbtChatComponent : ChatComponent, IEquatable<BaseNbtChatComponent>
+public abstract record NbtTextComponent : TextComponent, IEquatable<NbtTextComponent>
 {
     /// <summary>
-    /// Initializes a new instance of the <see cref="BaseNbtChatComponent"/> class.
+    /// Initializes a new instance of the <see cref="NbtTextComponent"/> class.
     /// </summary>
-    private protected BaseNbtChatComponent()
+    private protected NbtTextComponent()
     {
     }
 
     /// <summary>
-    /// Initializes a new instance of <see cref="BaseNbtChatComponent"/> with the specified style
+    /// Initializes a new instance of <see cref="NbtTextComponent"/> with the specified style
     /// settings data.
     /// </summary>
     /// <param name="baseCreationInfo">The base settings data.</param>
     /// <param name="nbtCreationInfo">The NBT settings data.</param>
     [SetsRequiredMembers]
-    private protected BaseNbtChatComponent(in TextComponentCreationInfo baseCreationInfo,
+    private protected NbtTextComponent(in TextComponentCreationInfo baseCreationInfo,
         in NBTTextComponentCreationInfo nbtCreationInfo) : base(baseCreationInfo)
     {
         Path = nbtCreationInfo.Path;
@@ -62,5 +61,5 @@ public abstract record BaseNbtChatComponent : ChatComponent, IEquatable<BaseNbtC
     /// <summary>
     /// Gets or sets the component as the separator between multiple values.
     /// </summary>
-    public ChatComponent? Separator { get; init; }
+    public TextComponent? Separator { get; init; }
 }

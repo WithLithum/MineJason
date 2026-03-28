@@ -5,12 +5,13 @@ namespace MineJason.Serialization.Schema;
 
 using MineJason.Serialization.IO;
 using MineJason.Serialization.Utilities.Results;
+using MineJason.Text;
 
 /// <summary>
 /// Defines a schema that encodes or decodes a list of text components to or from the given element
 /// type.
 /// </summary>
-public class TextComponentListSchema : ValueSchema<IReadOnlyList<ChatComponent>>
+public class TextComponentListSchema : ValueSchema<IReadOnlyList<TextComponent>>
 {
     /// <summary>
     /// The singleton instance.
@@ -18,7 +19,7 @@ public class TextComponentListSchema : ValueSchema<IReadOnlyList<ChatComponent>>
     public static readonly TextComponentListSchema Instance = new();
 
     /// <inheritdoc />
-    public override Result<TElement> Encode<TElement>(IReadOnlyList<ChatComponent> value,
+    public override Result<TElement> Encode<TElement>(IReadOnlyList<TextComponent> value,
         IValueEncoder<TElement> encoder,
         string? elementName = null)
     {
@@ -40,7 +41,7 @@ public class TextComponentListSchema : ValueSchema<IReadOnlyList<ChatComponent>>
     }
 
     /// <inheritdoc />
-    public override Result<IReadOnlyList<ChatComponent>> Decode<TElement>(TElement value,
+    public override Result<IReadOnlyList<TextComponent>> Decode<TElement>(TElement value,
         IValueDecoder<TElement> decoder)
     {
         var colResult = decoder.GetCollection(value);
@@ -49,7 +50,7 @@ public class TextComponentListSchema : ValueSchema<IReadOnlyList<ChatComponent>>
             return colResult.AsError();
         }
 
-        var list = new List<ChatComponent>();
+        var list = new List<TextComponent>();
 
         // Decode the list
         foreach (var element in collection)

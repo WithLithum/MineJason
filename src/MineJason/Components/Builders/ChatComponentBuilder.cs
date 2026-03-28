@@ -14,7 +14,7 @@ using System.Drawing;
 /// Provides a base for chat component building.
 /// </summary>
 [PublicAPI]
-public abstract class ChatComponentBuilder<TTarget> where TTarget : ChatComponent
+public abstract class ChatComponentBuilder<TTarget> where TTarget : TextComponent
 {
     private IChatColor? _color;
     private ResourceLocation? _font;
@@ -28,7 +28,7 @@ public abstract class ChatComponentBuilder<TTarget> where TTarget : ChatComponen
     private string? _insertion;
     private HoverEvent? _hoverEvent;
     private ClickEvent? _clickEvent;
-    private IList<ChatComponent>? _extras;
+    private IList<TextComponent>? _extras;
 
     private Color? _shadowColor;
 
@@ -143,7 +143,7 @@ public abstract class ChatComponentBuilder<TTarget> where TTarget : ChatComponen
     /// </summary>
     /// <param name="extras">The extra components.</param>
     /// <returns>This instance.</returns>
-    public ChatComponentBuilder<TTarget> Extras(IList<ChatComponent>? extras)
+    public ChatComponentBuilder<TTarget> Extras(IList<TextComponent>? extras)
     {
         _extras = extras;
         return this;

@@ -1,42 +1,45 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
-namespace MineJason;
-
-using JetBrains.Annotations;
-using MineJason.Serialization.TextJson;
-using MineJason.Text;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json.Serialization;
+using JetBrains.Annotations;
+using MineJason.Serialization.TextJson;
+
+namespace MineJason.Text;
 
 /// <summary>
-/// Represents a chat component that resolves to the value of the scoreboard entity for the specified
-/// objective upon being presented to the user.
+/// Represents a text component that resolves to a scoreboard value. This class cannot be
+/// inherited.
 /// </summary>
+/// <remarks>
+/// This type of component is resolved on the server side and will display nothing if resolved on
+/// the client as-is.
+/// </remarks>
 [PublicAPI]
 [JsonConverter(typeof(TextComponentConverter))]
-public sealed record ScoreboardChatComponent : ChatComponent,
-    IEquatable<ScoreboardChatComponent>
+public sealed record ScoreTextComponent : TextComponent,
+    IEquatable<ScoreTextComponent>
 {
     /// <summary>
-    /// Initializes a new instance of the <see cref="ScoreboardChatComponent"/> class.
+    /// Initializes a new instance of the <see cref="ScoreTextComponent"/> class.
     /// </summary>
-    public ScoreboardChatComponent()
+    public ScoreTextComponent()
     {
     }
 
     /// <summary>
-    /// Initializes a new instance of <see cref="ScoreboardChatComponent"/> with the specified
+    /// Initializes a new instance of <see cref="ScoreTextComponent"/> with the specified
     /// data.
     /// </summary>
     /// <param name="data">The data.</param>
     [SetsRequiredMembers]
-    public ScoreboardChatComponent(Data data)
+    public ScoreTextComponent(Data data)
     {
         Score = data;
     }
 
-    internal ScoreboardChatComponent(in TextComponentCreationInfo creationInfo)
+    internal ScoreTextComponent(in TextComponentCreationInfo creationInfo)
         : base(creationInfo)
     {
     }

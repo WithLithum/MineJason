@@ -6,15 +6,16 @@ namespace MineJason.Components.Builders;
 using JetBrains.Annotations;
 using MineJason.Data;
 using MineJason.Data.Selectors;
+using MineJason.Text;
 
 /// <summary>
-/// Provides fluent syntax building for <see cref="EntityChatComponent"/>.
+/// Provides fluent syntax building for <see cref="EntityTextComponent"/>.
 /// </summary>
 [PublicAPI]
-public sealed class EntityComponentBuilder : ChatComponentBuilder<EntityChatComponent>
+public sealed class EntityComponentBuilder : ChatComponentBuilder<EntityTextComponent>
 {
     private IEntitySelector? _selector;
-    private ChatComponent? _separator;
+    private TextComponent? _separator;
 
     /// <summary>
     /// Sets the selector.
@@ -32,14 +33,14 @@ public sealed class EntityComponentBuilder : ChatComponentBuilder<EntityChatComp
     /// </summary>
     /// <param name="separator">The separator.</param>
     /// <returns>This instance.</returns>
-    public EntityComponentBuilder Separator(ChatComponent? separator)
+    public EntityComponentBuilder Separator(TextComponent? separator)
     {
         _separator = separator;
         return this;
     }
 
     /// <inheritdoc />
-    public override EntityChatComponent Build()
+    public override EntityTextComponent Build()
     {
         if (_selector is null)
         {
@@ -48,7 +49,7 @@ public sealed class EntityComponentBuilder : ChatComponentBuilder<EntityChatComp
 
         var creationInfo = CreateData();
 
-        return new EntityChatComponent(creationInfo)
+        return new EntityTextComponent(creationInfo)
         {
             Selector = _selector,
             Separator = _separator

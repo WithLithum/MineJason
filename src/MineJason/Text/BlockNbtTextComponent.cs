@@ -1,20 +1,23 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
-namespace MineJason.Components;
-
-using MineJason.Components.Builders;
-using MineJason.Data.Coordinates;
-using MineJason.Text;
-using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json.Serialization;
+using MineJason.Components.Builders;
+using MineJason.Data.Coordinates;
+
+namespace MineJason.Text;
 
 /// <summary>
-/// Represents an NBT chat component that sources data from a block entity. This class cannot be inherited.
+/// Represents a text component that resolves to the text representation of an NBT value retrieved
+/// from a block entity. This class cannot be inherited.
 /// </summary>
-public sealed record BlockNbtChatComponent : BaseNbtChatComponent,
-    IEquatable<BlockNbtChatComponent>
+/// <remarks>
+/// This type of component is resolved on the server side and will display nothing if resolved on
+/// the client as-is.
+/// </remarks>
+public sealed record BlockNbtTextComponent : NbtTextComponent,
+    IEquatable<BlockNbtTextComponent>
 {
     /// <summary>
     /// The value of the <c>source</c> field identifying this type.
@@ -22,26 +25,26 @@ public sealed record BlockNbtChatComponent : BaseNbtChatComponent,
     public const string SourceName = "block";
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="BlockNbtChatComponent"/> class.
+    /// Initializes a new instance of the <see cref="BlockNbtTextComponent"/> class.
     /// </summary>
-    public BlockNbtChatComponent()
+    public BlockNbtTextComponent()
     {
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="BlockNbtChatComponent"/> class.
+    /// Initializes a new instance of the <see cref="BlockNbtTextComponent"/> class.
     /// </summary>
     /// <param name="block">The block.</param>
     /// <param name="path">The path.</param>
     [SetsRequiredMembers]
-    public BlockNbtChatComponent(BlockPosition block, string path)
+    public BlockNbtTextComponent(BlockPosition block, string path)
     {
         Path = path;
         Block = block;
     }
 
     [SetsRequiredMembers]
-    internal BlockNbtChatComponent(in TextComponentCreationInfo creationInfo,
+    internal BlockNbtTextComponent(in TextComponentCreationInfo creationInfo,
         in NBTTextComponentCreationInfo nbtInfo,
         BlockPosition block) : base(creationInfo, nbtInfo)
     {

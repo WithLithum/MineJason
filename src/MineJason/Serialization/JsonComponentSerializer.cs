@@ -4,6 +4,7 @@
 using System.Text.Json;
 using JetBrains.Annotations;
 using MineJason.Serialization.TextJson;
+using MineJason.Text;
 
 namespace MineJason.Serialization;
 
@@ -15,26 +16,26 @@ namespace MineJason.Serialization;
 public static class JsonComponentSerializer
 {
     /// <summary>
-    /// Converts the specified <see cref="ChatComponent"/> to its JSON representation.
+    /// Converts the specified <see cref="TextComponent"/> to its JSON representation.
     /// </summary>
     /// <param name="component">The component to convert from.</param>
     /// <returns>The converted JSON.</returns>
-    public static string Serialize(ChatComponent component)
+    public static string Serialize(TextComponent component)
     {
-        return JsonSerializer.Serialize(component, typeof(ChatComponent), MineJasonTextJsonContext.Default);
+        return JsonSerializer.Serialize(component, typeof(TextComponent), MineJasonTextJsonContext.Default);
     }
 
     /// <summary>
-    /// Asynchronously converts the specified <see cref="ChatComponent"/> to its JSON representation and writes it to the
+    /// Asynchronously converts the specified <see cref="TextComponent"/> to its JSON representation and writes it to the
     /// specified stream.
     /// </summary>
     /// <param name="utf8Json">The stream to write to.</param>
     /// <param name="component">The component to convert from.</param>
     /// <param name="cancellation">The cancellation token.</param>
     /// <returns>A task that represents the operation.</returns>
-    public static async Task SerializeAsync(Stream utf8Json, ChatComponent component, CancellationToken cancellation = default)
+    public static async Task SerializeAsync(Stream utf8Json, TextComponent component, CancellationToken cancellation = default)
     {
-        await JsonSerializer.SerializeAsync(utf8Json, component, typeof(ChatComponent), MineJasonTextJsonContext.Default, cancellationToken: cancellation);
+        await JsonSerializer.SerializeAsync(utf8Json, component, typeof(TextComponent), MineJasonTextJsonContext.Default, cancellationToken: cancellation);
     }
 
     /// <summary>
@@ -42,9 +43,9 @@ public static class JsonComponentSerializer
     /// </summary>
     /// <param name="utf8Json">The stream to read from.</param>
     /// <returns>The chat component.</returns>
-    public static ChatComponent? Deserialize(Stream utf8Json)
+    public static TextComponent? Deserialize(Stream utf8Json)
     {
-        return (ChatComponent?)JsonSerializer.Deserialize(utf8Json, typeof(ChatComponent), MineJasonTextJsonContext.Default);
+        return (TextComponent?)JsonSerializer.Deserialize(utf8Json, typeof(TextComponent), MineJasonTextJsonContext.Default);
     }
 
     /// <summary>
@@ -52,9 +53,9 @@ public static class JsonComponentSerializer
     /// </summary>
     /// <param name="json">The text.</param>
     /// <returns>The converted chat component.</returns>
-    public static ChatComponent? Deserialize(ReadOnlySpan<char> json)
+    public static TextComponent? Deserialize(ReadOnlySpan<char> json)
     {
-        return (ChatComponent?)JsonSerializer.Deserialize(json, typeof(ChatComponent), MineJasonTextJsonContext.Default);
+        return (TextComponent?)JsonSerializer.Deserialize(json, typeof(TextComponent), MineJasonTextJsonContext.Default);
     }
 
     /// <summary>
@@ -63,9 +64,9 @@ public static class JsonComponentSerializer
     /// <param name="utf8Json">The stream to read from.</param>
     /// <param name="cancellation">The cancellation token.</param>
     /// <returns>The chat component.</returns>
-    public static async Task<ChatComponent?> DeserializeAsync(Stream utf8Json, CancellationToken cancellation = default)
+    public static async Task<TextComponent?> DeserializeAsync(Stream utf8Json, CancellationToken cancellation = default)
     {
-        return (ChatComponent?)await JsonSerializer.DeserializeAsync(utf8Json, typeof(ChatComponent), MineJasonTextJsonContext.Default,
+        return (TextComponent?)await JsonSerializer.DeserializeAsync(utf8Json, typeof(TextComponent), MineJasonTextJsonContext.Default,
             cancellation);
     }
 }

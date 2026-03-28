@@ -1,18 +1,21 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
-namespace MineJason.Components;
-
+using System.Diagnostics.CodeAnalysis;
 using MineJason.Components.Builders;
 using MineJason.Data.Selectors;
-using MineJason.Text;
-using System.Diagnostics.CodeAnalysis;
+
+namespace MineJason.Text;
 
 /// <summary>
-/// Represents a chat component that resolves into the value of the NBT entry from an entity
-/// upon being displayed.
+/// Represents a text component that resolves to the text representation of an NBT value retrieved
+/// from an entity. This class cannot be inherited.
 /// </summary>
-public sealed record EntityNbtChatComponent : BaseNbtChatComponent
+/// <remarks>
+/// This type of component is resolved on the server side and will display nothing if resolved on
+/// the client as-is.
+/// </remarks>
+public sealed record EntityNbtTextComponent : NbtTextComponent
 {
     /// <summary>
     /// The value of the <c>source</c> field identifying this type.
@@ -20,26 +23,26 @@ public sealed record EntityNbtChatComponent : BaseNbtChatComponent
     public const string SourceName = "entity";
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="EntityNbtChatComponent"/> class.
+    /// Initializes a new instance of the <see cref="EntityNbtTextComponent"/> class.
     /// </summary>
-    public EntityNbtChatComponent()
+    public EntityNbtTextComponent()
     {
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="EntityNbtChatComponent"/> class.
+    /// Initializes a new instance of the <see cref="EntityNbtTextComponent"/> class.
     /// </summary>
     /// <param name="entity">The entity to source NBT from.</param>
     /// <param name="path">The NBT path.</param>
     [SetsRequiredMembers]
-    public EntityNbtChatComponent(IEntitySelector entity, string path)
+    public EntityNbtTextComponent(IEntitySelector entity, string path)
     {
         Entity = entity;
         Path = path;
     }
 
     [SetsRequiredMembers]
-    internal EntityNbtChatComponent(in TextComponentCreationInfo creationInfo,
+    internal EntityNbtTextComponent(in TextComponentCreationInfo creationInfo,
         in NBTTextComponentCreationInfo nbtInfo,
         IEntitySelector selector) : base(creationInfo, nbtInfo)
     {

@@ -1,47 +1,49 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
-namespace MineJason;
-
+using System.Diagnostics.CodeAnalysis;
+using System.Text.Json.Serialization;
 using JetBrains.Annotations;
 using MineJason.Data.Selectors;
 using MineJason.Serialization.TextJson;
-using MineJason.Text;
-using System;
-using System.Diagnostics.CodeAnalysis;
-using System.Text.Json.Serialization;
+
+namespace MineJason.Text;
 
 /// <summary>
-/// Represents an entity selector chat component that resolves into a list of entity names upon being
-/// presented to the user.
+/// Represents a text components that resolves into a list of entity names selected by the
+/// specified selector. This class cannot be inherited
 /// </summary>
+/// <remarks>
+/// This type of component is resolved on the server side and will display nothing if resolved on
+/// the client as-is.
+/// </remarks>
 [PublicAPI]
 [JsonConverter(typeof(TextComponentConverter))]
-public sealed record EntityChatComponent :
-    ChatComponent,
-    IEquatable<EntityChatComponent>
+public sealed record EntityTextComponent :
+    TextComponent,
+    IEquatable<EntityTextComponent>
 {
     /// <summary>
-    /// Initializes a new instance of <see cref="EntityChatComponent"/>.
+    /// Initializes a new instance of <see cref="EntityTextComponent"/>.
     /// </summary>
-    public EntityChatComponent()
+    public EntityTextComponent()
     {
     }
 
     /// <summary>
-    /// Initializes a new instance of <see cref="EntityChatComponent"/> with the specified selector
+    /// Initializes a new instance of <see cref="EntityTextComponent"/> with the specified selector
     /// and separator.
     /// </summary>
     /// <param name="selector">The selector.</param>
     /// <param name="separator">The chat component to separate entity names.</param>
     [SetsRequiredMembers]
-    public EntityChatComponent(IEntitySelector selector, ChatComponent? separator = null)
+    public EntityTextComponent(IEntitySelector selector, TextComponent? separator = null)
     {
         Selector = selector;
         Separator = separator;
     }
 
-    internal EntityChatComponent(in TextComponentCreationInfo creationInfo) : base(creationInfo)
+    internal EntityTextComponent(in TextComponentCreationInfo creationInfo) : base(creationInfo)
     {
     }
 
@@ -53,7 +55,7 @@ public sealed record EntityChatComponent :
     /// <summary>
     /// Gets chat component to separate entity names.
     /// </summary>
-    public ChatComponent? Separator { get; init; }
+    public TextComponent? Separator { get; init; }
 
     /// <inheritdoc />
     public override int GetHashCode()
