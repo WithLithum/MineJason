@@ -18,7 +18,7 @@ public class ComponentTests
         const string json = "{\"type\":\"nbt\",\"text\":\"Hello World!\"}";
 
         // Act
-        var component = JsonSerializer.Deserialize(json, MineJasonTextJsonContext.Default.ChatComponent);
+        var component = JsonSerializer.Deserialize(json, MineJasonTextJsonContext.Default.TextComponent);
 
         // Assert
         Assert.Equal(TextComponent.CreateText("Hello World!"),

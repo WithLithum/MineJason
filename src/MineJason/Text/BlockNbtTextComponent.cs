@@ -3,8 +3,8 @@
 
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json.Serialization;
-using MineJason.Components.Builders;
 using MineJason.Data.Coordinates;
+using MineJason.Text.Builders.Utilities;
 
 namespace MineJason.Text;
 
@@ -45,7 +45,7 @@ public sealed record BlockNbtTextComponent : NbtTextComponent,
 
     [SetsRequiredMembers]
     internal BlockNbtTextComponent(in TextComponentCreationInfo creationInfo,
-        in NBTTextComponentCreationInfo nbtInfo,
+        in NbtTextComponentCreationInfo nbtInfo,
         BlockPosition block) : base(creationInfo, nbtInfo)
     {
         Block = block;

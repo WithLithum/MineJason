@@ -1,17 +1,15 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
-namespace MineJason.Components.Builders;
-
 using JetBrains.Annotations;
-using MineJason.Text;
-using System.Drawing;
+
+namespace MineJason.Text.Builders;
 
 /// <summary>
 /// Provides a fluent syntax builder for <see cref="TranslateTextComponent"/>.
 /// </summary>
 [PublicAPI]
-public sealed class TranslatableComponentBuilder : ChatComponentBuilder<TranslateTextComponent>
+public sealed class TranslateComponentBuilder : TextComponentBuilder<TranslateTextComponent>
 {
     private string? _translate;
     private string? _fallback;
@@ -22,7 +20,7 @@ public sealed class TranslatableComponentBuilder : ChatComponentBuilder<Translat
     /// </summary>
     /// <param name="value">The value to set to.</param>
     /// <returns>This instance.</returns>
-    public TranslatableComponentBuilder Value(string value)
+    public TranslateComponentBuilder Value(string value)
     {
         _translate = value;
         return this;
@@ -33,7 +31,7 @@ public sealed class TranslatableComponentBuilder : ChatComponentBuilder<Translat
     /// </summary>
     /// <param name="value">THe fallback text.</param>
     /// <returns>This instance.</returns>
-    public TranslatableComponentBuilder Fallback(string value)
+    public TranslateComponentBuilder Fallback(string value)
     {
         _fallback = value;
         return this;
@@ -44,7 +42,7 @@ public sealed class TranslatableComponentBuilder : ChatComponentBuilder<Translat
     /// </summary>
     /// <param name="value">The value.</param>
     /// <returns>This instance.</returns>
-    public TranslatableComponentBuilder With(TextComponent value)
+    public TranslateComponentBuilder With(TextComponent value)
     {
         _with.Add(value);
         return this;
@@ -55,7 +53,7 @@ public sealed class TranslatableComponentBuilder : ChatComponentBuilder<Translat
     /// </summary>
     /// <param name="values">The values.</param>
     /// <returns>This instance.</returns>
-    public TranslatableComponentBuilder With(params TextComponent[] values)
+    public TranslateComponentBuilder With(params TextComponent[] values)
     {
         _with.AddRange(values);
         return this;

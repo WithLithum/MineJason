@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
 using System.Diagnostics.CodeAnalysis;
-using MineJason.Components.Builders;
+using MineJason.Text.Builders.Utilities;
 
 namespace MineJason.Text;
 
@@ -43,7 +43,7 @@ public sealed record StorageNbtTextComponent : NbtTextComponent,
 
     [SetsRequiredMembers]
     internal StorageNbtTextComponent(in TextComponentCreationInfo creationInfo,
-        in NBTTextComponentCreationInfo nbtInfo,
+        in NbtTextComponentCreationInfo nbtInfo,
         ResourceLocation storage) : base(creationInfo, nbtInfo)
     {
         Storage = storage;

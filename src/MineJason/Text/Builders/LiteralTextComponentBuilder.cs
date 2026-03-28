@@ -1,16 +1,15 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
-namespace MineJason.Components.Builders;
-
 using JetBrains.Annotations;
-using MineJason.Text;
+
+namespace MineJason.Text.Builders;
 
 /// <summary>
 /// Provides a fluent syntax builder for <see cref="LiteralTextComponent"/>.
 /// </summary>
 [PublicAPI]
-public sealed class TextComponentBuilder : ChatComponentBuilder<LiteralTextComponent>
+public sealed class LiteralTextComponentBuilder : TextComponentBuilder<LiteralTextComponent>
 {
     private string? _text;
 
@@ -19,7 +18,7 @@ public sealed class TextComponentBuilder : ChatComponentBuilder<LiteralTextCompo
     /// </summary>
     /// <param name="text">The text value to set to.</param>
     /// <returns>This instance.</returns>
-    public TextComponentBuilder Value(string text)
+    public LiteralTextComponentBuilder Value(string text)
     {
         _text = text;
         return this;

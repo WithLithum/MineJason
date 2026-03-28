@@ -1,16 +1,15 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
-namespace MineJason.Components.Builders;
-
 using JetBrains.Annotations;
-using MineJason.Text;
+
+namespace MineJason.Text.Builders;
 
 /// <summary>
 /// Provides fluent syntax builder for <see cref="KeybindTextComponent"/>.
 /// </summary>
 [PublicAPI]
-public class KeybindComponentBuilder : ChatComponentBuilder<KeybindTextComponent>
+public class KeybindComponentBuilder : TextComponentBuilder<KeybindTextComponent>
 {
     private string? _keybind;
 

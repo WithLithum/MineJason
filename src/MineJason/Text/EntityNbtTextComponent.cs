@@ -2,8 +2,8 @@
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
 using System.Diagnostics.CodeAnalysis;
-using MineJason.Components.Builders;
 using MineJason.Data.Selectors;
+using MineJason.Text.Builders.Utilities;
 
 namespace MineJason.Text;
 
@@ -43,7 +43,7 @@ public sealed record EntityNbtTextComponent : NbtTextComponent
 
     [SetsRequiredMembers]
     internal EntityNbtTextComponent(in TextComponentCreationInfo creationInfo,
-        in NBTTextComponentCreationInfo nbtInfo,
+        in NbtTextComponentCreationInfo nbtInfo,
         IEntitySelector selector) : base(creationInfo, nbtInfo)
     {
         Entity = selector;

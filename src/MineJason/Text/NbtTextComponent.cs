@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
 using System.Diagnostics.CodeAnalysis;
-using MineJason.Components.Builders;
+using MineJason.Text.Builders.Utilities;
 
 namespace MineJason.Text;
 
@@ -26,7 +26,7 @@ public abstract record NbtTextComponent : TextComponent, IEquatable<NbtTextCompo
     /// <param name="nbtCreationInfo">The NBT settings data.</param>
     [SetsRequiredMembers]
     private protected NbtTextComponent(in TextComponentCreationInfo baseCreationInfo,
-        in NBTTextComponentCreationInfo nbtCreationInfo) : base(baseCreationInfo)
+        in NbtTextComponentCreationInfo nbtCreationInfo) : base(baseCreationInfo)
     {
         Path = nbtCreationInfo.Path;
         Separator = nbtCreationInfo.Separator;

@@ -128,9 +128,9 @@ public abstract record TextComponent
     /// </summary>
     /// <returns>The text component builder.</returns>
     [PublicAPI]
-    public static TextComponentBuilder CreateText()
+    public static LiteralTextComponentBuilder CreateText()
     {
-        return new TextComponentBuilder();
+        return new LiteralTextComponentBuilder();
     }
 
     /// <summary>
@@ -154,9 +154,9 @@ public abstract record TextComponent
     /// Creates a builder for a translatable chat component.
     /// </summary>
     /// <returns>The chat component builder.</returns>
-    public static TranslatableComponentBuilder CreateTranslatable()
+    public static TranslateComponentBuilder CreateTranslatable()
     {
-        return new TranslatableComponentBuilder();
+        return new TranslateComponentBuilder();
     }
 
     /// <summary>

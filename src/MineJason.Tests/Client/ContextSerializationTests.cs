@@ -18,7 +18,7 @@ public class ContextSerializationTests
 
         // Act
         var json = JsonSerializer.Serialize(component,
-            MineJasonTextJsonContext.Default.ChatComponent);
+            MineJasonTextJsonContext.Default.TextComponent);
 
         // Assert
         Assert.Equal("{\"type\":\"text\",\"text\":\"text\"}", json);
@@ -32,7 +32,7 @@ public class ContextSerializationTests
 
         // Act
         var json = JsonSerializer.Serialize(component,
-            MineJasonTextJsonContext.Default.ChatComponent);
+            MineJasonTextJsonContext.Default.TextComponent);
 
         // Assert
         Assert.Equal("{\"type\":\"translatable\",\"translate\":\"its_me\"}", json);
@@ -46,7 +46,7 @@ public class ContextSerializationTests
 
         // Act
         var json = JsonSerializer.Serialize(component,
-            MineJasonTextJsonContext.Default.ChatComponent);
+            MineJasonTextJsonContext.Default.TextComponent);
 
         // Assert
         Assert.Equal("{\"type\":\"selector\",\"selector\":\"@s\"}", json);
@@ -60,7 +60,7 @@ public class ContextSerializationTests
 
         // Act
         var json = JsonSerializer.Serialize(component,
-            MineJasonTextJsonContext.Default.ChatComponent);
+            MineJasonTextJsonContext.Default.TextComponent);
 
         // Assert
         Assert.Equal("{\"type\":\"object\",\"object\":\"atlas\",\"sprite\":\"foo:bar\"}", json);

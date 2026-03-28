@@ -7,12 +7,13 @@ using JetBrains.Annotations;
 using MineJason.Data;
 using MineJason.Data.Selectors;
 using MineJason.Text;
+using MineJason.Text.Builders;
 
 /// <summary>
 /// Provides fluent syntax building for <see cref="EntityTextComponent"/>.
 /// </summary>
 [PublicAPI]
-public sealed class EntityComponentBuilder : ChatComponentBuilder<EntityTextComponent>
+public sealed class EntityComponentBuilder : TextComponentBuilder<EntityTextComponent>
 {
     private IEntitySelector? _selector;
     private TextComponent? _separator;

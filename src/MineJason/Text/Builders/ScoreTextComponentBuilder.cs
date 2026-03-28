@@ -3,13 +3,10 @@
 
 namespace MineJason.Text.Builders;
 
-using MineJason.Components.Builders;
-using MineJason.Text;
-
 /// <summary>
 /// Constructs a <see cref="ScoreTextComponent"/> with support for fluent syntax.
 /// </summary>
-public class ScoreTextComponentBuilder : ChatComponentBuilder<ScoreTextComponent>
+public class ScoreTextComponentBuilder : TextComponentBuilder<ScoreTextComponent>
 {
     private string? _name;
     private string? _objective;

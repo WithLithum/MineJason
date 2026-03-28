@@ -1,14 +1,12 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
-using MineJason.Text;
-
-namespace MineJason.Components.Builders;
+namespace MineJason.Text.Builders.Utilities;
 
 /// <summary>
 /// Encapsulates data for creation of NBT text components.
 /// </summary>
-public readonly ref struct NBTTextComponentCreationInfo
+public readonly ref struct NbtTextComponentCreationInfo
 {
     /// <summary>
     /// Gets the path.

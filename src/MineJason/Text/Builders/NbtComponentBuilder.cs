@@ -1,15 +1,15 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
-using MineJason.Text;
+using MineJason.Text.Builders.Utilities;
 
-namespace MineJason.Components.Builders;
+namespace MineJason.Text.Builders;
 
 /// <summary>
 /// Provides services for building an NBT component.
 /// </summary>
 /// <typeparam name="T">The type of the NBT component.</typeparam>
-public abstract class NbtComponentBuilder<T> : ChatComponentBuilder<T>
+public abstract class NbtComponentBuilder<T> : TextComponentBuilder<T>
     where T : NbtTextComponent
 {
     private string? _path;
@@ -67,14 +67,14 @@ public abstract class NbtComponentBuilder<T> : ChatComponentBuilder<T>
     /// Throws <see cref="InvalidOperationException"/> if the required base values are not yet
     /// submitted.
     /// </summary>
-    protected NBTTextComponentCreationInfo CreateNBTData()
+    protected NbtTextComponentCreationInfo CreateNBTData()
     {
         if (_path == null)
         {
             throw new InvalidOperationException("Path is required.");
         }
 
-        return new NBTTextComponentCreationInfo
+        return new NbtTextComponentCreationInfo
         {
             Path = _path,
             Separator = _separator,

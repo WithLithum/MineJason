@@ -20,7 +20,7 @@ public class SimpleSerializationTests
 
         // Act
         var json = JsonSerializer.Serialize(component,
-            MineJasonTextJsonContext.Default.ChatComponent);
+            MineJasonTextJsonContext.Default.TextComponent);
 
         // Assert
         Assert.Equal("{\"type\":\"text\",\"text\":\"I am text\"}", json);
@@ -34,7 +34,7 @@ public class SimpleSerializationTests
 
         // Act
         var deserialized = JsonSerializer.Deserialize<TextComponent>(json,
-            MineJasonTextJsonContext.Default.ChatComponent);
+            MineJasonTextJsonContext.Default.TextComponent);
 
         // Assert
         Assert.Equal(TextComponent.CreateText("Hello World!"), deserialized);
@@ -48,7 +48,7 @@ public class SimpleSerializationTests
 
         // Act
         var deserialized = JsonSerializer.Deserialize(json,
-            MineJasonTextJsonContext.Default.ChatComponent);
+            MineJasonTextJsonContext.Default.TextComponent);
 
         // Assert
         Assert.Equal(TextComponent.CreateText("Hello World!"), (TextComponent?)deserialized);
@@ -62,7 +62,7 @@ public class SimpleSerializationTests
 
         // Act
         var json = JsonSerializer.Serialize(component,
-            MineJasonTextJsonContext.Default.ChatComponent);
+            MineJasonTextJsonContext.Default.TextComponent);
 
         // Assert
         Assert.Equal("{\"type\":\"translatable\",\"translate\":\"translatable.key\"}", json);
@@ -76,7 +76,7 @@ public class SimpleSerializationTests
 
         // Act
         var deserialized = JsonSerializer.Deserialize(json,
-            MineJasonTextJsonContext.Default.ChatComponent);
+            MineJasonTextJsonContext.Default.TextComponent);
 
         // Assert
         var exp = TextComponent.CreateTranslatable("translatable.key");
@@ -91,7 +91,7 @@ public class SimpleSerializationTests
 
         // Act
         var json = JsonSerializer.Serialize(component,
-            MineJasonTextJsonContext.Default.ChatComponent);
+            MineJasonTextJsonContext.Default.TextComponent);
 
         // Assert
         Assert.Equal("{\"type\":\"score\",\"score\":{\"name\":\"Player\",\"objective\":\"advancements\"}}", json);
@@ -105,7 +105,7 @@ public class SimpleSerializationTests
 
         // Act
         var deserialized = JsonSerializer.Deserialize(json,
-            MineJasonTextJsonContext.Default.ChatComponent);
+            MineJasonTextJsonContext.Default.TextComponent);
 
         // Assert
         Assert.Equal(TextComponent.CreateScore("Player", "advancements"), (TextComponent?)deserialized);
@@ -119,7 +119,7 @@ public class SimpleSerializationTests
 
         // Act
         var json = JsonSerializer.Serialize(component,
-            MineJasonTextJsonContext.Default.ChatComponent);
+            MineJasonTextJsonContext.Default.TextComponent);
 
         // Assert
         Assert.Equal("{\"type\":\"selector\",\"selector\":\"@a\",\"separator\":{\"type\":\"text\",\"text\":\";\"}}", json);
@@ -134,7 +134,7 @@ public class SimpleSerializationTests
 
         // Act
         var deserialized = JsonSerializer.Deserialize(json,
-            MineJasonTextJsonContext.Default.ChatComponent);
+            MineJasonTextJsonContext.Default.TextComponent);
 
         // Assert
         Assert.Equal(TextComponent.CreateSelector(new EntitySelector(EntitySelectorKind.AllPlayers), TextComponent.CreateText(";")),
@@ -149,7 +149,7 @@ public class SimpleSerializationTests
 
         // Act
         var json = JsonSerializer.Serialize(component,
-            MineJasonTextJsonContext.Default.ChatComponent);
+            MineJasonTextJsonContext.Default.TextComponent);
 
         // Assert
         Assert.Equal("{\"type\":\"nbt\",\"source\":\"storage\",\"nbt\":\"path.to.NBT\",\"storage\":\"mine:storage\"}", json);
@@ -167,7 +167,7 @@ public class SimpleSerializationTests
 
         // Act
         var json = JsonSerializer.Serialize(component,
-            MineJasonTextJsonContext.Default.ChatComponent);
+            MineJasonTextJsonContext.Default.TextComponent);
 
         // Assert
         Assert.Equal("{\"type\":\"nbt\",\"source\":\"storage\",\"nbt\":\"path.to.NBT\",\"interpret\":true,\"storage\":\"mine:storage\"}", json);
@@ -185,7 +185,7 @@ public class SimpleSerializationTests
 
         // Act
         var json = JsonSerializer.Serialize(component,
-            MineJasonTextJsonContext.Default.ChatComponent);
+            MineJasonTextJsonContext.Default.TextComponent);
 
         // Assert
         Assert.Equal("{\"type\":\"nbt\",\"source\":\"storage\",\"nbt\":\"path.to.NBT\",\"plain\":true,\"storage\":\"mine:storage\"}", json);
@@ -199,7 +199,7 @@ public class SimpleSerializationTests
 
         // Act
         var deserialized = JsonSerializer.Deserialize(json,
-            MineJasonTextJsonContext.Default.ChatComponent);
+            MineJasonTextJsonContext.Default.TextComponent);
 
         // Assert
         Assert.Equal(TextComponent.CreateNbt(new ResourceLocation("mine", "storage"), "path.to.NBT"),
@@ -214,7 +214,7 @@ public class SimpleSerializationTests
 
         // Act
         var json = JsonSerializer.Serialize(component,
-            MineJasonTextJsonContext.Default.ChatComponent);
+            MineJasonTextJsonContext.Default.TextComponent);
 
         // Assert
         Assert.Equal("{\"type\":\"nbt\",\"source\":\"block\",\"nbt\":\"path.to.NBT\",\"block\":\"12 12 12\"}", json);
@@ -228,7 +228,7 @@ public class SimpleSerializationTests
 
         // Act
         var deserialized = JsonSerializer.Deserialize(json,
-            MineJasonTextJsonContext.Default.ChatComponent);
+            MineJasonTextJsonContext.Default.TextComponent);
 
         // Assert
         Assert.Equal(TextComponent.CreateNbt(new BlockPosition(12, 12, 12), "path.to.NBT"),
@@ -243,7 +243,7 @@ public class SimpleSerializationTests
 
         // Act
         var json = JsonSerializer.Serialize(component,
-            MineJasonTextJsonContext.Default.ChatComponent);
+            MineJasonTextJsonContext.Default.TextComponent);
 
         // Assert
         Assert.Equal("{\"type\":\"nbt\",\"source\":\"entity\",\"nbt\":\"path.to.NBT\",\"entity\":\"@s\"}", json);
@@ -259,7 +259,7 @@ public class SimpleSerializationTests
 
         // Act
         var json = JsonSerializer.Serialize(component,
-            MineJasonTextJsonContext.Default.ChatComponent);
+            MineJasonTextJsonContext.Default.TextComponent);
 
         // Assert
         Assert.Equal("{\"type\":\"object\",\"object\":\"atlas\",\"atlas\":\"foo:atlas\",\"sprite\":\"foo:bar\"}",
@@ -277,7 +277,7 @@ public class SimpleSerializationTests
 
         // Act
         var json = JsonSerializer.Serialize(component,
-            MineJasonTextJsonContext.Default.ChatComponent);
+            MineJasonTextJsonContext.Default.TextComponent);
 
         // Assert
         Assert.Equal("{\"type\":\"object\",\"object\":\"atlas\",\"fallback\":{\"type\":\"text\",\"text\":\"Fallback\"},\"atlas\":\"foo:atlas\",\"sprite\":\"foo:bar\"}",
@@ -292,7 +292,7 @@ public class SimpleSerializationTests
 
         // Act
         var deserialized = JsonSerializer.Deserialize(json,
-            MineJasonTextJsonContext.Default.ChatComponent);
+            MineJasonTextJsonContext.Default.TextComponent);
 
         // Assert
         Assert.Equal(TextComponent.CreateNbt(new EntitySelector(EntitySelectorKind.Executor), "path.to.NBT"),
@@ -307,7 +307,7 @@ public class SimpleSerializationTests
 
         // Act
         var deserialized = JsonSerializer.Deserialize(json,
-            MineJasonTextJsonContext.Default.ChatComponent);
+            MineJasonTextJsonContext.Default.TextComponent);
 
         // Assert
         Assert.Equal(TextComponent.CreateAtlasObject(sprite: new ResourceLocation("foo", "bar"),
@@ -324,7 +324,7 @@ public class SimpleSerializationTests
 
         // Act
         var deserialized = JsonSerializer.Deserialize(json,
-            MineJasonTextJsonContext.Default.ChatComponent);
+            MineJasonTextJsonContext.Default.TextComponent);
 
         // Assert
         Assert.Equal(TextComponent.CreateAtlasObject(sprite: new ResourceLocation("foo", "bar"),
@@ -341,7 +341,7 @@ public class SimpleSerializationTests
 
         // Act
         var json = JsonSerializer.Serialize(component,
-            MineJasonTextJsonContext.Default.ChatComponent);
+            MineJasonTextJsonContext.Default.TextComponent);
 
         // Assert
         Assert.Equal("{\"type\":\"text\",\"text\":\"Hello World!\",\"color\":\"aqua\"}", json);
@@ -356,7 +356,7 @@ public class SimpleSerializationTests
 
         // Act
         var json = JsonSerializer.Serialize(component,
-            MineJasonTextJsonContext.Default.ChatComponent);
+            MineJasonTextJsonContext.Default.TextComponent);
 
         // Assert
         Assert.Equal("{\"type\":\"translatable\",\"translate\":\"translatable.key\",\"color\":\"aqua\"}", json);

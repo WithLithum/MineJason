@@ -1,9 +1,7 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
-using MineJason.Text;
-
-namespace MineJason.Components.Builders;
+namespace MineJason.Text.Builders;
 
 /// <summary>
 /// Constructs a NBT chat component with data sourced from a storage file. This class cannot be inherited.
