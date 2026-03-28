@@ -7,12 +7,12 @@ using System.Text.Json.Serialization;
 using MineJason.Text.Colors;
 
 /// <summary>
-/// Provides JSON conversion for <see cref="IChatColor"/>.
+/// Provides JSON conversion for <see cref="ITextColor"/>.
 /// </summary>
-public class ChatColorConverter : JsonConverter<IChatColor>
+public class ChatColorConverter : JsonConverter<ITextColor>
 {
     /// <inheritdoc />
-    public override IChatColor? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override ITextColor? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         if (reader.TokenType != JsonTokenType.String)
         {
@@ -29,7 +29,7 @@ public class ChatColorConverter : JsonConverter<IChatColor>
         if (str.StartsWith('#'))
         {
             // If it is RGB chat color then we are parsing it here.
-            if (!TextColor.TryParse(str, out var rgbColor))
+            if (!RgbTextColor.TryParse(str, out var rgbColor))
             {
                 throw new JsonException("Expected RGB color notation");
             }
@@ -50,7 +50,7 @@ public class ChatColorConverter : JsonConverter<IChatColor>
     }
 
     /// <inheritdoc />
-    public override void Write(Utf8JsonWriter writer, IChatColor value, JsonSerializerOptions options)
+    public override void Write(Utf8JsonWriter writer, ITextColor value, JsonSerializerOptions options)
     {
         writer.WriteStringValue(value.GenerateColorText());
     }

@@ -5,6 +5,7 @@ namespace MineJason.Text;
 
 using MineJason.Events;
 using MineJason.Events.Hover;
+using MineJason.Text.Colors;
 using System.Drawing;
 
 /// <summary>
@@ -40,7 +41,7 @@ public readonly ref struct TextComponentCreationInfo
     /// <summary>
     /// Gets or sets the color of this component.
     /// </summary>
-    public IChatColor? Color { get; init; }
+    public ITextColor? Color { get; init; }
 
     /// <summary>
     /// Gets or sets the shadow color of this text component.

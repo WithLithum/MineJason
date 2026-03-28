@@ -11,6 +11,7 @@ using MineJason.Events;
 using MineJason.Events.Hover;
 using MineJason.Serialization.TextJson;
 using MineJason.Text.Builders;
+using MineJason.Text.Colors;
 
 namespace MineJason.Text;
 
@@ -76,7 +77,7 @@ public abstract record TextComponent
     /// <summary>
     /// Gets or sets the color of this component.
     /// </summary>
-    public IChatColor? Color { get; init; }
+    public ITextColor? Color { get; init; }
 
     /// <summary>
     /// Gets or sets the shadow color of this text component.
@@ -341,7 +342,7 @@ public abstract record TextComponent
     /// </summary>
     /// <param name="color">The color of this instance.</param>
     /// <returns>This instance for chaining.</returns>
-    public TextComponent WithColor(IChatColor? color)
+    public TextComponent WithColor(ITextColor? color)
     {
         return this with { Color = color };
     }

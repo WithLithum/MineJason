@@ -4,6 +4,7 @@
 using JetBrains.Annotations;
 using MineJason.Events;
 using MineJason.Events.Hover;
+using MineJason.Text.Colors;
 using System.Drawing;
 
 namespace MineJason.Text.Builders;
@@ -14,7 +15,7 @@ namespace MineJason.Text.Builders;
 [PublicAPI]
 public abstract class TextComponentBuilder<TTarget> where TTarget : TextComponent
 {
-    private IChatColor? _color;
+    private ITextColor? _color;
     private ResourceLocation? _font;
 
     private bool _bold;
@@ -35,7 +36,7 @@ public abstract class TextComponentBuilder<TTarget> where TTarget : TextComponen
     /// </summary>
     /// <param name="color">The color to set to.</param>
     /// <returns>This instance.</returns>
-    public TextComponentBuilder<TTarget> Color(IChatColor? color)
+    public TextComponentBuilder<TTarget> Color(ITextColor? color)
     {
         _color = color;
         return this;
