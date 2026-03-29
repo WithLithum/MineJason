@@ -56,7 +56,7 @@ namespace MineJason.Serialization.TextJson;
 [JsonSerializable(typeof(LootStorageNumberProvider))]
 [JsonSerializable(typeof(INbtDataProvider))]
 [JsonSerializable(typeof(RawNbtDataProvider))]
-[PublicAPI]
+[Obsolete("The built-in JSON context is deprecated. Please create your own context instead.")]
 public partial class MineJasonTextJsonContext : JsonSerializerContext
 {
 }

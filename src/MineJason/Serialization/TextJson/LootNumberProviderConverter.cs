@@ -13,6 +13,7 @@ using MineJason.Data.Loot.Numbers;
 /// <summary>
 /// Converts <see cref="ILootNumberProvider"/> and its implementation types to and from JSON.
 /// </summary>
+[Obsolete("Loot number providers are no longer provided in the Client module.")]
 public class LootNumberProviderConverter : JsonConverter<ILootNumberProvider>
 {
     private static readonly ReadOnlyDictionary<ResourceLocation, Type> SubTypes = new Dictionary<ResourceLocation, Type>()
@@ -77,7 +78,7 @@ public class LootNumberProviderConverter : JsonConverter<ILootNumberProvider>
 
     private static ILootNumberProvider HandleTyped(JsonObject root, JsonValue typeProperty)
     {
-        var type = typeProperty.Deserialize<ResourceLocation>(MineJasonTextJsonContext.Default.ResourceLocation);
+        var type = typeProperty.Deserialize(MineJasonTextJsonContext.Default.ResourceLocation);
         if (!SubTypes.TryGetValue(type, out var finalType))
         {
             throw new JsonException("Unrecognised number provider type.");
@@ -86,7 +87,7 @@ public class LootNumberProviderConverter : JsonConverter<ILootNumberProvider>
         // Remove type
         root.Remove("type");
 
-        var result = root.Deserialize(finalType, MineJasonTextJsonContext.Default)!;
+        var result = root.Deserialize(finalType)!;
         if (result == null)
         {
             throw new JsonException("Number provider cannot be null.");
