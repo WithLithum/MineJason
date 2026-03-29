@@ -88,20 +88,20 @@ The [.NET Runtime Style Guide](https://github.com/dotnet/runtime/blob/HEAD/docs/
 6. Field summaries should _not_ be written like property summaries.
 7. If a type has only one feature then its summary may be written like a void-returning parameter-less method.
 
+## 3. Commits
+
+1. Use [Conventional Gitmoji](https://github.com/ljnsn/cz-conventional-gitmoji) by ljnsn whenever possible.
+2. If in environments (e.g. JetBrains IDE) where this is not possible, use `cz c --dry-run` to generate a commit message.
+3. Sign off commits whenever possible.
+
 ## See also
 
 - [Framework Design Guidelines Digest](https://github.com/dotnet/runtime/blob/main/docs/coding-guidelines/framework-design-guidelines-digest.md)
-
 - [.NET Runtime Coding Style](https://github.com/dotnet/runtime/blob/HEAD/docs/coding-guidelines/coding-style.md)
-
 - [Google C# style guide](https://google.github.io/styleguide/csharp-style.html)
-
 - Framework Design Guidelines (the book)
-
 - [Cheat Sheet: Best practices for writing XML documentation in C#](https://blog.rsuter.com/best-practices-for-writing-xml-documentation-phrases-in-c/)
 
 <!-- Put this here because this breaks KIO -->
-
 <!-- SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026 -->
-
 <!-- SPDX-License-Identifier: Apache-2.0 -->

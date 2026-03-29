@@ -1,5 +1,12 @@
 # AGENTS instructions
 
+## Key commands
+
+- Restore: `dotnet restore "src/MineJason.slnx"`
+- Build solution: `dotnet build "src/MineJason.slnx"`
+- Run tests: `dotnet test "src/MineJason.Tests/MineJason.Tests.csproj"`
+- Commit with commitizen: `cz c -- -s`
+
 ## Environment setup
 
 - Check [`global.json`](global.json) for .NET version
@@ -13,11 +20,10 @@ Key paths:
 - `LICENSES/` — REUSE licenses directory
 - `src/` — Source code directory
     - `MineJason/` — Handles client formats such as text components, dialogs, entity selectors
-        - `Components/` — Where text components used to be in, don't place new components in here
         - `Dialogs/` — [Dialogs](http://minecraft.wiki/w/Dialog)  support
         - `Serialization/` — Code that works with `MineJason.Serialization`
             - `Schema/` — Schemas for the Client module
-        - `Text/` — Where new [text components](https://minecraft.wiki/w/Text_component_format) types and related types needs to be in
+        - `Text/` — Where new [text components](https://minecraft.wiki/w/Text_component_format) types and other text-related types needs to be in
     - `MineJason.Serialization/` — Handles format-agnostic DOM serialization
         - `Schema/` — Schemas which handles specific types
             - `Objects/` — Object schema
@@ -42,6 +48,7 @@ From repository root:
 
 - Do not suffix or name `ChatComponent` for new types, use `TextComponent`
 - Add REUSE SPDX licence header on all files
+- Use [Conventional Gitmoji](https://github.com/ljnsn/cz-conventional-gitmoji) for authoring commit messages
 - Refer to [the Style Guide](docs/STYLEGUIDE.md) for more standards
 
 ## Important things
