@@ -1,12 +1,11 @@
 ﻿// SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: Apache-2.0
 
-namespace MineJason.Tests.Client.Models;
-
 using System.Text.Json;
-using MineJason.Data;
 using MineJason.Data.Nbt;
-using MineJason.Serialization.TextJson;
+using MineJason.Tests.Client.Json;
+
+namespace MineJason.Tests.Client.Models;
 
 public class NbtProviderTests
 {
@@ -18,7 +17,7 @@ public class NbtProviderTests
         
         // Act
         var result = JsonSerializer.Deserialize(json, 
-            MineJasonTextJsonContext.Default.INbtDataProvider);
+            JsonTestContext.Default.INbtDataProvider);
         
         // Assert
         Assert.Equal(new RawNbtDataProvider("{Value:123}"), result);
@@ -32,7 +31,7 @@ public class NbtProviderTests
         
         // Act
         var json = JsonSerializer.Serialize(provider,
-            MineJasonTextJsonContext.Default.INbtDataProvider);
+            JsonTestContext.Default.INbtDataProvider);
         
         // Assert
         Assert.Equal("\"{Value:123}\"", json);
@@ -46,7 +45,7 @@ public class NbtProviderTests
         
         // Act
         var result = JsonSerializer.Deserialize(json, 
-            MineJasonTextJsonContext.Default.RawNbtDataProvider);
+            JsonTestContext.Default.RawNbtDataProvider);
         
         // Assert
         Assert.Equal(new RawNbtDataProvider("{Value:123}"), result);
@@ -60,7 +59,7 @@ public class NbtProviderTests
         
         // Act
         var json = JsonSerializer.Serialize(provider,
-            MineJasonTextJsonContext.Default.RawNbtDataProvider);
+            JsonTestContext.Default.RawNbtDataProvider);
         
         // Assert
         Assert.Equal("\"{Value:123}\"", json);

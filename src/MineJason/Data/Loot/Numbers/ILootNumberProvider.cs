@@ -10,6 +10,7 @@ using MineJason.Serialization.TextJson;
 /// Defines a number provider.
 /// </summary>
 [JsonConverter(typeof(LootNumberProviderConverter))]
+[Obsolete("Loot number providers are no longer provided in the Client module.")]
 public interface ILootNumberProvider
 {
     /// <summary>

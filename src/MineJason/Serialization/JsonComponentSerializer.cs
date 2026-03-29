@@ -13,6 +13,7 @@ namespace MineJason.Serialization;
 /// System.Text.Json (in situations where a context is required).
 /// </summary>
 [PublicAPI]
+[Obsolete("Use JsonSerializer instead. If a context is needed, create one with the default source generator.")]
 public static class JsonComponentSerializer
 {
     /// <summary>

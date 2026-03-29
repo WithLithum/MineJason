@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 using System.Text.Json;
-using MineJason.Serialization.TextJson;
+using MineJason.Tests.Client.Json;
 using MineJason.Text.Colors;
 
 namespace MineJason.Tests.Client;
@@ -31,7 +31,7 @@ public class TextColorTests
 
         // Act
         var result = JsonSerializer.Serialize(color,
-            MineJasonTextJsonContext.Default.RgbTextColor);
+            JsonTestContext.Default.RgbTextColor);
 
         // Result
         // ReSharper disable once StringLiteralTypo   
@@ -46,7 +46,7 @@ public class TextColorTests
 
         // Act
         var result = JsonSerializer.Serialize(color,
-            MineJasonTextJsonContext.Default.ITextColor);
+            JsonTestContext.Default.ITextColor);
 
         // Result
         Assert.Equal("\"#00ffff\"", result);
@@ -61,7 +61,7 @@ public class TextColorTests
 
         // Act
         var result = JsonSerializer.Deserialize(color,
-            MineJasonTextJsonContext.Default.RgbTextColor);
+            JsonTestContext.Default.RgbTextColor);
 
         // Assert
         Assert.Equal(new RgbTextColor(0x00, 0xff, 0xff), result);
@@ -76,7 +76,7 @@ public class TextColorTests
 
         // Act
         var result = JsonSerializer.Deserialize(color,
-            MineJasonTextJsonContext.Default.ITextColor);
+            JsonTestContext.Default.ITextColor);
 
         // Assert
         Assert.Equal(new RgbTextColor(0x00, 0xff, 0xff), result);

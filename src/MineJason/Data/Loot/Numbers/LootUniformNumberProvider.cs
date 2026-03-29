@@ -8,6 +8,7 @@ using System.Text.Json.Serialization;
 /// <summary>
 /// Provides a random value from an inclusive uniform distribution between two values.
 /// </summary>
+[Obsolete("Loot number providers are no longer provided in the Client module.")]
 public readonly record struct LootUniformNumberProvider : ILootNumberProvider
 {
     /// <summary>

@@ -8,6 +8,7 @@ using System.Text.Json.Serialization;
 /// <summary>
 /// Provides a number fetched from the score of an entity.
 /// </summary>
+[Obsolete("Loot number providers are no longer provided in the Client module.")]
 public readonly struct LootScoreNumberProvider : ILootNumberProvider,
     IEquatable<LootScoreNumberProvider>
 {

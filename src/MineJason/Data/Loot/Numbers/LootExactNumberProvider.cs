@@ -8,6 +8,7 @@ using System.Text.Json.Serialization;
 /// <summary>
 /// Provides an exact value.
 /// </summary>
+[Obsolete("Loot number providers are no longer provided in the Client module.")]
 public readonly record struct LootExactNumberProvider : ILootNumberProvider
 {
     /// <summary>

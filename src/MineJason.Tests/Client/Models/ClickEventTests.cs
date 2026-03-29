@@ -1,13 +1,12 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: Apache-2.0
 
-namespace MineJason.Tests.Client.Models;
-
 using System.Text.Json;
 using MineJason.Events;
-using MineJason.Serialization.TextJson;
+using MineJason.Tests.Client.Json;
 using MineJason.Text.Behaviour.Click;
-using Xunit;
+
+namespace MineJason.Tests.Client.Models;
 
 public class ClickEventTests
 {
@@ -18,7 +17,7 @@ public class ClickEventTests
         var clickEvent = new ChangePageClickEvent(12);
         
         // Act
-        var json = JsonSerializer.Serialize(clickEvent, MineJasonTextJsonContext.Default.ClickEvent);
+        var json = JsonSerializer.Serialize(clickEvent, JsonTestContext.Default.ClickEvent);
         
         // Assert
         Assert.Equal("{\"action\":\"change_page\",\"page\":12}", json);
@@ -32,7 +31,7 @@ public class ClickEventTests
         
         // Act
         var result = JsonSerializer.Deserialize(json,
-            MineJasonTextJsonContext.Default.ClickEvent);
+            JsonTestContext.Default.ClickEvent);
         
         // Assert
         Assert.Equal(new ChangePageClickEvent(12), result);
@@ -45,7 +44,7 @@ public class ClickEventTests
         var clickEvent = new CopyToClipboardClickEvent("clipboard copy");
         
         // Act
-        var json = JsonSerializer.Serialize(clickEvent, MineJasonTextJsonContext.Default.ClickEvent);
+        var json = JsonSerializer.Serialize(clickEvent, JsonTestContext.Default.ClickEvent);
         
         // Assert
         Assert.Equal("{\"action\":\"copy_to_clipboard\",\"value\":\"clipboard copy\"}", json);
@@ -59,7 +58,7 @@ public class ClickEventTests
         
         // Act
         var result = JsonSerializer.Deserialize(json,
-            MineJasonTextJsonContext.Default.ClickEvent);
+            JsonTestContext.Default.ClickEvent);
         
         // Assert
         Assert.Equal(new CopyToClipboardClickEvent("clipboard copy"), result);
@@ -72,7 +71,7 @@ public class ClickEventTests
         var clickEvent = new OpenUrlClickEvent(new Uri("https://minecraft.net"));
         
         // Act
-        var json = JsonSerializer.Serialize(clickEvent, MineJasonTextJsonContext.Default.ClickEvent);
+        var json = JsonSerializer.Serialize(clickEvent, JsonTestContext.Default.ClickEvent);
         
         // Assert
         Assert.Equal("{\"action\":\"open_url\",\"url\":\"https://minecraft.net/\"}", json);
@@ -86,7 +85,7 @@ public class ClickEventTests
         
         // Act
         var result = JsonSerializer.Deserialize(json,
-            MineJasonTextJsonContext.Default.ClickEvent);
+            JsonTestContext.Default.ClickEvent);
         
         // Assert
         Assert.Equal(new OpenUrlClickEvent(new Uri("https://minecraft.net")), result);
@@ -99,7 +98,7 @@ public class ClickEventTests
         var clickEvent = new RunCommandClickEvent("effect clear");
         
         // Act
-        var json = JsonSerializer.Serialize(clickEvent, MineJasonTextJsonContext.Default.ClickEvent);
+        var json = JsonSerializer.Serialize(clickEvent, JsonTestContext.Default.ClickEvent);
         
         // Assert
         Assert.Equal("{\"action\":\"run_command\",\"command\":\"effect clear\"}", json);
@@ -113,7 +112,7 @@ public class ClickEventTests
         
         // Act
         var result = JsonSerializer.Deserialize(json,
-            MineJasonTextJsonContext.Default.ClickEvent);
+            JsonTestContext.Default.ClickEvent);
         
         // Assert
         Assert.Equal(new RunCommandClickEvent("effect clear"), result);
@@ -126,7 +125,7 @@ public class ClickEventTests
         var clickEvent = new SuggestCommandClickEvent("effect clear");
         
         // Act
-        var json = JsonSerializer.Serialize(clickEvent, MineJasonTextJsonContext.Default.ClickEvent);
+        var json = JsonSerializer.Serialize(clickEvent, JsonTestContext.Default.ClickEvent);
         
         // Assert
         Assert.Equal("{\"action\":\"suggest_command\",\"command\":\"effect clear\"}", json);
@@ -140,7 +139,7 @@ public class ClickEventTests
         
         // Act
         var result = JsonSerializer.Deserialize(json,
-            MineJasonTextJsonContext.Default.ClickEvent);
+            JsonTestContext.Default.ClickEvent);
         
         // Assert
         Assert.Equal(new SuggestCommandClickEvent("effect clear"), result);
@@ -154,7 +153,7 @@ public class ClickEventTests
             new ResourceLocation("foo", "bar"));
 
         // Act
-        var json = JsonSerializer.Serialize(clickEvent, MineJasonTextJsonContext.Default.ClickEvent);
+        var json = JsonSerializer.Serialize(clickEvent, JsonTestContext.Default.ClickEvent);
 
         // Assert
         Assert.Equal("{\"action\":\"custom\",\"id\":\"foo:bar\"}", json);
@@ -169,7 +168,7 @@ public class ClickEventTests
 
         // Act
         var result = JsonSerializer.Deserialize(json,
-            MineJasonTextJsonContext.Default.ClickEvent);
+            JsonTestContext.Default.ClickEvent);
 
         // Assert
         Assert.Equal(new CustomClickEvent(new ResourceLocation("foo", "bar")), result);
@@ -184,7 +183,7 @@ public class ClickEventTests
             "bar");
 
         // Act
-        var json = JsonSerializer.Serialize(clickEvent, MineJasonTextJsonContext.Default.ClickEvent);
+        var json = JsonSerializer.Serialize(clickEvent, JsonTestContext.Default.ClickEvent);
 
         // Assert
         Assert.Equal("{\"action\":\"custom\",\"id\":\"foo:data\",\"payload\":\"bar\"}", json);
@@ -199,7 +198,7 @@ public class ClickEventTests
 
         // Act
         var result = JsonSerializer.Deserialize(json,
-            MineJasonTextJsonContext.Default.ClickEvent);
+            JsonTestContext.Default.ClickEvent);
 
         // Assert
         Assert.Equal(new CustomClickEvent(
