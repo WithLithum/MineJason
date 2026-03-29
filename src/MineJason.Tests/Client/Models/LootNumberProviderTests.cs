@@ -1,12 +1,12 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: Apache-2.0
 
-namespace MineJason.Tests.Client.Models;
-
 using System.Text.Json;
 using MineJason.Data.Loot;
 using MineJason.Data.Loot.Numbers;
-using MineJason.Serialization.TextJson;
+using MineJason.Tests.Client.Json;
+
+namespace MineJason.Tests.Client.Models;
 
 public class LootNumberProviderTests
 {
@@ -31,7 +31,7 @@ public class LootNumberProviderTests
         
         // Act
         var provider = JsonSerializer.Deserialize(json,
-            MineJasonTextJsonContext.Default.ILootNumberProvider);
+            JsonTestContext.Default.ILootNumberProvider);
         
         // Assert
         Assert.Equal(new LootExactNumberProvider(25f), provider);
@@ -45,7 +45,7 @@ public class LootNumberProviderTests
         
         // Act
         var provider = JsonSerializer.Deserialize(json,
-            MineJasonTextJsonContext.Default.ILootNumberProvider);
+            JsonTestContext.Default.ILootNumberProvider);
         
         // Assert
         Assert.Equal(new LootExactNumberProvider(25f), provider);
@@ -59,7 +59,7 @@ public class LootNumberProviderTests
         
         // Act
         var provider = JsonSerializer.Deserialize(json,
-            MineJasonTextJsonContext.Default.ILootNumberProvider);
+            JsonTestContext.Default.ILootNumberProvider);
         
         // Assert
         Assert.Equal(new LootUniformNumberProvider(10f, 20f), provider);
@@ -73,7 +73,7 @@ public class LootNumberProviderTests
         
         // Act
         var provider = JsonSerializer.Deserialize(json,
-            MineJasonTextJsonContext.Default.ILootNumberProvider);
+            JsonTestContext.Default.ILootNumberProvider);
         
         // Assert
         Assert.Equal(new LootUniformNumberProvider(10f, 20f), provider);
@@ -87,7 +87,7 @@ public class LootNumberProviderTests
         
         // Act
         var provider = JsonSerializer.Deserialize(json,
-            MineJasonTextJsonContext.Default.ILootNumberProvider);
+            JsonTestContext.Default.ILootNumberProvider);
         
         // Assert
         Assert.Equal(new LootBinomialNumberProvider(10f, 20f), provider);
@@ -103,7 +103,7 @@ public class LootNumberProviderTests
         
         // Act
         var json = JsonSerializer.Serialize(provider,
-            MineJasonTextJsonContext.Default.ILootNumberProvider);
+            JsonTestContext.Default.ILootNumberProvider);
         
         // Assert
         Assert.Equal("{\"type\":\"minecraft:score\",\"target\":{\"type\":\"fixed\",\"name\":\"test_target\"},\"score\":\"objective\"}", 
@@ -120,7 +120,7 @@ public class LootNumberProviderTests
         
         // Act
         var json = JsonSerializer.Serialize(provider,
-            MineJasonTextJsonContext.Default.ILootNumberProvider);
+            JsonTestContext.Default.ILootNumberProvider);
         
         // Assert
         Assert.Equal("{\"type\":\"minecraft:score\",\"target\":{\"type\":\"fixed\",\"name\":\"test_target\"},\"score\":\"objective\",\"scale\":2.5}",
@@ -137,7 +137,7 @@ public class LootNumberProviderTests
         
         // Act
         var json = JsonSerializer.Serialize(provider,
-            MineJasonTextJsonContext.Default.ILootNumberProvider);
+            JsonTestContext.Default.ILootNumberProvider);
         
         // Assert
         Assert.Equal("{\"type\":\"minecraft:score\",\"target\":{\"type\":\"context\",\"target\":\"this\"},\"score\":\"objective\"}",
@@ -154,7 +154,7 @@ public class LootNumberProviderTests
         
         // Act
         var json = JsonSerializer.Serialize(provider,
-            MineJasonTextJsonContext.Default.ILootNumberProvider);
+            JsonTestContext.Default.ILootNumberProvider);
         
         // Assert
         Assert.Equal("{\"type\":\"minecraft:score\",\"target\":{\"type\":\"context\",\"target\":\"this\"},\"score\":\"objective\",\"scale\":2.5}", json);
@@ -170,7 +170,7 @@ public class LootNumberProviderTests
         const string json = "{\"type\":\"minecraft:score\",\"target\":{\"type\":\"context\",\"target\":\"this\"},\"score\":\"objective\",\"scale\":2.5}";
         
         // Act
-        var result = JsonSerializer.Deserialize(json, MineJasonTextJsonContext.Default.ILootNumberProvider);
+        var result = JsonSerializer.Deserialize(json, JsonTestContext.Default.ILootNumberProvider);
         
         // Assert
         Assert.Equal(matchProvider, result);
@@ -186,7 +186,7 @@ public class LootNumberProviderTests
         const string json = "{\"type\":\"minecraft:score\",\"target\":{\"type\":\"context\",\"target\":\"this\"},\"score\":\"objective\"}";
         
         // Act
-        var result = JsonSerializer.Deserialize(json, MineJasonTextJsonContext.Default.ILootNumberProvider);
+        var result = JsonSerializer.Deserialize(json, JsonTestContext.Default.ILootNumberProvider);
         
         // Assert
         Assert.Equal(matchProvider, result);
@@ -202,7 +202,7 @@ public class LootNumberProviderTests
         const string json = "{\"type\":\"minecraft:score\",\"target\":{\"type\":\"fixed\",\"name\":\"test\"},\"score\":\"objective\",\"scale\":2.5}";
         
         // Act
-        var result = JsonSerializer.Deserialize(json, MineJasonTextJsonContext.Default.ILootNumberProvider);
+        var result = JsonSerializer.Deserialize(json, JsonTestContext.Default.ILootNumberProvider);
         
         // Assert
         Assert.Equal(matchProvider, result);
@@ -218,7 +218,7 @@ public class LootNumberProviderTests
         const string json = "{\"type\":\"minecraft:score\",\"target\":{\"type\":\"fixed\",\"name\":\"test\"},\"score\":\"objective\"}";
         
         // Act
-        var result = JsonSerializer.Deserialize(json, MineJasonTextJsonContext.Default.ILootNumberProvider);
+        var result = JsonSerializer.Deserialize(json, JsonTestContext.Default.ILootNumberProvider);
         
         // Assert
         Assert.Equal(matchProvider, result);
@@ -233,7 +233,7 @@ public class LootNumberProviderTests
         const string json = "{\"type\":\"minecraft:storage\",\"storage\":\"test:storage\",\"path\":\"path.to.number\"}";
         
         // Act
-        var result = JsonSerializer.Deserialize(json, MineJasonTextJsonContext.Default.ILootNumberProvider);
+        var result = JsonSerializer.Deserialize(json, JsonTestContext.Default.ILootNumberProvider);
         
         // Assert
         Assert.Equal(provider, result);
@@ -247,7 +247,7 @@ public class LootNumberProviderTests
             "path.to.number");
         
         // Act
-        var result = JsonSerializer.Serialize(provider, MineJasonTextJsonContext.Default.ILootNumberProvider);
+        var result = JsonSerializer.Serialize(provider, JsonTestContext.Default.ILootNumberProvider);
         
         // Assert
         Assert.Equal("{\"type\":\"minecraft:storage\",\"storage\":\"test:storage\",\"path\":\"path.to.number\"}",

@@ -1,13 +1,13 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: Apache-2.0
 
-namespace MineJason.Tests.Client;
-
+using System.Text.Json;
 using MineJason.Serialization.IO.Json;
 using MineJason.Serialization.Schema;
-using MineJason.Serialization.TextJson;
+using MineJason.Tests.Client.Json;
 using MineJason.Text;
-using System.Text.Json;
+
+namespace MineJason.Tests.Client;
 
 public class ComponentTests
 {
@@ -18,7 +18,8 @@ public class ComponentTests
         const string json = "{\"type\":\"nbt\",\"text\":\"Hello World!\"}";
 
         // Act
-        var component = JsonSerializer.Deserialize(json, MineJasonTextJsonContext.Default.TextComponent);
+        var component = JsonSerializer.Deserialize(json,
+            JsonTestContext.Default.TextComponent);
 
         // Assert
         Assert.Equal(TextComponent.CreateText("Hello World!"),

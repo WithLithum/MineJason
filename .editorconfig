@@ -12,8 +12,10 @@ vsspell_section_id = 339515a6a93a446aac574e8a57bfc211
 vsspell_ignored_words_339515a6a93a446aac574e8a57bfc211 = argb|changelog|color|deserialization|deserialize|deserializer|deserializing|json|keybind|minecraft|mutator|nbt|rgb|serialization|serialize|serializer|strikethrough|utf|tooltip
 vsspell_ignored_keywords_339515a6a93a446aac574e8a57bfc211 = strikethrough
 
-[*.cs]
+[*.{cs,vb}]
+#### Formatting styles ####
 
+# C# rules
 # IDE0065: Misplaced using directives
 csharp_using_directive_placement = outside_namespace:warning
 csharp_prefer_simple_using_statement = true:suggestion
@@ -35,9 +37,9 @@ csharp_indent_labels = one_less_than_current
 # Resharper styles
 
 csharp_qualified_using_at_nested_scope = true
-
-[*.{cs,vb}]
-#### Formatting styles ####
+resharper_add_imports_to_deepest_scope = false
+resharper_sort_usings_with_system_first = true
+resharper_convert_to_primary_constructor_highlighting = false
 
 # Import rules
 

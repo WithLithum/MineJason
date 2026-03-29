@@ -1,12 +1,12 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: Apache-2.0
 
-namespace MineJason.Tests.Client.Models;
-
 using System.Text.Json;
 using MineJason.Events.Hover;
-using MineJason.Serialization.TextJson;
+using MineJason.Tests.Client.Json;
 using MineJason.Text;
+
+namespace MineJason.Tests.Client.Models;
 
 public class HoverEventTests
 {
@@ -21,7 +21,7 @@ public class HoverEventTests
 
         // Act
         var json = JsonSerializer.Serialize(e,
-            MineJasonTextJsonContext.Default.HoverEvent);
+            JsonTestContext.Default.HoverEvent);
 
         // Assert
         Assert.Equal(expected,
@@ -38,7 +38,7 @@ public class HoverEventTests
 
         // Act
         var result = JsonSerializer.Deserialize(json,
-            MineJasonTextJsonContext.Default.HoverEvent);
+            JsonTestContext.Default.HoverEvent);
 
         // Assert
         Assert.Equal(expected, result);
@@ -53,7 +53,7 @@ public class HoverEventTests
 
         // Act
         var result = JsonSerializer.Serialize(value,
-            MineJasonTextJsonContext.Default.HoverEvent);
+            JsonTestContext.Default.HoverEvent);
 
         // Assert
         Assert.Equal(json, result);
@@ -68,7 +68,7 @@ public class HoverEventTests
 
         // Act
         var result = JsonSerializer.Deserialize(json,
-            MineJasonTextJsonContext.Default.HoverEvent);
+            JsonTestContext.Default.HoverEvent);
 
         // Assert
         Assert.Equal(expected, result);
