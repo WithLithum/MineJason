@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 using System.Text.Json.Serialization;
-using MineJason.Data.Loot.Numbers;
+using MineJason.Data.Nbt;
 using MineJason.Events;
 using MineJason.Events.Hover;
 using MineJason.Text;
@@ -16,5 +16,6 @@ namespace MineJason.Tests.Client.Json;
 [JsonSerializable(typeof(ITextColor))]
 [JsonSerializable(typeof(RgbTextColor))]
 [JsonSerializable(typeof(TextComponent))]
-[JsonSerializable(typeof(ILootNumberProvider))]
+[JsonSerializable(typeof(INbtDataProvider))]
+[JsonSerializable(typeof(RawNbtDataProvider))]
 internal sealed partial class JsonTestContext : JsonSerializerContext;
