@@ -87,7 +87,9 @@ public class LootNumberProviderConverter : JsonConverter<ILootNumberProvider>
         // Remove type
         root.Remove("type");
 
-        var result = root.Deserialize(finalType)!;
+        // This *should* have been a pattern matching expression, but since this thing is already
+        // terminally deprecated I am not going to change this.
+        var result = root.Deserialize(finalType, MineJasonTextJsonContext.Default)!;
         if (result == null)
         {
             throw new JsonException("Number provider cannot be null.");
