@@ -12,39 +12,9 @@ using MineJason.Serialization.Schema;
 /// <summary>
 /// Converts <see cref="HoverEvent"/> and its children from or to JSON.
 /// </summary>
-public class HoverEventConverter : JsonConverter<HoverEvent>
+public class HoverEventConverter() :
+    JsonSchemaBasedConverter<HoverEvent>(HoverEventSchema.Instance)
 {
-    /// <inheritdoc />
-    public override HoverEvent Read(ref Utf8JsonReader reader,
-        Type typeToConvert,
-        JsonSerializerOptions options)
-    {
-        var document = JsonDocument.ParseValue(ref reader);
-
-        var decodeResult = HoverEventSchema.Instance.Decode(document.RootElement,
-            SchemaCommons.JsonDecoder);
-
-        return decodeResult.Error != null
-            ? throw new JsonException($"Decode failed: {decodeResult.Error}")
-            : decodeResult.Value!;
-    }
-
-    /// <inheritdoc />
-    public override void Write(Utf8JsonWriter writer,
-        HoverEvent value,
-        JsonSerializerOptions options)
-    {
-        var encodeResult = HoverEventSchema.Instance.Encode(value,
-            SchemaCommons.JsonEncoder);
-
-        if (encodeResult.Error != null)
-        {
-            throw new JsonException($"Encode failed: {encodeResult.Error}");
-        }
-
-        encodeResult.Value!.WriteTo(writer, options);
-    }
-
     /// <inheritdoc />
     public override bool CanConvert(Type typeToConvert)
     {

@@ -12,52 +12,9 @@ using MineJason.Text;
 /// <summary>
 /// Converts text components from and to JSON.
 /// </summary>
-public class TextComponentConverter : JsonConverter<TextComponent>
+public class TextComponentConverter() :
+    JsonSchemaBasedConverter<TextComponent>(TextComponentSchema.Instance)
 {
-    /// <inheritdoc />
-    public override TextComponent? Read(ref Utf8JsonReader reader,
-        Type typeToConvert,
-        JsonSerializerOptions options)
-    {
-        var element = JsonElement.ParseValue(ref reader);
-        return ReadElement(ref element);
-    }
-
-    private static TextComponent? ReadElement(ref JsonElement element)
-    {
-        if (element.ValueKind == JsonValueKind.Null)
-        {
-            return null;
-        }
-
-        return ReadOne(ref element);
-    }
-
-    private static TextComponent ReadOne(ref JsonElement element)
-    {
-        var decodeResult = TextComponentSchema.Instance.Decode(element,
-            SchemaCommons.JsonDecoder);
-        if (decodeResult.Error != null)
-        {
-            throw new JsonException($"Decode failed: {decodeResult.Error}");
-        }
-
-        return decodeResult.Value!;
-    }
-
-    /// <inheritdoc />
-    public override void Write(Utf8JsonWriter writer, TextComponent value, JsonSerializerOptions options)
-    {
-        var nodeResult = TextComponentSchema.Instance.Encode(value,
-                SchemaCommons.JsonEncoder);
-        if (nodeResult.Error != null)
-        {
-            throw new JsonException($"Encode failed: {nodeResult.Error}");
-        }
-
-        nodeResult.Value!.WriteTo(writer);
-    }
-
     /// <inheritdoc />
     public override bool CanConvert(Type typeToConvert)
     {
