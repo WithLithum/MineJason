@@ -1,41 +1,56 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
-using MineJason.Text.Colors;
+namespace MineJason.Serialization.TextJson;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-
-namespace MineJason.Serialization.TextJson;
+using MineJason.Text.Colors;
 
 /// <summary>
-/// Converts <see cref="RgbTextColor"/> to or from JSON.
+/// Provides JSON conversion for <see cref="ITextColor"/>.
 /// </summary>
-public class RgbTextColorConverter : JsonConverter<RgbTextColor>
+public sealed class TextColorConverter : JsonConverter<ITextColor>
 {
     /// <inheritdoc />
-    public override RgbTextColor? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override ITextColor? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-        var str = reader.GetString();
+        if (reader.TokenType != JsonTokenType.String)
+        {
+            throw new JsonException("Expected string");
+        }
 
-#if DEBUG
-        Console.WriteLine("RgbColorConverter: received {0}", str);
-#endif
+        var str = reader.GetString();
 
         if (string.IsNullOrWhiteSpace(str))
         {
-            throw new JsonException("Expected RGB chat string");
+            throw new JsonException("Expected chat colour");
         }
 
-        if (!RgbTextColor.TryParse(str, out var result))
+        if (str.StartsWith('#'))
         {
-            throw new JsonException("Expected valid RGB color notation");
-        }
+            // If it is RGB chat color then we are parsing it here.
+            if (!RgbTextColor.TryParse(str, out var rgbColor))
+            {
+                throw new JsonException("Expected RGB color notation");
+            }
 
-        return result;
+            return rgbColor;
+        }
+        else
+        {
+            try
+            {
+                return new NamedTextColor(str);
+            }
+            catch (ArgumentException ex)
+            {
+                throw new JsonException($"Invalid color name '{str}'.", ex);
+            }
+        }
     }
 
     /// <inheritdoc />
-    public override void Write(Utf8JsonWriter writer, RgbTextColor value, JsonSerializerOptions options)
+    public override void Write(Utf8JsonWriter writer, ITextColor value, JsonSerializerOptions options)
     {
         writer.WriteStringValue(value.GenerateColorText());
     }

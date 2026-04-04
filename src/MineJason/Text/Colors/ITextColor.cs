@@ -9,7 +9,7 @@ namespace MineJason.Text.Colors;
 /// <summary>
 /// Represents a text color.
 /// </summary>
-[JsonConverter(typeof(ChatColorConverter))]
+[JsonConverter(typeof(TextColorConverter))]
 public interface ITextColor
 {
     /// <summary>
