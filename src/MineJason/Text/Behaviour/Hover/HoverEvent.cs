@@ -1,14 +1,13 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
-namespace MineJason.Events.Hover;
-
-using MineJason.Serialization.TextJson;
 using System.Text.Json.Serialization;
+using MineJason.Serialization.TextJson;
+
+namespace MineJason.Text.Behaviour.Hover;
 
 /// <summary>
-/// Represents a hover event, an event triggered when the player puts their mouse pointer over the
-/// text being displayed.
+/// Controls the content of the tooltip displayed when hovering over a displayed text component.
 /// </summary>
 [JsonConverter(typeof(HoverEventConverter))]
 public abstract class HoverEvent : IEquatable<HoverEvent>

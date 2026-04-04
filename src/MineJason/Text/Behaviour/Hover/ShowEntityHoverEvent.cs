@@ -1,17 +1,15 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
-namespace MineJason.Events.Hover;
-
 using System.Diagnostics.CodeAnalysis;
+using System.Text.Json.Serialization;
 using JetBrains.Annotations;
 using MineJason.Serialization.TextJson;
-using System.Text.Json.Serialization;
-using MineJason.Text;
+
+namespace MineJason.Text.Behaviour.Hover;
 
 /// <summary>
-/// Represents a show entity hover event, a hover event that displays entity type and GUID information
-/// in a tooltip that is shown.
+/// Represents a hover event that displays technical information about an entity.
 /// </summary>
 [PublicAPI]
 [JsonConverter(typeof(HoverEventConverter))]

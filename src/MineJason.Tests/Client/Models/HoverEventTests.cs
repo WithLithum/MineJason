@@ -2,9 +2,9 @@
 // SPDX-License-Identifier: Apache-2.0
 
 using System.Text.Json;
-using MineJason.Events.Hover;
 using MineJason.Tests.Client.Json;
 using MineJason.Text;
+using MineJason.Text.Behaviour.Hover;
 
 namespace MineJason.Tests.Client.Models;
 

@@ -1,14 +1,12 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
+using System.Drawing;
 using MineJason.Text.Behaviour.Click;
+using MineJason.Text.Behaviour.Hover;
+using MineJason.Text.Colors;
 
 namespace MineJason.Text;
-
-using MineJason.Events;
-using MineJason.Events.Hover;
-using MineJason.Text.Colors;
-using System.Drawing;
 
 /// <summary>
 /// Encapsulates data for common properties of a text component. 

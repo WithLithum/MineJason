@@ -2,11 +2,10 @@
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
 using JetBrains.Annotations;
-using MineJason.Events;
-using MineJason.Events.Hover;
 using MineJason.Text.Colors;
 using System.Drawing;
 using MineJason.Text.Behaviour.Click;
+using MineJason.Text.Behaviour.Hover;
 
 namespace MineJason.Text.Builders;
 

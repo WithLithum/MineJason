@@ -1,11 +1,11 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
-using MineJason.Events.Hover;
 using MineJason.Serialization.IO;
 using MineJason.Serialization.Schema.Objects;
 using MineJason.Serialization.Schema.Primitive;
 using MineJason.Serialization.Utilities.Results;
+using MineJason.Text.Behaviour.Hover;
 using PStringGuidSchema = MineJason.Serialization.Schema.Primitive.StringGuidSchema;
 using ShowItemHoverEvent = MineJason.Text.Behaviour.Hover.ShowItemHoverEvent;
 

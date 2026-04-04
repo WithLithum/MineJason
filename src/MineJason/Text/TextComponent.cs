@@ -6,10 +6,9 @@ using System.Text.Json.Serialization;
 using JetBrains.Annotations;
 using MineJason.Data.Coordinates;
 using MineJason.Data.Selectors;
-using MineJason.Events;
-using MineJason.Events.Hover;
 using MineJason.Serialization.TextJson;
 using MineJason.Text.Behaviour.Click;
+using MineJason.Text.Behaviour.Hover;
 using MineJason.Text.Builders;
 using MineJason.Text.Colors;
 

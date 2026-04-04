@@ -1,12 +1,10 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
+using System.Diagnostics.CodeAnalysis;
 using MineJason.Text.Behaviour.Click;
 
 namespace MineJason.Dialogs;
-
-using MineJason.Events;
-using System.Diagnostics.CodeAnalysis;
 
 /// <summary>
 /// Represents a dialog action that performs an operation with circumstances not affected by input
