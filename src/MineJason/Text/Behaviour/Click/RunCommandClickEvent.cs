@@ -1,45 +1,45 @@
 ﻿// SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
-namespace MineJason.Events;
-
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json.Serialization;
 using JetBrains.Annotations;
 using MineJason.Serialization.TextJson;
 
+namespace MineJason.Text.Behaviour.Click;
+
 /// <summary>
-/// Represents a click event that jumps to a specified page in a book.
+/// Represents a click event that executes a command.
 /// </summary>
-[PublicAPI]
 [JsonConverter(typeof(ClickEventConverter))]
-public sealed class ChangePageClickEvent : ClickEvent, IEquatable<ChangePageClickEvent>
+public sealed class RunCommandClickEvent : ClickEvent, IEquatable<RunCommandClickEvent>
 {
     /// <summary>
-    /// Initializes a new instance of the <see cref="ChangePageClickEvent"/> class.
+    /// Initializes a new instance of the <see cref="RunCommandClickEvent"/> class.
     /// </summary>
-    public ChangePageClickEvent()
+    [PublicAPI]
+    public RunCommandClickEvent()
     {
     }
-
+    
     /// <summary>
-    /// Initializes a new instance of <see cref="ChangePageClickEvent"/> with the specified value.
+    /// Initializes a new instance of <see cref="RunCommandClickEvent"/> with the specified value.
     /// </summary>
-    /// <param name="value">The value</param>
+    /// <param name="value">The command to execute.</param>
     [SetsRequiredMembers]
-    public ChangePageClickEvent(int value)
+    public RunCommandClickEvent(string value)
     {
         Value = value;
     }
     
     /// <summary>
-    /// Gets or sets the page to jump to.
+    /// Gets the command to execute.
     /// </summary>
     [JsonPropertyName("value")]
-    public required int Value { get; init; }
-
+    public required string Value { get; init; }
+    
     /// <inheritdoc />
-    public bool Equals(ChangePageClickEvent? other)
+    public bool Equals(RunCommandClickEvent? other)
     {
         if (ReferenceEquals(null, other)) return false;
         if (ReferenceEquals(this, other)) return true;
@@ -49,12 +49,12 @@ public sealed class ChangePageClickEvent : ClickEvent, IEquatable<ChangePageClic
     /// <inheritdoc />
     public override bool Equals(object? obj)
     {
-        return ReferenceEquals(this, obj) || obj is ChangePageClickEvent other && Equals(other);
+        return ReferenceEquals(this, obj) || obj is RunCommandClickEvent other && Equals(other);
     }
 
     /// <inheritdoc />
     public override int GetHashCode()
     {
-        return Value;
+        return Value.GetHashCode();
     }
 }

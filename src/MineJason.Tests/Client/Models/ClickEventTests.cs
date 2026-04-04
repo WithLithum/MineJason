@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 
 using System.Text.Json;
-using MineJason.Events;
 using MineJason.Tests.Client.Json;
 using MineJason.Text.Behaviour.Click;
 

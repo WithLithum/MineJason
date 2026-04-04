@@ -1,17 +1,16 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
-namespace MineJason.Events;
-
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json.Serialization;
-using JetBrains.Annotations;
 using MineJason.Serialization.TextJson;
 
+namespace MineJason.Text.Behaviour.Click;
+
 /// <summary>
-/// Represents a copy to clipboard click event, that copies the specified text to the clipboard.
+/// Represents a click event that copies the specified text to the clipboard. This class cannot be
+/// inherited.
 /// </summary>
-[PublicAPI]
 [JsonConverter(typeof(ClickEventConverter))]
 public sealed class CopyToClipboardClickEvent : ClickEvent, IEquatable<CopyToClipboardClickEvent>
 {
@@ -36,7 +35,6 @@ public sealed class CopyToClipboardClickEvent : ClickEvent, IEquatable<CopyToCli
     /// <summary>
     /// Gets the text to copy to the clipboard.
     /// </summary>
-    [JsonPropertyName("value")]
     public required string Value { get; init; }
 
     /// <inheritdoc />

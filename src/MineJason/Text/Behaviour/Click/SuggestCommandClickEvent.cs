@@ -1,55 +1,56 @@
 ﻿// SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
-namespace MineJason.Events;
-
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json.Serialization;
 using JetBrains.Annotations;
 using MineJason.Serialization.TextJson;
 
+namespace MineJason.Text.Behaviour.Click;
+
 /// <summary>
-/// Represents an open URL click event, that shows a prompt to open a URL in the default browser.
+/// Represents a click event that enters the specified text into the chat box.
 /// </summary>
 [PublicAPI]
 [JsonConverter(typeof(ClickEventConverter))]
-public sealed class OpenUrlClickEvent : ClickEvent, IEquatable<OpenUrlClickEvent>
+public sealed class SuggestCommandClickEvent : ClickEvent, IEquatable<SuggestCommandClickEvent>
 {
     /// <summary>
-    /// Initializes a new instance of the <see cref="OpenUrlClickEvent"/> class.
+    /// Initializes a new instance of the <see cref="SuggestCommandClickEvent"/> class.
     /// </summary>
-    public OpenUrlClickEvent()
+    public SuggestCommandClickEvent()
     {
     }
-
+    
     /// <summary>
-    /// Initializes a new instance of <see cref="OpenUrlClickEvent"/> with the specified value.
+    /// Initializes a new instance of <see cref="SuggestCommandClickEvent"/> with the specified
+    /// value.
     /// </summary>
-    /// <param name="value">The URL to open.</param>
+    /// <param name="value">The text to copy into the chat box.</param>
     [SetsRequiredMembers]
-    public OpenUrlClickEvent(Uri value)
+    public SuggestCommandClickEvent(string value)
     {
         Value = value;
     }
     
     /// <summary>
-    /// Gets the URL to open.
+    /// Gets the text to copy into the chat box.
     /// </summary>
     [JsonPropertyName("value")]
-    public required Uri Value { get; init; }
+    public required string Value { get; init; }
 
     /// <inheritdoc />
-    public bool Equals(OpenUrlClickEvent? other)
+    public bool Equals(SuggestCommandClickEvent? other)
     {
         if (ReferenceEquals(null, other)) return false;
         if (ReferenceEquals(this, other)) return true;
-        return Value.Equals(other.Value);
+        return Value == other.Value;
     }
 
     /// <inheritdoc />
     public override bool Equals(object? obj)
     {
-        return ReferenceEquals(this, obj) || obj is OpenUrlClickEvent other && Equals(other);
+        return ReferenceEquals(this, obj) || obj is SuggestCommandClickEvent other && Equals(other);
     }
 
     /// <inheritdoc />

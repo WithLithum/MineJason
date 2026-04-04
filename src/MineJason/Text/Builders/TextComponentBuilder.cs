@@ -6,6 +6,7 @@ using MineJason.Events;
 using MineJason.Events.Hover;
 using MineJason.Text.Colors;
 using System.Drawing;
+using MineJason.Text.Behaviour.Click;
 
 namespace MineJason.Text.Builders;
 

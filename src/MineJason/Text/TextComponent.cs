@@ -9,6 +9,7 @@ using MineJason.Data.Selectors;
 using MineJason.Events;
 using MineJason.Events.Hover;
 using MineJason.Serialization.TextJson;
+using MineJason.Text.Behaviour.Click;
 using MineJason.Text.Builders;
 using MineJason.Text.Colors;
 

@@ -1,6 +1,8 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: Apache-2.0
 
+using MineJason.Text.Behaviour.Click;
+
 namespace MineJason.Tests.Client.Models;
 
 using System.Text.Json;

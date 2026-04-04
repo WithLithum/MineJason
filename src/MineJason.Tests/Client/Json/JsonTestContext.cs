@@ -6,6 +6,7 @@ using MineJason.Data.Nbt;
 using MineJason.Events;
 using MineJason.Events.Hover;
 using MineJason.Text;
+using MineJason.Text.Behaviour.Click;
 using MineJason.Text.Colors;
 
 namespace MineJason.Tests.Client.Json;
