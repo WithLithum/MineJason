@@ -6,10 +6,9 @@ namespace MineJason.Text.Behaviour.Hover;
 using System.Diagnostics.CodeAnalysis;
 using JetBrains.Annotations;
 using MineJason.Data.Components;
-using MineJason.Events.Hover;
 
 /// <summary>
-/// Represents a hover event that displays an item stack.
+/// Represents a hover event that displays an item stack tooltip.
 /// </summary>
 [PublicAPI]
 public sealed class ShowItemHoverEvent : HoverEvent, IEquatable<ShowItemHoverEvent>
