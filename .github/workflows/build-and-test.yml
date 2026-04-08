@@ -25,7 +25,7 @@ jobs:
     - name: Build
       run: dotnet build "src/MineJason.slnx" --no-restore
     - name: Test
-      run: dotnet test --project "src/MineJason.Tests/MineJason.Tests.csproj" --no-build --verbosity normal -- --coverage --coverage-output-format cobertura --coverage-output coverage.cobertura.xml --results-directory "${{ github.workspace }}\TestResults"
+      run: dotnet test --project "src/MineJason.Tests/MineJason.Tests.csproj" --no-build --verbosity normal -- --coverage --coverage-output-format cobertura --coverage-output coverage.cobertura.xml --results-directory "${{ github.workspace }}/TestResults"
     - uses: codecov/codecov-action@57e3a136b779b570ffcdbf80b3bdc90e7fab3de2 # v6
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
