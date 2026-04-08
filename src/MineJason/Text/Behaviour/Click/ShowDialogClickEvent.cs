@@ -1,18 +1,18 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
-namespace MineJason.Text.Behaviour.Click;
-
-using MineJason.Dialogs.Reference;
-using MineJason.Events;
-using System;
+using JetBrains.Annotations;
 using System.Text.Json.Serialization;
+using MineJason.Dialogs.Reference;
 using MineJason.Serialization.TextJson;
+
+namespace MineJason.Text.Behaviour.Click;
 
 /// <summary>
 /// Represents a click event that shows a dialog. This class cannot be inherited.
 /// </summary>
 [JsonConverter(typeof(ClickEventConverter))]
+[PublicAPI]
 public sealed class ShowDialogClickEvent : ClickEvent, IEquatable<ShowDialogClickEvent>
 {
     /// <summary>

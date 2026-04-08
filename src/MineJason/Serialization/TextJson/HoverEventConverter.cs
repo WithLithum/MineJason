@@ -1,9 +1,10 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
+using MineJason.Text.Behaviour.Hover;
+
 namespace MineJason.Serialization.TextJson;
 
-using MineJason.Events.Hover;
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;

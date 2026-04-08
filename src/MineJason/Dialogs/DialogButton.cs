@@ -1,11 +1,10 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
-namespace MineJason.Dialogs;
-
-using MineJason.Events;
 using MineJason.Text;
 using MineJason.Utilities;
+
+namespace MineJason.Dialogs;
 
 /// <summary>
 /// Represents a button shown on a dialog.

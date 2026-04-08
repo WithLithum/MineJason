@@ -3,7 +3,6 @@
 
 namespace MineJason.Text.Behaviour.Click;
 
-using MineJason.Events;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json.Serialization;
 using MineJason.Serialization.TextJson;
