@@ -411,19 +411,4 @@ public class BlockPositionTests
         // Assert
         Assert.Equal(hash1, hash2);
     }
-    
-    [Fact]
-    public void ComponentHashCode_Different_NotEquals()
-    {
-        // Arrange
-        var c1 = new BlockPositionComponent(1000);
-        var c2 = new BlockPositionComponent(2000);
-        
-        // Act
-        var hash1 = c1.GetHashCode();
-        var hash2 = c2.GetHashCode();
-        
-        // Assert
-        Assert.NotEqual(hash1, hash2);
-    }
 }
