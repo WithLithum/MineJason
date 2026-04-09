@@ -351,4 +351,64 @@ public class StandardSchemaTests
         Assert.Multiple(() => Assert.True(result),
             () => Assert.Equal("OK!", value));
     }
+
+    [Fact]
+    public void OptionalValueType_DecodeNull_ReturnFail()
+    {
+        // Arrange
+        var baseSchema = Int32ValueSchema.Instance;
+        var subjectSchema = new OptionalValueTypeSchemaWrapper<int>(baseSchema);
+        var jsonNull = JsonDocument.Parse("null");
+
+        // Act
+        var result = subjectSchema.Decode(jsonNull.RootElement, new JsonElementDecoder());
+
+        // Assert
+        ResultAssert.Failure(result);
+    }
+
+    [Fact]
+    public void OptionalValueType_DecodeNonNull_ReturnOk()
+    {
+        // Arrange
+        var baseSchema = Int32ValueSchema.Instance;
+        var subjectSchema = new OptionalValueTypeSchemaWrapper<int>(baseSchema);
+        var jsonNull = JsonDocument.Parse("123");
+
+        // Act
+        var result = subjectSchema.Decode(jsonNull.RootElement, new JsonElementDecoder());
+
+        // Assert
+        ResultAssert.Success(result);
+    }
+
+    [Fact]
+    public void OptionalValueType_EncodeNull_ReturnFail()
+    {
+        // Arrange
+        var baseSchema = Int32ValueSchema.Instance;
+        var subjectSchema = new OptionalValueTypeSchemaWrapper<int>(baseSchema);
+        int? value = null;
+
+        // Act
+        var result = subjectSchema.Encode(value, new JsonNodeEncoder());
+
+        // Assert
+        ResultAssert.Failure(result);
+    }
+
+    [Fact]
+    public void OptionalValueType_EncodeNonNull_ReturnOk()
+    {
+        // Arrange
+        var baseSchema = Int32ValueSchema.Instance;
+        var subjectSchema = new OptionalValueTypeSchemaWrapper<int>(baseSchema);
+        int? value = 123;
+
+        // Act
+        var result = subjectSchema.Encode(value, new JsonNodeEncoder());
+
+        // Assert
+        ResultAssert.Success(result);
+    }
 }
