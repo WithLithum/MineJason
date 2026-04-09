@@ -263,7 +263,7 @@ public class ResourceLocationTest
     }
     
     [Fact]
-    public void EqualsObject_DifferentContent_ReturnsTrue()
+    public void EqualsObject_DifferentContent_ReturnsFalse()
     {
         // Arrange
         var a = new ResourceLocation("minecraft", "air");
