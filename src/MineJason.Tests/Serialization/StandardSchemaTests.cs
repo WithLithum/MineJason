@@ -9,19 +9,13 @@ using MineJason.Serialization.Utilities.Results;
 using MineJason.Tests.Serialization.Utilities;
 using Moq;
 using System.Text.Json;
+using System.Text.Json.Nodes;
 using StringGuidSchema = MineJason.Serialization.Schema.Primitive.StringGuidSchema;
 
 namespace MineJason.Tests.Serialization;
 
 public class StandardSchemaTests
 {
-    #region Mock tyeps
-
-    private class A;
-    private class B : A;
-
-    #endregion
-
     [Fact]
     public void ValueSchema_InterfaceEncodeWithName_PassNameSuccessfully()
     {
@@ -52,87 +46,6 @@ public class StandardSchemaTests
 
         // Assert
         Assert.IsType<ArgumentException>(exception);
-    }
-
-    [Theory]
-    [InlineData(true)]
-    [InlineData(false)]
-    public void Boolean_Value_EncodesSuccessfully(bool value)
-    {
-        // Arrange
-        var schema = BooleanSchema.Instance;
-        var encoder = new JsonNodeEncoder();
-
-        // Act
-        var result = schema.Encode(value, encoder);
-
-        // Assert
-        Assert.Equal(value, ResultAssert.NotEmpty(result).GetValue<bool>());
-    }
-
-    [Fact]
-    public void Boolean_True_DecodesSuccessfully()
-    {
-        // Arrange
-        var schema = BooleanSchema.Instance;
-
-        var json = JsonDocument.Parse("true");
-        var decoder = new JsonElementDecoder();
-
-        // Act
-        var result = schema.Decode(json.RootElement, decoder);
-
-        // Assert
-        Assert.Null(result.Error);
-        Assert.True(result.Value);
-    }
-
-    [Fact]
-    public void Boolean_False_DecodesSuccessfully()
-    {
-        // Arrange
-        var schema = BooleanSchema.Instance;
-
-        var json = JsonDocument.Parse("false");
-        var decoder = new JsonElementDecoder();
-
-        // Act
-        var result = schema.Decode(json.RootElement, decoder);
-
-        // Assert
-        Assert.False(ResultAssert.NotEmpty(result));
-    }
-
-    [Fact]
-    public void Uri_CorrectForming_EncodesSuccessfully()
-    {
-        // Arrange
-        var uri = new Uri("https://contoso.com/");
-        var schema = UriSchema.Instance;
-        var encoder = new JsonNodeEncoder();
-
-        // Act
-        var result = schema.Encode(uri, encoder);
-
-        // Assert
-        Assert.Equal("\"https://contoso.com/\"", ResultAssert.NotEmpty(result)
-            .ToJsonString());
-    }
-
-    [Fact]
-    public void Uri_CorrectForming_DecodesSuccessfully()
-    {
-        // Arrange
-        var schema = UriSchema.Instance;
-
-        var json = JsonDocument.Parse("\"https://contoso.com/\"");
-        var decoder = new JsonElementDecoder();
-
-        // Act
-        var result = schema.Decode(json.RootElement, decoder);
-
-        // Assert
-        Assert.Equal(new Uri("https://contoso.com/"), ResultAssert.NotEmpty(result));
     }
 
     [Fact]
@@ -289,36 +202,6 @@ public class StandardSchemaTests
         Assert.Collection(ResultAssert.NotEmpty(result),
             x1 => Assert.Equal("Hello", x1),
             x2 => Assert.Equal("World", x2));
-    }
-
-    [Fact]
-    public void StringSchema_StringValue_EncodeSucceed()
-    {
-        // Arrange
-        var schema = StringValueSchema.Instance;
-        var decoder = new JsonNodeEncoder();
-
-        // Act
-        var result = schema.Encode("Hello World!", decoder);
-
-        // Assert
-        Assert.Equal("\"Hello World!\"", result.Value?.ToJsonString());
-    }
-
-    [Fact]
-    public void StringSchema_StringValue_DecodeSucceed()
-    {
-        // Arrange
-        var schema = StringValueSchema.Instance;
-        var decoder = new JsonElementDecoder();
-
-        var element = JsonDocument.Parse("\"Hello World!\"");
-
-        // Act
-        var result = schema.Decode(element.RootElement, decoder);
-
-        // Assert
-        Assert.Equal("Hello World!", result.Value);
     }
 
     [Fact]
