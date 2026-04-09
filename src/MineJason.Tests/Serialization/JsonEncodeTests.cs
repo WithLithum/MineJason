@@ -451,7 +451,7 @@ public class JsonEncodeTests
     public void Decoder_Object_EnumeratesCorrectly()
     {
         // Arrange
-        var obj = JsonDocument.Parse("{\"first\":1,\"second\":2}");
+        using var obj = JsonDocument.Parse("{\"first\":1,\"second\":2}");
         var adapter = new JsonElementObjectAdapter(obj.RootElement);
 
         // Act

@@ -34,7 +34,7 @@ public class PrimitiveSchemaTests
         // Arrange
         var schema = BooleanSchema.Instance;
 
-        var json = JsonDocument.Parse("true");
+        using var json = JsonDocument.Parse("true");
         var decoder = new JsonElementDecoder();
 
         // Act
@@ -51,7 +51,7 @@ public class PrimitiveSchemaTests
         // Arrange
         var schema = BooleanSchema.Instance;
 
-        var json = JsonDocument.Parse("false");
+        using var json = JsonDocument.Parse("false");
         var decoder = new JsonElementDecoder();
 
         // Act
@@ -67,7 +67,7 @@ public class PrimitiveSchemaTests
         // Arrange
         var schema = BooleanSchema.Instance;
 
-        var json = JsonDocument.Parse("\"I AM NOT A BOOLEAN\"");
+        using var json = JsonDocument.Parse("\"I AM NOT A BOOLEAN\"");
         var decoder = new JsonElementDecoder();
 
         // Act
@@ -92,7 +92,7 @@ public class PrimitiveSchemaTests
         var result = schema.Encode(value, encoder);
 
         // Assert
-        Assert.Equal("1234.56", ResultAssert.Success(result)!.ToJsonString());
+        Assert.Equal("1234.56", ResultAssert.Success(result).ToJsonString());
     }
 
     [Fact]
@@ -107,7 +107,7 @@ public class PrimitiveSchemaTests
         var result = schema.Encode(value, encoder);
 
         // Assert
-        Assert.Equal("1234.5678", ResultAssert.Success(result)!.ToJsonString());
+        Assert.Equal("1234.5678", ResultAssert.Success(result).ToJsonString());
     }
 
     [Fact]
@@ -116,7 +116,7 @@ public class PrimitiveSchemaTests
         // Arrange
         var schema = SingleValueSchema.Instance;
 
-        var json = JsonDocument.Parse("3.14");
+        using var json = JsonDocument.Parse("3.14");
         var decoder = new JsonElementDecoder();
 
         // Act
@@ -132,7 +132,7 @@ public class PrimitiveSchemaTests
         // Arrange
         var schema = DoubleValueSchema.Instance;
 
-        var json = JsonDocument.Parse("3.1415926");
+        using var json = JsonDocument.Parse("3.1415926");
         var decoder = new JsonElementDecoder();
 
         // Act
@@ -148,7 +148,7 @@ public class PrimitiveSchemaTests
         // Arrange
         var schema = SingleValueSchema.Instance;
 
-        var json = JsonDocument.Parse("\"I am not a number.\"");
+        using var json = JsonDocument.Parse("\"I am not a number.\"");
         var decoder = new JsonElementDecoder();
 
         // Act
@@ -164,7 +164,7 @@ public class PrimitiveSchemaTests
         // Arrange
         var schema = DoubleValueSchema.Instance;
 
-        var json = JsonDocument.Parse("\"I am not a number.\"");
+        using var json = JsonDocument.Parse("\"I am not a number.\"");
         var decoder = new JsonElementDecoder();
 
         // Act
@@ -189,7 +189,7 @@ public class PrimitiveSchemaTests
         var result = schema.Encode(value, encoder);
 
         // Assert
-        Assert.Equal($"{value}", ResultAssert.Success(result)!.ToJsonString());
+        Assert.Equal($"{value}", ResultAssert.Success(result).ToJsonString());
     }
     
     [Fact]
@@ -204,7 +204,7 @@ public class PrimitiveSchemaTests
         var result = schema.Encode(value, encoder);
 
         // Assert
-        Assert.Equal($"{value}", ResultAssert.Success(result)!.ToJsonString());
+        Assert.Equal($"{value}", ResultAssert.Success(result).ToJsonString());
     }
 
     [Fact]
@@ -219,7 +219,7 @@ public class PrimitiveSchemaTests
         var result = schema.Encode(value, encoder);
 
         // Assert
-        Assert.Equal($"{value}", ResultAssert.Success(result)!.ToJsonString());
+        Assert.Equal($"{value}", ResultAssert.Success(result).ToJsonString());
     }
 
     [Fact]
@@ -229,7 +229,7 @@ public class PrimitiveSchemaTests
         const int value = 87654321;
         var schema = Int32ValueSchema.Instance;
 
-        var json = JsonDocument.Parse($"{value}");
+        using var json = JsonDocument.Parse($"{value}");
         var decoder = new JsonElementDecoder();
 
         // Act
@@ -251,7 +251,7 @@ public class PrimitiveSchemaTests
         var result = schema.Encode(value, encoder);
 
         // Assert
-        Assert.Equal($"{value}", ResultAssert.Success(result)!.ToJsonString());
+        Assert.Equal($"{value}", ResultAssert.Success(result).ToJsonString());
     }
 
     [Fact]
@@ -261,7 +261,7 @@ public class PrimitiveSchemaTests
         const long value = 87654321;
         var schema = Int64ValueSchema.Instance;
 
-        var json = JsonDocument.Parse($"{value}");
+        using var json = JsonDocument.Parse($"{value}");
         var decoder = new JsonElementDecoder();
 
         // Act
@@ -290,7 +290,7 @@ public class PrimitiveSchemaTests
     public void IntegerSchema_DecodeNotNumber_ReturnsErr(IValueSchema schema)
     {
         // Arrange
-        var json = JsonDocument.Parse("\"I am not a number.\"");
+        using var json = JsonDocument.Parse("\"I am not a number.\"");
         var decoder = new JsonElementDecoder();
 
         // Act
@@ -315,7 +315,7 @@ public class PrimitiveSchemaTests
         var result = schema.Encode(value, encoder);
 
         // Assert
-        Assert.Equal($"{value}", ResultAssert.Success(result)!.ToJsonString());
+        Assert.Equal($"{value}", ResultAssert.Success(result).ToJsonString());
     }
 
     [Fact]
@@ -325,7 +325,7 @@ public class PrimitiveSchemaTests
         const ushort value = 54321;
         var schema = UInt16ValueSchema.Instance;
 
-        var json = JsonDocument.Parse($"{value}");
+        using var json = JsonDocument.Parse($"{value}");
         var decoder = new JsonElementDecoder();
 
         // Act
@@ -347,7 +347,7 @@ public class PrimitiveSchemaTests
         var result = schema.Encode(value, encoder);
 
         // Assert
-        Assert.Equal($"{value}", ResultAssert.Success(result)!.ToJsonString());
+        Assert.Equal($"{value}", ResultAssert.Success(result).ToJsonString());
     }
 
     [Fact]
@@ -357,7 +357,7 @@ public class PrimitiveSchemaTests
         const uint value = 4000000000;
         var schema = UInt32ValueSchema.Instance;
 
-        var json = JsonDocument.Parse($"{value}");
+        using var json = JsonDocument.Parse($"{value}");
         var decoder = new JsonElementDecoder();
 
         // Act
@@ -379,7 +379,7 @@ public class PrimitiveSchemaTests
         var result = schema.Encode(value, encoder);
 
         // Assert
-        Assert.Equal($"{value}", ResultAssert.Success(result)!.ToJsonString());
+        Assert.Equal($"{value}", ResultAssert.Success(result).ToJsonString());
     }
 
     [Fact]
@@ -389,7 +389,7 @@ public class PrimitiveSchemaTests
         const ulong value = 18000000000000000000;
         var schema = UInt64ValueSchema.Instance;
 
-        var json = JsonDocument.Parse($"{value}");
+        using var json = JsonDocument.Parse($"{value}");
         var decoder = new JsonElementDecoder();
 
         // Act
@@ -473,7 +473,7 @@ public class PrimitiveSchemaTests
         // Arrange
         var schema = UriSchema.Instance;
 
-        var json = JsonDocument.Parse("\"https://contoso.com/\"");
+        using var json = JsonDocument.Parse("\"https://contoso.com/\"");
         var decoder = new JsonElementDecoder();
 
         // Act
@@ -489,7 +489,7 @@ public class PrimitiveSchemaTests
         // Arrange
         var schema = UriSchema.Instance;
 
-        var json = JsonDocument.Parse("321");
+        using var json = JsonDocument.Parse("321");
         var decoder = new JsonElementDecoder();
 
         // Act
@@ -505,7 +505,7 @@ public class PrimitiveSchemaTests
         // Arrange
         var schema = UriSchema.Instance;
 
-        var json = JsonDocument.Parse("\"I_HAVE_NO_GREETING://////////\"");
+        using var json = JsonDocument.Parse("\"I_HAVE_NO_GREETING://////////\"");
         var decoder = new JsonElementDecoder();
 
         // Act
