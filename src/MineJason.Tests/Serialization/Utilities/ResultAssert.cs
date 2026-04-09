@@ -7,14 +7,14 @@ namespace MineJason.Tests.Serialization.Utilities;
 
 public static class ResultAssert
 {
-    public static T? Success<T>(Result<T> result)
+    public static T Success<T>(Result<T> result)
     {
         if (result.Error != null)
         {
             Assert.Fail($"Errored data result: '{result.Error}'");
         }
 
-        return result.Value;
+        return result.Value!;
     }
 
     public static void Success(Result result)
