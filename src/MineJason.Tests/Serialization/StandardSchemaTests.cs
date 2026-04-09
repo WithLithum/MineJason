@@ -83,6 +83,23 @@ public class StandardSchemaTests
     }
 
     [Fact]
+    public void StringEnum_EncodeUnrecognised_ReturnsErr()
+    {
+        // Arrange
+        var schema = new StringEnumValueSchema<AttributeTargets>(
+            JsonNamingPolicy.SnakeCaseLower);
+        var encoder = new JsonNodeEncoder();
+
+        const AttributeTargets value = (AttributeTargets)99999999; // will not exist!
+
+        // Act
+        var result = schema.Encode(value, encoder);
+
+        // Assert
+        ResultAssert.Failure(result);
+    }
+
+    [Fact]
     public void StringEnum_NoNamingPolicy_DecodesSuccessfully()
     {
         // Arrange
@@ -115,6 +132,24 @@ public class StandardSchemaTests
         // Assert
         Assert.Null(result.Error);
         Assert.Equal(AttributeTargets.GenericParameter, result.Value);
+    }
+
+    [Fact]
+    public void StringEnum_DecodeUnrecognized_ReturnsErr()
+    {
+        // Arrange
+        var schema = new StringEnumValueSchema<AttributeTargets>(
+            JsonNamingPolicy.SnakeCaseLower);
+
+        var json = JsonDocument.Parse(
+            "\"this_random_name_which_is_gurranteed_not_to_exist\"");
+        var decoder = new JsonElementDecoder();
+
+        // Act
+        var result = schema.Decode(json.RootElement, decoder);
+
+        // Assert
+        ResultAssert.Failure(result);
     }
 
     [Fact]
