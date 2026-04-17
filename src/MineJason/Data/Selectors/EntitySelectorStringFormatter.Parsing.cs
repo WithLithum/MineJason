@@ -5,6 +5,7 @@ using System.Globalization;
 using MineJason.Data.Nbt;
 using MineJason.Data.Selectors.Advancements;
 using MineJason.Data.Selectors.Predicates;
+using MineJason.Data.Selectors.Utilities;
 using MineJason.Exceptions;
 using MineJason.Utilities;
 
@@ -44,17 +45,11 @@ public static partial class EntitySelectorStringFormatter
 
     private static void ParseSelectorArguments(string s, EntitySelector selector)
     {
-#if DEBUG
-        Console.WriteLine(s);
-#endif
-
         if (!s.StartsWith('[') || !s.EndsWith(']') || s.Length <= 5)
         {
             throw new FormatException("Invalid value");
         }
 
-        Vector3D? position = null;
-        Vector3D? diagonal = null;
         DistanceRange? distanceRange = null;
 
         var pairs = EntitySelectorParser.ParsePairSet(s[1..^1]);
@@ -62,21 +57,11 @@ public static partial class EntitySelectorStringFormatter
         Console.WriteLine(pairs);
 #endif
 
-        if (TryGetXyzValue(pairs, out var resultPos))
-        {
-            position = resultPos;
-        }
-
-        // diagonal
-        if (TryGetXyzValue(pairs, out var resultDPos, "dx", "dy", "dz"))
-        {
-            diagonal = resultDPos;
-        }
+        var coords = EvaluateXyz(pairs);
 
         foreach (var pair in pairs)
         {
             EntitySelectorParser.ParsePair(pair, out var key, out var value);
-            DebugHelper.Output("ParseSelectorArguments: pair (key={0}, value={1})", key, value);
 
             switch (key)
             {
@@ -94,6 +79,7 @@ public static partial class EntitySelectorStringFormatter
                     {
                         selector.GameMode.Exclude.Add(ParseGameMode(value[1..]));
                     }
+
                     break;
                 case "distance":
                     var distValue = ParseDistanceRange(value);
@@ -152,10 +138,14 @@ public static partial class EntitySelectorStringFormatter
 
                         selector.Type.Include = resourceLocation;
                     }
+
                     break;
                 case "x":
                 case "y":
                 case "z":
+                case "dx":
+                case "dy":
+                case "dz":
                     // Don't do anything here, just skip.
                     // We already handled them above.
                     break;
@@ -168,6 +158,7 @@ public static partial class EntitySelectorStringFormatter
                     {
                         selector.Nbt.Include.Add(new RawNbtDataProvider(value));
                     }
+
                     break;
                 case "advancements":
                     ParseAdvancements(value, selector.Advancements);
@@ -188,51 +179,52 @@ public static partial class EntitySelectorStringFormatter
         // Assemble all values!
 
         // position
-        selector.Position = position;
-
-        // diagonal
-        selector.DiagonalRange = diagonal;
+        selector.Position = coords.Origin;
+        selector.DiagonalRange = coords.Diagonal;
 
         // distance
         selector.Distance = distanceRange;
     }
 
-    private static bool TryGetXyzValue(IEnumerable<string> pairs,
-        out Vector3D vector,
-        string xName = "x",
-        string yName = "y",
-        string zName = "z")
+    private static SelectorXyz EvaluateXyz(IEnumerable<string> pairs)
     {
-        double? x = null;
-        double? y = null;
-        double? z = null;
-        vector = default;
+        double? x = null, y = null, z = null, dx = null, dy = null, dz = null;
+
+        void EvalOne(ReadOnlySpan<char> k,
+            ReadOnlySpan<char> v,
+            ReadOnlySpan<char> name, ref double? variable)
+        {
+            if (k.Equals(name, StringComparison.Ordinal))
+            {
+                variable = double.Parse(v, CultureInfo.InvariantCulture);
+            }
+        }
 
         foreach (var pair in pairs)
         {
-            EntitySelectorParser.ParsePair(pair, out var key, out var value);
+            var pairBuf = pair.AsSpan();
+            EntitySelectorParser.ParsePair(pairBuf,
+                out var key,
+                out var value);
 
-            if (string.Equals(key, xName, StringComparison.Ordinal))
-            {
-                x = double.Parse(value, CultureInfo.InvariantCulture);
-            }
-            else if (string.Equals(key, yName, StringComparison.Ordinal))
-            {
-                y = double.Parse(value, CultureInfo.InvariantCulture);
-            }
-            else if (string.Equals(key, zName, StringComparison.Ordinal))
-            {
-                z = double.Parse(value, CultureInfo.InvariantCulture);
-            }
+            EvalOne(key, value, "x", ref x);
+            EvalOne(key, value, "y", ref y);
+            EvalOne(key, value, "z", ref z);
+            EvalOne(key, value, "dx", ref dx);
+            EvalOne(key, value, "dy", ref dy);
+            EvalOne(key, value, "dz", ref dz);
         }
 
-        if (x.HasValue && y.HasValue && z.HasValue)
+        return new SelectorXyz
         {
-            vector = new Vector3D(x.Value, y.Value, z.Value);
-            return true;
-        }
+            Origin = x.HasValue && y.HasValue && z.HasValue
+                ? new Vector3D(x.Value, y.Value, z.Value)
+                : null,
 
-        return false;
+            Diagonal = dx.HasValue && dy.HasValue && dz.HasValue
+                ? new Vector3D(dx.Value, dy.Value, dz.Value)
+                : null,
+        };
     }
 
     /// <summary>
@@ -319,7 +311,7 @@ public static partial class EntitySelectorStringFormatter
             }
 
             range = DistanceRange.MatchRange(double.Parse(valueSpan[valueRanges[0]],
-                CultureInfo.InvariantCulture),
+                    CultureInfo.InvariantCulture),
                 double.Parse(valueSpan[valueRanges[1]], CultureInfo.InvariantCulture));
         }
         else
