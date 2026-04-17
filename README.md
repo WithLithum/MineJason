@@ -3,6 +3,9 @@
 <h1>MineJason</h1>
 </div>
 
+![GitHub branch check runs](https://img.shields.io/github/check-runs/WithLithum/MineJason/main?style=flat-square&logo=github)
+![Codecov](https://img.shields.io/codecov/c/github/WithLithum/MineJason?style=flat-square)
+
 MineJason is a suite of libraries that deals with various formats used in Minecraft: Java Editions.
 
 The suite is primarily consisted of the following "modules":
