@@ -6,6 +6,7 @@ using MineJason.Serialization.IO.Json;
 using MineJason.Serialization.Schema;
 using MineJason.Tests.Client.Json;
 using MineJason.Text;
+using MineJason.Text.Builders;
 
 namespace MineJason.Tests.Client;
 
@@ -86,5 +87,39 @@ public class ComponentTests
                 x1 => Assert.Equal(TextComponent.CreateText("B"), x1),
                 x2 => Assert.Equal(TextComponent.CreateText("C"), x2))
         );
+    }
+
+    [Fact]
+    public void Component_Embolden_ReturnsCorrect()
+    {
+        // Arrange
+        var component = TextComponent.CreateText("Bold");
+        
+        // Act
+        var italicised = component.Embolden();
+        
+        // Assert
+        Assert.Equal(TextComponent.CreateText()
+                .Value("Bold")
+                .Bold()
+                .Build(),
+            italicised);
+    }
+    
+    [Fact]
+    public void Component_Italicise_ReturnsCorrect()
+    {
+        // Arrange
+        var component = TextComponent.CreateText("Literal");
+        
+        // Act
+        var italicised = component.Italicise();
+        
+        // Assert
+        Assert.Equal(TextComponent.CreateText()
+            .Value("Literal")
+            .Italic()
+            .Build(),
+            italicised);
     }
 }

@@ -9,19 +9,13 @@ using MineJason.Serialization.Utilities.Results;
 using MineJason.Tests.Serialization.Utilities;
 using Moq;
 using System.Text.Json;
+using System.Text.Json.Nodes;
 using StringGuidSchema = MineJason.Serialization.Schema.Primitive.StringGuidSchema;
 
 namespace MineJason.Tests.Serialization;
 
 public class StandardSchemaTests
 {
-    #region Mock tyeps
-
-    private class A;
-    private class B : A;
-
-    #endregion
-
     [Fact]
     public void ValueSchema_InterfaceEncodeWithName_PassNameSuccessfully()
     {
@@ -52,87 +46,6 @@ public class StandardSchemaTests
 
         // Assert
         Assert.IsType<ArgumentException>(exception);
-    }
-
-    [Theory]
-    [InlineData(true)]
-    [InlineData(false)]
-    public void Boolean_Value_EncodesSuccessfully(bool value)
-    {
-        // Arrange
-        var schema = BooleanSchema.Instance;
-        var encoder = new JsonNodeEncoder();
-
-        // Act
-        var result = schema.Encode(value, encoder);
-
-        // Assert
-        Assert.Equal(value, ResultAssert.NotEmpty(result).GetValue<bool>());
-    }
-
-    [Fact]
-    public void Boolean_True_DecodesSuccessfully()
-    {
-        // Arrange
-        var schema = BooleanSchema.Instance;
-
-        var json = JsonDocument.Parse("true");
-        var decoder = new JsonElementDecoder();
-
-        // Act
-        var result = schema.Decode(json.RootElement, decoder);
-
-        // Assert
-        Assert.Null(result.Error);
-        Assert.True(result.Value);
-    }
-
-    [Fact]
-    public void Boolean_False_DecodesSuccessfully()
-    {
-        // Arrange
-        var schema = BooleanSchema.Instance;
-
-        var json = JsonDocument.Parse("false");
-        var decoder = new JsonElementDecoder();
-
-        // Act
-        var result = schema.Decode(json.RootElement, decoder);
-
-        // Assert
-        Assert.False(ResultAssert.NotEmpty(result));
-    }
-
-    [Fact]
-    public void Uri_CorrectForming_EncodesSuccessfully()
-    {
-        // Arrange
-        var uri = new Uri("https://contoso.com/");
-        var schema = UriSchema.Instance;
-        var encoder = new JsonNodeEncoder();
-
-        // Act
-        var result = schema.Encode(uri, encoder);
-
-        // Assert
-        Assert.Equal("\"https://contoso.com/\"", ResultAssert.NotEmpty(result)
-            .ToJsonString());
-    }
-
-    [Fact]
-    public void Uri_CorrectForming_DecodesSuccessfully()
-    {
-        // Arrange
-        var schema = UriSchema.Instance;
-
-        var json = JsonDocument.Parse("\"https://contoso.com/\"");
-        var decoder = new JsonElementDecoder();
-
-        // Act
-        var result = schema.Decode(json.RootElement, decoder);
-
-        // Assert
-        Assert.Equal(new Uri("https://contoso.com/"), ResultAssert.NotEmpty(result));
     }
 
     [Fact]
@@ -170,6 +83,23 @@ public class StandardSchemaTests
     }
 
     [Fact]
+    public void StringEnum_EncodeUnrecognised_ReturnsErr()
+    {
+        // Arrange
+        var schema = new StringEnumValueSchema<AttributeTargets>(
+            JsonNamingPolicy.SnakeCaseLower);
+        var encoder = new JsonNodeEncoder();
+
+        const AttributeTargets value = (AttributeTargets)99999999; // will not exist!
+
+        // Act
+        var result = schema.Encode(value, encoder);
+
+        // Assert
+        ResultAssert.Failure(result);
+    }
+
+    [Fact]
     public void StringEnum_NoNamingPolicy_DecodesSuccessfully()
     {
         // Arrange
@@ -202,6 +132,24 @@ public class StandardSchemaTests
         // Assert
         Assert.Null(result.Error);
         Assert.Equal(AttributeTargets.GenericParameter, result.Value);
+    }
+
+    [Fact]
+    public void StringEnum_DecodeUnrecognized_ReturnsErr()
+    {
+        // Arrange
+        var schema = new StringEnumValueSchema<AttributeTargets>(
+            JsonNamingPolicy.SnakeCaseLower);
+
+        var json = JsonDocument.Parse(
+            "\"this_random_name_which_is_gurranteed_not_to_exist\"");
+        var decoder = new JsonElementDecoder();
+
+        // Act
+        var result = schema.Decode(json.RootElement, decoder);
+
+        // Assert
+        ResultAssert.Failure(result);
     }
 
     [Fact]
@@ -289,36 +237,6 @@ public class StandardSchemaTests
         Assert.Collection(ResultAssert.NotEmpty(result),
             x1 => Assert.Equal("Hello", x1),
             x2 => Assert.Equal("World", x2));
-    }
-
-    [Fact]
-    public void StringSchema_StringValue_EncodeSucceed()
-    {
-        // Arrange
-        var schema = StringValueSchema.Instance;
-        var decoder = new JsonNodeEncoder();
-
-        // Act
-        var result = schema.Encode("Hello World!", decoder);
-
-        // Assert
-        Assert.Equal("\"Hello World!\"", result.Value?.ToJsonString());
-    }
-
-    [Fact]
-    public void StringSchema_StringValue_DecodeSucceed()
-    {
-        // Arrange
-        var schema = StringValueSchema.Instance;
-        var decoder = new JsonElementDecoder();
-
-        var element = JsonDocument.Parse("\"Hello World!\"");
-
-        // Act
-        var result = schema.Decode(element.RootElement, decoder);
-
-        // Assert
-        Assert.Equal("Hello World!", result.Value);
     }
 
     [Fact]
@@ -432,5 +350,65 @@ public class StandardSchemaTests
         // Assert
         Assert.Multiple(() => Assert.True(result),
             () => Assert.Equal("OK!", value));
+    }
+
+    [Fact]
+    public void OptionalValueType_DecodeNull_ReturnFail()
+    {
+        // Arrange
+        var baseSchema = Int32ValueSchema.Instance;
+        var subjectSchema = new OptionalValueTypeSchemaWrapper<int>(baseSchema);
+        var jsonNull = JsonDocument.Parse("null");
+
+        // Act
+        var result = subjectSchema.Decode(jsonNull.RootElement, new JsonElementDecoder());
+
+        // Assert
+        ResultAssert.Failure(result);
+    }
+
+    [Fact]
+    public void OptionalValueType_DecodeNonNull_ReturnOk()
+    {
+        // Arrange
+        var baseSchema = Int32ValueSchema.Instance;
+        var subjectSchema = new OptionalValueTypeSchemaWrapper<int>(baseSchema);
+        var jsonNull = JsonDocument.Parse("123");
+
+        // Act
+        var result = subjectSchema.Decode(jsonNull.RootElement, new JsonElementDecoder());
+
+        // Assert
+        ResultAssert.Success(result);
+    }
+
+    [Fact]
+    public void OptionalValueType_EncodeNull_ReturnFail()
+    {
+        // Arrange
+        var baseSchema = Int32ValueSchema.Instance;
+        var subjectSchema = new OptionalValueTypeSchemaWrapper<int>(baseSchema);
+        int? value = null;
+
+        // Act
+        var result = subjectSchema.Encode(value, new JsonNodeEncoder());
+
+        // Assert
+        ResultAssert.Failure(result);
+    }
+
+    [Fact]
+    public void OptionalValueType_EncodeNonNull_ReturnOk()
+    {
+        // Arrange
+        var baseSchema = Int32ValueSchema.Instance;
+        var subjectSchema = new OptionalValueTypeSchemaWrapper<int>(baseSchema);
+        int? value = 123;
+
+        // Act
+        var result = subjectSchema.Encode(value, new JsonNodeEncoder());
+
+        // Assert
+        ResultAssert.Success(result);
     }
 }

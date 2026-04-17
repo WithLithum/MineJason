@@ -9,6 +9,32 @@ namespace MineJason.Tests.Serialization;
 public class ValueResultTests
 {
     [Fact]
+    public void Value_FailureResult_IsNull()
+    {
+        // Arrange
+        var subject = Result.Failure<string>("This is an error");
+        
+        // Act
+        var value = subject.Value;
+        
+        // Assert
+        Assert.Null(value);
+    }
+    
+    [Fact]
+    public void Value_SuccessResult_NotNull()
+    {
+        // Arrange
+        var subject = Result.Success("Successful value!");
+        
+        // Act
+        var value = subject.Value;
+        
+        // Assert
+        Assert.NotNull(value);
+    }
+    
+    [Fact]
     public void Success_Invoke_ReturnsSuccessResult()
     {
         // Act

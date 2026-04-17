@@ -10,6 +10,20 @@ using MineJason.Data.Selectors;
 public class JsonConvertTests
 {
     [Fact]
+    public void AnySelectorConverter_Read_Guid()
+    {
+        // Arrange
+        const string input = "\"659D3AC7-41F3-4C7B-B0FC-9A4F0F3137A9\"";
+        
+        // Act
+        var result = JsonSerializer.Deserialize<IEntitySelector>(input);
+        
+        // Assert
+        Assert.Equal(new Guid("659D3AC7-41F3-4C7B-B0FC-9A4F0F3137A9"), 
+            Assert.IsType<EntityGuidSelector>(result).Value);
+    }
+    
+    [Fact]
     public void AnySelectorConverter_Write_Guid()
     {
         // Arrange
@@ -17,7 +31,7 @@ public class JsonConvertTests
         var selector = new EntityGuidSelector(Guid.Parse(guid));
         
         // Act
-        var result = JsonSerializer.Serialize(selector);
+        var result = JsonSerializer.Serialize<IEntitySelector>(selector);
         
         // Assert
         Assert.Equal($"\"{guid}\"",
@@ -33,7 +47,7 @@ public class JsonConvertTests
             .Build();
         
         // Act
-        var result = JsonSerializer.Serialize(selector);
+        var result = JsonSerializer.Serialize<IEntitySelector>(selector);
         
         // Assert
         Assert.Equal("\"@r\"", result);
