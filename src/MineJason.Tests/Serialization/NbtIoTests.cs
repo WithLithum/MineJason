@@ -3,6 +3,7 @@
 
 using fNbt;
 using MineJason.Serialization.fNbt;
+using MineJason.Tests.Serialization.Utilities;
 
 namespace MineJason.Tests.Serialization;
 
@@ -177,5 +178,34 @@ public class NbtIoTests
             x2 => Assert.Multiple(
                 () => Assert.Equal("Second", x2.Key),
                 () => Assert.Equal("2", x2.Value.StringValue)));
+    }
+
+    [Fact]
+    public void ListAdapter_InsertItems_ReturnCorrect()
+    {
+        // Arrange
+        var list = new NbtList(NbtTagType.String);
+        var adapter = new NbtListAdapter(list);
+        
+        // Act
+        _ = adapter.Add(new NbtString(null, "1"));
+        var result = adapter.GetContainer();
+
+        // Assert
+        var nbtList = Assert.IsType<NbtList>(result);
+        Assert.Equal("1", Assert.IsType<NbtString>(Assert.Single(nbtList)).Value);
+    }
+    
+    [Fact]
+    public void ListAdapter_InsertNamedItem_ReturnError()
+    {
+        // Arrange
+        var adapter = new NbtListAdapter(new NbtList(NbtTagType.String));
+        
+        // Act
+        var result = adapter.Add(new NbtString("Named", "1"));
+
+        // Assert
+        ResultAssert.Failure(result);
     }
 }

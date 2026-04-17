@@ -18,6 +18,11 @@ public class NbtListAdapter : ICollectionLikeWritable<NbtTag>
 
     public Result Add(NbtTag value)
     {
+        if (value.Name != null)
+        {
+            return Result.Failure("Named tags are not allowed in lists");
+        }
+        
         if (_list.ListType != value.TagType)
         {
             return Result.Failure($"List type ('{value.TagType}') and " +
