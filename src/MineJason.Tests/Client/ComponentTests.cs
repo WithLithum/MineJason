@@ -1,12 +1,12 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: Apache-2.0
 
+using System.Drawing;
 using System.Text.Json;
 using MineJason.Serialization.IO.Json;
 using MineJason.Serialization.Schema;
 using MineJason.Tests.Client.Json;
 using MineJason.Text;
-using MineJason.Text.Builders;
 
 namespace MineJason.Tests.Client;
 
@@ -24,7 +24,7 @@ public class ComponentTests
 
         // Assert
         Assert.Equal(TextComponent.CreateText("Hello World!"),
-            (TextComponent?)component);
+            component);
     }
 
     [Fact]
@@ -120,6 +120,40 @@ public class ComponentTests
             .Value("Literal")
             .Italic()
             .Build(),
+            italicised);
+    }
+    
+    [Fact]
+    public void Component_WithShadowColor_ReturnsCorrect()
+    {
+        // Arrange
+        var component = TextComponent.CreateText("Literal");
+        
+        // Act
+        var italicised = component.WithShadowColor(Color.Aqua);
+        
+        // Assert
+        Assert.Equal(TextComponent.CreateText()
+                .Value("Literal")
+                .ShadowColor(Color.Aqua)
+                .Build(),
+            italicised);
+    }
+    
+    [Fact]
+    public void Component_WithFont_ReturnsCorrect()
+    {
+        // Arrange
+        var component = TextComponent.CreateText("Literal");
+        
+        // Act
+        var italicised = component.WithFont(new ResourceLocation("my", "font"));
+        
+        // Assert
+        Assert.Equal(TextComponent.CreateText()
+                .Value("Literal")
+                .Font(new ResourceLocation("my", "font"))
+                .Build(),
             italicised);
     }
 }
