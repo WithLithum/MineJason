@@ -8,13 +8,25 @@ using MineJason.Serialization.Utilities.Results;
 
 public sealed class UriSchema : ValueSchema<Uri>
 {
+    private readonly UriKind _kind;
+    
     /// <summary>
     /// The singleton instance.
     /// </summary>
+    [Obsolete("Create UriSchema instances instead.")]
     public static readonly UriSchema Instance = new();
 
-    private UriSchema()
+    private UriSchema() : this(UriKind.RelativeOrAbsolute)
     {
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="UriSchema"/> class.
+    /// </summary>
+    /// <param name="kind">The URI kind to parse.</param>
+    public UriSchema(UriKind kind)
+    {
+        _kind = kind;
     }
 
     public override Result<TElement> Encode<TElement>(Uri value,
@@ -32,7 +44,7 @@ public sealed class UriSchema : ValueSchema<Uri>
             return result.AsError();
         }
 
-        if (!Uri.TryCreate(result.Value!, UriKind.RelativeOrAbsolute, out var uri))
+        if (!Uri.TryCreate(result.Value!, _kind, out var uri))
         {
             return Errors.Error("Malformed URI");
         }

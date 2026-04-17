@@ -456,7 +456,7 @@ public class PrimitiveSchemaTests
     {
         // Arrange
         var uri = new Uri("https://contoso.com/");
-        var schema = UriSchema.Instance;
+        var schema = new UriSchema(UriKind.Absolute);
         var encoder = new JsonNodeEncoder();
 
         // Act
@@ -471,7 +471,7 @@ public class PrimitiveSchemaTests
     public void Uri_DecodeValue_ReturnsCorrect()
     {
         // Arrange
-        var schema = UriSchema.Instance;
+        var schema = new UriSchema(UriKind.Absolute);
 
         using var json = JsonDocument.Parse("\"https://contoso.com/\"");
         var decoder = new JsonElementDecoder();
@@ -487,7 +487,7 @@ public class PrimitiveSchemaTests
     public void Uri_DecodeNotString_ReturnsErr()
     {
         // Arrange
-        var schema = UriSchema.Instance;
+        var schema = new UriSchema(UriKind.Absolute);
 
         using var json = JsonDocument.Parse("321");
         var decoder = new JsonElementDecoder();
@@ -499,11 +499,11 @@ public class PrimitiveSchemaTests
         ResultAssert.Failure(result);
     }
 
-    [Fact(Skip = "See issue #12")]
+    [Fact]
     public void Uri_DecodeInvalidUri_ReturnsErr()
     {
         // Arrange
-        var schema = UriSchema.Instance;
+        var schema = new UriSchema(UriKind.Absolute);
 
         using var json = JsonDocument.Parse("\"I_HAVE_NO_GREETING://////////\"");
         var decoder = new JsonElementDecoder();
