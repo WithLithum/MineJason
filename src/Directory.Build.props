@@ -16,7 +16,7 @@
 
 		<!-- Change this -->
 		<VersionPrefix>0.7.0</VersionPrefix>
-		<VersionSuffix>alpha.4</VersionSuffix>
+		<VersionSuffix>alpha.5</VersionSuffix>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(CI)' == 'true'">

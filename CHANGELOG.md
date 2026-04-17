@@ -2,6 +2,40 @@
 
 This document notes most user-visible changes of this library. The format is based on the [Keep a Changelog](https://keepachangelog.com) format and this project adheres to [Semantic Versioning](https://semver.org).
 
+## [0.7.0-alpha.5] - 2026-04-17
+
+### Added
+
+- Added `JsonSchemaBasedConverter` which contains common logic for `JsonConverter` implementations that simply wraps around a schema.
+- Added support for `UriKind` configuration in `UriSchema`. 
+
+### Changed
+
+- **BREAKING CHANGE**: Moved click and hover events to `MineJason.Text.Behaviours`.
+- **BREAKING CHANGE**: Renamed `ChatComponent` classes to `TextComponent`.
+- **BREAKING CHANGE**: Renamed `IChatColor` to `ITextColor`.
+  - Renamed `TextColor` to `RgbTextColor`.
+  - The argument of `TextColor.FromRgb(int)` is now validated.
+- **BREAKING CHANGE**: Made the following converters inherit `JsonSchemaBasedConverter` instead:
+  - `ClickEventConverter`
+  - `HoverEventConverter`
+  - `TextComponentConverter`
+- Improved entity selector parsing for origin and diagonal coordinate conditions.
+
+### Removed
+
+- **BREAKING CHANGE**: Removed previously deprecated legacy `ShowItemHoverEvent`.
+
+### Fixed
+
+- Fixed `NbtListAdapter` not validating if the tag is named, which would result in `ArgumentException`.
+
+### Deprecated
+
+- Deprecated built-in JSON contexts.
+- Deprecated loot number providers.
+- Deprecated `UriSchema.Instance` in favour of constructing own instances.
+
 ## [0.7.0-alpha.4] - 2026-03-22
 
 ### Fixed
@@ -50,6 +84,7 @@ This is the first consolidated version of MineJason, bringing all modules under 
 
 Please see the [old changelogs directory](docs/changelogs).
 
+[0.7.0-alpha.5]: https://github.com/WithLithum/MineJason/compare/v0.7.0-alpha.4...v0.7.0-alpha.5
 [0.7.0-alpha.4]: https://github.com/WithLithum/MineJason/compare/v0.7.0-alpha.3...v0.7.0-alpha.4
 [0.7.0-alpha.3]: https://github.com/WithLithum/MineJason/releases/tag/v0.7.0-alpha.3
 
