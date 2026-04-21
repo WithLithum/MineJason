@@ -1,9 +1,9 @@
-﻿// SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
+// SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: Apache-2.0
 
-namespace MineJason.Tests.Client.Selectors;
+using MineJason.Extras.Selectors.Matching.Predicates;
 
-using MineJason.Data.Selectors.Predicates;
+namespace MineJason.Tests.Extras.Selectors;
 
 public class PredicateConditionTests
 {
@@ -12,7 +12,7 @@ public class PredicateConditionTests
     {
         // Arrange
         const string parse = "!custom:predicate";
-        
+
         // Act
         if (!PredicateCondition.TryParse(parse, out var result))
         {
@@ -24,13 +24,13 @@ public class PredicateConditionTests
             false),
             result);
     }
-    
+
     [Fact]
     public void PredicateCondition_Parse_Correct_DoMatch()
     {
         // Arrange
         const string parse = "custom:match";
-        
+
         // Act
         if (!PredicateCondition.TryParse(parse, out var result))
         {
@@ -49,23 +49,23 @@ public class PredicateConditionTests
         // Arrange
         var condition = new PredicateCondition(new ResourceLocation("custom", "matcher"),
             true);
-        
+
         // Act
         var str = condition.ToString();
-        
+
         Assert.Equal("custom:matcher", str);
     }
-    
+
     [Fact]
     public void PredicateCondition_ToString_DoNotMatch()
     {
         // Arrange
         var condition = new PredicateCondition(new ResourceLocation("custom", "mismatch"),
             false);
-        
+
         // Act
         var str = condition.ToString();
-        
+
         Assert.Equal("!custom:mismatch", str);
     }
 }

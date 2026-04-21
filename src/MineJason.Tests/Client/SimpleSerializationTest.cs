@@ -115,7 +115,7 @@ public class SimpleSerializationTests
     public void EntityComponent_Serialize()
     {
         // Arrange
-        var component = TextComponent.CreateSelector(new EntitySelector(EntitySelectorKind.AllPlayers), TextComponent.CreateText(";"));
+        var component = TextComponent.CreateSelector("@a", TextComponent.CreateText(";"));
 
         // Act
         var json = JsonSerializer.Serialize(component,
@@ -137,7 +137,7 @@ public class SimpleSerializationTests
             JsonTestContext.Default.TextComponent);
 
         // Assert
-        Assert.Equal(TextComponent.CreateSelector(new EntitySelector(EntitySelectorKind.AllPlayers), TextComponent.CreateText(";")),
+        Assert.Equal(TextComponent.CreateSelector("@a", TextComponent.CreateText(";")),
             deserialized);
     }
 
@@ -239,7 +239,7 @@ public class SimpleSerializationTests
     public void EntityNbtComponent_Serialize()
     {
         // Arrange
-        var component = TextComponent.CreateNbt(new EntitySelector(EntitySelectorKind.Executor), "path.to.NBT");
+        var component = TextComponent.CreateNbt("@s", "path.to.NBT");
 
         // Act
         var json = JsonSerializer.Serialize(component,
@@ -295,7 +295,7 @@ public class SimpleSerializationTests
             JsonTestContext.Default.TextComponent);
 
         // Assert
-        Assert.Equal(TextComponent.CreateNbt(new EntitySelector(EntitySelectorKind.Executor), "path.to.NBT"),
+        Assert.Equal(TextComponent.CreateNbt("@s", "path.to.NBT"),
             deserialized);
     }
 

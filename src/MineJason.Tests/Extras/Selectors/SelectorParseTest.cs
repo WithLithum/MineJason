@@ -1,9 +1,9 @@
-﻿// SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
+// SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: Apache-2.0
 
-using MineJason.Data.Selectors;
+using MineJason.Extras.Selectors;
 
-namespace MineJason.Tests.Client.Selectors;
+namespace MineJason.Tests.Extras.Selectors;
 
 public class SelectorParseTest
 {
@@ -51,7 +51,7 @@ public class SelectorParseTest
     [InlineData("@a[predicate=!custom:predicate]", TestDisplayName = "Predicate exclude")]
     [InlineData("@a[limit=10]", TestDisplayName = "Limit")]
     public void SelectorParser_EndToEnd_SameResult(string sample)
-    { 
+    {
         // Act
         var parseResult = EntitySelectorStringFormatter.ParseSelector(sample).ToString();
 

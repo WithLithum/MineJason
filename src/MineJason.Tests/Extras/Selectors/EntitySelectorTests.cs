@@ -1,10 +1,11 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: Apache-2.0
 
-namespace MineJason.Tests.Client;
-
 using MineJason.Data;
-using MineJason.Data.Selectors;
+using MineJason.Extras.Selectors;
+using MineJason.Extras.Selectors.Matching;
+
+namespace MineJason.Tests.Extras.Selectors;
 
 public class EntitySelectorTests
 {
@@ -13,14 +14,14 @@ public class EntitySelectorTests
     {
         // Arrange
         var selector = new EntitySelector(EntitySelectorKind.AllPlayers);
-        
+
         // Act
         var result = selector.ToString();
-        
+
         // Assert
         Assert.Equal("@a", result);
     }
-    
+
     [Fact]
     public void ToString_Distance()
     {
@@ -29,14 +30,14 @@ public class EntitySelectorTests
         {
             Distance = new DistanceRange(null, 2)
         };
-        
+
         // Act
         var result = selector.ToString();
 
         // Assert
         Assert.Equal("@a[distance=..2]", result);
     }
-    
+
     [Fact]
     public void ToString_DistanceWithCoords()
     {
@@ -46,14 +47,14 @@ public class EntitySelectorTests
             Distance = new DistanceRange(null, 2),
             Position = new Vector3D(21d, 32d, 1050d)
         };
-        
+
         // Act
         var result = selector.ToString();
 
         // Assert
         Assert.Equal("@a[x=21,y=32,z=1050,distance=..2]", result);
     }
-    
+
     [Fact]
     public void ToString_Diagonal()
     {
@@ -62,14 +63,14 @@ public class EntitySelectorTests
         {
             DiagonalRange = new Vector3D(3d, 3d, 3d)
         };
-        
+
         // Act
         var result = selector.ToString();
 
         // Assert
         Assert.Equal("@a[dx=3,dy=3,dz=3]", result);
     }
-    
+
     [Fact]
     public void ToString_DiagonalWithCoords()
     {
@@ -79,7 +80,7 @@ public class EntitySelectorTests
             Position = new Vector3D(25d, 100d, 1032d),
             DiagonalRange = new Vector3D(3d, 4d, 5d)
         };
-        
+
         // Act
         var result = selector.ToString();
 
@@ -93,10 +94,10 @@ public class EntitySelectorTests
         // Arrange
         var selector = new EntitySelector(EntitySelectorKind.AllPlayers);
         selector.GameMode.MatchExact(GameMode.Creative);
-        
+
         // Act
         var result = selector.ToString();
-        
+
         // Assert
         Assert.Equal("@a[gamemode=creative]", result);
     }
@@ -107,14 +108,14 @@ public class EntitySelectorTests
         // Arrange
         var selector = new EntitySelector(EntitySelectorKind.AllPlayers);
         selector.GameMode.MatchExclude(GameMode.Adventure, GameMode.Spectator);
-        
+
         // Act
         var result = selector.ToString();
-        
+
         // Assert
         Assert.Equal("@a[gamemode=!adventure,gamemode=!spectator]", result);
     }
-    
+
     [Fact]
     public void ToString_Name_Exact()
     {
@@ -124,7 +125,7 @@ public class EntitySelectorTests
 
         // Act
         var result = selector.ToString();
-        
+
         // Assert
         Assert.Equal("@a[name=Exact_Name]", result);
     }
@@ -136,14 +137,14 @@ public class EntitySelectorTests
         var selector = new EntitySelector(EntitySelectorKind.AllPlayers);
         selector.Name.Add("Exclude_Me", false);
         selector.Name.Add("Nothing", false);
-        
+
         // Act
         var result = selector.ToString();
-        
+
         // Assert
         Assert.Equal("@a[name=!Exclude_Me,name=!Nothing]", result);
     }
-    
+
     [Fact]
     public void ToString_Scores()
     {
@@ -159,7 +160,7 @@ public class EntitySelectorTests
 
         // Act
         var result = selector.ToString();
-        
+
         // Assert
         Assert.Equal("@a[scores={obj0=..2,obj1=..15}]", result);
     }
@@ -170,38 +171,38 @@ public class EntitySelectorTests
         // Arrange
         var collection = new ScoreboardRangeCollection();
         EntitySelectorStringFormatter.ParseScores("{obj0=..3,obj1=..250}", collection);
-        
+
         // Act
         var result = collection.ToString();
-        
+
         // Assert
         Assert.Equal("{obj0=..3,obj1=..250}", result);
     }
-    
+
     [Fact]
     public void Formatter_Parse_ThreeDifferentScores()
     {
         // Arrange
         var collection = new ScoreboardRangeCollection();
         EntitySelectorStringFormatter.ParseScores("{obj0=..3,obj1=250,obj2=2..}", collection);
-        
+
         // Act
         var result = collection.ToString();
-        
+
         // Assert
         Assert.Equal("{obj0=..3,obj1=250,obj2=2..}", result);
     }
-    
+
     [Fact]
     public void Formatter_Parse_AllScores()
     {
         // Arrange
         var collection = new ScoreboardRangeCollection();
         EntitySelectorStringFormatter.ParseScores("{obj0=..3,obj1=250,obj2=2..,obj3=20..25}", collection);
-        
+
         // Act
         var result = collection.ToString();
-        
+
         // Assert
         Assert.Equal("{obj0=..3,obj1=250,obj2=2..,obj3=20..25}", result);
     }
@@ -211,38 +212,38 @@ public class EntitySelectorTests
     {
         // Arrange
         const string range = "..150.5";
-        
+
         // Act
         var result = EntitySelectorStringFormatter.ParseDistanceRange(range);
-        
+
         // Assert
         Assert.Equal(DistanceRange.MatchRange(null, 150.5D),
             result);
     }
-    
+
     [Fact]
     public void Formatter_Parse_DistanceRangeBoth()
     {
         // Arrange
         const string range = "22.5..150.5";
-        
+
         // Act
         var result = EntitySelectorStringFormatter.ParseDistanceRange(range);
-        
+
         // Assert
         Assert.Equal(DistanceRange.MatchRange(22.5D, 150.5D),
             result);
     }
-    
+
     [Fact]
     public void Formatter_Parse_DistanceExact()
     {
         // Arrange
         const string range = "111.2";
-        
+
         // Act
         var result = EntitySelectorStringFormatter.ParseDistanceRange(range);
-        
+
         // Assert
         Assert.Equal(DistanceRange.MatchExact(111.2D),
             result);
@@ -254,55 +255,55 @@ public class EntitySelectorTests
         // Arrange
         const string objective = "objective";
         const string value = "222..233";
-        
+
         // Act
         var range = EntitySelectorParser.ParseScoresRange(objective, value);
-        
+
         // Assert
         Assert.Equal(new ScoreboardRangeMatch("objective", new IntegralRange(222, 233)),
             range);
     }
-    
+
     [Fact]
     public void ScoreboardValueRange_Min()
     {
         // Arrange
         const string objective = "objective";
         const string value = "255..";
-        
+
         // Act
         var range = EntitySelectorParser.ParseScoresRange(objective, value);
-        
+
         // Assert
         Assert.Equal(new ScoreboardRangeMatch("objective", new IntegralRange(255, null)),
             range);
     }
-    
+
     [Fact]
     public void ScoreboardValueRange_Max()
     {
         // Arrange
         const string objective = "objective";
         const string value = "..205";
-        
+
         // Act
         var range = EntitySelectorParser.ParseScoresRange(objective, value);
-        
+
         // Assert
         Assert.Equal(new ScoreboardRangeMatch("objective", new IntegralRange(null, 205)),
             range);
     }
-    
+
     [Fact]
     public void ScoreboardValueRange_Exact()
     {
         // Arrange
         const string objective = "objective";
         const string value = "377";
-        
+
         // Act
         var range = EntitySelectorParser.ParseScoresRange(objective, value);
-        
+
         // Assert
         Assert.Equal(new ScoreboardExactMatch("objective", 377),
             range);
@@ -314,10 +315,10 @@ public class EntitySelectorTests
         // Arrange
         const string value = "{ad=1..,ab=5,ac=..10}";
         var collection = new ScoreboardRangeCollection();
-        
+
         // Act
         EntitySelectorParser.ParseScoresValue(value, collection);
-        
+
         // Assert
         Assert.Equal(value, collection.ToString());
     }
@@ -328,28 +329,28 @@ public class EntitySelectorTests
         // Arrange
         var teams = new TeamSelector();
         const string teamName = "included";
-        
+
         // Act
         EntitySelectorParser.ParseTeamsValue(teamName, teams);
-        
+
         Assert.Equal("team=included", teams.ToString());
     }
-    
+
     [Fact]
     public void Parser_Teams_ExcludesMultiple()
     {
         // Arrange
         var teams = new TeamSelector();
-        
+
         // Act
         EntitySelectorParser.ParseTeamsValue("!exclude", teams);
         EntitySelectorParser.ParseTeamsValue("!hello", teams);
         var result = teams.ToString();
-        
+
         // Assert
         Assert.Equal("team=!exclude,team=!hello", result);
     }
-    
+
     [Fact]
     public void Parser_AdvancementIncomplete()
     {

@@ -1,9 +1,9 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: Apache-2.0
 
-namespace MineJason.Tests.Client.Selectors;
+using MineJason.Extras.Selectors;
 
-using MineJason.Data.Selectors;
+namespace MineJason.Tests.Extras.Selectors;
 
 public class SelectorParserTests
 {
