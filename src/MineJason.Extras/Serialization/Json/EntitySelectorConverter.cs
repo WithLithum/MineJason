@@ -1,12 +1,11 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
-namespace MineJason.Extras.Serialization.Json;
-
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using MineJason.Data.Selectors;
 using MineJason.Extras.Selectors;
+
+namespace MineJason.Extras.Serialization.Json;
 
 /// <summary>
 /// Provides conversion services to <see cref="EntitySelector"/>.

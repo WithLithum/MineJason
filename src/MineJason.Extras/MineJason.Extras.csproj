@@ -26,14 +26,19 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="Meziantou.Analyzer" Version="3.0.50">
-	    <PrivateAssets>all</PrivateAssets>
-	    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-	  </PackageReference>
+		<PackageReference Include="Meziantou.Analyzer" Version="3.0.50">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\MineJason\MineJason.csproj" />
+		<ProjectReference Include="..\MineJason\MineJason.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="README.md" Pack="true" PackagePath="" />
+		<None Include="logo.png" Pack="true" PackagePath="" />
 	</ItemGroup>
 
 </Project>
