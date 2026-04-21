@@ -2,6 +2,7 @@
 <!-- SPDX-License-Identifier: Apache-2.0 -->
 
 <Solution>
+  <Project Path="MineJason.Extras/MineJason.Extras.csproj" Id="2596922f-88cd-46cf-b22c-45c6d32c8a53" />
   <Project Path="MineJason.Serialization.fNbt/MineJason.Serialization.fNbt.csproj" />
   <Project Path="MineJason.Serialization/MineJason.Serialization.csproj" />
   <Project Path="MineJason.SNbt/MineJason.SNbt.csproj" />
