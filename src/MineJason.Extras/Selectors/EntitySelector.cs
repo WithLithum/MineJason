@@ -44,7 +44,7 @@ public sealed class EntitySelector(EntitySelectorKind kind) : IEquatable<EntityS
     /// <summary>
     /// Gets a collection of tags conditions that a entity must fulfill to be selected. This represents the <c>tag</c> arguments.
     /// </summary>
-    public TagSelectorCollection Tags { get; } = [];
+    public TagMatchCollection Tags { get; } = [];
 
     /// <summary>
     /// Gets a collection of scoreboard conditions that a entity must fulfill to be selected. This represents the

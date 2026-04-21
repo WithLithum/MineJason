@@ -58,11 +58,11 @@ public static class EntitySelectorParser
     /// </summary>
     /// <param name="value">The value to parse.</param>
     /// <param name="collection">The collection to add to.</param>
-    public static void ParseTagValue(string value, TagSelectorCollection collection)
+    public static void ParseTagValue(string value, TagMatchCollection collection)
     {
         collection.Add(value.StartsWith('!')
-            ? new TagSelector(value[1..], false)
-            : new TagSelector(value, true));
+            ? new TagMatch(value[1..], false)
+            : new TagMatch(value, true));
     }
 
     /// <summary>

@@ -6,7 +6,7 @@ namespace MineJason.Extras.Selectors.Matching;
 /// <summary>
 /// Represents a tag search operation.
 /// </summary>
-public readonly struct TagSelector(string tag, bool present) : IEquatable<TagSelector>
+public readonly struct TagMatch(string tag, bool present) : IEquatable<TagMatch>
 {
     /// <summary>
     /// Gets or sets the tag to check for.
@@ -19,7 +19,7 @@ public readonly struct TagSelector(string tag, bool present) : IEquatable<TagSel
     public bool Present { get; } = present;
 
     /// <inheritdoc />
-    public bool Equals(TagSelector other)
+    public bool Equals(TagMatch other)
     {
         return Tag == other.Tag && Present == other.Present;
     }
@@ -27,7 +27,7 @@ public readonly struct TagSelector(string tag, bool present) : IEquatable<TagSel
     /// <inheritdoc />
     public override bool Equals(object? obj)
     {
-        return obj is TagSelector other && Equals(other);
+        return obj is TagMatch other && Equals(other);
     }
 
     /// <inheritdoc />
@@ -44,7 +44,7 @@ public readonly struct TagSelector(string tag, bool present) : IEquatable<TagSel
     /// <param name="right">The right instance.</param>
     /// <returns><see langword="true"/> if the instance to the <paramref name="left"/> is equivalent to the instance
     /// to the <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
-    public static bool operator ==(TagSelector left, TagSelector right)
+    public static bool operator ==(TagMatch left, TagMatch right)
     {
         return left.Equals(right);
     }
@@ -57,7 +57,7 @@ public readonly struct TagSelector(string tag, bool present) : IEquatable<TagSel
     /// <param name="right">The right instance.</param>
     /// <returns><see langword="true"/> if the instance to the <paramref name="left"/> is not equivalent to the instance
     /// to the <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
-    public static bool operator !=(TagSelector left, TagSelector right)
+    public static bool operator !=(TagMatch left, TagMatch right)
     {
         return !(left == right);
     }
@@ -67,9 +67,9 @@ public readonly struct TagSelector(string tag, bool present) : IEquatable<TagSel
     /// </summary>
     /// <param name="value">The value.</param>
     /// <returns>The specified <paramref name="value"/> with <see cref="Present"/> property negated.</returns>
-    public static TagSelector operator !(TagSelector value)
+    public static TagMatch operator !(TagMatch value)
     {
-        return new TagSelector(value.Tag, !value.Present);
+        return new TagMatch(value.Tag, !value.Present);
     }
 
     /// <inheritdoc />

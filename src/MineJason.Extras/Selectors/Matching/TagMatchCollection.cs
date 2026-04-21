@@ -9,12 +9,12 @@ namespace MineJason.Extras.Selectors.Matching;
 /// <summary>
 /// Represents a collection of tag selectors.
 /// </summary>
-public class TagSelectorCollection : ICollection<TagSelector>
+public class TagMatchCollection : ICollection<TagMatch>
 {
-    private readonly List<TagSelector> _list = [];
+    private readonly List<TagMatch> _list = [];
 
     /// <inheritdoc />
-    public IEnumerator<TagSelector> GetEnumerator()
+    public IEnumerator<TagMatch> GetEnumerator()
     {
         return _list.GetEnumerator();
     }
@@ -28,7 +28,7 @@ public class TagSelectorCollection : ICollection<TagSelector>
     /// Adds a tag selector to this collection.
     /// </summary>
     /// <param name="item">The selector.</param>
-    public void Add(TagSelector item)
+    public void Add(TagMatch item)
     {
         _list.Add(item);
     }
@@ -40,7 +40,7 @@ public class TagSelectorCollection : ICollection<TagSelector>
     /// <param name="present">If <see langword="true"/>, the tag is required to be present; otherwise, the tag is required to be not present.</param>
     public void Add(string tag, bool present)
     {
-        Add(new TagSelector(tag, present));
+        Add(new TagMatch(tag, present));
     }
 
     /// <inheritdoc />
@@ -50,19 +50,19 @@ public class TagSelectorCollection : ICollection<TagSelector>
     }
 
     /// <inheritdoc />
-    public bool Contains(TagSelector item)
+    public bool Contains(TagMatch item)
     {
         return _list.Contains(item);
     }
 
     /// <inheritdoc />
-    public void CopyTo(TagSelector[] array, int arrayIndex)
+    public void CopyTo(TagMatch[] array, int arrayIndex)
     {
         _list.CopyTo(array, arrayIndex);
     }
 
     /// <inheritdoc />
-    public bool Remove(TagSelector item)
+    public bool Remove(TagMatch item)
     {
         return _list.Remove(item);
     }

@@ -110,7 +110,7 @@ public class EntitySelectorBuilder
     /// <returns>This instance.</returns>
     public EntitySelectorBuilder IncludeTag(string tag)
     {
-        _selector.Tags.Add(new TagSelector(tag, true));
+        _selector.Tags.Add(new TagMatch(tag, true));
         return this;
     }
 
@@ -121,7 +121,7 @@ public class EntitySelectorBuilder
     /// <returns>This instance.</returns>
     public EntitySelectorBuilder ExcludeTag(string tag)
     {
-        _selector.Tags.Add(new TagSelector(tag, false));
+        _selector.Tags.Add(new TagMatch(tag, false));
         return this;
     }
 

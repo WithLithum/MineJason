@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
-namespace MineJason.Extras.Selectors;
+namespace MineJason.Extras.Selectors.Matching;
 
 /// <summary>
 /// Checks whether an entity is or is not of the specified name.
