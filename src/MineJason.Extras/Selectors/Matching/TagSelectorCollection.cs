@@ -1,11 +1,10 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
-namespace MineJason.Data;
-
 using System.Collections;
 using System.Text;
-using MineJason.Data.Selectors;
+
+namespace MineJason.Extras.Selectors.Matching;
 
 /// <summary>
 /// Represents a collection of tag selectors.

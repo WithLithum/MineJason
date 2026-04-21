@@ -1,11 +1,11 @@
-﻿// SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
+// SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
-namespace MineJason.Data;
-
+using MineJason.Data;
 using System.Collections;
 using System.Text;
-using MineJason.Data.Selectors;
+
+namespace MineJason.Extras.Selectors.Matching;
 
 /// <summary>
 /// Represents a collection of tag selectors.
@@ -80,14 +80,14 @@ public class ScoreboardRangeCollection : ICollection<IScoreboardRange>
         var builder = new StringBuilder();
         builder.Append('{');
         var first = false;
-        
+
         foreach (var selector in _list)
         {
             if (first)
             {
                 builder.Append(',');
             }
-            
+
             first = true;
 
             builder.Append(selector.Objective);
@@ -99,14 +99,14 @@ public class ScoreboardRangeCollection : ICollection<IScoreboardRange>
 
         return builder.ToString();
     }
-    
+
     internal void WriteToBuilder(EntitySelectorArgumentBuilder builder)
     {
         var str = ToString();
 
         if (!string.IsNullOrWhiteSpace(str))
         {
-            builder.WritePair("scores", ToString());   
+            builder.WritePair("scores", ToString());
         }
     }
 }

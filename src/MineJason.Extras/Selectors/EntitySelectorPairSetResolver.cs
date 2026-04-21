@@ -5,7 +5,6 @@ namespace MineJason.Extras.Selectors;
 
 using System;
 using System.Text;
-using MineJason.Exceptions;
 
 /// <summary>
 /// Resolves a set of value pairs for entity target selectors. This class cannot be inherited.

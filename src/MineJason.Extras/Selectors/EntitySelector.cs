@@ -3,7 +3,6 @@
 
 using System.Text.Json.Serialization;
 using MineJason.Data;
-using MineJason.Data.Selectors;
 using MineJason.Extras.Selectors.Matching;
 using MineJason.Extras.Selectors.Matching.Advancements;
 using MineJason.Extras.Selectors.Matching.Predicates;

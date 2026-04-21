@@ -1,12 +1,12 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
-namespace MineJason.Serialization.Schema;
-
-using MineJason.Data;
-using MineJason.Data.Selectors;
+using MineJason.Extras.Selectors;
 using MineJason.Serialization.IO;
+using MineJason.Serialization.Schema;
 using MineJason.Serialization.Utilities.Results;
+
+namespace MineJason.Extras.Serialization.Schema;
 
 /// <summary>
 /// Converts entity selectors from or to the given element type.
@@ -30,7 +30,6 @@ public class EntitySelectorSchema : ValueSchema<EntitySelector>
         string str;
         try
         {
-            // TODO make this more proper
             str = EntitySelectorStringFormatter.ToString(value);
         }
         catch (Exception ex)

@@ -1,9 +1,9 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
-using MineJason.Extras.Selectors;
+using MineJason.Data;
 
-namespace MineJason.Data.Selectors;
+namespace MineJason.Extras.Selectors;
 
 /// <summary>
 /// Provides parsing for entity selectors.
@@ -13,13 +13,13 @@ public static partial class EntitySelectorStringFormatter
     internal static string ToString(EntitySelector selector)
     {
         var kind = GetKindString(selector.Kind);
-        
+
         var parameterString = GetParameterString(selector);
-        
-        #if DEBUG
+
+#if DEBUG
         Console.WriteLine("-- parameter string --");
-        Console.WriteLine(parameterString ?? "parameter string null");        
-        #endif
+        Console.WriteLine(parameterString ?? "parameter string null");
+#endif
 
         return $"{kind}{(string.IsNullOrWhiteSpace(parameterString) ? string.Empty : $"[{parameterString}]")}";
     }
@@ -27,7 +27,7 @@ public static partial class EntitySelectorStringFormatter
     private static string GetParameterString(EntitySelector selector)
     {
         var builder = new EntitySelectorArgumentBuilder();
-        
+
         if (selector.Position.HasValue)
         {
             AddPosition(builder, selector.Position);
@@ -50,10 +50,10 @@ public static partial class EntitySelectorStringFormatter
 
         if (selector.Scores.Count > 0)
         {
-            #if DEBUG
-            Console.WriteLine("Selector score parsing: OK");            
-            #endif
-            
+#if DEBUG
+            Console.WriteLine("Selector score parsing: OK");
+#endif
+
             selector.Scores.WriteToBuilder(builder);
         }
 
@@ -75,7 +75,7 @@ public static partial class EntitySelectorStringFormatter
         }
 
         selector.GameMode.WriteToBuilder(builder);
-        
+
         // Rotation
         if (selector.VerticalRotation.HasValue)
         {
@@ -113,14 +113,14 @@ public static partial class EntitySelectorStringFormatter
             _ => throw new ArgumentException("Unknown kind", nameof(kind))
         };
     }
-    
+
     private static void AddDiagonalRange(EntitySelectorArgumentBuilder builder, Vector3D? diagonalRange)
     {
         if (!diagonalRange.HasValue)
         {
             return;
         }
-        
+
         builder.WritePair("dx", diagonalRange.Value.X);
         builder.WritePair("dy", diagonalRange.Value.Y);
         builder.WritePair("dz", diagonalRange.Value.Z);
@@ -132,7 +132,7 @@ public static partial class EntitySelectorStringFormatter
         {
             return;
         }
-        
+
         builder.WritePair("x", selectorPosition.Value.X);
         builder.WritePair("y", selectorPosition.Value.Y);
         builder.WritePair("z", selectorPosition.Value.Z);

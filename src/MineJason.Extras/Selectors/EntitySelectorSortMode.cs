@@ -3,12 +3,9 @@
 
 namespace MineJason.Extras.Selectors;
 
-using JetBrains.Annotations;
-
 /// <summary>
 /// An enumeration of all possible entity selector sorting modes.
 /// </summary>
-[PublicAPI]
 public enum EntitySelectorSortMode
 {
     /// <summary>

@@ -1,14 +1,11 @@
-﻿// SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
+// SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
-namespace MineJason.Data;
-
-using JetBrains.Annotations;
+namespace MineJason.Extras.Selectors.Matching;
 
 /// <summary>
 /// Represents a tag search operation.
 /// </summary>
-[PublicAPI]
 public readonly struct TagSelector(string tag, bool present) : IEquatable<TagSelector>
 {
     /// <summary>

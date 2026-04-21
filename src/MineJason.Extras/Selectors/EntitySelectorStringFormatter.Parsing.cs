@@ -2,17 +2,15 @@
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
 using System.Globalization;
+using MineJason.Data;
 using MineJason.Data.Nbt;
-using MineJason.Data.Selectors.Advancements;
-using MineJason.Exceptions;
-using MineJason.Extras.Selectors;
+using MineJason.Extras.Helpers;
 using MineJason.Extras.Selectors.Matching;
 using MineJason.Extras.Selectors.Matching.Advancements;
 using MineJason.Extras.Selectors.Matching.Predicates;
 using MineJason.Extras.Selectors.Utilities;
-using MineJason.Utilities;
 
-namespace MineJason.Data.Selectors;
+namespace MineJason.Extras.Selectors;
 
 public static partial class EntitySelectorStringFormatter
 {
@@ -391,7 +389,7 @@ public static partial class EntitySelectorStringFormatter
             return result;
         }
 
-        if (!SpecificValueUtil.TryParseLowerBoolean(value, out var boolean))
+        if (!BooleanUtil.TryParseLowerBoolean(value, out var boolean))
         {
             throw new FormatException("Invalid boolean advancement condition!");
         }

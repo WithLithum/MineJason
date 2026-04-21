@@ -1,16 +1,13 @@
-﻿// SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
+// SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
-namespace MineJason.Data;
-
 using System.Text;
-using JetBrains.Annotations;
-using MineJason.Data.Selectors;
+
+namespace MineJason.Extras.Selectors.Matching;
 
 /// <summary>
 /// Represents a team target selector argument.
 /// </summary>
-[PublicAPI]
 public sealed class TeamSelector
 {
     /// <summary>
@@ -18,9 +15,9 @@ public sealed class TeamSelector
     /// </summary>
     public TeamSelector()
     {
-        
+
     }
-    
+
     /// <summary>
     /// Gets or sets the team that the player must be in to be selected.
     /// </summary>
@@ -35,17 +32,17 @@ public sealed class TeamSelector
     public override string ToString()
     {
         // If includes..
-        
+
         if (Include != null)
         {
             return $"team={Include}";
         }
 
         // Or if excludes..
-        
+
         var builder = new StringBuilder();
         var first = true;
-        
+
         foreach (var exclude in Exclude!)
         {
             if (first)
@@ -56,7 +53,7 @@ public sealed class TeamSelector
             {
                 builder.Append(',');
             }
-            
+
             builder.Append("team=!").Append(exclude);
         }
 
@@ -66,14 +63,14 @@ public sealed class TeamSelector
     internal void WriteToBuilder(EntitySelectorArgumentBuilder builder)
     {
         // If includes..
-        
+
         if (Include != null)
         {
             builder.WritePair("team", Include);
         }
 
         // Or if excludes..
-        
+
         foreach (var exclude in Exclude!)
         {
             builder.WritePair("team", $"!{exclude}");

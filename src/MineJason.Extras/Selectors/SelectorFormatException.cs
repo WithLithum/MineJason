@@ -1,12 +1,10 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
-namespace MineJason.Exceptions;
-
 using System.Diagnostics.CodeAnalysis;
 using System.Text;
-using JetBrains.Annotations;
-using MineJason.Data.Selectors;
+
+namespace MineJason.Extras.Selectors;
 
 /// <summary>
 /// An exception thrown when a target selector or a part of a target selector is in an invalid format.
@@ -26,7 +24,6 @@ public class SelectorFormatException : Exception
     /// <summary>
     /// Gets the value that was in the invalid format.
     /// </summary>
-    [PublicAPI]
     public string? Value { get; }
 
     /// <inheritdoc/>

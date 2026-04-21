@@ -3,8 +3,8 @@
 
 namespace MineJason.Extras.Selectors;
 
+using MineJason.Data;
 using MineJason.Data.Nbt;
-using MineJason.Data.Selectors.Predicates;
 using MineJason.Extras.Selectors.Matching;
 
 /// <summary>
