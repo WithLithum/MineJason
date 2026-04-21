@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
 using System.Diagnostics.CodeAnalysis;
-using MineJason.Data.Selectors;
 using MineJason.Text.Builders.Utilities;
 
 namespace MineJason.Text;
@@ -32,10 +31,13 @@ public sealed record EntityNbtTextComponent : NbtTextComponent
     /// <summary>
     /// Initializes a new instance of the <see cref="EntityNbtTextComponent"/> class.
     /// </summary>
-    /// <param name="entity">The entity to source NBT from.</param>
+    /// <param name="entity">
+    /// The entity selector to source NBT from. Minecraft restricts that this selector must be
+    /// limited to a single entity.
+    /// </param>
     /// <param name="path">The NBT path.</param>
     [SetsRequiredMembers]
-    public EntityNbtTextComponent(IEntitySelector entity, string path)
+    public EntityNbtTextComponent(string entity, string path)
     {
         Entity = entity;
         Path = path;
@@ -44,7 +46,7 @@ public sealed record EntityNbtTextComponent : NbtTextComponent
     [SetsRequiredMembers]
     internal EntityNbtTextComponent(in TextComponentCreationInfo creationInfo,
         in NbtTextComponentCreationInfo nbtInfo,
-        IEntitySelector selector) : base(creationInfo, nbtInfo)
+        string selector) : base(creationInfo, nbtInfo)
     {
         Entity = selector;
     }
@@ -52,7 +54,7 @@ public sealed record EntityNbtTextComponent : NbtTextComponent
     /// <summary>
     /// Gets or sets the entity to source the NBT data from.
     /// </summary>
-    public required IEntitySelector Entity { get; init; }
+    public required string Entity { get; init; }
 
     /// <inheritdoc/>
     public override string ToString()

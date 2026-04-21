@@ -1,12 +1,13 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
-namespace MineJason.Serialization.Schema;
-
 using MineJason.Serialization.IO;
 using MineJason.Serialization.Schema.Objects;
+using MineJason.Serialization.Schema.Primitive;
 using MineJason.Serialization.Utilities.Results;
 using MineJason.Text;
+
+namespace MineJason.Serialization.Schema;
 
 public partial class TextComponentSchema
 {
@@ -22,7 +23,7 @@ public partial class TextComponentSchema
         = new ObjectSchemaBuilder<EntityNbtTextComponent>()
             .CommonNbtTextComponentSchema(EntityNbtTextComponent.SourceName)
             .Property("entity", x => x.Entity,
-                EntitySelectorSchema.Instance)
+                StringValueSchema.Instance)
             .CommonTextComponentSchema()
             .Build();
 

@@ -5,7 +5,6 @@ using System.Drawing;
 using System.Text.Json.Serialization;
 using JetBrains.Annotations;
 using MineJason.Data.Coordinates;
-using MineJason.Data.Selectors;
 using MineJason.Serialization.TextJson;
 using MineJason.Text.Behaviour.Click;
 using MineJason.Text.Behaviour.Hover;
@@ -198,11 +197,11 @@ public abstract record TextComponent
     /// <summary>
     /// Creates an entity selector component.
     /// </summary>
-    /// <param name="selector">The selector.</param>
+    /// <param name="selector">The selector code.</param>
     /// <param name="separator">The chat component that is used to separate between multiple entities.</param> 
     /// <returns>The selector component.</returns>
     [PublicAPI]
-    public static TextComponent CreateSelector(IEntitySelector selector, TextComponent? separator = null)
+    public static TextComponent CreateSelector(string selector, TextComponent? separator = null)
     {
         return new EntityTextComponent(selector, separator);
     }
@@ -256,7 +255,7 @@ public abstract record TextComponent
     /// <param name="path">The NBT path.</param>
     /// <returns>The created component.</returns>
     [PublicAPI]
-    public static TextComponent CreateNbt(IEntitySelector entity, string path)
+    public static TextComponent CreateNbt(string entity, string path)
     {
         return new EntityNbtTextComponent(entity, path);
     }

@@ -4,7 +4,6 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json.Serialization;
 using JetBrains.Annotations;
-using MineJason.Data.Selectors;
 using MineJason.Serialization.TextJson;
 
 namespace MineJason.Text;
@@ -34,10 +33,10 @@ public sealed record EntityTextComponent :
     /// Initializes a new instance of <see cref="EntityTextComponent"/> with the specified selector
     /// and separator.
     /// </summary>
-    /// <param name="selector">The selector.</param>
+    /// <param name="selector">The selector pattern.</param>
     /// <param name="separator">The chat component to separate entity names.</param>
     [SetsRequiredMembers]
-    public EntityTextComponent(IEntitySelector selector, TextComponent? separator = null)
+    public EntityTextComponent(string selector, TextComponent? separator = null)
     {
         Selector = selector;
         Separator = separator;
@@ -48,9 +47,9 @@ public sealed record EntityTextComponent :
     }
 
     /// <summary>
-    /// Gets the entity selector.
+    /// Gets the entity selector pattern.
     /// </summary>
-    public required IEntitySelector Selector { get; init; }
+    public required string Selector { get; init; }
 
     /// <summary>
     /// Gets chat component to separate entity names.

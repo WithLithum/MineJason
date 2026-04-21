@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
 using JetBrains.Annotations;
-using MineJason.Data.Selectors;
 
 namespace MineJason.Text.Builders;
 
@@ -13,12 +12,12 @@ namespace MineJason.Text.Builders;
 [PublicAPI]
 public sealed class EntityNbtComponentBuilder : NbtComponentBuilder<EntityNbtTextComponent>
 {
-    internal EntityNbtComponentBuilder(IEntitySelector selector)
+    internal EntityNbtComponentBuilder(string selector)
     {
         _selector = selector;
     }
 
-    private readonly IEntitySelector _selector;
+    private readonly string _selector;
 
     /// <inheritdoc />
     public override EntityNbtTextComponent Build()

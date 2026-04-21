@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
 using JetBrains.Annotations;
-using MineJason.Data.Selectors;
 
 namespace MineJason.Text.Builders;
 
@@ -12,15 +11,15 @@ namespace MineJason.Text.Builders;
 [PublicAPI]
 public sealed class EntityComponentBuilder : TextComponentBuilder<EntityTextComponent>
 {
-    private IEntitySelector? _selector;
+    private string? _selector;
     private TextComponent? _separator;
 
     /// <summary>
     /// Sets the selector.
     /// </summary>
-    /// <param name="selector">The selector.</param>
+    /// <param name="selector">The selector pattern.</param>
     /// <returns>This instance.</returns>
-    public EntityComponentBuilder Selector(IEntitySelector selector)
+    public EntityComponentBuilder Selector(string selector)
     {
         _selector = selector;
         return this;

@@ -4,7 +4,6 @@
 using System.Diagnostics.CodeAnalysis;
 using JetBrains.Annotations;
 using MineJason.Data.Coordinates;
-using MineJason.Data.Selectors;
 
 namespace MineJason.Text.Builders;
 
@@ -25,9 +24,12 @@ public sealed class NbtComponentBuilderFactory
     /// <summary>
     /// Specifies an entity as the source of data.
     /// </summary>
-    /// <param name="selector">The selector that selects an entity.</param>
+    /// <param name="selector">
+    /// The selector that selects an entity. Minecraft restricts that this selector must be limited
+    /// to a single entity.
+    /// </param>
     /// <returns>An instance of the NBT component builder for an entity NBT component.</returns>
-    public EntityNbtComponentBuilder Entity(IEntitySelector selector)
+    public EntityNbtComponentBuilder Entity(string selector)
     {
         return new EntityNbtComponentBuilder(selector);
     }
