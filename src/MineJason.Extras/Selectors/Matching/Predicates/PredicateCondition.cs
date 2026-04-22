@@ -68,6 +68,7 @@ public readonly struct PredicateCondition : IEquatable<PredicateCondition>
     /// <returns><see langword="true"/> if the syntax is correct; otherwise, <see langword="false"/>.</returns>
     public static bool TryParse(string from, out PredicateCondition result)
     {
+        // TODO make a span-based version
         if (string.IsNullOrWhiteSpace(from))
         {
             result = default;
