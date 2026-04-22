@@ -3,6 +3,7 @@
 <h1>MineJason</h1>
 </div>
 
+[![FOSSA Status](https://app.fossa.com/api/projects/custom%2B61921%2Fgithub.com%2FWithLithum%2FMineJason.svg?type=shield&issueType=license)](https://app.fossa.com/projects/custom%2B61921%2Fgithub.com%2FWithLithum%2FMineJason?ref=badge_shield&issueType=license)
 ![GitHub branch check runs](https://img.shields.io/github/check-runs/WithLithum/MineJason/main?style=flat-square&logo=github)
 ![Codecov](https://img.shields.io/codecov/c/github/WithLithum/MineJason?style=flat-square)
 

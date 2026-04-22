@@ -46,7 +46,10 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="MineJason.Serialization" Version="0.1.0-alpha.7" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\MineJason.Serialization\MineJason.Serialization.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
