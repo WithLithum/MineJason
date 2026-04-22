@@ -28,9 +28,9 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Compile Remove="Exceptions\**" />
-	  <EmbeddedResource Remove="Exceptions\**" />
-	  <None Remove="Exceptions\**" />
+		<Compile Remove="Exceptions\**" />
+		<EmbeddedResource Remove="Exceptions\**" />
+		<None Remove="Exceptions\**" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -42,7 +42,7 @@
 		<PackageReference Include="JetBrains.Annotations" Version="2025.2.4">
 			<PrivateAssets>all</PrivateAssets>
 		</PackageReference>
-		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="10.0.103">
+		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="10.0.203">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
