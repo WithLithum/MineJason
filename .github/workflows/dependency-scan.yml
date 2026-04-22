@@ -17,4 +17,4 @@ jobs:
     - uses: fossas/fossa-action@ff70fe9fe17cbd2040648f1c45e8ec4e4884dcf3 # v1.9.0
       with:
         api-key: ${{secrets.FOSSA_API_KEY}}
-        working-directory: ${{ github.workspace }}/src
+        working-directory: ${{ github.workspace }}
