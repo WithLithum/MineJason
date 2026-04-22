@@ -50,7 +50,7 @@ public readonly struct EntityNameMatch : IEquatable<EntityNameMatch>
     /// <returns>The negated value.</returns>
     public static EntityNameMatch operator !(EntityNameMatch match)
     {
-        return new EntityNameMatch(match.Name, false);
+        return new EntityNameMatch(match.Name, !match.Value);
     }
 
     /// <summary>
