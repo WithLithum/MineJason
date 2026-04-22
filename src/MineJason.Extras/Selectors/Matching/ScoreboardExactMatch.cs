@@ -20,7 +20,8 @@ public readonly struct ScoreboardExactMatch(string objective, int value) : IScor
     /// <inheritdoc />
     public readonly bool Equals(ScoreboardExactMatch other)
     {
-        return Value == other.Value;
+        return Value == other.Value
+            && Objective.Equals(other.Objective, StringComparison.Ordinal);
     }
 
     /// <inheritdoc />
