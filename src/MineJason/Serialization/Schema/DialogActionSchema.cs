@@ -1,14 +1,13 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: Apache-2.0
 
-namespace MineJason.Serialization.Schema;
-
 using MineJason.Dialogs;
 using MineJason.Serialization.IO;
 using MineJason.Serialization.Schema.Objects;
 using MineJason.Serialization.Schema.Primitive;
 using MineJason.Serialization.Utilities.Results;
-using MineJason.Utilities;
+
+namespace MineJason.Serialization.Schema;
 
 /// <summary>
 /// Encodes or decodes <see cref="DialogAction"/> inheritors to or from the given element type.
