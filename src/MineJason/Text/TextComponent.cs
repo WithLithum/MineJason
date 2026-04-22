@@ -199,10 +199,29 @@ public abstract record TextComponent
     /// </summary>
     /// <param name="selector">The selector code.</param>
     /// <param name="separator">The chat component that is used to separate between multiple entities.</param> 
+    /// <remarks>
+    /// <para>
+    /// This method makes no attempt to validate the selector string, other than ensuring that it
+    /// is not null, empty or consisted only of whitespace characters. It is the caller's
+    /// responsibility to ensure that the selector is valid according to Minecraft's selector
+    /// syntax.
+    /// </para>
+    /// <para>
+    /// Invalid selectors may lead to runtime errors when the component is used in-game.
+    /// </para>
+    /// </remarks>
     /// <returns>The selector component.</returns>
+    /// <exception cref="ArgumentException">
+    /// The <paramref name="selector"/> is empty or consisted only of white space characters.
+    /// </exception>
+    /// <exception cref="ArgumentNullException">
+    /// <paramref name="selector"/> is <see langword="null"/>.
+    /// </exception>
     [PublicAPI]
     public static TextComponent CreateSelector(string selector, TextComponent? separator = null)
     {
+        ArgumentException.ThrowIfNullOrWhiteSpace(selector);
+
         return new EntityTextComponent(selector, separator);
     }
 

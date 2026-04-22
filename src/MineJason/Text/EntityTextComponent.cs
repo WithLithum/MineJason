@@ -13,8 +13,15 @@ namespace MineJason.Text;
 /// specified selector. This class cannot be inherited
 /// </summary>
 /// <remarks>
+/// <note type="warning">
+/// This class makes no attempt to validate the selector string, other than ensuring that it is not
+/// null, empty or consisted only of whitespace characters. It is the caller's responsibility to
+/// ensure that the selector is valid according to Minecraft's selector syntax.
+/// </note>
+/// <para>
 /// This type of component is resolved on the server side and will display nothing if resolved on
 /// the client as-is.
+/// </para>
 /// </remarks>
 [PublicAPI]
 [JsonConverter(typeof(TextComponentConverter))]
@@ -35,9 +42,17 @@ public sealed record EntityTextComponent :
     /// </summary>
     /// <param name="selector">The selector pattern.</param>
     /// <param name="separator">The chat component to separate entity names.</param>
+    /// <exception cref="ArgumentException">
+    /// The <paramref name="selector"/> is empty or consisted only of white space characters.
+    /// </exception>
+    /// <exception cref="ArgumentNullException">
+    /// <paramref name="selector"/> is <see langword="null"/>.
+    /// </exception>
     [SetsRequiredMembers]
     public EntityTextComponent(string selector, TextComponent? separator = null)
     {
+        ArgumentException.ThrowIfNullOrWhiteSpace(selector);
+
         Selector = selector;
         Separator = separator;
     }
