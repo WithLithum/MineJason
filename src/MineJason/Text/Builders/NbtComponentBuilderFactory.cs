@@ -4,7 +4,6 @@
 using System.Diagnostics.CodeAnalysis;
 using JetBrains.Annotations;
 using MineJason.Data.Coordinates;
-using MineJason.Data.Selectors;
 
 namespace MineJason.Text.Builders;
 
@@ -25,10 +24,32 @@ public sealed class NbtComponentBuilderFactory
     /// <summary>
     /// Specifies an entity as the source of data.
     /// </summary>
-    /// <param name="selector">The selector that selects an entity.</param>
+    /// <param name="selector">
+    /// The selector that selects an entity. Minecraft restricts that this selector must be limited
+    /// to a single entity.
+    /// </param>
+    /// <remarks>
+    /// <para>
+    /// This method makes no attempt to validate the selector string, other than ensuring that it
+    /// is not null, empty or consisted only of whitespace characters. It is the caller's
+    /// responsibility to ensure that the selector is valid according to Minecraft's selector
+    /// syntax.
+    /// </para>
+    /// <para>
+    /// Invalid selectors may lead to runtime errors when the component is used in-game.
+    /// </para>
+    /// </remarks>
     /// <returns>An instance of the NBT component builder for an entity NBT component.</returns>
-    public EntityNbtComponentBuilder Entity(IEntitySelector selector)
+    /// <exception cref="ArgumentException">
+    /// The <paramref name="selector"/> is empty or consisted only of white space characters.
+    /// </exception>
+    /// <exception cref="ArgumentNullException">
+    /// <paramref name="selector"/> is <see langword="null"/>.
+    /// </exception>
+    public EntityNbtComponentBuilder Entity(string selector)
     {
+        ArgumentException.ThrowIfNullOrWhiteSpace(selector);
+
         return new EntityNbtComponentBuilder(selector);
     }
 

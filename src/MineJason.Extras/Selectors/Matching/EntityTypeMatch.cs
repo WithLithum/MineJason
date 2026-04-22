@@ -1,0 +1,61 @@
+// SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
+// SPDX-License-Identifier: LGPL-3.0-or-later
+
+namespace MineJason.Extras.Selectors.Matching;
+
+/// <summary>
+/// Provides matching services for entity types.
+/// </summary>
+public sealed class EntityTypeMatch : IEquatable<EntityTypeMatch>
+{
+    /// <summary>
+    /// Gets or sets the type the entity must be of to be selected.
+    /// </summary>
+    public ResourceLocation? Include { get; set; }
+
+    /// <summary>
+    /// Gets a list of the types the entity must not be of to be selected.
+    /// </summary>
+    public IList<ResourceLocation> Exclude { get; } = new List<ResourceLocation>();
+
+    internal void WriteToBuilder(EntitySelectorArgumentBuilder builder)
+    {
+        if (Include.HasValue)
+        {
+            builder.WritePair("type", Include.Value.ToString());
+        }
+
+        foreach (var type in Exclude)
+        {
+            builder.WritePair("type", $"!{type}");
+        }
+    }
+
+    /// <inheritdoc />
+    public bool Equals(EntityTypeMatch? other)
+    {
+        if (ReferenceEquals(null, other))
+        {
+            return false;
+        }
+
+        if (ReferenceEquals(this, other))
+        {
+            return true;
+        }
+
+        return Nullable.Equals(Include, other.Include) && Exclude.Equals(other.Exclude);
+    }
+
+    /// <inheritdoc />
+    public override bool Equals(object? obj)
+    {
+        return ReferenceEquals(this, obj) || obj is EntityTypeMatch other && Equals(other);
+    }
+
+    /// <inheritdoc />
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(Include ?? new ResourceLocation("blah", "ruh"), Exclude);
+    }
+}

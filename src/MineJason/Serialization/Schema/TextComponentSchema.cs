@@ -1,14 +1,14 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
-namespace MineJason.Serialization.Schema;
-
 using MineJason.Serialization.IO;
 using MineJason.Serialization.Schema.Objects;
 using MineJason.Serialization.Schema.Primitive;
 using MineJason.Serialization.Utilities.Results;
 using MineJason.Text;
 using MineJason.Utilities;
+
+namespace MineJason.Serialization.Schema;
 
 /// <summary>
 /// Defines a schema that encodes or decodes text components to or from the given element type. 
@@ -54,7 +54,7 @@ public partial class TextComponentSchema : ValueSchema<TextComponent>
         = new ObjectSchemaBuilder<EntityTextComponent>()
             .Constant("type", "selector", StringValueSchema.Instance)
             .Property("selector", x => x.Selector,
-                EntitySelectorSchema.Instance)
+                StringValueSchema.Instance)
             .Property("separator", x => x.Separator,
                 Instance, optional: true)
             .Build();

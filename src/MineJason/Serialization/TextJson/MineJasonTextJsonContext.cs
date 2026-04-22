@@ -2,13 +2,11 @@
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
 using System.Text.Json.Serialization;
-using JetBrains.Annotations;
 using MineJason.Data;
 using MineJason.Data.Coordinates;
 using MineJason.Data.Loot;
 using MineJason.Data.Loot.Numbers;
 using MineJason.Data.Nbt;
-using MineJason.Data.Selectors;
 using MineJason.Text;
 using MineJason.Text.Colors;
 
@@ -34,16 +32,11 @@ namespace MineJason.Serialization.TextJson;
 [JsonSerializable(typeof(NamedTextColor))]
 [JsonSerializable(typeof(NbtDataSource))]
 [JsonSerializable(typeof(ResourceLocation))]
-[JsonSerializable(typeof(EntitySelector))]
 [JsonSerializable(typeof(string))]
 [JsonSerializable(typeof(bool))]
 [JsonSerializable(typeof(int))]
 [JsonSerializable(typeof(float))]
 [JsonSerializable(typeof(double))]
-[JsonSerializable(typeof(IEntitySelector))]
-[JsonSerializable(typeof(EntityGuidSelector))]
-[JsonSerializable(typeof(EntitySelectorKind))]
-[JsonSerializable(typeof(TagSelector))]
 [JsonSerializable(typeof(ILootNumberProvider))]
 [JsonSerializable(typeof(LootUniformNumberProvider))]
 [JsonSerializable(typeof(LootExactNumberProvider))]
