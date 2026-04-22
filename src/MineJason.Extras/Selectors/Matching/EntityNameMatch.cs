@@ -20,13 +20,17 @@ public readonly struct EntityNameMatch : IEquatable<EntityNameMatch>
     }
 
     /// <summary>
-    /// Gets or sets the name to check.
+    /// Gets the name to check.
     /// </summary>
     public string Name { get; }
 
     /// <summary>
-    /// Gets or sets the value to check.
+    /// Gets a value indicating whether to match or exclude the specified name.
     /// </summary>
+    /// <value>
+    /// <see langword="true"/> if the target must have the name to be matched;
+    /// <see langword="false"/> if the entity must <i>not</i> have the name.
+    /// </value>
     public bool Value { get; }
 
     /// <inheritdoc/>
@@ -59,7 +63,7 @@ public readonly struct EntityNameMatch : IEquatable<EntityNameMatch>
     /// <param name="value">The value.</param>
     public static implicit operator EntityNameMatch(string value)
     {
-        return new EntityNameMatch(value, true);
+        return new EntityNameMatch(name: value, value: true);
     }
 
     /// <summary>
