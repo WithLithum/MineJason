@@ -1,5 +1,5 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
-// SPDX-License-Identifier: LGPL-3.0-or-later
+// SPDX-License-Identifier: Apache-2.0
 
 namespace MineJason.Data.Loot.Numbers;
 
@@ -27,22 +27,22 @@ public readonly record struct LootStorageNumberProvider : ILootNumberProvider
         Storage = storage;
         Path = path;
     }
-    
+
     /// <summary>
     /// Gets the identifier of the storage to obtain the number from.
     /// </summary>
     [JsonPropertyName("storage")]
     public ResourceLocation Storage { get; }
-    
+
     /// <summary>
     /// Gets the path to the tag storing the number.
     /// </summary>
     [JsonPropertyName("path")]
     public string Path { get; }
-    
+
     // This is rather a hacky way to force STJ to output a "type" property
     // we can't use polymorphic types as we require it to be parsable as resource location
-    
+
     /// <inheritdoc />
     [JsonInclude]
     [JsonPropertyOrder(-1)]

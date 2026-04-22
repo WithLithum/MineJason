@@ -1,5 +1,5 @@
-﻿<!-- SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026 -->
-<!-- SPDX-License-Identifier: LGPL-3.0-or-later -->
+<!-- SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026 -->
+<!-- SPDX-License-Identifier: Apache-2.0 -->
 
 <Project Sdk="Microsoft.NET.Sdk">
 
@@ -23,6 +23,7 @@
 		<IncludeSymbols>true</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+		<PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
 
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>

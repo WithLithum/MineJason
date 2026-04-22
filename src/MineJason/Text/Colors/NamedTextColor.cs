@@ -1,5 +1,5 @@
-﻿// SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
-// SPDX-License-Identifier: LGPL-3.0-or-later
+// SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
+// SPDX-License-Identifier: Apache-2.0
 
 using System.Text.Json.Serialization;
 using MineJason.Serialization.TextJson;

@@ -24,4 +24,4 @@ Please report issues in the [issue tracker](https://github.com/WithLithum/MineJa
 
 <!-- Put this here because this breaks KIO -->
 <!-- SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026 -->
-<!-- SPDX-License-Identifier: LGPL-3.0-or-later -->
+<!-- SPDX-License-Identifier: Apache-2.0 -->

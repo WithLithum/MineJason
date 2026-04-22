@@ -1,5 +1,5 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
-// SPDX-License-Identifier: LGPL-3.0-or-later
+// SPDX-License-Identifier: Apache-2.0
 
 namespace MineJason.Data.Loot.Numbers;
 
@@ -15,7 +15,7 @@ public readonly record struct LootBinomialNumberProvider : ILootNumberProvider
     /// The resource location of a binomial provider.
     /// </summary>
     public static readonly ResourceLocation Id = new ResourceLocation("minecraft", "binomial");
-    
+
     /// <summary>
     /// Initializes a new instance of the <see cref="LootUniformNumberProvider"/> structure.
     /// </summary>
@@ -27,13 +27,13 @@ public readonly record struct LootBinomialNumberProvider : ILootNumberProvider
         Min = min;
         Max = max;
     }
-    
+
     /// <summary>
     /// Gets the minimum value (inclusive) of this instance.
     /// </summary>
     [JsonPropertyName("min")]
     public float Min { get; }
-    
+
     /// <summary>
     /// Gets the maximum value (inclusive) of this instance.
     /// </summary>
@@ -42,7 +42,7 @@ public readonly record struct LootBinomialNumberProvider : ILootNumberProvider
 
     // This is rather a hacky way to force STJ to output a "type" property
     // we can't use polymorphic types as we require it to be parsable as resource location
-    
+
     /// <inheritdoc />
     [JsonInclude]
     [JsonPropertyOrder(-1)]
