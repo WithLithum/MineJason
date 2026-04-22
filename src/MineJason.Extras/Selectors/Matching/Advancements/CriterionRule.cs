@@ -1,6 +1,8 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
+using MineJason.Extras.Helpers;
+
 namespace MineJason.Extras.Selectors.Matching.Advancements;
 
 /// <summary>
@@ -32,7 +34,8 @@ public readonly struct CriterionRule : IEquatable<CriterionRule>
     /// <inheritdoc />
     public bool Equals(CriterionRule other)
     {
-        return Criterion == other.Criterion && Value == other.Value;
+        return string.Equals(Criterion, other.Criterion, StringComparison.Ordinal)
+            && Value == other.Value;
     }
 
     /// <inheritdoc />
@@ -53,7 +56,7 @@ public readonly struct CriterionRule : IEquatable<CriterionRule>
     /// <returns>The string representation.</returns>
     public override string ToString()
     {
-        return $"{Criterion}={(Value ? "true" : "false")}";
+        return $"{Criterion}={BooleanUtil.ToLowerBooleanString(Value)}";
     }
 
     /// <summary>
@@ -84,7 +87,7 @@ public readonly struct CriterionRule : IEquatable<CriterionRule>
             return false;
         }
 
-        if (!TryParseLowerBoolean(s[split[1]], out var value))
+        if (!BooleanUtil.TryParseLowerBoolean(s[split[1]], out var value))
         {
             // Fail: value not boolean
             return false;
@@ -125,24 +128,5 @@ public readonly struct CriterionRule : IEquatable<CriterionRule>
     public static bool operator !=(CriterionRule left, CriterionRule right)
     {
         return !(left == right);
-    }
-
-    private static bool TryParseLowerBoolean(in ReadOnlySpan<char> from, out bool result)
-    {
-        result = default;
-
-        switch (from)
-        {
-            case "true":
-                result = true;
-                break;
-            case "false":
-                result = false;
-                break;
-            default:
-                return false;
-        }
-
-        return true;
     }
 }
