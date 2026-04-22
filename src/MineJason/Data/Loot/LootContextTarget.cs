@@ -17,6 +17,7 @@ using MineJason.Serialization.TextJson;
 /// </remarks>
 [PublicAPI]
 [JsonConverter(typeof(JsonLowerSnakeStringEnumConverter<LootContextTarget>))]
+[Obsolete("Loot targets are no longer supported in the Client module and is subject to removal.")]
 public enum LootContextTarget
 {
     /// <summary>

@@ -8,6 +8,7 @@ using System.Text.Json.Serialization;
 /// <summary>
 /// Specifies an arbitrary entity as a target.
 /// </summary>
+[Obsolete("Loot score providers are no longer supported in the Client module and is subject to removal.")]
 public readonly record struct LootScoreFixedTarget : ILootScoreTarget
 {
     /// <summary>
@@ -19,7 +20,7 @@ public readonly record struct LootScoreFixedTarget : ILootScoreTarget
     {
         Name = name;
     }
-    
+
     /// <summary>
     /// Gets the name of this instance.
     /// </summary>

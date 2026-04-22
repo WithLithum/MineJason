@@ -28,6 +28,12 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Compile Remove="Exceptions\**" />
+	  <EmbeddedResource Remove="Exceptions\**" />
+	  <None Remove="Exceptions\**" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<None Include="README.md" Pack="true" PackagePath="" />
 		<None Include="logo.png" Pack="true" PackagePath="" />
 	</ItemGroup>
@@ -56,10 +62,6 @@
 			<AutoGen>True</AutoGen>
 			<DependentUpon>MessageResources.resx</DependentUpon>
 		</Compile>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Exceptions\" />
 	</ItemGroup>
 
 </Project>
