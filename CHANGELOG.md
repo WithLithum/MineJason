@@ -2,6 +2,29 @@
 
 This document notes most user-visible changes of this library. The format is based on the [Keep a Changelog](https://keepachangelog.com) format and this project adheres to [Semantic Versioning](https://semver.org).
 
+## [0.7.0-alpha.6] - 2026-05-02
+
+### Added
+
+- Added a new package `MineJason.Extras`.
+- Added new extension methods into `ObjectLikeExtensions` that allows retriving values from Object Like results.
+
+### Changed
+
+- **BREAKING CHANGE**: Moved structured entity selectors to Extras module.
+- **BREAKING CHANGE**: The following Text module APIs previously accepting structured entity selector objects now accepts an arbitrary string instead:
+  - `EntityTextComponent`
+  - `EntityNbtTextComponent`
+- Text module was relicensed to Apache License 2.0.
+
+### Deprecated
+
+- Deprecated the following types:
+  - `ILootScoreTarget`
+  - `LootScoreContextTarget`
+  - `LootScoreFixedTarget`
+  - `LootContextTarget`
+
 ## [0.7.0-alpha.5] - 2026-04-17
 
 ### Added
@@ -84,6 +107,7 @@ This is the first consolidated version of MineJason, bringing all modules under 
 
 Please see the [old changelogs directory](docs/changelogs).
 
+[0.7.0-alpha.6]: https://github.com/WithLithum/MineJason/compare/v0.7.0-alpha.5...v0.7.0-alpha.6
 [0.7.0-alpha.5]: https://github.com/WithLithum/MineJason/compare/v0.7.0-alpha.4...v0.7.0-alpha.5
 [0.7.0-alpha.4]: https://github.com/WithLithum/MineJason/compare/v0.7.0-alpha.3...v0.7.0-alpha.4
 [0.7.0-alpha.3]: https://github.com/WithLithum/MineJason/releases/tag/v0.7.0-alpha.3
