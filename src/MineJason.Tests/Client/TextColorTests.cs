@@ -1,6 +1,7 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: Apache-2.0
 
+using System.Drawing;
 using System.Text.Json;
 using MineJason.Tests.Client.Json;
 using MineJason.Text.Colors;
@@ -9,6 +10,32 @@ namespace MineJason.Tests.Client;
 
 public class TextColorTests
 {
+    [Fact]
+    public void FromColorCode_Known_ReturnsCorrect()
+    {
+        // Arrange
+        const char input = '6';
+
+        // Act
+        var result = TextColor.FromColorCode(input);
+
+        // Assert
+        Assert.Equal(NamedTextColor.Gold, result);
+    }
+
+    [Fact]
+    public void FromColorCode_Unrecognised_Throws()
+    {
+        // Arrange
+        const char input = 'g';
+
+        // Act
+        var exception = Record.Exception(() => TextColor.FromColorCode(input));
+
+        // Assert
+        Assert.IsType<ArgumentException>(exception);
+    }
+
     [Fact]
     public void RgbParse_ValidColour_MatchingResult()
     {
@@ -80,6 +107,20 @@ public class TextColorTests
 
         // Assert
         Assert.Equal(new RgbTextColor(0x00, 0xff, 0xff), result);
+    }
+
+    [Fact]
+    public void RgbEqualsDrawingColor_SameValue_True()
+    {
+        // Arrange
+        var drawingColor = Color.Red;
+        var rgbColor = new RgbTextColor(0xFF, 0x00, 0x00);
+
+        // Act
+        var result = rgbColor.Equals(drawingColor);
+
+        // Assert
+        Assert.True(result);
     }
 
     [Fact]

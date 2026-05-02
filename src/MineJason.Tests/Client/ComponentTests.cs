@@ -94,10 +94,10 @@ public class ComponentTests
     {
         // Arrange
         var component = TextComponent.CreateText("Bold");
-        
+
         // Act
         var italicised = component.Embolden();
-        
+
         // Assert
         Assert.Equal(TextComponent.CreateText()
                 .Value("Bold")
@@ -105,16 +105,16 @@ public class ComponentTests
                 .Build(),
             italicised);
     }
-    
+
     [Fact]
     public void Component_Italicise_ReturnsCorrect()
     {
         // Arrange
         var component = TextComponent.CreateText("Literal");
-        
+
         // Act
         var italicised = component.Italicise();
-        
+
         // Assert
         Assert.Equal(TextComponent.CreateText()
             .Value("Literal")
@@ -122,16 +122,16 @@ public class ComponentTests
             .Build(),
             italicised);
     }
-    
+
     [Fact]
     public void Component_WithShadowColor_ReturnsCorrect()
     {
         // Arrange
         var component = TextComponent.CreateText("Literal");
-        
+
         // Act
         var italicised = component.WithShadowColor(Color.Aqua);
-        
+
         // Assert
         Assert.Equal(TextComponent.CreateText()
                 .Value("Literal")
@@ -139,16 +139,16 @@ public class ComponentTests
                 .Build(),
             italicised);
     }
-    
+
     [Fact]
     public void Component_WithFont_ReturnsCorrect()
     {
         // Arrange
         var component = TextComponent.CreateText("Literal");
-        
+
         // Act
         var italicised = component.WithFont(new ResourceLocation("my", "font"));
-        
+
         // Assert
         Assert.Equal(TextComponent.CreateText()
                 .Value("Literal")
