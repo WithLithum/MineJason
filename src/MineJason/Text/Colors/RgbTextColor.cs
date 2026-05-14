@@ -43,7 +43,7 @@ public sealed class RgbTextColor : ITextColor, IRGBLike, IEquatable<RgbTextColor
     /// <inheritdoc />
     public bool Equals(RgbTextColor? other)
     {
-        return other != null && Color.Equals(other.Color);
+        return other != null && Equals(other.Color);
     }
 
     /// <summary>
@@ -53,7 +53,7 @@ public sealed class RgbTextColor : ITextColor, IRGBLike, IEquatable<RgbTextColor
     /// <returns><see langword="true"/> if the two values are equivalent; otherwise, <see langword="false"/>.</returns>
     public bool Equals(Color other)
     {
-        return Color == other;
+        return Color.ToArgb() == other.ToArgb();
     }
 
     /// <inheritdoc />

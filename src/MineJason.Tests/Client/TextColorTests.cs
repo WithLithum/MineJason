@@ -110,6 +110,20 @@ public class TextColorTests
     }
 
     [Fact]
+    public void ColorEqualsDrawingColor_SameValue_True()
+    {
+        // Arrange
+        var drawingColor = Color.Red;
+        var rgbColor = new RgbTextColor(Color.Red);
+
+        // Act
+        var result = rgbColor.Equals(drawingColor);
+
+        // Assert
+        Assert.True(result);
+    }
+
+    [Fact]
     public void RgbEqualsDrawingColor_SameValue_True()
     {
         // Arrange
