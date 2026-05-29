@@ -9,6 +9,8 @@ namespace MineJason.Tests.Serialization;
 
 public class NbtIoTests
 {
+    #region Encoder tests
+
     [Fact]
     public void Encoder_Boolean_ProducesByteTag()
     {
@@ -77,6 +79,32 @@ public class NbtIoTests
         // Assert
         Assert.IsType<NbtLong>(result);
         Assert.Equal(30000L, result.LongValue);
+    }
+
+    [Fact]
+    public void Encoder_Single_ProducesFloatTag()
+    {
+        // Arrange
+        var encoder = new NbtTagEncoder();
+
+        // Act
+        var result = encoder.CreateSingle(12.3f);
+
+        // Assert
+        Assert.Equal(12.3f, Assert.IsType<NbtFloat>(result).Value);
+    }
+
+    [Fact]
+    public void Encoder_Double_ProducesDoubleTag()
+    {
+        // Arrange
+        var encoder = new NbtTagEncoder();
+
+        // Act
+        var result = encoder.CreateDouble(12.345d);
+
+        // Assert
+        Assert.Equal(12.345d, Assert.IsType<NbtDouble>(result).Value);
     }
 
     [Fact]
@@ -156,6 +184,218 @@ public class NbtIoTests
         Assert.Equal("Hello World!", result.StringValue);
     }
 
+    #endregion Encoder tests
+
+    #region Decoder tests
+
+    [Fact]
+    public void Decoder_DecodeBooleanByte_ReturnsBoolean()
+    {
+        // Arrange
+        var tag = new NbtByte(null, 1);
+        var decoder = new NbtTagDecoder();
+
+        // Act
+        var result = decoder.GetBoolean(tag);
+
+        // Assert
+        Assert.True(ResultAssert.Success(result));
+    }
+
+    [Fact]
+    public void Decoder_DecodeNumberByte_ReturnsByte()
+    {
+        // Arrange
+        var tag = new NbtByte(null, 100);
+        var decoder = new NbtTagDecoder();
+
+        // Act
+        var result = decoder.GetByte(tag);
+
+        // Assert
+        Assert.Equal(100, ResultAssert.Success(result));
+    }
+
+    [Fact]
+    public void Decoder_DecodeShort_ReturnsInt16()
+    {
+        // Arrange
+        var tag = new NbtShort(null, 25565);
+        var decoder = new NbtTagDecoder();
+
+        // Act
+        var result = decoder.GetInt16(tag);
+
+        // Assert
+        Assert.Equal(25565, ResultAssert.Success(result));
+    }
+
+    [Fact]
+    public void Decoder_DecodeInt_ReturnsInt32()
+    {
+        // Arrange
+        var tag = new NbtInt(null, 1000000);
+        var decoder = new NbtTagDecoder();
+
+        // Act
+        var result = decoder.GetInt32(tag);
+
+        // Assert
+        Assert.Equal(1000000, ResultAssert.Success(result));
+    }
+
+    [Fact]
+    public void Decoder_DecodeLong_ReturnsInt64()
+    {
+        // Arrange
+        var tag = new NbtLong(null, 168000000L);
+        var decoder = new NbtTagDecoder();
+
+        // Act
+        var result = decoder.GetInt64(tag);
+
+        // Assert
+        Assert.Equal(168000000L, ResultAssert.Success(result));
+    }
+
+    [Fact]
+    public void Decoder_DecodeFloat_ReturnsSingle()
+    {
+        // Arrange
+        var tag = new NbtFloat(null, 127.0f);
+        var decoder = new NbtTagDecoder();
+
+        // Act
+        var result = decoder.GetSingle(tag);
+
+        // Assert
+        Assert.Equal(127.0f, ResultAssert.Success(result));
+    }
+
+    [Fact]
+    public void Decoder_DecodeDouble_ReturnsDouble()
+    {
+        // Arrange
+        var tag = new NbtDouble(null, 127.122d);
+        var decoder = new NbtTagDecoder();
+
+        // Act
+        var result = decoder.GetDouble(tag);
+
+        // Assert
+        Assert.Equal(127.122d, ResultAssert.Success(result));
+    }
+
+    [Fact]
+    public void Decoder_DecodeString_ReturnsString()
+    {
+        // Arrange
+        var tag = new NbtString(null, "Hello World!");
+        var decoder = new NbtTagDecoder();
+
+        // Act
+        var result = decoder.GetString(tag);
+
+        // Assert
+        Assert.Equal("Hello World!", ResultAssert.Success(result));
+    }
+
+    [Fact]
+    public void Decoder_DecodeByteArray_ReturnsInt16Array()
+    {
+        // Arrange
+        var tag = new NbtByteArray(null, [1, 2, 3]);
+        var decoder = new NbtTagDecoder();
+
+        // Act
+        var result = decoder.GetByteArray(tag);
+
+        // Assert
+        Assert.Collection(ResultAssert.Success(result),
+            a1 => Assert.Equal(1, a1),
+            a2 => Assert.Equal(2, a2),
+            a3 => Assert.Equal(3, a3));
+    }
+
+    [Fact]
+    public void Decoder_DecodeIntArray_ReturnsInt32Array()
+    {
+        // Arrange
+        var tag = new NbtIntArray(null, [12, 34, 56]);
+        var decoder = new NbtTagDecoder();
+
+        // Act
+        var result = decoder.GetInt32Array(tag);
+
+        // Assert
+        Assert.Collection(ResultAssert.Success(result),
+            a1 => Assert.Equal(12, a1),
+            a2 => Assert.Equal(34, a2),
+            a3 => Assert.Equal(56, a3));
+    }
+
+    [Fact]
+    public void Decoder_DecodeLongArray_ReturnsInt64Array()
+    {
+        // Arrange
+        var tag = new NbtLongArray(null, [1234L, 5678L]);
+        var decoder = new NbtTagDecoder();
+
+        // Act
+        var result = decoder.GetInt64Array(tag);
+
+        // Assert
+        Assert.Collection(ResultAssert.Success(result),
+            a1 => Assert.Equal(1234L, a1),
+            a2 => Assert.Equal(5678L, a2));
+    }
+
+    [Fact]
+    public void Decoder_DecodeList_ReturnsCollection()
+    {
+        // Arrange
+        var tag = new NbtList(null, [
+            new NbtString("One"),
+            new NbtString("Two")
+        ], NbtTagType.String);
+        var decoder = new NbtTagDecoder();
+
+        // Act
+        var result = decoder.GetCollection(tag);
+
+        // Assert
+        Assert.Collection(ResultAssert.Success(result),
+            a1 => Assert.Equal("One", Assert.IsType<NbtString>(a1).Value),
+            a2 => Assert.Equal("Two", Assert.IsType<NbtString>(a2).Value));
+    }
+
+    [Fact]
+    public void Decoder_DecodeCompound_ReturnsObject()
+    {
+        // Arrange
+        var tag = new NbtCompound(null,
+        [
+            new NbtString("One", "1"),
+            new NbtString("Two", "2")
+        ]);
+        var decoder = new NbtTagDecoder();
+
+        // Act
+        var result = decoder.GetObjectLike(tag);
+
+        // Assert
+        var obj = ResultAssert.Success(result);
+        Assert.Multiple(
+            () => Assert.Equal("1", Assert.IsType<NbtString>(ResultAssert.Success(
+                obj.Get("One")))
+            .Value),
+            () => Assert.Equal("2", Assert.IsType<NbtString>(ResultAssert.Success(
+                obj.Get("Two")))
+            .Value));
+    }
+
+    #endregion Decoder tests
+
     [Fact]
     public void CompoundAdapter_Enumerate_ReturnCorrectly()
     {
@@ -186,7 +426,7 @@ public class NbtIoTests
         // Arrange
         var list = new NbtList(NbtTagType.String);
         var adapter = new NbtListAdapter(list);
-        
+
         // Act
         _ = adapter.Add(new NbtString(null, "1"));
         var result = adapter.GetContainer();
@@ -195,13 +435,13 @@ public class NbtIoTests
         var nbtList = Assert.IsType<NbtList>(result);
         Assert.Equal("1", Assert.IsType<NbtString>(Assert.Single(nbtList)).Value);
     }
-    
+
     [Fact]
     public void ListAdapter_InsertNamedItem_ReturnError()
     {
         // Arrange
         var adapter = new NbtListAdapter(new NbtList(NbtTagType.String));
-        
+
         // Act
         var result = adapter.Add(new NbtString("Named", "1"));
 
