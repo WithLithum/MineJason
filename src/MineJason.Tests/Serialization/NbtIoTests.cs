@@ -421,6 +421,127 @@ public class NbtIoTests
     }
 
     [Fact]
+    public void CompoundContainsKey_Existing_ReturnTrue()
+    {
+        // Arrange
+        var compound = new NbtCompound
+        {
+            new NbtString("First", "1")
+        };
+        var adapter = new NbtCompoundAdapter(compound);
+
+        // Act
+        var result = adapter.ContainsKey("First");
+
+        // Assert
+        Assert.True(result);
+    }
+
+    [Fact]
+    public void CompoundContainsKey_NonExisting_ReturnFalse()
+    {
+        // Arrange
+        var compound = new NbtCompound();
+        var adapter = new NbtCompoundAdapter(compound);
+
+        // Act
+        var result = adapter.ContainsKey("Third");
+
+        // Assert
+        Assert.False(result);
+    }
+
+    [Fact]
+    public void CompoundAdd_NewKey_Succeed()
+    {
+        // Arrange
+        var compound = new NbtCompound();
+        var adapter = new NbtCompoundAdapter(compound);
+
+        // Act
+        var result = adapter.Add("Value", new NbtString("Value", "3"));
+
+        // Assert
+        ResultAssert.Success(result);
+    }
+
+    [Fact]
+    public void CompoundAdd_ExistingKey_Error()
+    {
+        // Arrange
+        var compound = new NbtCompound
+        {
+            new NbtString("First", "1"),
+        };
+        var adapter = new NbtCompoundAdapter(compound);
+
+        // Act
+        var result = adapter.Add("First", new NbtString("First", ""));
+
+        // Assert
+        ResultAssert.Failure(result);
+    }
+
+    [Fact]
+    public void CompoundAdd_MismatchedKey_Error()
+    {
+        // Arrange
+        var compound = new NbtCompound();
+        var adapter = new NbtCompoundAdapter(compound);
+
+        // Act
+        var result = adapter.Add("First", new NbtString("Second", ""));
+
+        // Assert
+        ResultAssert.Failure(result);
+    }
+
+    [Fact]
+    public void CompoundGet_ValidKey_Succeed()
+    {
+        // Arrange
+        var compound = new NbtCompound
+        {
+            new NbtString("First", "1"),
+        };
+        var adapter = new NbtCompoundAdapter(compound);
+
+        // Act
+        var result = adapter.Get("First");
+
+        // Assert
+        ResultAssert.Success(result);
+    }
+
+    [Fact]
+    public void CompoundGet_InvalidKey_Error()
+    {
+        // Arrange
+        var compound = new NbtCompound();
+        var adapter = new NbtCompoundAdapter(compound);
+
+        // Act
+        var result = adapter.Get("Second");
+
+        // Assert
+        ResultAssert.Failure(result);
+    }
+
+    [Fact]
+    public void Compound_GetContainer_ReturnSameInstance()
+    {
+        // Arrange
+        var compound = new NbtCompound();
+        var adapter = new NbtCompoundAdapter(compound);
+
+        // Act
+        var result = adapter.GetContainer();
+
+        // Assert
+        Assert.Same(result, compound);
+    }
+
+    [Fact]
     public void ListAdapter_InsertItems_ReturnCorrect()
     {
         // Arrange
@@ -444,6 +565,19 @@ public class NbtIoTests
 
         // Act
         var result = adapter.Add(new NbtString("Named", "1"));
+
+        // Assert
+        ResultAssert.Failure(result);
+    }
+
+    [Fact]
+    public void ListAdapter_InsertIncorrectType_ReturnError()
+    {
+        // Arrange
+        var adapter = new NbtListAdapter(new NbtList(NbtTagType.String));
+
+        // Act
+        var result = adapter.Add(new NbtFloat(null, 1f));
 
         // Assert
         ResultAssert.Failure(result);
