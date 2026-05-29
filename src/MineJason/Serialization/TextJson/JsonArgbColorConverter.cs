@@ -1,17 +1,17 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: Apache-2.0
 
-namespace MineJason.Serialization.TextJson;
-
-using System;
 using System.Drawing;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+
+namespace MineJason.Serialization.TextJson;
 
 /// <summary>
 /// Converts a color value from and to ARGB format. This converter supports reading both array and
 /// integer format, but will only write integer format.
 /// </summary>
+[Obsolete("This type is unused in the Client module and is no longer supported.")]
 public class JsonArgbColorConverter : JsonConverter<Color>
 {
     /// <inheritdoc />
