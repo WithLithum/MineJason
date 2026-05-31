@@ -1,6 +1,9 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: Apache-2.0
 
+// SPDX-FileCopyrightText: (c) .NET Foundation and Contributors
+// SPDX-License-Identifier: MIT
+
 using System.Numerics;
 using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
@@ -25,27 +28,27 @@ public readonly struct Vector3D : IEquatable<Vector3D>
     /// <summary>
     /// Gets a <see cref="Vector3D"/> whose 3 elements are set to zero.
     /// </summary>
-    public static readonly Vector3D Zero = new Vector3D(0d, 0d, 0d);
+    public static readonly Vector3D Zero = new(0d, 0d, 0d);
 
     /// <summary>
     /// Gets a <see cref="Vector3D"/> whose 3 elements are set to <c>1</c>.
     /// </summary>
-    public static readonly Vector3D One = new Vector3D(1d, 1d, 1d);
+    public static readonly Vector3D One = new(1d, 1d, 1d);
 
     /// <summary>
     /// Gets a <see cref="Vector3D"/> of <c>(1, 0, 0)</c>.
     /// </summary>
-    public static readonly Vector3D UnitX = new Vector3D(1d, 0d, 0d);
+    public static readonly Vector3D UnitX = new(1d, 0d, 0d);
 
     /// <summary>
     /// Gets a <see cref="Vector3D"/> of <c>(0, 1, 0)</c>.
     /// </summary>
-    public static readonly Vector3D UnitY = new Vector3D(0d, 1d, 0d);
+    public static readonly Vector3D UnitY = new(0d, 1d, 0d);
 
     /// <summary>
     /// Gets a <see cref="Vector3D"/> of <c>(0, 0, 1)</c>.
     /// </summary>
-    public static readonly Vector3D UnitZ = new Vector3D(0d, 0d, 1d);
+    public static readonly Vector3D UnitZ = new(0d, 0d, 1d);
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Vector3D"/> structure, with three values all set to the
