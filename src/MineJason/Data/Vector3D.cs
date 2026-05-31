@@ -1,11 +1,11 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: Apache-2.0
 
-namespace MineJason.Data;
-
 using System.Numerics;
 using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
+
+namespace MineJason.Data;
 
 /// <summary>
 /// Represents a three dimensional vector of double precision floating point numbers.
@@ -60,9 +60,23 @@ public readonly struct Vector3D : IEquatable<Vector3D>
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="Vector3D"/> structure.
+    /// Initializes a new instance of the <see cref="Vector3D"/> structure with the value from the
+    /// specified <see cref="Vector3"/>.
     /// </summary>
-    /// <param name="vector">The single-precision vector.</param>
+    /// <param name="vector">The vector to duplicate.</param>
+    public Vector3D(Vector3 vector)
+    {
+        X = vector.X;
+        Y = vector.Y;
+        Z = vector.Z;
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Vector3D"/> structure with the value from the
+    /// specified instance.
+    /// </summary>
+    /// <param name="vector">The vector to duplicate.</param>
+    [Obsolete("Duplication constructor is not necessary as Vector3D is a value type.")]
     public Vector3D(Vector3D vector)
     {
         X = vector.X;
@@ -369,6 +383,17 @@ public readonly struct Vector3D : IEquatable<Vector3D>
     /// <param name="right">The scalar value.</param>
     /// <returns>The scaled vector.</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static Vector3D Multiply(Vector3D left, double right)
+    {
+        return left * right;
+    }
+
+    /// <summary>Multiplies a vector by a specified scalar.</summary>
+    /// <param name="left">The vector to multiply.</param>
+    /// <param name="right">The scalar value.</param>
+    /// <returns>The scaled vector.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    [Obsolete("Use Multiply(Vector3D, double) instead.")]
     public static Vector3D Multiply(Vector3D left, float right)
     {
         return left * right;
@@ -379,7 +404,18 @@ public readonly struct Vector3D : IEquatable<Vector3D>
     /// <param name="right">The vector.</param>
     /// <returns>The scaled vector.</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    [Obsolete("Use Multiply(double, Vector3D) instead.")]
     public static Vector3D Multiply(float left, Vector3D right)
+    {
+        return left * right;
+    }
+
+    /// <summary>Multiplies a scalar value by a specified vector.</summary>
+    /// <param name="left">The scaled value.</param>
+    /// <param name="right">The vector.</param>
+    /// <returns>The scaled vector.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static Vector3D Multiply(double left, Vector3D right)
     {
         return left * right;
     }
@@ -392,7 +428,6 @@ public readonly struct Vector3D : IEquatable<Vector3D>
     {
         return -value;
     }
-
 
     /// <summary>Returns the reflection of a vector off a surface that has the specified normal.</summary>
     /// <param name="vector">The source vector.</param>
@@ -461,6 +496,7 @@ public readonly struct Vector3D : IEquatable<Vector3D>
     /// <returns><see langword="true" /> if the two vectors are equal; otherwise, <see langword="false" />.</returns>
     /// <remarks>Two vectors are equal if their <see cref="X" />, <see cref="Y" />, and <see cref="Z" /> elements are equal.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    [Obsolete("Use Equals(Vector3D instead).")]
     public readonly bool Equals(Vector3 other)
     {
         return X.Equals(other.X)
@@ -468,7 +504,10 @@ public readonly struct Vector3D : IEquatable<Vector3D>
                && Z.Equals(other.Z);
     }
 
-    /// <inheritdoc />
+    /// <summary>Returns a value that indicates whether this instance and another vector are equal.</summary>
+    /// <param name="other">The other vector.</param>
+    /// <returns><see langword="true" /> if the two vectors are equal; otherwise, <see langword="false" />.</returns>
+    /// <remarks>Two vectors are equal if their <see cref="X" />, <see cref="Y" />, and <see cref="Z" /> elements are equal.</remarks>
     public bool Equals(Vector3D other)
     {
         return X.Equals(other.X) && Y.Equals(other.Y) && Z.Equals(other.Z);
@@ -478,5 +517,14 @@ public readonly struct Vector3D : IEquatable<Vector3D>
     public override bool Equals(object? obj)
     {
         return obj is Vector3D other && Equals(other);
+    }
+
+    /// <summary>
+    /// Converts the specified single-precision vector into its double precision form.
+    /// </summary>
+    /// <param name="vector">The vector to convert.</param>
+    public static implicit operator Vector3D(Vector3 vector)
+    {
+        return new Vector3D(vector);
     }
 }

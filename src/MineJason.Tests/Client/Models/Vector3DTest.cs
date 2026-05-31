@@ -9,6 +9,22 @@ namespace MineJason.Tests.Client.Models;
 public class Vector3DTest
 {
     [Fact]
+    public void Constructor_Vector3_SameValues()
+    {
+        // Arrange
+        var input = new Vector3(1f, 1f, 1f);
+
+        // Act
+        var result = new Vector3D(input);
+
+        // Assert
+        Assert.Multiple(
+            () => Assert.Equal(1d, result.X),
+            () => Assert.Equal(1d, result.Y),
+            () => Assert.Equal(1d, result.Z));
+    }
+
+    [Fact]
     public void Constructor_SingleValue_FillsAll()
     {
         // Arrange
@@ -326,5 +342,21 @@ public class Vector3DTest
 
         // Assert
         Assert.Equal(bigger, result);
+    }
+
+    [Fact]
+    public void ImplicitCast_FromVector3_SameValues()
+    {
+        // Arrange
+        var input = new Vector3(1f, 1f, 1f);
+
+        // Act
+        Vector3D result = input;
+
+        // Assert
+        Assert.Multiple(
+            () => Assert.Equal(1d, result.X),
+            () => Assert.Equal(1d, result.Y),
+            () => Assert.Equal(1d, result.Z));
     }
 }
