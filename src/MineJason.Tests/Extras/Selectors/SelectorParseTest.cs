@@ -50,6 +50,8 @@ public class SelectorParseTest
     [InlineData("@a[predicate=custom:predicate]", TestDisplayName = "Predicate include")]
     [InlineData("@a[predicate=!custom:predicate]", TestDisplayName = "Predicate exclude")]
     [InlineData("@a[limit=10]", TestDisplayName = "Limit")]
+    [InlineData("@a[distance=10..20]", TestDisplayName = "Ranged distance")]
+    [InlineData("@a[distance=5]", TestDisplayName = "Exact distance")]
     public void SelectorParser_EndToEnd_SameResult(string sample)
     {
         // Act

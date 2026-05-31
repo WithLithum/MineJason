@@ -3,6 +3,7 @@
 
 namespace MineJason.Data;
 
+using System.Globalization;
 using System.Text;
 using JetBrains.Annotations;
 
@@ -20,7 +21,7 @@ public readonly struct DistanceRange : IEquatable<DistanceRange>
     {
         Exact = exact;
     }
-    
+
     /// <summary>
     /// Initializes a new instance of the <see cref="DistanceRange"/> structure.
     /// </summary>
@@ -31,7 +32,7 @@ public readonly struct DistanceRange : IEquatable<DistanceRange>
         Min = min;
         Max = max;
     }
-    
+
     /// <summary>
     /// Gets or sets the minimum range.
     /// </summary>
@@ -66,13 +67,18 @@ public readonly struct DistanceRange : IEquatable<DistanceRange>
     /// range as used by a target selector.</returns>
     public override string ToString()
     {
-        var builder = new StringBuilder();
+        if (Exact.HasValue)
+        {
+            return Exact.Value.ToString(CultureInfo.InvariantCulture);
+        }
 
         if (!Min.HasValue && !Max.HasValue)
         {
             return string.Empty;
         }
-        
+
+        var builder = new StringBuilder();
+
         if (Min.HasValue)
         {
             builder.Append(Min);
@@ -129,7 +135,7 @@ public readonly struct DistanceRange : IEquatable<DistanceRange>
     {
         return new DistanceRange(distance);
     }
-    
+
     /// <summary>
     /// Returns a new <see cref="DistanceRange"/> that matches for a range between.
     /// </summary>
