@@ -2,6 +2,23 @@
 
 This document notes most user-visible changes of this library. The format is based on the [Keep a Changelog](https://keepachangelog.com) format and this project adheres to [Semantic Versioning](https://semver.org).
 
+## [0.7.0-beta.2] - 2026-05-31
+
+### Added
+
+- Added `double` based `Multiply` and `Divide` overloads to `Vector3D`.
+- Added a new constructor: `Vector3D(Vector3)`.
+
+### Fixed
+
+- Fixed an issue in `DistanceRange` that caused `ToString()` to return an empty string for exact range values.
+  - This addressed an issue where exact number `distance` field being formatted as `[distance=]`.
+
+### Deprecated
+
+- Deprecated `Vector3D(Vector3D)` constructor.
+- Deprecated `Multiply` and `Divide` overloads that takes a `float` in `Vector3D`. 
+
 ## [0.7.0-beta.1] - 2026-05-29
 
 ### Deprecated
@@ -113,6 +130,7 @@ This is the first consolidated version of MineJason, bringing all modules under 
 
 Please see the [old changelogs directory](docs/changelogs).
 
+[0.7.0-beta.2]: https://github.com/WithLithum/MineJason/compare/v0.7.0-beta.1...v0.7.0-beta.2
 [0.7.0-beta.1]: https://github.com/WithLithum/MineJason/compare/v0.7.0-alpha.6...v0.7.0-beta.1
 [0.7.0-alpha.6]: https://github.com/WithLithum/MineJason/compare/v0.7.0-alpha.5...v0.7.0-alpha.6
 [0.7.0-alpha.5]: https://github.com/WithLithum/MineJason/compare/v0.7.0-alpha.4...v0.7.0-alpha.5
