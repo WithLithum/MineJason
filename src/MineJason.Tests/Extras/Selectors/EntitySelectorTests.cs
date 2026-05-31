@@ -363,4 +363,70 @@ public class EntitySelectorTests
         // Assert
         Assert.IsType<FormatException>(exception);
     }
+
+    [Fact]
+    public void Factory_AllPlayers_CorrectKind()
+    {
+        // Act
+        var result = EntitySelector.AllPlayers()
+            .Build();
+
+        // Assert
+        Assert.Equal(EntitySelectorKind.AllPlayers, result.Kind);
+    }
+
+    [Fact]
+    public void Factory_NearestPlayer_CorrectKind()
+    {
+        // Act
+        var result = EntitySelector.NearestPlayer()
+            .Build();
+
+        // Assert
+        Assert.Equal(EntitySelectorKind.NearestPlayer, result.Kind);
+    }
+
+    [Fact]
+    public void Factory_RandomPlayer_CorrectKind()
+    {
+        // Act
+        var result = EntitySelector.RandomPlayer()
+            .Build();
+
+        // Assert
+        Assert.Equal(EntitySelectorKind.RandomPlayer, result.Kind);
+    }
+
+    [Fact]
+    public void Factory_AllEntities_CorrectKind()
+    {
+        // Act
+        var result = EntitySelector.AllEntities()
+            .Build();
+
+        // Assert
+        Assert.Equal(EntitySelectorKind.AllEntities, result.Kind);
+    }
+
+    [Fact]
+    public void Factory_Executor_CorrectKind()
+    {
+        // Act
+        var result = EntitySelector.Executor()
+            .Build();
+
+        // Assert
+        Assert.Equal(EntitySelectorKind.Executor, result.Kind);
+    }
+
+    [Fact]
+    public void Factory_NearestEntity_CorrectKind()
+    {
+        // Act
+        var result = EntitySelector.NearestEntity()
+            .Build();
+
+        // Assert
+        Assert.Equal(EntitySelectorKind.NearestEntity, result.Kind);
+    }
 }
