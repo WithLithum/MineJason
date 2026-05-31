@@ -429,4 +429,184 @@ public class EntitySelectorTests
         // Assert
         Assert.Equal(EntitySelectorKind.NearestEntity, result.Kind);
     }
+
+    [Fact]
+    public void Builder_Origin_Produces()
+    {
+        // Act
+        var result = EntitySelector.NearestEntity()
+            .Position(new Vector3D(25d, 0d, 25d))
+            .Build();
+
+        // Assert
+        Assert.Equal("@n[x=25,y=0,z=25]", result.ToString());
+    }
+
+    [Fact]
+    public void Builder_DistanceExact_Produces()
+    {
+        // Act
+        var result = EntitySelector.NearestEntity()
+            .Distance(10)
+            .Build();
+
+        // Assert
+        Assert.Equal("@n[distance=10]", result.ToString());
+    }
+
+    [Fact]
+    public void Builder_DistanceRange_Produces()
+    {
+        // Act
+        var result = EntitySelector.NearestEntity()
+            .Distance(20, 100)
+            .Build();
+
+        // Assert
+        Assert.Equal("@n[distance=20..100]", result.ToString());
+    }
+
+    [Fact]
+    public void Builder_HasName_Produces()
+    {
+        // Act
+        var result = EntitySelector.NearestEntity()
+            .HasName("Steve")
+            .Build();
+
+        // Assert
+        Assert.Equal("@n[name=Steve]", result.ToString());
+    }
+
+    [Fact]
+    public void Builder_ExcludeName_Produces()
+    {
+        // Act
+        var result = EntitySelector.NearestEntity()
+            .ExcludeName("Alex")
+            .Build();
+
+        // Assert
+        Assert.Equal("@n[name=!Alex]", result.ToString());
+    }
+
+    [Fact]
+    public void Builder_HasLevel_Produces()
+    {
+        // Act
+        var result = EntitySelector.NearestEntity()
+            .HasLevel(new IntegralRange(20, 30))
+            .Build();
+
+        // Assert
+        Assert.Equal("@n[level=20..30]", result.ToString());
+    }
+
+    [Fact]
+    public void Builder_InTeam_Produces()
+    {
+        // Act
+        var result = EntitySelector.NearestEntity()
+            .InTeam("red")
+            .Build();
+
+        // Assert
+        Assert.Equal("@n[team=red]", result.ToString());
+    }
+
+    [Fact]
+    public void Builder_ExcludeTeam_Produces()
+    {
+        // Act
+        var result = EntitySelector.NearestEntity()
+            .ExcludeTeam("blue")
+            .Build();
+
+        // Assert
+        Assert.Equal("@n[team=!blue]", result.ToString());
+    }
+
+    [Fact]
+    public void Builder_IncludeTag_Produces()
+    {
+        // Act
+        var result = EntitySelector.NearestEntity()
+            .IncludeTag("a_tag")
+            .Build();
+
+        // Assert
+        Assert.Equal("@n[tag=a_tag]", result.ToString());
+    }
+
+    [Fact]
+    public void Builder_ExcludeTag_Produces()
+    {
+        // Act
+        EntitySelector? result = EntitySelector.NearestEntity()
+            .ExcludeTag("b_tag")
+            .Build();
+
+        // Assert
+        Assert.Equal("@n[tag=!b_tag]", result.ToString());
+    }
+
+    [Fact]
+    public void Builder_Diagonal_Produces()
+    {
+        // Act
+        EntitySelector? result = EntitySelector.NearestEntity()
+            .DiagonalRange(new Vector3D(30.5d, 3d, 25d))
+            .Build();
+
+        // Assert
+        Assert.Equal("@n[dx=30.5,dy=3,dz=25]", result.ToString());
+    }
+
+    [Fact]
+    public void Builder_Limit_Produces()
+    {
+        // Act
+        EntitySelector? result = EntitySelector.AllEntities()
+            .Limit(10)
+            .Build();
+
+        // Assert
+        Assert.Equal("@e[limit=10]", result.ToString());
+    }
+
+    [Fact]
+    public void Builder_SortBy_Produces()
+    {
+        // Act
+        EntitySelector? result = EntitySelector.AllEntities()
+            .SortBy(EntitySelectorSortMode.Nearest)
+            .Build();
+
+        // Assert
+        Assert.Equal("@e[sort=nearest]", result.ToString());
+    }
+
+    [Fact]
+    public void Builder_MatchType_Produces()
+    {
+        // Act
+        EntitySelector? result = EntitySelector.AllEntities()
+            .MatchType(new ResourceLocation("minecraft", "bat"))
+            .Build();
+
+        // Assert
+        Assert.Equal("@e[type=minecraft:bat]", result.ToString());
+    }
+
+    [Fact]
+    public void Builder_ExcludeType_Produces()
+    {
+        // Act
+        EntitySelector? result = EntitySelector.AllEntities()
+            .ExcludeType(new ResourceLocation("minecraft", "armor_stand"))
+            .Build();
+
+        // Assert
+        Assert.Equal("@e[type=!minecraft:armor_stand]", result.ToString());
+    }
 }
