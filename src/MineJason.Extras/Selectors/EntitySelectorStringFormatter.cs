@@ -100,7 +100,7 @@ public static partial class EntitySelectorStringFormatter
         return builder.ToString();
     }
 
-    private static string GetKindString(EntitySelectorKind kind)
+    internal static string GetKindString(EntitySelectorKind kind)
     {
         return kind switch
         {
