@@ -16,11 +16,6 @@ public static partial class EntitySelectorStringFormatter
 
         var parameterString = GetParameterString(selector);
 
-#if DEBUG
-        Console.WriteLine("-- parameter string --");
-        Console.WriteLine(parameterString ?? "parameter string null");
-#endif
-
         return $"{kind}{(string.IsNullOrWhiteSpace(parameterString) ? string.Empty : $"[{parameterString}]")}";
     }
 
@@ -110,7 +105,7 @@ public static partial class EntitySelectorStringFormatter
             EntitySelectorKind.NearestPlayer => "@p",
             EntitySelectorKind.RandomPlayer => "@r",
             EntitySelectorKind.NearestEntity => "@n",
-            _ => throw new ArgumentException("Unknown kind", nameof(kind))
+            _ => throw new ArgumentException("Unknown kind", nameof(kind)),
         };
     }
 
