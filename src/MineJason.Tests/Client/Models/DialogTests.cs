@@ -3,8 +3,10 @@
 
 using System.Text.Json;
 using MineJason.Dialogs;
+using MineJason.Dialogs.Reference;
 using MineJason.Serialization.IO.Json;
 using MineJason.Serialization.Schema;
+using MineJason.Tests.Serialization.Utilities;
 using MineJason.Text.Behaviour.Click;
 
 namespace MineJason.Tests.Client.Models;
@@ -120,4 +122,218 @@ public class DialogTests
         Assert.Null(result.Error);
         Assert.Equal(json, result.Value!.ToJsonString());
     }
+
+    [Fact]
+    public void DialogSource_EncodeTagWithSingleInstance_Error()
+    {
+        // Arrange
+        var input = new TagDialogSource(
+            new ResourceLocation("this", "tag"));
+        var encoder = new JsonNodeEncoder();
+
+        // Act
+        var result = DialogSourceSchema.SingleInstance.Encode(input,
+            encoder);
+
+        // Assert
+        ResultAssert.Failure(result);
+    }
+
+    [Fact]
+    public void DialogSource_EncodeCollectionWithSingleInstance_Error()
+    {
+        // Arrange
+        var input = new CollectionDialogSource([
+            new DialogReference(new ResourceLocation("this", "ref"))
+            ]);
+        var encoder = new JsonNodeEncoder();
+
+        // Act
+        var result = DialogSourceSchema.SingleInstance.Encode(input,
+            encoder);
+
+        // Assert
+        ResultAssert.Failure(result);
+    }
+
+    [Fact]
+    public void DialogSource_NotValidElement_Error()
+    {
+        // Arrange
+        const string input = "123";
+        var element = JsonElement.Parse(input);
+        var decoder = new JsonElementDecoder();
+
+        // Act
+        var result = DialogSourceSchema.SingleInstance.Decode(element,
+            decoder);
+
+        // Assert
+        ResultAssert.Failure(result);
+    }
+
+    [Fact]
+    public void DialogSource_ValidIdReference_Success()
+    {
+        // Arrange
+        const string input = "\"minecraft:dialog\"";
+        var element = JsonElement.Parse(input);
+        var decoder = new JsonElementDecoder();
+
+        // Act
+        var result = DialogSourceSchema.SingleInstance.Decode(element,
+            decoder);
+
+        // Assert
+        var ds = ResultAssert.Success(result);
+        Assert.Equal("minecraft:dialog", Assert.IsType<DialogReference>(ds)
+            .Identifier.ToString());
+    }
+
+    [Fact]
+    public void DialogSource_InvalidIdReference_Error()
+    {
+        // Arrange
+        const string input = "\"this is not a valid resource location\"";
+        var element = JsonElement.Parse(input);
+        var decoder = new JsonElementDecoder();
+
+        // Act
+        var result = DialogSourceSchema.SingleInstance.Decode(element,
+            decoder);
+
+        // Assert
+        ResultAssert.Failure(result);
+    }
+
+    [Fact]
+    public void DialogSource_SingleButTagEncountered_Error()
+    {
+        // Arrange
+        const string input = "\"#tag\"";
+        var element = JsonElement.Parse(input);
+        var decoder = new JsonElementDecoder();
+
+        // Act
+        var result = DialogSourceSchema.SingleInstance.Decode(element,
+            decoder);
+
+        // Assert
+        ResultAssert.Failure(result);
+    }
+
+    [Fact]
+    public void DialogSource_ValidTagReference_Success()
+    {
+        // Arrange
+        const string input = "\"#minecraft:dialogs\"";
+        var element = JsonElement.Parse(input);
+        var decoder = new JsonElementDecoder();
+
+        // Act
+        var result = DialogSourceSchema.MultiInstance.Decode(element,
+            decoder);
+
+        // Assert
+        var ds = ResultAssert.Success(result);
+        Assert.Equal("minecraft:dialogs", Assert.IsType<TagDialogSource>(ds)
+            .Id.ToString());
+    }
+
+    [Fact]
+    public void DialogSource_InvalidTagReference_Error()
+    {
+        // Arrange
+        const string input = "\"#This is Definitely Not A Tag\"";
+        var element = JsonElement.Parse(input);
+        var decoder = new JsonElementDecoder();
+
+        // Act
+        var result = DialogSourceSchema.MultiInstance.Decode(element,
+            decoder);
+
+        // Assert
+        ResultAssert.Failure(result);
+    }
+
+    [Fact]
+    public void DialogSource_InvalidInlineDialog_Error()
+    {
+        // Arrange
+        const string input = "{\"type\":\"Not A Valid Dialog!\"}";
+        var element = JsonElement.Parse(input);
+        var decoder = new JsonElementDecoder();
+
+        // Act
+        var result = DialogSourceSchema.SingleInstance.Decode(element,
+            decoder);
+
+        // Assert
+        ResultAssert.Failure(result);
+    }
+
+    [Fact]
+    public void DialogSource_ValidInlineDialog_Succeed()
+    {
+        // Arrange
+        const string input = "{\"type\":\"minecraft:notice\",\"title\":{\"type\":\"text\",\"text\":\"Yeet\"}}";
+        var element = JsonElement.Parse(input);
+        var decoder = new JsonElementDecoder();
+
+        // Act
+        var result = DialogSourceSchema.SingleInstance.Decode(element,
+            decoder);
+
+        // Assert
+        Assert.IsType<InlineDialogSource>(ResultAssert.Success(result));
+    }
+
+    [Fact]
+    public void DialogSource_SingleButCollectionEncountered_Error()
+    {
+        // Arrange
+        const string input = "[\"minecraft:dialog\"]";
+        var element = JsonElement.Parse(input);
+        var decoder = new JsonElementDecoder();
+
+        // Act
+        var result = DialogSourceSchema.SingleInstance.Decode(element,
+            decoder);
+
+        // Assert
+        ResultAssert.Failure(result);
+    }
+
+    [Fact]
+    public void DialogSource_InvalidCollection_Error()
+    {
+        // Arrange
+        const string input = "[\"This is Not A Valid Dialog\", 123]";
+        var element = JsonElement.Parse(input);
+        var decoder = new JsonElementDecoder();
+
+        // Act
+        var result = DialogSourceSchema.MultiInstance.Decode(element,
+            decoder);
+
+        // Assert
+        ResultAssert.Failure(result);
+    }
+
+    [Fact]
+    public void DialogSource_ValidCollection_Error()
+    {
+        // Arrange
+        const string input = "[\"minecraft:dialog_a\", \"minecraft:dialog_b\"]";
+        var element = JsonElement.Parse(input);
+        var decoder = new JsonElementDecoder();
+
+        // Act
+        var result = DialogSourceSchema.MultiInstance.Decode(element,
+            decoder);
+
+        // Assert
+        Assert.IsType<CollectionDialogSource>(ResultAssert.Success(result));
+    }
+
 }

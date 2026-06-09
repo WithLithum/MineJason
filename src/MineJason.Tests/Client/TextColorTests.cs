@@ -3,7 +3,10 @@
 
 using System.Drawing;
 using System.Text.Json;
+using MineJason.Serialization.IO.Json;
+using MineJason.Serialization.Schema;
 using MineJason.Tests.Client.Json;
+using MineJason.Tests.Serialization.Utilities;
 using MineJason.Text.Colors;
 
 namespace MineJason.Tests.Client;
@@ -48,6 +51,18 @@ public class TextColorTests
         // Assert
         Assert.True(success);
         Assert.Equal(new RgbTextColor(0x00, 0xff, 0x00), result);
+    }
+
+    [Theory]
+    [InlineData("#aaaaaaa", Label = "Invalid length")]
+    [InlineData("#INVALD", Label = "Malformed")]
+    public void RgbParse_InvalidColour_Fail(string input)
+    {
+        // Act
+        var success = RgbTextColor.TryParse(input, out _);
+
+        // Assert
+        Assert.False(success);
     }
 
     [Fact]
@@ -176,5 +191,56 @@ public class TextColorTests
         Assert.Multiple(() => Assert.Equal(0xFE, result.Color.R),
             () => Assert.Equal(0x30, result.Color.G),
             () => Assert.Equal(0xA2, result.Color.B));
+    }
+
+    [Fact]
+    public void TextColorSchema_DecodeKnown_Success()
+    {
+        // Arrange
+        const string input = "\"red\"";
+        var element = JsonElement.Parse(input);
+        var decoder = new JsonElementDecoder();
+
+        // Act
+        var result = TextColorSchema.Instance.Decode(element, decoder);
+
+        // Assert
+        var color = ResultAssert.Success(result);
+        Assert.Equal("red", Assert.IsType<NamedTextColor>(color).GenerateColorText());
+    }
+
+    [Fact]
+    public void TextColorSchema_Rgb_Success()
+    {
+        // Arrange
+        const string input = "\"#ff0000\"";
+        var element = JsonElement.Parse(input);
+        var decoder = new JsonElementDecoder();
+
+        // Act
+        var result = TextColorSchema.Instance.Decode(element, decoder);
+
+        // Assert
+        var color = ResultAssert.Success(result);
+        Assert.Equal("#ff0000", Assert.IsType<RgbTextColor>(color).GenerateColorText());
+    }
+
+    [Theory]
+    [InlineData("123", Label = "Not string")]
+    [InlineData("\"\"", Label = "Empty")]
+    [InlineData("\"unknown_color\"", Label = "Invalid color name")]
+    [InlineData("\"#aaaaaaa\"", Label = "Too long RGB triplet")]
+    [InlineData("\"#INVALD\"", Label = "Malformed RGB triplet")]
+    public void TextColorSchema_Invalid_Failure(string input)
+    {
+        // Arrange
+        var element = JsonElement.Parse(input);
+        var decoder = new JsonElementDecoder();
+
+        // Act
+        var result = TextColorSchema.Instance.Decode(element, decoder);
+
+        // Assert
+        ResultAssert.Failure(result);
     }
 }
