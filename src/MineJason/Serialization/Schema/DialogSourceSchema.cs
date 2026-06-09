@@ -1,14 +1,14 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: Apache-2.0
 
-namespace MineJason.Serialization.Schema;
-
 using System.Collections.Immutable;
 using MineJason.Dialogs.Reference;
 using MineJason.Properties;
 using MineJason.Serialization.IO;
 using MineJason.Serialization.Utilities.Results;
 using MineJason.Utilities;
+
+namespace MineJason.Serialization.Schema;
 
 /// <summary>
 /// Encodes or decodes <see cref="MultiDialogSource"/> to or from the specified element type.
@@ -99,9 +99,14 @@ public sealed class DialogSourceSchema : ValueSchema<MultiDialogSource>
         return Errors.Error(MessageResources.ResultNotDialogSource);
     }
 
-    private static Result<MultiDialogSource> DecodeCollectionSource<TElement>(TElement value,
+    private Result<MultiDialogSource> DecodeCollectionSource<TElement>(TElement value,
         IValueDecoder<TElement> decoder)
     {
+        if (!_allowMulti)
+        {
+            return MyResults.MultiReferenceDisallowed;
+        }
+
         var collection = OneCollection.Decode(value, decoder);
         if (!collection)
         {
