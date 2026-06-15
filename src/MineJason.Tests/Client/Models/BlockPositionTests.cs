@@ -1,10 +1,9 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: Apache-2.0
 
-namespace MineJason.Tests.Client.Models;
-
 using MineJason.Data.Coordinates;
-using Xunit;
+
+namespace MineJason.Tests.Client.Models;
 
 public class BlockPositionTests
 {
