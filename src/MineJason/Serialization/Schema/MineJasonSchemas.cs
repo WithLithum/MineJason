@@ -1,13 +1,14 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: Apache-2.0
 
-namespace MineJason.Serialization.Schema;
-
 using System.Text.Json;
 using MineJason.Data.Profile;
 using MineJason.Dialogs;
 using MineJason.Dialogs.Input;
 using MineJason.Serialization.Schema.Objects;
+using MineJason.Text;
+
+namespace MineJason.Serialization.Schema;
 
 /// <summary>
 /// Contains reusable schema instances of the given element type.
@@ -89,4 +90,10 @@ public static class MineJasonSchemas
             .Property("action", x => x.Action, DialogActionSchema.Instance,
                 optional: true)
             .Build();
+
+    /// <summary>
+    /// A collection schema for <see cref="TextComponent"/> instances.
+    /// </summary>
+    public static readonly CollectionSchema<TextComponent> TextComponentList =
+        new(TextComponentSchema.Instance);
 }

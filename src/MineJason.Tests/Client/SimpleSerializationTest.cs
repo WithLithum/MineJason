@@ -41,6 +41,43 @@ public class SimpleSerializationTests
     }
 
     [Fact]
+    public void TextComponent_WithExtras_Serialize()
+    {
+        // Arrange
+        var component = TextComponent.CreateText()
+            .Value("My Text")
+            .Extras([TextComponent.CreateText("My Extra")])
+            .Build();
+
+        // Act
+        var json = JsonSerializer.Serialize(component,
+            JsonTestContext.Default.TextComponent);
+
+        // Assert
+        Assert.Equal("{\"type\":\"text\",\"text\":\"My Text\",\"extra\":[{\"type\":\"text\",\"text\":\"My Extra\"}]}",
+            json);
+    }
+
+    [Fact]
+    public void TextComponent_WithExtras_Deserialize()
+    {
+        // Arrange
+        const string json = "{\"text\":\"Hello World!\",\"extra\":[\"And to you!\"]}";
+
+        // Act
+        var deserialized = JsonSerializer.Deserialize(json,
+            JsonTestContext.Default.TextComponent);
+
+        // Assert
+        Assert.NotNull(deserialized);
+        Assert.NotNull(deserialized.Extra);
+        Assert.Multiple(() => Assert.Equal("Hello World!",
+            Assert.IsType<LiteralTextComponent>(deserialized).Text),
+            () => Assert.Equal(TextComponent.CreateText("And to you!"),
+            Assert.Single(deserialized.Extra!)));
+    }
+
+    [Fact]
     public void TextComponent_Deserialize_RawString()
     {
         // Arrange

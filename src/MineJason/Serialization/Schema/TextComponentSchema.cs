@@ -36,7 +36,7 @@ public partial class TextComponentSchema : ValueSchema<TextComponent>
             .String("translate", x => x.Translate)
             .OptionalString("fallback", x => x.Fallback)
             .Property("with", x => x.With!,
-                TextComponentListSchema.Instance, optional: true)
+                MineJasonSchemas.TextComponentList, optional: true)
             .CommonTextComponentSchema()
             .Build();
 

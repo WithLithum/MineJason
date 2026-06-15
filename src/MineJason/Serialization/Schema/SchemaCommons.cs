@@ -12,6 +12,7 @@ using MineJason.Serialization.Utilities.Results;
 using MineJason.Text;
 
 namespace MineJason.Serialization.Schema;
+
 internal static class SchemaCommons
 {
     internal static readonly JsonNodeEncoder JsonEncoder = new();
@@ -51,7 +52,7 @@ internal static class SchemaCommons
                 new HoverEventSchema(),
                 optional: true)
             .Property("extra", x => x.Extra,
-                TextComponentListSchema.Instance,
+                MineJasonSchemas.TextComponentList,
                 optional: true);
     }
 

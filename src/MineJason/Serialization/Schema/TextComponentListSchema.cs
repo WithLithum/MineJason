@@ -1,21 +1,23 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: Apache-2.0
 
-namespace MineJason.Serialization.Schema;
-
 using MineJason.Serialization.IO;
 using MineJason.Serialization.Utilities.Results;
 using MineJason.Text;
+
+namespace MineJason.Serialization.Schema;
 
 /// <summary>
 /// Defines a schema that encodes or decodes a list of text components to or from the given element
 /// type.
 /// </summary>
+[Obsolete("Use MineJasonSchemas.TextComponentList instead.")]
 public class TextComponentListSchema : ValueSchema<IReadOnlyList<TextComponent>>
 {
     /// <summary>
     /// The singleton instance.
     /// </summary>
+    [Obsolete("Use MineJasonSchemas.TextComponentList instead.")]
     public static readonly TextComponentListSchema Instance = new();
 
     /// <inheritdoc />
