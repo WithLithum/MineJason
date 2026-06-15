@@ -1,4 +1,4 @@
-﻿// SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
+// SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: Apache-2.0
 
 namespace MineJason.Tests.Client.Models;
@@ -13,90 +13,104 @@ public class BlockPositionTests
     {
         // Arrange
         const string input = "12 34";
-        
+
         // Act
         var exception = Record.Exception(() => BlockPosition.Parse(input));
-        
+
         // Assert
         Assert.IsType<ArgumentException>(exception);
     }
-    
+
     [Fact]
     public void PositionParse_TooManyComponents_Throw()
     {
         // Arrange
         const string input = "12 34 56 78";
-        
+
         // Act
         var exception = Record.Exception(() => BlockPosition.Parse(input));
-        
+
         // Assert
         Assert.IsType<ArgumentException>(exception);
     }
-    
+
     [Fact]
     public void PositionParse_WellFormed_ReturnsCorrect()
     {
         // Arrange
         const string input = "12 34 56";
-        
+
         // Act
         var result = BlockPosition.Parse(input);
-        
+
         // Assert
         Assert.Equal(new BlockPosition(12, 34, 56), result);
     }
-    
+
     [Fact]
     public void ComponentParse_Absolute_ReturnsCorrect()
     {
         // Arrange
         const string input = "127";
-        
+
         // Act
         var result = BlockPositionComponent.Parse(input);
-        
+
         // Assert
         Assert.Equal(new BlockPositionComponent(127), result);
     }
-    
+
     [Fact]
     public void ComponentParse_Relative_ReturnsCorrect()
     {
         // Arrange
         const string input = "~320";
-        
+
         // Act
         var result = BlockPositionComponent.Parse(input);
-        
+
         // Assert
         Assert.Equal(new BlockPositionComponent(320, BlockPositionComponentType.Relative),
             result);
     }
-    
+
+    [Fact]
+    public void ComponentParse_RelativeHere_ReturnsCorrect()
+    {
+        // Arrange
+        const string input = "~";
+
+        // Act
+        var result = BlockPositionComponent.Parse(input);
+
+        // Assert
+        Assert.Equal(new BlockPositionComponent(0, BlockPositionComponentType.Relative),
+            result);
+    }
+
     [Fact]
     public void ComponentParse_Local_ReturnsCorrect()
     {
         // Arrange
         const string input = "^256";
-        
+
         // Act
         var result = BlockPositionComponent.Parse(input);
-        
+
         // Assert
         Assert.Equal(new BlockPositionComponent(256, BlockPositionComponentType.Local),
             result);
     }
-    
+
     [Fact]
     public void BlockPosition_IsValid_AllAbsolute()
     {
         // Arrange
         var pos = new BlockPosition(123, 456, 789);
-        
+
         // Act
         var isValid = pos.IsValid();
-        
+
         // Assert
         Assert.True(isValid);
     }
@@ -106,10 +120,10 @@ public class BlockPositionTests
     {
         // Arrange
         var pos = new BlockPosition(123, 456, 789, BlockPositionComponentType.Relative);
-        
+
         // Act
         var isValid = pos.IsValid();
-        
+
         // Assert
         Assert.True(isValid);
     }
@@ -119,10 +133,10 @@ public class BlockPositionTests
     {
         // Arrange
         var pos = new BlockPosition(123, 456, 789, BlockPositionComponentType.Local);
-        
+
         // Act
         var isValid = pos.IsValid();
-        
+
         // Assert
         Assert.True(isValid);
     }
@@ -135,10 +149,10 @@ public class BlockPositionTests
         var pos = new BlockPosition(new BlockPositionComponent(331),
             new BlockPositionComponent(0, BlockPositionComponentType.Relative),
             new BlockPositionComponent(115, BlockPositionComponentType.Relative));
-        
+
         // Act
         var isValid = pos.IsValid();
-        
+
         // Assert
         Assert.True(isValid);
     }
@@ -151,10 +165,10 @@ public class BlockPositionTests
         var pos = new BlockPosition(new BlockPositionComponent(123),
             new BlockPositionComponent(0, BlockPositionComponentType.Relative),
             new BlockPositionComponent(2, BlockPositionComponentType.Local));
-        
+
         // Act
         var isValid = pos.IsValid();
-        
+
         // Assert
         Assert.False(isValid);
     }
@@ -165,10 +179,10 @@ public class BlockPositionTests
         // Arrange
         var component = new BlockPositionComponent(255,
             type: BlockPositionComponentType.Absolute);
-        
+
         // Act
         var result = component.ToString();
-        
+
         // Assert
         Assert.Equal("255", result);
     }
@@ -179,10 +193,10 @@ public class BlockPositionTests
         // Arrange
         var component = new BlockPositionComponent(233,
             type: BlockPositionComponentType.Local);
-        
+
         // Act
         var result = component.ToString();
-        
+
         // Assert
         Assert.Equal("^233", result);
     }
@@ -193,94 +207,199 @@ public class BlockPositionTests
         // Arrange
         var component = new BlockPositionComponent(123,
             type: BlockPositionComponentType.Relative);
-        
+
         // Act
         var result = component.ToString();
-        
+
         // Assert
         Assert.Equal("~123", result);
     }
-    
+
+    [Fact]
+    public void BlockPositionComponent_ToString_RelativeHere()
+    {
+        // Arrange
+        var component = new BlockPositionComponent(0,
+            type: BlockPositionComponentType.Relative);
+
+        // Act
+        var result = component.ToString();
+
+        // Assert
+        Assert.Equal("~", result);
+    }
+
+
     [Fact]
     public void Component_AddComponent_Correct()
     {
         // Arrange
         var left = new BlockPositionComponent(100);
         var right = new BlockPositionComponent(23);
-        
+
         // Act
         var result = left + right;
-        
+
         // Assert
         Assert.Equal(new BlockPositionComponent(123), result);
     }
-    
+
+    [Fact]
+    public void Component_AddDifferentComponent_Throws()
+    {
+        // Arrange
+        var left = new BlockPositionComponent(100,
+            BlockPositionComponentType.Absolute);
+        var right = new BlockPositionComponent(23,
+            BlockPositionComponentType.Relative);
+
+        // Act
+        var exception = Record.Exception(() => _ = left + right);
+
+        // Assert
+        Assert.IsType<ArgumentException>(exception);
+    }
+
     [Fact]
     public void Component_AddNumber_Correct()
     {
         // Arrange
         var left = new BlockPositionComponent(100);
         const int right = 23;
-        
+
         // Act
         var result = left + right;
-        
+
         // Assert
         Assert.Equal(new BlockPositionComponent(123), result);
     }
-    
+
+    [Fact]
+    public void Component_AddByNumber_Correct()
+    {
+        // Arrange
+        const int left = 20;
+        var right = new BlockPositionComponent(80);
+
+        // Act
+        var result = left + right;
+
+        // Assert
+        Assert.Equal(new BlockPositionComponent(100), result);
+    }
+
     [Fact]
     public void Component_SubtractComponent_Correct()
     {
         // Arrange
         var left = new BlockPositionComponent(123);
         var right = new BlockPositionComponent(23);
-        
+
         // Act
         var result = left - right;
-        
+
         // Assert
         Assert.Equal(new BlockPositionComponent(100), result);
     }
-    
+
+    [Fact]
+    public void Component_SubtractDifferentComponent_Throws()
+    {
+        // Arrange
+        var left = new BlockPositionComponent(123,
+            BlockPositionComponentType.Absolute);
+        var right = new BlockPositionComponent(23,
+            BlockPositionComponentType.Relative);
+
+        // Act
+        var exception = Record.Exception(() => _ = left - right);
+
+        // Assert
+        Assert.IsType<ArgumentException>(exception);
+    }
+
     [Fact]
     public void Component_SubtractNumber_Correct()
     {
         // Arrange
         var left = new BlockPositionComponent(123);
         const int right = 23;
-        
+
         // Act
         var result = left - right;
-        
+
         // Assert
         Assert.Equal(new BlockPositionComponent(100), result);
     }
-    
+
+    [Fact]
+    public void Component_SubtractByNumber_Correct()
+    {
+        // Arrange
+        const int left = 123;
+        var right = new BlockPositionComponent(23);
+
+        // Act
+        var result = left - right;
+
+        // Assert
+        Assert.Equal(new BlockPositionComponent(100), result);
+    }
+
     [Fact]
     public void Component_MultiplyComponent_Correct()
     {
         // Arrange
         var left = new BlockPositionComponent(10);
         var right = new BlockPositionComponent(10);
-        
+
         // Act
         var result = left * right;
-        
+
         // Assert
         Assert.Equal(new BlockPositionComponent(100), result);
     }
-    
+
+    [Fact]
+    public void Component_MultiplyDifferentComponent_Throws()
+    {
+        // Arrange
+        var left = new BlockPositionComponent(10,
+            BlockPositionComponentType.Absolute);
+        var right = new BlockPositionComponent(10,
+            BlockPositionComponentType.Relative);
+
+        // Act
+        var exception = Record.Exception(() => _ = left * right);
+
+        // Assert
+        Assert.IsType<ArgumentException>(exception);
+    }
+
     [Fact]
     public void Component_MultiplyNumber_Correct()
     {
         // Arrange
         var left = new BlockPositionComponent(10);
         const int right = 10;
-        
+
         // Act
         var result = left * right;
-        
+
+        // Assert
+        Assert.Equal(new BlockPositionComponent(100), result);
+    }
+
+    [Fact]
+    public void Component_MultiplyByNumber_Correct()
+    {
+        // Arrange
+        const int left = 10;
+        var right = new BlockPositionComponent(10);
+
+        // Act
+        var result = left * right;
+
         // Assert
         Assert.Equal(new BlockPositionComponent(100), result);
     }
@@ -291,108 +410,138 @@ public class BlockPositionTests
         // Arrange
         var left = new BlockPositionComponent(1000);
         var right = new BlockPositionComponent(2);
-        
+
         // Act
         var result = left / right;
-        
+
         // Assert
         Assert.Equal(new BlockPositionComponent(500), result);
     }
-    
+
+    [Fact]
+    public void Component_DivideDifferentComponent_Throws()
+    {
+        // Arrange
+        var left = new BlockPositionComponent(1000,
+            BlockPositionComponentType.Absolute);
+        var right = new BlockPositionComponent(2,
+            BlockPositionComponentType.Relative);
+
+        // Act
+        var exception = Record.Exception(() => _ = left / right);
+
+        // Assert
+        Assert.IsType<ArgumentException>(exception);
+    }
+
     [Fact]
     public void Component_DivideNumber_Correct()
     {
         // Arrange
         var left = new BlockPositionComponent(1000);
         const int right = 2;
-        
+
         // Act
         var result = left / right;
-        
+
         // Assert
         Assert.Equal(new BlockPositionComponent(500), result);
     }
-    
+
+    [Fact]
+    public void Component_DivideByNumber_Correct()
+    {
+        // Arrange
+        const int left = 1000;
+        var right = new BlockPositionComponent(2);
+
+        // Act
+        var result = left / right;
+
+        // Assert
+        Assert.Equal(new BlockPositionComponent(500), result);
+    }
+
     [Fact]
     public void ComponentEquality_Same_True()
     {
         // Arrange
         var left = new BlockPositionComponent(1000);
         var right = new BlockPositionComponent(1000);
-        
+
         // Act
         var result = left == right;
-        
+
         // Assert
         Assert.True(result);
     }
-    
+
     [Fact]
     public void ComponentEquality_Different_False()
     {
         // Arrange
         var left = new BlockPositionComponent(1000);
         var right = new BlockPositionComponent(555);
-        
+
         // Act
         var result = left == right;
-        
+
         // Assert
         Assert.False(result);
     }
-    
+
     [Fact]
     public void ComponentEquality_DifferentKind_False()
     {
         // Arrange
         var left = new BlockPositionComponent(1000);
         var right = new BlockPositionComponent(1000, BlockPositionComponentType.Local);
-        
+
         // Act
         var result = left == right;
-        
+
         // Assert
         Assert.False(result);
     }
-    
+
     [Fact]
     public void ComponentInequality_Same_Correct()
     {
         // Arrange
         var left = new BlockPositionComponent(1000);
         var right = new BlockPositionComponent(1000);
-        
+
         // Act
         var result = left != right;
-        
+
         // Assert
         Assert.False(result);
     }
-    
+
     [Fact]
     public void ComponentInequality_Different_True()
     {
         // Arrange
         var left = new BlockPositionComponent(1000);
         var right = new BlockPositionComponent(555);
-        
+
         // Act
         var result = left != right;
-        
+
         // Assert
         Assert.True(result);
     }
-    
+
     [Fact]
     public void ComponentInequality_DifferentKind_True()
     {
         // Arrange
         var left = new BlockPositionComponent(1000);
         var right = new BlockPositionComponent(1000, BlockPositionComponentType.Relative);
-        
+
         // Act
         var result = left != right;
-        
+
         // Assert
         Assert.True(result);
     }
@@ -403,11 +552,11 @@ public class BlockPositionTests
         // Arrange
         var c1 = new BlockPositionComponent(1000);
         var c2 = new BlockPositionComponent(1000);
-        
+
         // Act
         var hash1 = c1.GetHashCode();
         var hash2 = c2.GetHashCode();
-        
+
         // Assert
         Assert.Equal(hash1, hash2);
     }
