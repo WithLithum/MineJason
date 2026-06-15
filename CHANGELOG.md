@@ -2,6 +2,25 @@
 
 This document notes most user-visible changes of this library. The format is based on the [Keep a Changelog](https://keepachangelog.com) format and this project adheres to [Semantic Versioning](https://semver.org).
 
+## [0.7.0-beta.3] - 2026-06-15
+
+### Added
+
+- Added the read-only `MineJasonSchemas.TextComponentList` field, which is a `CollectionSchema` for `TextComponent` instances.
+
+### Changed
+
+- All places where `TextComponentListSchema` was used previously were made to use `CollectionSchema`.
+
+### Fixed
+
+- Fixed an issue that causes `SingleSourceSchema` to accept dialog sources that supplies more than one dialogs.
+  - Callers who expect this noncompliant behaviour will break.
+
+### Deprecated
+
+- Deprecated `TextComponentListSchema` in favour of simply using `CollectionSchema`.
+
 ## [0.7.0-beta.2] - 2026-05-31
 
 ### Added
@@ -130,6 +149,7 @@ This is the first consolidated version of MineJason, bringing all modules under 
 
 Please see the [old changelogs directory](docs/changelogs).
 
+[0.7.0-beta.3]: https://github.com/WithLithum/MineJason/compare/v0.7.0-beta.2...v0.7.0-beta.3
 [0.7.0-beta.2]: https://github.com/WithLithum/MineJason/compare/v0.7.0-beta.1...v0.7.0-beta.2
 [0.7.0-beta.1]: https://github.com/WithLithum/MineJason/compare/v0.7.0-alpha.6...v0.7.0-beta.1
 [0.7.0-alpha.6]: https://github.com/WithLithum/MineJason/compare/v0.7.0-alpha.5...v0.7.0-alpha.6
