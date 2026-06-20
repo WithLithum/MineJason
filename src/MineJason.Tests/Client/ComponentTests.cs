@@ -156,4 +156,50 @@ public class ComponentTests
                 .Build(),
             italicised);
     }
+
+    [Fact]
+    public void ComponentAppend_NoExistingExtra_CreateExtra()
+    {
+        // Arrange
+        var component = TextComponent.CreateText("No Extra");
+
+        // Act
+        var result = component.Append(TextComponent.CreateText("Now it has"));
+
+        // Assert
+        Assert.NotNull(result.Extra);
+        Assert.Single(result.Extra, TextComponent.CreateText("Now it has"));
+    }
+
+    [Fact]
+    public void ComponentAppend_HasExistingExtra_AppendExtra()
+    {
+        // Arrange
+        var component = TextComponent.CreateText()
+            .Value("Has An Extra")
+            .Extras([TextComponent.CreateText("This is An Extra")])
+            .Build();
+
+        // Act
+        var result = component.Append(TextComponent.CreateText("A Second"));
+
+        // Assert        
+        Assert.NotNull(result.Extra);
+        Assert.Collection(result.Extra,
+            a => Assert.Equal(TextComponent.CreateText("This is An Extra"), a),
+            b => Assert.Equal(TextComponent.CreateText("A Second"), b));
+    }
+
+    [Fact]
+    public void NewKeybind_KeyId_Assigns()
+    {
+        // Arrange
+        const string input = "test.keybind";
+
+        // Act
+        var result = new KeybindTextComponent(input);
+
+        // Assert
+        Assert.Equal(input, result.Keybind);
+    }
 }

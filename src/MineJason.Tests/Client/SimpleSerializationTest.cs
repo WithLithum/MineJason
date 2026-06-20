@@ -121,6 +121,39 @@ public class SimpleSerializationTests
     }
 
     [Fact]
+    public void KeybindComponent_Serialize()
+    {
+        // Arrange
+        var component = TextComponent.CreateKeybind()
+            .Keybind("test.key")
+            .Build();
+
+        // Act
+        var json = JsonSerializer.Serialize(component,
+            JsonTestContext.Default.TextComponent);
+
+        // Assert
+        Assert.Equal("{\"type\":\"keybind\",\"keybind\":\"test.key\"}",
+            json);
+    }
+
+    [Fact]
+    public void KeybindComponent_Deserialize()
+    {
+        // Arrange
+        const string json = "{\"keybind\":\"test.key\"}";
+
+        // Act
+        var deserialized = JsonSerializer.Deserialize(json,
+            JsonTestContext.Default.TextComponent);
+
+        // Assert
+        Assert.Equal(TextComponent.CreateKeybind()
+            .Keybind("test.key")
+            .Build(), deserialized);
+    }
+
+    [Fact]
     public void ScoreboardComponent_Serialize()
     {
         // Arrange
@@ -322,6 +355,48 @@ public class SimpleSerializationTests
     }
 
     [Fact]
+    public void PlayerSpriteComponent_Serialize()
+    {
+        // Arrange
+        var component = new PlayerObjectTextComponent()
+        {
+            Player = new Data.Profile.PlayerProfile
+            {
+                Name = "PlayerName"
+            }
+        };
+
+        // Act
+        var json = JsonSerializer.Serialize(component,
+            JsonTestContext.Default.TextComponent);
+
+        // Assert
+        Assert.Equal("{\"type\":\"object\",\"object\":\"player\",\"player\":{\"name\":\"PlayerName\"}}",
+            json);
+    }
+
+    [Fact]
+    public void PlayerSpriteComponent_Deserialize()
+    {
+        // Arrange
+        const string json = "{\"type\":\"object\",\"object\":\"player\",\"player\":{\"name\":\"PlayerName\"}}";
+
+        // Act
+        var deserialized = JsonSerializer.Deserialize(json,
+            JsonTestContext.Default.TextComponent);
+
+        // Assert
+        Assert.Equal(new PlayerObjectTextComponent()
+        {
+            Player = new Data.Profile.PlayerProfile
+            {
+                Name = "PlayerName"
+            }
+        }, deserialized);
+    }
+
+
+    [Fact]
     public void EntityNbtComponent_Deserialize()
     {
         // Arrange
@@ -397,5 +472,50 @@ public class SimpleSerializationTests
 
         // Assert
         Assert.Equal("{\"type\":\"translatable\",\"translate\":\"translatable.key\",\"color\":\"aqua\"}", json);
+    }
+
+    [Fact]
+    public void BlockPosition_Serialize()
+    {
+        // Arrange
+        var pos = new BlockPosition(12, 34, 56);
+
+        // Act
+        var json = JsonSerializer.Serialize(pos,
+            JsonTestContext.Default.BlockPosition);
+
+        // Assert
+        Assert.Equal("\"12 34 56\"",
+            json);
+    }
+
+    [Fact]
+    public void BlockPosition_Deserialize()
+    {
+        // Arrange
+        const string json = "\"~2 ~2 ~3\"";
+
+        // Act
+        var deserialized = JsonSerializer.Deserialize(json,
+            JsonTestContext.Default.BlockPosition);
+
+        // Assert
+        Assert.Equal(new BlockPosition(2, 2, 3,
+            BlockPositionComponentType.Relative),
+            deserialized);
+    }
+
+    [Fact]
+    public void BlockPosition_Deserialize_NotStringError()
+    {
+        // Arrange
+        const string json = "123";
+
+        // Act
+        var exception = Record.Exception(() => JsonSerializer.Deserialize(json,
+            JsonTestContext.Default.BlockPosition));
+
+        // Assert
+        Assert.IsType<JsonException>(exception, false);
     }
 }

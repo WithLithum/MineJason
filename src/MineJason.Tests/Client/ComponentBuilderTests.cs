@@ -141,4 +141,33 @@ public class ComponentBuilderTests
         // Assert
         Assert.Equal("Fallback Text", result.Fallback);
     }
+
+    [Fact]
+    public void Entity_Selector_AffectsComponent()
+    {
+        // Arrange
+        var builder = TextComponent.CreateSelector();
+
+        // Act
+        var result = builder.Selector("@a")
+            .Build();
+
+        // Assert
+        Assert.Equal("@a", result.Selector);
+    }
+
+    [Fact]
+    public void Entity_Separator_AffectsComponent()
+    {
+        // Arrange
+        var builder = TextComponent.CreateSelector();
+
+        // Act
+        var result = builder.Selector("@a")
+            .Separator(TextComponent.CreateText("||"))
+            .Build();
+
+        // Assert
+        Assert.Equal(TextComponent.CreateText("||"), result.Separator);
+    }
 }

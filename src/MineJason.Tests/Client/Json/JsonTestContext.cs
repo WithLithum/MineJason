@@ -1,7 +1,8 @@
-﻿// SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
+// SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: Apache-2.0
 
 using System.Text.Json.Serialization;
+using MineJason.Data.Coordinates;
 using MineJason.Data.Nbt;
 using MineJason.Text;
 using MineJason.Text.Behaviour.Click;
@@ -18,4 +19,5 @@ namespace MineJason.Tests.Client.Json;
 [JsonSerializable(typeof(TextComponent))]
 [JsonSerializable(typeof(INbtDataProvider))]
 [JsonSerializable(typeof(RawNbtDataProvider))]
+[JsonSerializable(typeof(BlockPosition))]
 internal sealed partial class JsonTestContext : JsonSerializerContext;
