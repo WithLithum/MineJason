@@ -1,9 +1,9 @@
 // SPDX-FileCopyrightText: (C) WithLithum & contributors 2023-2026
 // SPDX-License-Identifier: Apache-2.0
 
+using System.Diagnostics.Contracts;
 using System.Drawing;
 using System.Text.Json.Serialization;
-using JetBrains.Annotations;
 using MineJason.Data.Coordinates;
 using MineJason.Serialization.TextJson;
 using MineJason.Text.Behaviour.Click;
@@ -17,7 +17,6 @@ namespace MineJason.Text;
 /// Represents a text component.
 /// </summary>
 [JsonConverter(typeof(TextComponentConverter))]
-[PublicAPI]
 public abstract record TextComponent
 {
     /// <summary>
@@ -116,7 +115,6 @@ public abstract record TextComponent
     /// </summary>
     /// <param name="text">The text to display.</param>
     /// <returns>The text component.</returns>
-    [PublicAPI]
     public static TextComponent CreateText(string text)
     {
         return new LiteralTextComponent(text);
@@ -126,7 +124,6 @@ public abstract record TextComponent
     /// Creates a builder for a text component.
     /// </summary>
     /// <returns>The text component builder.</returns>
-    [PublicAPI]
     public static LiteralTextComponentBuilder CreateText()
     {
         return new LiteralTextComponentBuilder();
@@ -141,7 +138,6 @@ public abstract record TextComponent
     /// uses the translation ID as the fallback.</param>
     /// <param name="with">The arguments of the translated string.</param>
     /// <returns>The translatable chat component.</returns>
-    [PublicAPI]
     public static TextComponent CreateTranslatable(string text,
         string? fallback = null,
         IReadOnlyList<TextComponent>? with = null)
@@ -164,7 +160,6 @@ public abstract record TextComponent
     /// <param name="name">The name of the scoreboard entity to display the score of.</param>
     /// <param name="objective">The objective to display the score of.</param>
     /// <returns>The scoreboard chat component.</returns>
-    [PublicAPI]
     public static TextComponent CreateScore(string name, string objective)
     {
         return new ScoreTextComponent(new ScoreTextComponent.Data(name, objective));
@@ -177,7 +172,6 @@ public abstract record TextComponent
     /// <param name="objective">The objective to display the score of.</param>
     /// <param name="value">The value to display instead of the score.</param>
     /// <returns>The scoreboard chat component.</returns>
-    [PublicAPI]
     [Obsolete("The 'value' parameter has no use. Use CreateScore(name, objective) instead.")]
     public static TextComponent CreateScore(string name, string objective, string? value)
     {
@@ -217,7 +211,6 @@ public abstract record TextComponent
     /// <exception cref="ArgumentNullException">
     /// <paramref name="selector"/> is <see langword="null"/>.
     /// </exception>
-    [PublicAPI]
     public static TextComponent CreateSelector(string selector, TextComponent? separator = null)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(selector);
@@ -229,7 +222,6 @@ public abstract record TextComponent
     /// Creates a builder that creates an entity selector component.
     /// </summary>
     /// <returns>The builder.</returns>
-    [PublicAPI]
     public static EntityComponentBuilder CreateSelector()
     {
         return new EntityComponentBuilder();
@@ -239,7 +231,6 @@ public abstract record TextComponent
     /// Create a builder that creates a keybind component.
     /// </summary>
     /// <returns>The builder.</returns>
-    [PublicAPI]
     public static KeybindComponentBuilder CreateKeybind()
     {
         return new KeybindComponentBuilder();
@@ -249,7 +240,6 @@ public abstract record TextComponent
     /// Initiates the construction of an NBT chat component.
     /// </summary>
     /// <returns>The NBT chat component building initiator.</returns>
-    [PublicAPI]
     public static NbtComponentBuilderFactory CreateNbt()
     {
         return new NbtComponentBuilderFactory();
@@ -261,7 +251,6 @@ public abstract record TextComponent
     /// <param name="block">The position of the block.</param>
     /// <param name="path">The NBT path.</param>
     /// <returns>The created component.</returns>
-    [PublicAPI]
     public static TextComponent CreateNbt(BlockPosition block, string path)
     {
         return new BlockNbtTextComponent(block, path);
@@ -273,7 +262,6 @@ public abstract record TextComponent
     /// <param name="entity">The selector that selects a single entity as a source.</param>
     /// <param name="path">The NBT path.</param>
     /// <returns>The created component.</returns>
-    [PublicAPI]
     public static TextComponent CreateNbt(string entity, string path)
     {
         return new EntityNbtTextComponent(entity, path);
@@ -285,7 +273,6 @@ public abstract record TextComponent
     /// <param name="storage">The identifier of the storage.</param>
     /// <param name="path">The NBT path.</param>
     /// <returns>The created component.</returns>
-    [PublicAPI]
     public static TextComponent CreateNbt(ResourceLocation storage, string path)
     {
         return new StorageNbtTextComponent(storage, path);
@@ -339,6 +326,7 @@ public abstract record TextComponent
     /// </summary>
     /// <param name="bold">The bold status to set to.</param>
     /// <returns>A new copy of this instance with bold status set.</returns>
+    [Pure]
     public TextComponent Embolden(bool bold = true)
     {
         return this with { Bold = bold };
@@ -349,6 +337,7 @@ public abstract record TextComponent
     /// </summary>
     /// <param name="italic">The italic status to set to.</param>
     /// <returns>A new copy of this instance with the italic status set.</returns>
+    [Pure]
     public TextComponent Italicise(bool italic = true)
     {
         return this with { Italic = italic };
@@ -359,6 +348,7 @@ public abstract record TextComponent
     /// </summary>
     /// <param name="color">The color of this instance.</param>
     /// <returns>This instance for chaining.</returns>
+    [Pure]
     public TextComponent WithColor(ITextColor? color)
     {
         return this with { Color = color };
@@ -369,6 +359,7 @@ public abstract record TextComponent
     /// </summary>
     /// <param name="color">The shadow color to set to.</param>
     /// <returns>A new copy of this instance with the specified shadow color.</returns>
+    [Pure]
     public TextComponent WithShadowColor(Color color)
     {
         return this with { ShadowColor = color };
@@ -379,6 +370,7 @@ public abstract record TextComponent
     /// </summary>
     /// <param name="font">The font of this instance.</param>
     /// <returns>This instance for chaining.</returns>
+    [Pure]
     public TextComponent WithFont(ResourceLocation? font)
     {
         return this with { Font = font };
@@ -389,6 +381,7 @@ public abstract record TextComponent
     /// </summary>
     /// <param name="component">The component to append.</param>
     /// <returns>This instance for chaining.</returns>
+    [Pure]
     public TextComponent Append(TextComponent component)
     {
         ArgumentNullException.ThrowIfNull(component);
